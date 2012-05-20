@@ -30,12 +30,12 @@ $htitle = HEADER_DAY;
     </div>
         <?php if($session->access == MULTIHUNTER) { 
 		echo "<div id=\"plus\"> 
-    	<a href=\"".HOMEPAGE."admin\" target=\"_blank\" title=\"".HEADER_ADMIN."\" class=\"plusBtn\"><span class=\"plusBtn-l\">".HEADER_ADMIN."</span></span><span class=\"plusBtn-r\">&nbsp;</span></a> 
+    	<a href=\"".HOMEPAGE."Admin\" target=\"_blank\" title=\"".HEADER_ADMIN."\" class=\"plusBtn\"><span class=\"plusBtn-l\">".HEADER_ADMIN."</span></span><span class=\"plusBtn-r\">&nbsp;</span></a> 
     </div>";
 		} ?>
         <?php if($session->access == ADMIN) {
 		echo "<div id=\"plus\"> 
-    	<a href=\"".HOMEPAGE."admin\" target=\"_blank\" title=\"".HEADER_ADMIN."\" class=\"plusBtn\"><span class=\"plusBtn-l\">".HEADER_ADMIN."</span></span><span class=\"plusBtn-r\">&nbsp;</span></a> 
+    	<a href=\"".HOMEPAGE."Admin\" target=\"_blank\" title=\"".HEADER_ADMIN."\" class=\"plusBtn\"><span class=\"plusBtn-l\">".HEADER_ADMIN."</span></span><span class=\"plusBtn-r\">&nbsp;</span></a> 
     </div>";
 		} ?>
 
