@@ -46,7 +46,8 @@
 		$t1 = $row['t1'];$t2 = $row['t2'];$t3 = $row['t3'];$t4 = $row['t4'];$t5 = $row['t5'];
 		$t6 = $row['t6'];$t7 = $row['t7'];$t8 = $row['t8'];$t9 = $row['t9'];$t10 = $row['t10'];
 		$t11 = 0;
-		
+		if($tribe == 1){ $u = ""; } elseif($tribe == 2){ $u = "1"; } elseif($tribe == 3){ $u = "2"; }elseif($tribe == 4){ $u = "3"; }else {$u = "4"; }
+        if($sql[$u.'1']>=$t1 && $sql[$u.'2']>=$t2 && $sql[$u.'3']>=$t3 && $sql[$u.'4']>=$t4 && $sql[$u.'5']>=$t5 && $sql[$u.'6']>=$t6 && $sql[$u.'7']>=$t7 && $sql[$u.'8']>=$t8 && $sql[$u.'9']>=$t9 && $sql[$u.'10']>=$t10 && $sql['hero']>=$t11){
 		if($slots[$sid]=='on'){
 			$ckey = $generator->generateRandStr(6);
 			$id = $database->addA2b($ckey,time(),$wref,$t1,$t2,$t3,$t4,$t5,$t6,$t7,$t8,$t9,$t10,$t11,4);
@@ -109,6 +110,7 @@
 			
 			$database->addMovement(3,$getFLData['wref'],$data['to_vid'],$reference,0,($time+time()));
 		}	
+	}
 	}
 header("Location: build.php?id=39&t=99");
 ?>

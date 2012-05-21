@@ -181,7 +181,8 @@ define("INCLUDE_ADMIN", %ARANK%);
 define("START_DATE", "%SSTARTDATE%");
 define("START_TIME", "%SSTARTTIME%");
 
-
+// ***** Register Open/Close
+define("REG_OPEN", %REG_OPEN%);
 
 ////////////////////////////////////
 //   ****  ADMIN SETTINGS  ****   //

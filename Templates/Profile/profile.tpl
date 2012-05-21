@@ -158,7 +158,7 @@ $prefix = "".TB_PREFIX."vdata";
     echo "<tr>";
     echo "<td class=\"name\"><input tabindex=\"6\" type=\"text\" name=\"dname$name\" value=\"".$row['name']."\" maxlength=\"20\" class=\"text\"> ";
     if($row['capital'] == 1) {
-        echo "<span class=\"mainVillage\">(Főfalu)</span>";
+        echo "<span class=\"mainVillage\">(Capital)</span>";
     }
     echo "</td>";
     echo "<td class=\"oases\">";

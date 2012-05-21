@@ -27,7 +27,7 @@ while($row = mysql_fetch_array($sql)){
 				<div class="round spacer listTitle" onclick="Travian.Game.RaidList.toggleList(<?php echo $lid; ?>);">
 						<div class="listTitleText">
 							<img alt="del" class="del" src="img/x.gif" onclick="
-								'واقعاً حذف شود؟'.dialog(
+								'are you sure that you want to delete this list?'.dialog(
 								{
 									onOkay: function(dialog, contentElement)
 									{
@@ -37,10 +37,10 @@ while($row = mysql_fetch_array($sql)){
 								event.stop();
 							">
 							<?php echo $lvname; ?> - <?php echo $lname; ?>
-                            <img alt="بارگذاری..." class="loading hide" src="img/x.gif" align="absmiddle">
+                            <img alt="Loading..." class="loading hide" src="img/x.gif" align="absmiddle">
 						</div>
 						<div class="openedClosedSwitch switchOpened">
-							جزئیات						</div>
+							Details						</div>
 						<div class="clear"></div>
 					</div>
 					<div class="listContent ">
@@ -49,11 +49,11 @@ while($row = mysql_fetch_array($sql)){
 		<thead>
 			<tr>
 				<td class="checkbox edit"></td>
-				<td class="village sortable" onclick="Travian.Game.RaidList.sort(<?php echo $lid; ?>, 'village');">دهکده</td>
-				<td class="ew sortable" onclick="Travian.Game.RaidList.sort(<?php echo $lid; ?>, 'ew');">جمعیت</td>
-				<td class="distance sortable" onclick="Travian.Game.RaidList.sort(<?php echo $lid; ?>, 'distance');">فاصله</td>
-				<td class="troops sortable" onclick="Travian.Game.RaidList.sort(<?php echo $lid; ?>, 'troops');">لشکریان</td>
-				<td class="lastRaid sortable" onclick="Travian.Game.RaidList.sort(<?php echo $lid; ?>, 'lastRaid');">آخرین غارت</td>
+				<td class="village sortable" onclick="Travian.Game.RaidList.sort(<?php echo $lid; ?>, 'village');">Village</td>
+				<td class="ew sortable" onclick="Travian.Game.RaidList.sort(<?php echo $lid; ?>, 'ew');">Ew</td>
+                <td class="distance sortable" onclick="Travian.Game.RaidList.sort(<?php echo $lid; ?>, 'distance');">Distance</td>
+                <td class="troops sortable" onclick="Travian.Game.RaidList.sort(<?php echo $lid; ?>, 'troops');">Troops</td>
+                <td class="lastRaid sortable" onclick="Travian.Game.RaidList.sort(<?php echo $lid; ?>, 'lastRaid');">LastRaid</td>
 				<td class="action"></td>
 			</tr>
 		</thead>
@@ -63,7 +63,7 @@ while($row = mysql_fetch_array($sql)){
 $sql2 = mysql_query("SELECT * FROM ".TB_PREFIX."raidlist WHERE lid = $lid ORDER BY distance ASC");
 $query2 = mysql_num_rows($sql2);
 if($query2 == 0) {        
-    echo '<td class="noData" colspan="7">هیچ غارتی افزوده نشده است.</td>';
+    echo '<td class="noData" colspan="7">There is no any raid list.</td>';
 }else{
 while($row = mysql_fetch_array($sql2)){ 
 $id= $row['id'];$lid = $row['lid'];$towref = $row['towref'];$x = $row['x'];$y = $row['y'];
@@ -95,7 +95,7 @@ $vdata = $database->getVillage($towref);
 					$inc_atts -= 1;
 				}
 			if($inc_atts > 0) {
-				echo '<img class="att2" src="img/x.gif" title="نیروی مهاجم خودی" />';
+                echo '<img class="att2" src="img/x.gif" title="Incoming Attacker" />';
 			}
 		}
         ?>
@@ -106,7 +106,7 @@ $vdata = $database->getVillage($towref);
                     if($oasistype != 0){
                 ?>
                 <span class="coordinates coordinatesWithText">
-                <span class="coordText">آبادی</span>
+                <span class="coordText">Oasis</span>
                 <span class="coordinatesWrapper">
                 <span class="coordinateY"><?php echo $y; ?>)</span>
                 <span class="coordinatePipe">|</span>
@@ -198,8 +198,7 @@ $vdata = $database->getVillage($towref);
             </td>
 			<td class="lastRaid">
 <?php
-$noticeClass = array("گزارش جاسوسی","پیروزی در حمله بدون تلفات.","پیروزی در حمله با تلفات.","شکست در حمله با تلفات.","پیروزی در دفاع بدون تلفات.","پیروزی در دفاع با تلفات.","شکست در دفاع با تلفات.","شکست در دفاع بدون تلفات","نیروی کمکی","","تاجران بیشتر چوب مبادله کردند.","تاجران بیشتر خشت مبادله کردند.","تاجران بیشتر آهن مبادله کردند.","تاجران بیشتر گندم مبادله کردند.","","حمله به نیروی کمکی");
-            
+$noticeClass = array("Scout Report","Won as attacker without losses","Won as attacker with losses","Lost as attacker with losses","Won as defender without losses","Won as defender with losses","Lost as defender with losses","Lost as defender without losses","Reinforcement arrived","","Wood Delivered","Clay Delivered","Iron Delivered","Crop Delivered","","Won as defender without losses","Won as defender with losses","Lost as defender with losses","Won scouting as attacker","Lost scouting as attacker","Won scouting as defender","Lost scouting as defender");            
 $limits = "ntype!=4 and ntype!=5 and ntype!=6 and ntype!=7";
 $getnotice = mysql_query("SELECT * FROM ".TB_PREFIX."ndata WHERE $limits AND toWref = ".$towref." ORDER BY time DESC Limit 1");
 
@@ -212,13 +211,13 @@ while($row2 = mysql_fetch_array($getnotice)){
     $carry = $dataarray[29];
     
     if ($dataarray[25]+$dataarray[26]+$dataarray[27]+$dataarray[28] == 0) {
-    echo "<img title=\"غنائم: ".$allres." منابع. حداکثر ظرفیت: ".$carry." منابع.\" src=\"img/x.gif\" class=\"carry empty\">";
+    echo "<img title=\"bounty: ".$allres." resouces max carry: ".$carry." resouces.\" src=\"img/x.gif\" class=\"carry empty\">";
     
-	} elseif ($dataarray[25]+$dataarray[26]+$dataarray[27]+$dataarray[28] != $dataarray[29]) {
-    echo "<img title=\"غنائم: ".$allres." منابع. حداکثر ظرفیت: ".$carry." منابع.\" src=\"img/x.gif\" class=\"carry half\">";
+    } elseif ($dataarray[25]+$dataarray[26]+$dataarray[27]+$dataarray[28] != $dataarray[29]) {
+    echo "<img title=\"bounty: ".$allres." resouces. max carry: ".$carry." resouces.\" src=\"img/x.gif\" class=\"carry half\">";
     
     } else {
-    echo "<img title=\"غنائم: ".$allres." منابع. حداکثر ظرفیت: ".$carry." منابع.\" src=\"img/x.gif\" class=\"carry full\">";
+    echo "<img title=\"bounty: ".$allres." resouces. max carry: ".$carry." resouces.\" src=\"img/x.gif\" class=\"carry full\">";
     }
     
     $date = $generator->procMtime($row2['time']);
@@ -228,7 +227,7 @@ while($row2 = mysql_fetch_array($getnotice)){
 				<div class="clear"></div>
 			</td>
 			<td class="action">
-				<a class="arrow" href="#" onclick="Travian.Game.RaidList.editSlot(<?php echo $lid; ?>, <?php echo $id; ?>); return false;">ویرایش</a>
+				<a class="arrow" href="#" onclick="Travian.Game.RaidList.editSlot(<?php echo $lid; ?>, <?php echo $id; ?>); return false;">edit</a>
 			</td>
             </tr>
 <?php
@@ -240,11 +239,11 @@ while($row2 = mysql_fetch_array($getnotice)){
 	</table>
 	<div class="markAll">
 		<input type="checkbox" id="raidListMarkAll<?php echo $lid; ?>" class="markAll" onclick="Travian.Game.RaidList.markAllSlotsOfAListForRaid(<?php echo $lid; ?>, this.checked);">
-		<label for="raidListMarkAll<?php echo $lid; ?>">انتخاب همه</label>
+		<label for="raidListMarkAll<?php echo $lid; ?>">Select All</label>
 	</div>
 
 	<div class="addSlot">
-		<button type="button" value="افزودن" onclick="Travian.Game.RaidList.addSlot(<?php echo $lid; ?>);"><div class="button-container"><div class="button-position"><div class="btl"><div class="btr"><div class="btc"></div></div></div><div class="bml"><div class="bmr"><div class="bmc"></div></div></div><div class="bbl"><div class="bbr"><div class="bbc"></div></div></div></div><div class="button-contents">افزودن</div></div></button>	</div>
+		<button type="button" value="افزودن" onclick="Travian.Game.RaidList.addSlot(<?php echo $lid; ?>);"><div class="button-container"><div class="button-position"><div class="btl"><div class="btr"><div class="btc"></div></div></div><div class="bml"><div class="bmr"><div class="bmc"></div></div></div><div class="bbl"><div class="bbr"><div class="bbc"></div></div></div></div><div class="button-contents">Add Raid</div></div></button>	</div>
 </div>
 <div class="clear"></div>
 
@@ -263,7 +262,7 @@ for($i=$start;$i<=$end;$i++){
 		<div class="clear"></div>
 </div>
 
-<button type="submit" value="آغاز غارت"><div class="button-container"><div class="button-position"><div class="btl"><div class="btr"><div class="btc"></div></div></div><div class="bml"><div class="bmr"><div class="bmc"></div></div></div><div class="bbl"><div class="bbr"><div class="bbc"></div></div></div></div><div class="button-contents">آغاز غارت</div></div></button>											</div>
+<button type="submit" value="آغاز غارت"><div class="button-container"><div class="button-position"><div class="btl"><div class="btr"><div class="btc"></div></div></div><div class="bml"><div class="bmr"><div class="bmc"></div></div></div><div class="bbl"><div class="bbr"><div class="bbc"></div></div></div></div><div class="button-contents">Start Raid</div></div></button>											</div>
 </form>
 
 </div>
@@ -272,7 +271,7 @@ for($i=$start;$i<=$end;$i++){
 <div class="round spacer listTitle" onclick="Travian.Game.RaidList.toggleList(<?php echo $lid; ?>);">
 						<div class="listTitleText">
 							<img alt="del" class="del" src="img/x.gif" onclick="
-								'واقعاً حذف شود؟'.dialog(
+								'are you sure that you want to delete this list?'.dialog(
 								{
 									onOkay: function(dialog, contentElement)
 									{
@@ -282,9 +281,9 @@ for($i=$start;$i<=$end;$i++){
 								event.stop();
 							">
 							<?php echo $lvname; ?> - <?php echo $lname; ?>
-                            <img alt="بارگذاری..." class="loading hide" src="img/x.gif" align="absmiddle">
+                            <img alt="Loading..." class="loading hide" src="img/x.gif" align="absmiddle">
 						</div>
-						<div class="openedClosedSwitch switchClosed">جزئیات</div>
+						<div class="openedClosedSwitch switchClosed">Details</div>
 						<div class="clear"></div>
 					</div>
 					<div class="listContent hide">
@@ -292,7 +291,7 @@ for($i=$start;$i<=$end;$i++){
 			</div>
 <?php } }?>
 <div class="options">
-	<a class="arrow" href="build.php?gid=16&t=99&action=addList">ایجاد لیست جدید</a>
+	<a class="arrow" href="build.php?gid=16&t=99&action=addList">Create a new list</a>
 </div>
 <?php
 }

@@ -5,13 +5,13 @@ $time = time();
 rename("../install/","../installed_".$time);
 ?>
 <div id="content" class="login">
-<div class="headline"><h2>پایان نصب اسکریپت</h2></div><br>
+<div class="headline"><h2>TravianT4 Installation Script</h2></div><br>
 <br>
-&nbsp;&nbsp;نصب بازی با موفقیت به پایان رسید
-    <h4>&nbsp;&nbsp;برای امنیت بیشتر نام پوشه نصب به طور خودکار تغییر کرد.<br/><br/>
-    &nbsp;&nbsp;فایل config.php جایگزین شد.</h4>
+&nbsp;&nbsp;The installation was completed
+    <h4>&nbsp;&nbsp;For security installation folder name is automatically changed.<br/><br/>
+    &nbsp;&nbsp;The file config.php was replaced.</h4>
   
 <br /><br />
 
-<div align="center"><font size="4"><a href="<?php echo HOMEPAGE; ?>"> صفحه اصلی</font></a>
+<div align="center"><font size="4"><a href="<?php echo HOMEPAGE; ?>"> My TravianT4 homepage</font></a>
 </div></div>

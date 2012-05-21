@@ -128,7 +128,7 @@ foreach($varray as $vil) {
     	$coor = $database->getCoor($vil['wref']);
     	echo "<tr><td class=\"name\"><a href=\"karte.php?x=".$coor['y']."&amp;y=".$coor['x']."\">".$vil['name']."</a> ";
         if($vil['capital'] == 1) {
-        echo "<span class=\"mainVillage\">(Főfalu)</span>";
+        echo "<span class=\"mainVillage\">(Capital)</span>";
         }
         echo "</td><td class=\"oases\">";
         

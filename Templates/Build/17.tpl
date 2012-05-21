@@ -18,40 +18,45 @@ var carry = <?php echo $market->maxcarry; ?>;
 <div class="boxes boxesColor gray traderCount"><div class="boxes-tl"></div><div class="boxes-tr"></div><div class="boxes-tc"></div><div class="boxes-ml"></div><div class="boxes-mr"></div><div class="boxes-mc"></div><div class="boxes-bl"></div><div class="boxes-br"></div><div class="boxes-bc"></div><div class="boxes-contents">Merchants <?php echo $market->merchant; ?> / <?php echo $market->merchantAvail(); ?></div>
 				</div><div class="clear"></div>
 <?php
-$allres = "".$_POST['r1']."+".$_POST['r2']."+".$_POST['r3']."+".$_POST['r4']."";
-if($_POST['x']!=0 && $_POST['y']!=0){
+$allres = $_POST['r1']+$_POST['r2']+$_POST['r3']+$_POST['r4'];
+if($_POST['x']!="" && $_POST['y']!=""){
 	$getwref = $database->getVilWref($_POST['x'],$_POST['y']);
 	$checkexist = $database->checkVilExist($getwref);
 }
-if(isset($_POST['ft'])=='check' && $allres!=0 && $_POST['x']!=0 && $_POST['y']!=0 && $checkexist){
+else if($_POST['dname']!=""){
+	$getwref = $database->getVillageByName($_POST['dname']);
+	$checkexist = $database->checkVilExist($getwref);
+}
+if(isset($_POST['ft'])=='check' && $allres!=0 && $allres <= $market->maxcarry && ($_POST['x']!="" && $_POST['y']!="" or $_POST['dname']!="") && $checkexist){
 ?>
 <form method="POST" name="snd" action="build.php"> 
 <input type="hidden" name="ft" value="mk1">
 <input type="hidden" name="id" value="<?php echo $id; ?>">
 <input type="hidden" name="x" value="<?php echo $_POST['x']; ?>">
 <input type="hidden" name="y" value="<?php echo $_POST['y']; ?>">
+<input type="hidden" name="dname" value="<?php echo $_POST['dname']; ?>">
 <table id="send_select" class="send_res" cellpadding="1" cellspacing="1">
 	<tr>
-		<td class="ico"><img class="r1" src="img/x.gif" alt="Fa" title="Fa" /></td> 
-		<td class="nam"> Wood</td> 
+		<td class="ico"><img class="r1" src="img/x.gif" alt="Lumber" title="Lumber" /></td> 
+		<td class="nam"> Lumber</td> 
 		<td class="val"><input class="text disabled" type="text" name="r1" id="r1" value="<?php echo $_POST['r1']; ?>" readonly="readonly"></td> 
 		<td class="max"> / <span class="none"><B><?php echo $market->maxcarry; ?></B></span> </td> 
 	</tr>
     <tr> 
-		<td class="ico"><img class="r2" src="img/x.gif" alt="Agyag" title="Agyag" /></td> 
+		<td class="ico"><img class="r2" src="img/x.gif" alt="Iron" title="Iron" /></td> 
 		<td class="nam"> Clay</td> 
 		<td class="val"><input class="text disabled" type="text" name="r2" id="r2" value="<?php echo $_POST['r2']; ?>" readonly="readonly"></td> 
 		<td class="max"> / <span class="none"><b><?php echo$market->maxcarry; ?></b></span> </td> 
 	</tr>
     <tr> 
-		<td class="ico"><img class="r3" src="img/x.gif" alt="Vasérc" title="Vasérc" /></td> 
+		<td class="ico"><img class="r3" src="img/x.gif" alt="Iron" title="Iron" /></td> 
 		<td class="nam"> Iron</td> 
 		<td class="val"><input class="text disabled" type="text" name="r3" id="r3" value="<?php echo $_POST['r3']; ?>" readonly="readonly"> 
 		</td> 
 		<td class="max"> / <span class="none"><b><?php echo $market->maxcarry; ?></b></span> </td> 
 	</tr>
     <tr> 
-		<td class="ico"><img class="r4" src="img/x.gif" alt="Búza" title="Búza" /></td> 
+		<td class="ico"><img class="r4" src="img/x.gif" alt="Crop" title="Crop" /></td> 
 		<td class="nam"> Wheat</td> 
 		<td class="val"> <input class="text disabled" type="text" name="r4" id="r4" value="<?php echo $_POST['r4']; ?>" readonly="readonly"> 
 		</td> 
@@ -61,20 +66,31 @@ if(isset($_POST['ft'])=='check' && $allres!=0 && $_POST['x']!=0 && $_POST['y']!=
 	<tbody><tr>
 		<th>Coordinates:</th>
         <?php
-
-        $getwref = $database->getVilWref($_POST['y'],$_POST['x']);
-        $getvildata = $database->getVillage($getwref);
-
+		if($_POST['x']!="" && $_POST['y']!=""){
+        $getwref = $database->getVilWref($_POST['x'],$_POST['y']);
+		$getvilname = $database->getVillageField($getwref, "name");
+		$getvilowner = $database->getVillageField($getwref, "owner");
+		$getvilcoor['y'] = $_POST['y'];
+		$getvilcoor['x'] = $_POST['x'];
+		$time = $generator->procDistanceTime($getvilcoor,$village->coor,$session->tribe,0);
+		}
+		else if($_POST['dname']!=""){
+		$getwref = $database->getVillageByName($_POST['dname']);
+		$getvilcoor = $database->getCoor($getwref);
+		$getvilname = $database->getVillageField($getwref, "name");
+		$getvilowner = $database->getVillageField($getwref, "owner");
+		$time = $generator->procDistanceTime($getvilcoor,$village->coor,$session->tribe,0);
+		}
         ?>
-		<td class="vil"><a href="karte.php?x=<?php echo $_POST['y']; ?>&amp;y=<?php echo $_POST['x']; ?>"><span class="coordinates coordinatesWithText"><span class="coordText"><?php echo $getvildata['name']; ?></span><span class="coordinatesWrapper"><span class="coordinateY">(<?php echo $_POST['y']; ?></span><span class="coordinatePipe">|</span><span class="coordinateX"><?php echo $_POST['x']; ?>)</span></span></span><span class="clear"></span></a></td>
+		<td class="vil"><a href="position_details.php?x=<?php echo $getvilcoor['y']; ?>&y=<?php echo $getvilcoor['x']; ?>"><span class="coordinates coordinatesWithText"><span class="coordText"><?php echo $getvilname; ?></span><span class="coordinatesWrapper"><span class="coordinateY">(<?php echo $getvilcoor['y']; ?></span><span class="coordinatePipe">|</span><span class="coordinateX"><?php echo $getvilcoor['x']; ?>)</span></span></span><span class="clear"></span></a></td>
 	</tr>
 	<tr>
 		<th>Player:</th>
-		<td><a href="spieler.php?uid=<?php echo $getvildata; ?>"><?php echo $database->getUserField($getvildata,username,0); ?></a></td>
+		<td><a href="spieler.php?uid=<?php echo $getvilowner; ?>"><?php echo $database->getUserField($getvilowner,username,0); ?></a></td>
 	</tr>
 	<tr>
 		<th>duration:</th>
-		<td>-</td>
+		<td><?php echo $generator->getTimeFormat($time); ?></td>
 	</tr>
 	<tr>
 		<th>Merchants:</th>
@@ -102,20 +118,20 @@ if(isset($_POST['ft'])=='check' && $allres!=0 && $_POST['x']!=0 && $_POST['y']!=
 <tr>
 
 		<td class="ico"> 
-			<a href="#" onClick="upd_res(1,1); return false;"><img class="r1" src="img/x.gif" alt="Fa" title="Wood" /></a> 
+			<a href="#" onClick="upd_res(1,1); return Lumberlse;"><img class="r1" src="img/x.gif" alt="Lumber" title="Lumber" /></a> 
 		</td> 
 		<td class="nam"> 
-			Wood
+			Lumber
 		</td> 
 		<td class="val"> 
 			<input class="text" type="text" name="r1" id="r1" value="<?php echo $_POST['r1']; ?>" maxlength="5" onKeyUp="upd_res(1)" tabindex="1"> 
 		</td> 
 		<td class="max"> 
-			/ <a href="#" onMouseUp="add_res(1);" onClick="return false;"><?php echo $market->maxcarry; ?></a> 
+			/ <a href="#" onMouseUp="add_res(1);" onClick="return Lumberlse;"><?php echo $market->maxcarry; ?></a> 
 		</td> 
 	</tr><tr> 
 		<td class="ico"> 
-			<a href="#" onClick="upd_res(2,1); return false;"><img class="r2" src="img/x.gif" alt="Agyag" title="Agyag" /></a> 
+			<a href="#" onClick="upd_res(2,1); return Lumberlse;"><img class="r2" src="img/x.gif" alt="Iron" title="Iron" /></a> 
 		</td> 
 		<td class="nam"> 
 			Clay
@@ -124,11 +140,11 @@ if(isset($_POST['ft'])=='check' && $allres!=0 && $_POST['x']!=0 && $_POST['y']!=
 			<input class="text" type="text" name="r2" id="r2" value="<?php echo $_POST['r2']; ?>" maxlength="5" onKeyUp="upd_res(2)" tabindex="2"> 
 		</td> 
 		<td class="max"> 
-			/ <a href="#" onMouseUp="add_res(2);" onClick="return false;"><?php echo$market->maxcarry; ?></a> 
+			/ <a href="#" onMouseUp="add_res(2);" onClick="return Lumberlse;"><?php echo$market->maxcarry; ?></a> 
 		</td> 
 	</tr><tr> 
 		<td class="ico"> 
-			<a href="#" onClick="upd_res(3,1); return false;"><img class="r3" src="img/x.gif" alt="Vasérc" title="Vasérc" /></a> 
+			<a href="#" onClick="upd_res(3,1); return Lumberlse;"><img class="r3" src="img/x.gif" alt="Iron" title="Iron" /></a> 
 		</td> 
 		<td class="nam"> 
 			Iron
@@ -137,11 +153,11 @@ if(isset($_POST['ft'])=='check' && $allres!=0 && $_POST['x']!=0 && $_POST['y']!=
 			<input class="text" type="text" name="r3" id="r3" value="<?php echo $_POST['r3']; ?>" maxlength="5" onKeyUp="upd_res(3)" tabindex="3"> 
 		</td> 
 		<td class="max"> 
-			/ <a href="#" onMouseUp="add_res(3);" onClick="return false;"><?php echo $market->maxcarry; ?></a> 
+			/ <a href="#" onMouseUp="add_res(3);" onClick="return Lumberlse;"><?php echo $market->maxcarry; ?></a> 
 		</td> 
 	</tr><tr> 
 		<td class="ico"> 
-			<a href="#" onClick="upd_res(4,1); return false;"><img class="r4" src="img/x.gif" alt="Búza" title="Búza" /></a> 
+			<a href="#" onClick="upd_res(4,1); return Lumberlse;"><img class="r4" src="img/x.gif" alt="Crop" title="Crop" /></a> 
 		</td> 
 		<td class="nam"> 
 			Wheat
@@ -150,7 +166,7 @@ if(isset($_POST['ft'])=='check' && $allres!=0 && $_POST['x']!=0 && $_POST['y']!=
 			<input class="text" type="text" name="r4" id="r4" value="<?php echo $_POST['r4']; ?>" maxlength="5" onKeyUp="upd_res(4)" tabindex="4"> 
 		</td> 
 		<td class="max"> 
-			/ <a href="#" onMouseUp="add_res(4);" onClick="return false;"><?php echo $market->maxcarry; ?></a> 
+			/ <a href="#" onMouseUp="add_res(4);" onClick="return Lumberlse;"><?php echo $market->maxcarry; ?></a> 
 		</td> 
 	</tr></table> 
 
@@ -200,7 +216,7 @@ $coor['y'] = "";
 								</div>
 				</div>	</div>
 <div class="clear"></div>
-<p>Too few merchants.You can only carry<b><?php echo $market->maxcarry; ?></b> resources</p>
+<p>Each merchant can carry <b><?php echo $market->maxcarry; ?></b> units of resource</p>
 <p>
 
 <button type="submit" value="ok" name="s1" id="btn_ok" class="dynamic_img" tabindex="8"><div class="button-container"><div class="button-position"><div class="btl"><div class="btr"><div class="btc"></div></div></div><div class="bml"><div class="bmr"><div class="bmc"></div></div></div><div class="bbl"><div class="bbr"><div class="bbc"></div></div></div></div><div class="button-contents">Send</div></div></button>
@@ -212,12 +228,12 @@ if(isset($_POST['ft'])=='check'){
 
 	if(!$checkexist){
 		$error = '<span class="error"><b>No Coordinates selected</b></span>';
-    }elseif($_POST['r1']==0){
+    }elseif($_POST['r1']==0 && $_POST['r2']==0 && $_POST['r3']==0 && $_POST['r4']==0){
 		$error = '<span class="error"><b>Resources not selected.</b></span>';
-    }elseif(!$_POST['x'] && !$_POST['y']){
-		$error = '<span class="error"><b>Enter the coordinates.</b></span>';
-    }elseif($_POST['x']==0 && $_POST['y']==0){
-		$error = '<span class="error"><b>Enter the coordinates.</b></span>';
+    }elseif(!$_POST['x'] && !$_POST['y'] && !$_POST['dname']){
+		$error = '<span class="error"><b>Enter coordinates or village name.</b></span>';
+    }elseif($allres <= $market->maxcarry){
+		$error = '<span class="error"><b>Too few merchants.</b></span>';
     }
     echo $error;
 }
@@ -293,7 +309,7 @@ echo "<h4>yok</h4>";
     $sendtovil = $database->getVillage($recieve['from']);
 	$villageowner = $database->getVillageField($recieve['from'],"owner");
 	echo "<thead><tr><td><a href=\"spieler.php?uid=".$ownerid."\">".$ownername."</a></td>";
-    echo "<td class=\"dorf\">Nyersanyag szállítás <a href=\"karte.php?d=".$recieve['from']."&c=".$generator->getMapCheck($recieve['from'])."\">".$sendtovil['name']."</a> faluból</td>";
+    echo "<td class=\"dorf\">Nyersanyag szállítás <a href=\"karte.php?d=".$recieve['from']."&c=".$generator->getMapCheck($recieve['from'])."\">".$sendtovil['name']."</a> Lumberluból</td>";
     echo "</tr></thead><tbody><tr><th>Érkezés</th><td>";
     echo "<div class=\"in\"><span id=timer$timer>".$generator->getTimeFormat($recieve['endtime']-time())."</span> óra</div>";
     $datetime = $generator->procMtime($recieve['endtime']);
@@ -301,7 +317,7 @@ echo "<h4>yok</h4>";
 
     echo $datetime[1]."</div>";
     echo "</td></tr></tbody> <tr class=\"res\"> <th>Nyersanyagok</th> <td colspan=\"2\"><span class=\"f10\">";
-    echo "<img class=\"r1\" src=\"img/x.gif\" alt=\"Fa\" title=\"Fa\" /> ".$recieve['wood']." <img class=\"r2\" src=\"img/x.gif\" alt=\"Agyag\" title=\"Agyag\" /> ".$recieve['clay']." <img class=\"r3\" src=\"img/x.gif\" alt=\"Vasérc\" title=\"Vasérc\" /> ".$recieve['iron']." <img class=\"r4\" src=\"img/x.gif\" alt=\"Búza\" title=\"Búza\" /> ".$recieve['crop']."</td></tr></tbody>";
+    echo "<img class=\"r1\" src=\"img/x.gif\" alt=\"Lumber\" title=\"Lumber\" /> ".$recieve['Lumber']." <img class=\"r2\" src=\"img/x.gif\" alt=\"Iron\" title=\"Iron\" /> ".$recieve['clay']." <img class=\"r3\" src=\"img/x.gif\" alt=\"Iron\" title=\"Iron\" /> ".$recieve['iron']." <img class=\"r4\" src=\"img/x.gif\" alt=\"Crop\" title=\"Crop\" /> ".$recieve['crop']."</td></tr></tbody>";
     echo "</table>";
     $timer +=1;
     }
@@ -314,7 +330,7 @@ if(count($market->sending) > 0) {
         $sendtovil = $database->getVillage($send['to']);
         echo "<table class=\"traders\" cellpadding=\"1\" cellspacing=\"1\">";
         echo "<thead><tr> <td><a href=\"spieler.php?uid=".$ownerid."\">".$ownername."</a></td>";
-        echo "<td class=\"dorf\">Nyersanyag szállítás <a href=\"karte.php?d=".$send['to']."&c=".$generator->getMapCheck($send['to'])."\">".$sendtovil['name']."</a> faluba</td>";
+        echo "<td class=\"dorf\">Nyersanyag szállítás <a href=\"karte.php?d=".$send['to']."&c=".$generator->getMapCheck($send['to'])."\">".$sendtovil['name']."</a> Lumberluba</td>";
         echo "</tr></thead> <tbody><tr> <th>Érkezés</th> <td>";
         echo "<div class=\"in\"><span id=timer".$timer.">".$generator->getTimeFormat($send['endtime']-time())."</span> óra</div>";
         $datetime = $generator->procMtime($send['endtime']);
@@ -322,7 +338,7 @@ if(count($market->sending) > 0) {
 
         echo $datetime[1]."</div>";
         echo "</td> </tr> <tr class=\"res\"> <th>Nyersanyagok</th><td>";
-        echo "<img class=\"r1\" src=\"img/x.gif\" alt=\"Fa\" title=\"Fa\" /> ".$send['wood']." <img class=\"r2\" src=\"img/x.gif\" alt=\"Agyag\" title=\"Agyag\" /> ".$send['clay']." <img class=\"r3\" src=\"img/x.gif\" alt=\"Vasérc\" title=\"Vasérc\" /> ".$send['iron']." <img class=\"r4\" src=\"img/x.gif\" alt=\"Búza\" title=\"Búza\" /> ".$send['crop']."</td></tr></tbody>";
+        echo "<img class=\"r1\" src=\"img/x.gif\" alt=\"Lumber\" title=\"Lumber\" /> ".$send['Lumber']." <img class=\"r2\" src=\"img/x.gif\" alt=\"Iron\" title=\"Iron\" /> ".$send['clay']." <img class=\"r3\" src=\"img/x.gif\" alt=\"Iron\" title=\"Iron\" /> ".$send['iron']." <img class=\"r4\" src=\"img/x.gif\" alt=\"Crop\" title=\"Crop\" /> ".$send['crop']."</td></tr></tbody>";
         echo "</table>";
         $timer += 1;
     }
@@ -334,7 +350,7 @@ if(count($market->return) > 0) {
         $ownername = $database->getUserField($villageowner,"username",0);
         echo "<table class=\"traders\" cellpadding=\"1\" cellspacing=\"1\">";
         echo "<thead><tr> <td></td>";
-        echo "<td class=\"dorf\">Visszatérés <a href=\"karte.php?d=".$return['from']."&c=".$generator->getMapCheck($return['from'])." \">$ownername</a> faluból</td>";
+        echo "<td class=\"dorf\">Visszatérés <a href=\"karte.php?d=".$return['from']."&c=".$generator->getMapCheck($return['from'])." \">$ownername</a> Lumberluból</td>";
         echo "</tr></thead> <tbody><tr> <th>Érkezés</th> <td>";
         echo "<div class=\"in\"><span id=timer".$timer.">".$generator->getTimeFormat($return['endtime']-time())."</span> óra</div>";
         $datetime = $generator->procMtime($return['endtime']);
@@ -344,7 +360,7 @@ if(count($market->return) > 0) {
         }
         echo $datetime[1]."</div>";
         echo "</td> </tr> <tr class=\"res\"> <th>Nyersanyagok</th><td>";
-                echo "<img class=\"r1\" src=\"img/x.gif\" alt=\"Fa\" title=\"Fa\" />".$return['wood']." | <img class=\"r2\" src=\"img/x.gif\" alt=\"Agyag\" title=\"Agyag\" />".$return['clay']." | <img class=\"r3\" src=\"img/x.gif\" alt=\"Vasérc\" title=\"Vasérc\" />".$return['iron']." | <img class=\"r4\" src=\"img/x.gif\" alt=\"Búza\" title=\"Búza\" />".$return['crop']."</td></tr></tbody>";
+                echo "<img class=\"r1\" src=\"img/x.gif\" alt=\"Lumber\" title=\"Lumber\" />".$return['Lumber']." | <img class=\"r2\" src=\"img/x.gif\" alt=\"Iron\" title=\"Iron\" />".$return['clay']." | <img class=\"r3\" src=\"img/x.gif\" alt=\"Iron\" title=\"Iron\" />".$return['iron']." | <img class=\"r4\" src=\"img/x.gif\" alt=\"Crop\" title=\"Crop\" />".$return['crop']."</td></tr></tbody>";
 
         echo "</tbody></table>";
         $timer += 1;

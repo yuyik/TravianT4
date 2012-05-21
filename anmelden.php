@@ -42,6 +42,7 @@ include "Templates/html.tpl";
 							<div class="contentTitle">&nbsp;</div>
 							<div class="contentContainer">
 								<div id="content" class="signup"><h1 class="titleInHeader"><?php echo REG; ?></h1>
+<?php if(REG_OPEN == true){ ?>
 		<h4 class="round"><?php echo REGISTER_USERINFO; ?></h4>
 		<form name="snd" method="post" action="anmelden.php">
 		<input type="hidden" name="ft" value="a1" />
@@ -157,12 +158,14 @@ echo $form->getError('agree');
 		</div>
 	</form>
     <div class="clear">&nbsp;</div>
-    </div>
+<?php }else{ ?>
+<p><?php echo REGISTER_CLOSED; ?></p>
+<?php } ?>   
+    </div>  
     <div class="clear"></div>
 						</div>
                         <div class="contentFooter">&nbsp;</div>
-					</div>
-                    
+					</div>       
 		<div id="side_info">
         
 	<?php if(NEWSBOX1) { ?>

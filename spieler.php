@@ -77,7 +77,7 @@ if($message->unread) {
 							<div class="contentTitle">&nbsp;</div>
 <div class="contentContainer">
 <div id="content" class="player">
-<h1 class="titleInHeader">Játékos profil</h1>
+<h1 class="titleInHeader">Player profile</h1>
 <script type="text/javascript"> 
 					window.addEvent('domready', function()
 					{

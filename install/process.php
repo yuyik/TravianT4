@@ -44,7 +44,7 @@ date_default_timezone_set('Asia/Tehran');
         		$text = preg_replace("'%TS_THRESHOLD%'", $_POST['ts_threshold'], $text);
 				$text = preg_replace("'%SSTARTDATE%'", $_POST['start_date'], $text);
 				$text = preg_replace("'%SSTARTTIME%'", $_POST['start_time'], $text);
-
+				$text = preg_replace("'%REG_OPEN%'", $_POST['reg_open'], $text);
         		fwrite($fh, $text);
 				fclose($fh);
 				

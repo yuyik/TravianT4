@@ -87,6 +87,7 @@ define("REGISTER_SE","South-East");
 define("REGISTER_SW","South-West");
 define("REGISTER_RANDOM","Random");
 define("REGISTER_MOREINFO","T&C");
+define("REGISTER_CLOSED","The register is closed. You can't register to this server.");
 
 //MENU
 define("REG","Register");

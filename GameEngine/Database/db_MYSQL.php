@@ -395,9 +395,9 @@
         	function addVillage($wid, $uid, $username, $capital) {
         		$total = count($this->getVillagesID($uid));
 				if($total >= 1) {
-					$vname = "دهکدۀ جدید";
+					$vname = $username . "\'s village " . ($total + 1);
 				} else {
-					$vname = "دهکدۀ ".$username;
+					$vname = $username . "\'s village";
 				}
 				
         		$time = time();
