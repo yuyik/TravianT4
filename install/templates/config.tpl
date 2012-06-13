@@ -10,7 +10,7 @@ echo "<div class=\"headline\"><span class=\"f10 c5\">Error creating constant.php
 
     	<tr class="hover">
 			<td>Server Name :</td>
-			<td><input type="text" dir="ltr" class="text" name="servername" id="servername" value="TravianX"></td>
+			<td><input type="text" dir="ltr" class="text" name="servername" id="servername" value="TravianT4"></td>
 		</tr>
         <tr class="hover">
 			<td>Speed :</td>
