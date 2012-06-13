@@ -31,8 +31,8 @@ echo "<div class=\"headline\"><span class=\"f10 c5\">Error creating constant.php
     	<tr class="hover">
 			<td>Register Open/Close:</td>
 			<td><select name="reg_open" dir="ltr" class="text">
-	  <option value="false">NO</option>
-	  <option value="true" selected="selected">Yes</option></select></td>
+	  <option value="false">Close</option>
+	  <option value="true" selected="selected">Open</option></select></td>
 		</tr>      
     	<tr class="hover">
 			<td>Home Page:</td>
@@ -98,14 +98,24 @@ echo "<div class=\"headline\"><span class=\"f10 c5\">Error creating constant.php
     	<tr class="hover">
 			<td>Great Workshop:</td>
 			<td><select name="great_wks" dir="ltr" class="text">
-      <option value="false">No</option>
-      <option value="true" selected="selected">Yes</option></select></td>
+      <option value="false" selected="selected">No</option>
+      <option value="true">Yes</option></select></td>
 		</tr>
     	<tr class="hover">
 			<td>WW Stats:</td>
 			<td><select name="ww" dir="ltr" class="text">
-      <option value="0" selected="selected">No</option>
-      <option value="1">Yes</option></select></td>
+      <option value="0">No</option>
+      <option value="1" selected="selected">Yes</option></select></td>
+		</tr>
+		<tr class="hover">
+		<td>Peace system:</td>
+		<td><select name="peace">
+		<option value="0" selected="selected">None</option>
+		<option value="1">Normal</option>
+		<option value="2">Christmas</option>
+		<option value="3">New Year</option>
+		<option value="4">Easter</option>				
+		</select></td>
 		</tr>
 
 </table>
@@ -246,8 +256,8 @@ echo "<div class=\"headline\"><span class=\"f10 c5\">Error creating constant.php
     	<tr class="hover">
 			<td>Limit Mailbox:</td>
 			<td><select name="limit_mailbox" dir="ltr" class="text">
-	  <option value="false">Disable</option>
-	  <option value="true" selected="selected">Enable</option></select></td>
+	  <option value="false" selected="selected">Disable</option>
+	  <option value="true">Enable</option></select></td>
 		</tr>
     	<tr class="hover">
 			<td>Max mails:</td>
@@ -257,7 +267,7 @@ echo "<div class=\"headline\"><span class=\"f10 c5\">Error creating constant.php
 			<td>Level Required of Main building for Demolishng Other Building</td>
 			<td><select name="demolish" dir="ltr" class="text">
 	  <option value="5">5</option>
-	  <option value="10" selected="selected">10</option>
+	  <option value="10" selected="selected">10 - Default</option>
 	  <option value="15">15</option>
 	  <option value="20">20</option></select></td>
 		</tr>
