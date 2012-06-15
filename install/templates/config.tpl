@@ -192,50 +192,50 @@ echo "<div class=\"headline\"><span class=\"f10 c5\">Error creating constant.php
     	<tr class="hover">
 			<td>Log Building:</td>
 			<td><select name="log_build" dir="ltr" class="text">
-	  <option value="0">No</option>
-	  <option value="1" selected="selected">Yes</option></select></td>
+	  <option value="0" selected="selected">No</option>
+	  <option value="1">Yes</option></select></td>
 		</tr>
     	<tr class="hover">
 			<td>Log Tech:</td>
 			<td><select name="log_tech" dir="ltr" class="text">
-	  <option value="0">No</option>
-	  <option value="1" selected="selected">Yes</option></select></td>
+	  <option value="0" selected="selected">No</option>
+	  <option value="1">Yes</option></select></td>
 		</tr>
     	<tr class="hover">
 			<td>Log Login:</td>
 			<td><select name="log_login" dir="ltr" class="text">
-	  <option value="0">No</option>
-	  <option value="1" selected="selected">Yes</option></select></td>
+	  <option value="0" selected="selected">No</option>
+	  <option value="1">Yes</option></select></td>
 		</tr>
     	<tr class="hover">
 			<td>Log Gold:</td>
 			<td><select name="log_gold_fin" dir="ltr" class="text">
-	  <option value="0">No</option>
-	  <option value="1" selected="selected">Yes</option></select></td>
+	  <option value="0" selected="selected">No</option>
+	  <option value="1">Yes</option></select></td>
 		</tr>
     	<tr class="hover">
 			<td>Log Admin:</td>
 			<td><select name="log_admin" dir="ltr" class="text">
-	  <option value="0">No</option>
-	  <option value="1" selected="selected">Yes</option></select></td>
+	  <option value="0" selected="selected">No</option>
+	  <option value="1">Yes</option></select></td>
 		</tr>
     	<tr class="hover">
 			<td>Log War:</td>
 			<td><select name="log_war" dir="ltr" class="text">
-	  <option value="0">No</option>
-	  <option value="1" selected="selected">Yes</option></select></td>
+	  <option value="0" selected="selected">No</option>
+	  <option value="1">Yes</option></select></td>
 		</tr>
     	<tr class="hover">
 			<td>Log Market:</td>
 			<td><select name="log_market" dir="ltr" class="text">
-	  <option value="0">No</option>
-	  <option value="1" selected="selected">Yes</option></select></td>
+	  <option value="0" selected="selected">No</option>
+	  <option value="1">Yes</option></select></td>
 		</tr>
     	<tr class="hover">
 			<td>Log Illegal:</td>
 			<td><select name="log_illegal" dir="ltr" class="text">
-	  <option value="0">No</option>
-	  <option value="1" selected="selected">Yes</option></select></td>
+	  <option value="0" selected="selected">No</option>
+	  <option value="1">Yes</option></select></td>
 		</tr>
 <tr class="empty"><td></td><td></td></tr>
 </table>
