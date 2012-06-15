@@ -2762,9 +2762,14 @@ break;
         	}
 			
 			function getLinks($id){
-                $q = 'SELECT * FROM ' . TB_PREFIX . 'links WHERE `userid` = ' . $id . ' ORDER BY `pos` ASC';
+                $q = 'SELECT * FROM ' . TB_PREFIX . 'links WHERE `userid` = '.$id.' ORDER BY `pos` ASC';
                 $result = mysql_query($q, $this->connection);
         		return $this->mysql_fetch_all($result);
+            }
+			
+            function removeLinks($id,$uid){
+                $q = "DELETE FROM " . TB_PREFIX . "links WHERE `id` = ".$id." and `userid` = ".$uid."";
+                return mysql_query($q, $this->connection);
             }
 			
 			function getFarmlist($uid){

@@ -1,4 +1,8 @@
 ﻿<?php 
+if(isset($_GET['del'])){
+	$database->removeLinks($_GET['del'],$session->uid);
+	header("Location: spieler.php?s=2");
+}
 #################################################################################
 ##              -= YOU MAY NOT REMOVE OR CHANGE THIS NOTICE =-                 ##
 ## --------------------------------------------------------------------------- ##
@@ -85,6 +89,7 @@ while($data = mysql_fetch_assoc($query)) {
 		<table class="transparent" cellpadding="1" cellspacing="1" id="links">
 			<thead>
 				<tr>
+					<td>Delete</td>
 					<td>No.</td>
 					<td>Link Name</td>
 					<td>Link Address</td>
@@ -95,6 +100,9 @@ while($data = mysql_fetch_assoc($query)) {
 
 							<?php $i = 0; foreach($links as $link): ?>
 								<tr>
+						  <td>
+						<a href="spieler.php?del=<?php echo $link['id']; ?>&s=2"><img class="del" src="img/x.gif" alt="delete" title="delete"></a>
+						</td>
 					<td class="nr">
 						<input class="text" type="text" name="nr<?php print $i; ?>" value="<?php print $link['pos']; ?>" size="1" maxlength="3" /><input type="hidden" name="id<?php print $i; ?>" value="<?php print $link['id']; ?>" />
 					</td>
@@ -109,6 +117,7 @@ while($data = mysql_fetch_assoc($query)) {
 				</tr>
 							<?php ++$i; $last_pos = $link['pos']; endforeach; ?>		
 						<tr class="addLine templateElement insertElement">
+					<td></td>
 					<td class="nr">
 						<input class="text" type="text" name="nr<?php print $i; ?>" value="<?php print ($last_pos + 1); ?>" size="1" maxlength="3" />
 					</td>
