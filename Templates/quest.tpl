@@ -5,10 +5,10 @@ if ($_SESSION['qst']!=25 && $_SESSION['fqst']!=35 && QUEST==true){
 <div class="questMaster">
 <div id="anm" style="width:120px; height:140px; visibility:hidden;"></div>
 			<div id="qge">
-				<?php if ($_SESSION['qst'] == 0){ ?>
-				<img onclick="qst_handle();" src="img/x.gif" id="qgei" style="width:160px;height:195px;cursor:pointer;" class="q_l<?php echo $session->userinfo['tribe'];?>" title="A küldetéshez...">
+				<?php if ($_SESSION['qst'] == 0 or $_SESSION['qstnew'] == 1){ ?>
+				<img onclick="qst_handle();" src="img/x.gif" id="qgei" style="width:160px;height:195px;cursor:pointer;" class="q_l<?php echo $session->userinfo['tribe'];?>g" title="to the task">
 				<?php }else{ ?>
-				<img onclick="qst_handle();" src="img/x.gif" id="qgei" style="width:160px;height:195px;cursor:pointer;" class="q_l<?php echo $session->userinfo['tribe'];?>g" title="A küldetéshez...">
+				<img onclick="qst_handle();" src="img/x.gif" id="qgei" style="width:160px;height:195px;cursor:pointer;" class="q_l<?php echo $session->userinfo['tribe'];?>" title="to the task">
 				<?php } ?>
 			</div>
 			<script type="text/javascript">

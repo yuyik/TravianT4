@@ -70,17 +70,17 @@ $xcount +=1;
 <!--
 var text_k = {}
 text_k.details = 'Részletek:';
-text_k.spieler = 'Játékos:';
-text_k.einwohner = 'Népesség:';
-text_k.allianz = 'Klán:';
-text_k.verlassenes_tal = 'Elhagyott oázis';
-text_k.besetztes_tal = 'Elfoglalt oázis';
-text_k.freie_oase = 'Elhagyott oázis';
+text_k.spieler = 'Player:';
+text_k.einwohner = 'Population:';
+text_k.allianz = 'Alliance:';
+text_k.verlassenes_tal = 'Abandoned valley';
+text_k.besetztes_tal = 'occupied oasis';
+text_k.freie_oase = 'Abandoned valley';
 var text_x = {}
-text_x.r1 = 'Fa';
-text_x.r2 = 'Agyag';
+text_x.r1 = 'Lumber';
+text_x.r2 = 'Clay';
 text_x.r3 = 'Vas';
-text_x.r4 = 'Búza';
+text_x.r4 = 'Crop';
 
 // -->
 </script>
@@ -264,5 +264,5 @@ for($h=0;$h<=12;$h++) {
             <span>y </span><input id="mcy" class="text" name="yp" value="" maxlength="4"/>
             <input type="image" id="btn_ok" class="dynamic_img" value="ok" name="s1" src="img/x.gif" alt="OK" />
 
-            </form></div><table cellpadding="1" cellspacing="1" id="map_infobox" class="default"><thead><tr><th colspan="2">Részlet:</th></tr></thead><tbody><tr><th>Játékos:</th><td>-</td></tr><tr><th>Népesség:</th><td>-</td></tr><tr><th>Klán:</th><td>-</td></tr></tbody></table></div>
+            </form></div><table cellpadding="1" cellspacing="1" id="map_infobox" class="deLumberult"><thead><tr><th colspan="2">Részlet:</th></tr></thead><tbody><tr><th>Player:</th><td>-</td></tr><tr><th>Population:</th><td>-</td></tr><tr><th>Alliance:</th><td>-</td></tr></tbody></table></div>
 </div>

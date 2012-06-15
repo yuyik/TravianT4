@@ -38,7 +38,12 @@ if(isset($_GET['inventory'])){
 		
 	}
 }
-
+if(isset($_GET['showhero'])){
+$database->modifyHero2('hide', 0, $session->uid, 0);
+}
+if(isset($_GET['hidehero'])){
+$database->modifyHero2('hide', 1, $session->uid, 0);
+}
 ?>
 <body class="v35 webkit chrome hero_inventory">
 	<div id="wrapper"> 
@@ -210,7 +215,15 @@ if($gi['bag']!=0){
 		</div>
 	</div>
 	<div class="heroHidden">
-		<input type="checkbox" class="check" name="hideShow" id="heroHideShow" checked="checked" disabled> When checked hero will defend village
+	<?php
+	if($hero['hide'] == 1){
+	?>
+		<input type="checkbox" class="check" name="hideShow" onclick="window.location.href = '?showhero=<?php echo $hero['heroid'];?>';" checked="checked"> When checked hero will hide when village attacked.
+	<?php 
+	}else{
+	?>
+		<input type="checkbox" class="check" name="hideShow" onclick="window.location.href = '?hidehero=<?php echo $hero['heroid'];?>';"> When checked hero will hide when village attacked.
+	<?php } ?>
 	</div>
 </div>
 <div id="hero_inventory">

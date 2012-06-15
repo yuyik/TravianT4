@@ -121,6 +121,12 @@
         		$dbarray = mysql_fetch_array($result);
         		return $dbarray[$field];
         	}
+			
+			function getStarvation(){
+                    $q = "SELECT * FROM " . TB_PREFIX . "vdata where starv != 0";
+                    $result = mysql_query($q, $this->connection);
+                    return $this->mysql_fetch_all($result);
+            }
 
         	function getActivateField($ref, $field, $mode) {
         		if(!$mode) {
@@ -1363,62 +1369,124 @@
         		$q = "SELECT * FROM " . TB_PREFIX . "ndata WHERE ally = $aid ORDER BY time DESC";
         	}
 
-        	function addBuilding($wid, $field, $type, $loop, $time) {
-        		$x = "UPDATE " . TB_PREFIX . "fdata SET f" . $field . "t=" . $type . " WHERE vref=" . $wid;
-        		mysql_query($x, $this->connection) or die(mysql_error());
-        		$q = "INSERT into " . TB_PREFIX . "bdata values (0,$wid,$field,$type,$loop,$time)";
-        		return mysql_query($q, $this->connection);
-        	}
+        	function addBuilding($wid, $field, $type, $loop, $time, $master, $level) {
+                $x = "UPDATE " . TB_PREFIX . "fdata SET f" . $field . "t=" . $type . " WHERE vref=" . $wid;
+                mysql_query($x, $this->connection) or die(mysql_error());
+                $q = "INSERT into " . TB_PREFIX . "bdata values (0,$wid,$field,$type,$loop,$time,$master,$level)";
+                return mysql_query($q, $this->connection);
+            }
 
         	function removeBuilding($d) {
-        		global $building;
-        		$jobLoopconID = -1;
-        		$SameBuildCount = 0;
-        		$jobs = $building->buildArray;
-        		for($i = 0; $i < sizeof($jobs); $i++) {
-        			if($jobs[$i]['id'] == $d) {
-        				$jobDeleted = $i;
-        			}
-        			if($jobs[$i]['loopcon'] == 1) {
-        				$jobLoopconID = $i;
-        			}
-        		}
-        		if(count($jobs) > 1 && ($jobs[0]['field'] == $jobs[1]['field'])) {
-        			$SameBuildCount = 1;
-        		}
-        		if(count($jobs) > 2 && ($jobs[0]['field'] == $jobs[2]['field'])) {
-        			$SameBuildCount = 2;
-        		}
-        		if(count($jobs) > 2 && ($jobs[1]['field'] == $jobs[2]['field'])) {
-        			$SameBuildCount = 3;
-        		}
-
-        		if($SameBuildCount > 0) {
-        			if($d == $jobs[floor($SameBuildCount / 3)]['id'] || $d == $jobs[floor($SameBuildCount / 2) + 1]['id']) {
-        				$q = "UPDATE " . TB_PREFIX . "bdata SET loopcon=0,timestamp=" . $jobs[floor($SameBuildCount / 3)]['timestamp'] . " WHERE ID=" . $jobs[floor($SameBuildCount / 3)]['id'] . " OR ID=" . $jobs[floor($SameBuildCount / 2) + 1]['id'];
-        				mysql_query($q, $this->connection);
-        			}
-        		} else {
-        			if($jobs[$jobDeleted]['field'] >= 19) {
-        				$x = "SELECT f" . $jobs[$jobDeleted]['field'] . " FROM " . TB_PREFIX . "fdata WHERE vref=" . $jobs[$jobDeleted]['wid'];
-        				$result = mysql_query($x, $this->connection) or die(mysql_error());
-        				$fieldlevel = mysql_fetch_row($result);
-        				if($fieldlevel[0] == 0) {
-        					$x = "UPDATE " . TB_PREFIX . "fdata SET f" . $jobs[$jobDeleted]['field'] . "t=0 WHERE vref=" . $jobs[$jobDeleted]['wid'];
-        					mysql_query($x, $this->connection) or die(mysql_error());
-        				}
-        			}
-        			if(($jobLoopconID >= 0) && ($jobs[$jobDeleted]['loopcon'] != 1)) {
-        				if(($jobs[$jobLoopconID]['field'] <= 18 && $jobs[$jobDeleted]['field'] <= 18) || ($jobs[$jobLoopconID]['field'] >= 19 && $jobs[$jobDeleted]['field'] >= 19)) {
-        					$uprequire = $building->resourceRequired($jobs[$jobLoopconID]['field'], $jobs[$jobLoopconID]['type']);
-        					$x = "UPDATE " . TB_PREFIX . "bdata SET loopcon=0,timestamp=" . (time() + $uprequire['time']) . " WHERE wid=" . $jobs[$jobDeleted]['wid'] . " AND loopcon=1";
-        					mysql_query($x, $this->connection) or die(mysql_error());
-        				}
-        			}
-        		}
-        		$q = "DELETE FROM " . TB_PREFIX . "bdata where id = $d";
-        		return mysql_query($q, $this->connection);
-        	}
+                global $building;
+                $jobLoopconID = -1;
+                $SameBuildCount = 0;
+                $jobs = $building->buildArray;
+                for($i = 0; $i < sizeof($jobs); $i++) {
+                    if($jobs[$i]['id'] == $d) {
+                        $jobDeleted = $i;
+                    }
+                    if($jobs[$i]['loopcon'] == 1) {
+                        $jobLoopconID = $i;
+                    }
+                    if($jobs[$i]['master'] == 1) {
+                        $jobMaster = $i;
+                    }
+                }
+                if(count($jobs) > 1 && ($jobs[0]['field'] == $jobs[1]['field'])) {
+                    $SameBuildCount = 1;
+                }
+                if(count($jobs) > 2 && ($jobs[0]['field'] == $jobs[2]['field'])) {
+                    $SameBuildCount = 2;
+                }
+                if(count($jobs) > 2 && ($jobs[1]['field'] == $jobs[2]['field'])) {
+                    $SameBuildCount = 3;
+                }
+				if(count($jobs) > 2 && ($jobs[0]['field'] == ($jobs[1]['field'] == $jobs[2]['field']))) {
+                    $SameBuildCount = 4;
+                }
+				if(count($jobs) > 3 && ($jobs[0]['field'] == ($jobs[1]['field'] == $jobs[3]['field']))) {
+                    $SameBuildCount = 5;
+                }
+				if(count($jobs) > 3 && ($jobs[0]['field'] == ($jobs[2]['field'] == $jobs[3]['field']))) {
+                    $SameBuildCount = 6;
+                }
+				if(count($jobs) > 3 && ($jobs[1]['field'] == ($jobs[2]['field'] == $jobs[3]['field']))) {
+                    $SameBuildCount = 7;
+                }
+				if(count($jobs) > 3 && ($jobs[0]['field'] == $jobs[3]['field'])) {
+                    $SameBuildCount = 8;
+                }
+                if(count($jobs) > 3 && ($jobs[1]['field'] == $jobs[3]['field'])) {
+                    $SameBuildCount = 9;
+                }
+                if(count($jobs) > 3 && ($jobs[2]['field'] == $jobs[3]['field'])) {
+                    $SameBuildCount = 10;
+                }
+                if($SameBuildCount > 0) {
+					if($SameBuildCount > 3){
+					if($SameBuildCount == 4 or $SameBuildCount == 5){
+					if($jobDeleted == 0){
+					$uprequire = $building->resourceRequired($jobs[1]['field'],$jobs[1]['type'],1);
+					$time = $uprequire['time'];
+					$timestamp = $time+time();
+					$q = "UPDATE " . TB_PREFIX . "bdata SET loopcon=0,level=level-1,timestamp=".$timestamp." WHERE id=".$jobs[1]['id']."";
+                        mysql_query($q, $this->connection);
+					}
+					}else if($SameBuildCount == 6){
+					if($jobDeleted == 0){
+					$uprequire = $building->resourceRequired($jobs[2]['field'],$jobs[2]['type'],1);
+					$time = $uprequire['time'];
+					$timestamp = $time+time();
+					$q = "UPDATE " . TB_PREFIX . "bdata SET loopcon=0,level=level-1,timestamp=".$timestamp." WHERE id=".$jobs[2]['id']."";
+                        mysql_query($q, $this->connection);
+					}
+					}else if($SameBuildCount == 7){
+					if($jobDeleted == 1){
+					$uprequire = $building->resourceRequired($jobs[2]['field'],$jobs[2]['type'],1);
+					$time = $uprequire['time'];
+					$timestamp = $time+time();
+					$q = "UPDATE " . TB_PREFIX . "bdata SET loopcon=0,level=level-1,timestamp=".$timestamp." WHERE id=".$jobs[2]['id']."";
+                        mysql_query($q, $this->connection);
+					}
+					}
+					if($SameBuildCount < 8){
+					$uprequire1 = $building->resourceRequired($jobs[$jobMaster]['field'],$jobs[$jobMaster]['type'],2);
+					$time1 = $uprequire1['time'];
+					$timestamp1 = $time1;
+					$q1 = "UPDATE " . TB_PREFIX . "bdata SET level=level-1,timestamp=".$timestamp1." WHERE id=".$jobs[$jobMaster]['id']."";
+                        mysql_query($q1, $this->connection);
+					}else{
+					$uprequire1 = $building->resourceRequired($jobs[$jobMaster]['field'],$jobs[$jobMaster]['type'],1);
+					$time1 = $uprequire1['time'];
+					$timestamp1 = $time1;
+					$q1 = "UPDATE " . TB_PREFIX . "bdata SET level=level-1,timestamp=".$timestamp1." WHERE id=".$jobs[$jobMaster]['id']."";
+                        mysql_query($q1, $this->connection);
+					}
+					}else if($d == $jobs[floor($SameBuildCount / 3)]['id'] || $d == $jobs[floor($SameBuildCount / 2) + 1]['id']) {
+                        $q = "UPDATE " . TB_PREFIX . "bdata SET loopcon=0,level=level-1,timestamp=" . $jobs[floor($SameBuildCount / 3)]['timestamp'] . " WHERE master = 0 AND id > ".$d." and (ID=" . $jobs[floor($SameBuildCount / 3)]['id'] . " OR ID=" . $jobs[floor($SameBuildCount / 2) + 1]['id'] . ")";
+                        mysql_query($q, $this->connection);
+                    }
+                } else {
+                    if($jobs[$jobDeleted]['field'] >= 19) {
+                        $x = "SELECT f" . $jobs[$jobDeleted]['field'] . " FROM " . TB_PREFIX . "fdata WHERE vref=" . $jobs[$jobDeleted]['wid'];
+                        $result = mysql_query($x, $this->connection) or die(mysql_error());
+                        $fieldlevel = mysql_fetch_row($result);
+                        if($fieldlevel[0] == 0) {
+                            $x = "UPDATE " . TB_PREFIX . "fdata SET f" . $jobs[$jobDeleted]['field'] . "t=0 WHERE vref=" . $jobs[$jobDeleted]['wid'];
+                            mysql_query($x, $this->connection) or die(mysql_error());
+                        }
+                    }
+                    if(($jobLoopconID >= 0) && ($jobs[$jobDeleted]['loopcon'] != 1)) {
+                        if(($jobs[$jobLoopconID]['field'] <= 18 && $jobs[$jobDeleted]['field'] <= 18) || ($jobs[$jobLoopconID]['field'] >= 19 && $jobs[$jobDeleted]['field'] >= 19) || sizeof($jobs) < 3) {
+                            $uprequire = $building->resourceRequired($jobs[$jobLoopconID]['field'], $jobs[$jobLoopconID]['type']);
+                            $x = "UPDATE " . TB_PREFIX . "bdata SET loopcon=0,timestamp=" . (time() + $uprequire['time']) . " WHERE wid=" . $jobs[$jobDeleted]['wid'] . " AND loopcon=1 AND master=0";
+                            mysql_query($x, $this->connection) or die(mysql_error());
+                        }
+                    }
+                }
+                $q = "DELETE FROM " . TB_PREFIX . "bdata where id = $d";
+                return mysql_query($q, $this->connection);
+            }
 
         	function addDemolition($wid, $field) {
         		global $building, $village;
@@ -1459,6 +1527,56 @@
         		$result = mysql_query($q, $this->connection);
         		return $this->mysql_fetch_all($result);
         	}
+
+            function FinishWoodcutter($wid) {
+				$time = time()-1;
+                $q = "SELECT * FROM " . TB_PREFIX . "bdata where wid = $wid and type = 1 order by master,timestamp ASC";
+                $result = mysql_query($q);
+				$dbarray = mysql_fetch_array($result);
+				$q = "UPDATE ".TB_PREFIX."bdata SET timestamp = $time WHERE id = '".$dbarray['id']."'";
+                $this->query($q);
+            }
+
+            function getMasterJobs($wid) {
+                $q = "SELECT * FROM " . TB_PREFIX . "bdata where wid = $wid and master = 1 order by master,timestamp ASC";
+                $result = mysql_query($q, $this->connection);
+                return $this->mysql_fetch_all($result);
+            }
+			
+            function getMasterJobsByField($wid,$field) {
+                $q = "SELECT * FROM " . TB_PREFIX . "bdata where wid = $wid and field = $field and master = 1 order by master,timestamp ASC";
+                $result = mysql_query($q, $this->connection);
+                return $this->mysql_fetch_all($result);
+            }
+
+            function getBuildingByField($wid,$field) {
+                $q = "SELECT * FROM " . TB_PREFIX . "bdata where wid = $wid and field = $field and master = 0";
+                $result = mysql_query($q, $this->connection);
+                return $this->mysql_fetch_all($result);
+            }
+
+            function getBuildingByType($wid,$type) {
+                $q = "SELECT * FROM " . TB_PREFIX . "bdata where wid = $wid and type = $type and master = 0";
+                $result = mysql_query($q, $this->connection);
+                return $this->mysql_fetch_all($result);
+            }
+
+            function getDorf1Building($wid) {
+                $q = "SELECT * FROM " . TB_PREFIX . "bdata where wid = $wid and field < 19 and master = 0";
+                $result = mysql_query($q, $this->connection);
+                return $this->mysql_fetch_all($result);
+            }
+
+            function getDorf2Building($wid) {
+                $q = "SELECT * FROM " . TB_PREFIX . "bdata where wid = $wid and field > 18 and master = 0";
+                $result = mysql_query($q, $this->connection);
+                return $this->mysql_fetch_all($result);
+            }
+
+            function updateBuildingWithMaster($id, $time,$loop) {
+                $q = "UPDATE " . TB_PREFIX . "bdata SET master = 0, timestamp = ".$time.",loopcon = ".$loop." WHERE id = ".$id."";
+                return mysql_query($q, $this->connection);
+            }
 
         	function getVillageByName($name) {
         		$name = mysql_real_escape_string($name, $this->connection);
@@ -2342,7 +2460,7 @@ break;
 }
         			$basearray = $this->getOMInfo($wid);				
         			//We switch type of oasis and instert record with apropriate infomation.
-        			$q = "INSERT into " . TB_PREFIX . "odata VALUES ('" . $basearray['id'] . "'," . $basearray['oasistype'] . ",0,".$tt."," . time() . ",100,3,'آبادی تسخیر نشده')";
+        			$q = "INSERT into " . TB_PREFIX . "odata VALUES ('" . $basearray['id'] . "'," . $basearray['oasistype'] . ",0,".$tt."," . time() . ",100,3,'Unoccupied oasis')";
         			$result = mysql_query($q, $this->connection);
         		}
         	}
@@ -2972,11 +3090,8 @@ break;
 			function addHero($uid){
 				$time = time();
 				$hash = md5($time);
-				$speed = 7*INCREASE_SPEED;
-				$reg = 10*INCREASE_SPEED;
-				$r0 = 12*SPEED;
 				$q = "INSERT into " . TB_PREFIX . "hero (`uid`, `wref`, `level`, `speed`, `points`, `experience`, `dead`, `health`, `power`, `offBonus`, `defBonus`, `product`, `r0`, `autoregen`, `lastupdate`, `lastadv`, `hash`) values 
-        ('$uid', 0, 0, '$speed', 0, '2', 0, '100', '0', 0, 0, '4', '$r0', '$reg', '$time', '$time', '$hash')";
+				('$uid', 0, 0, '7', 0, '2', 0, '100', '0', 0, 0, '4', '1', '10', '$time', '$time', '$hash')";
         		return mysql_query($q, $this->connection) or die(mysql_error());
 			}
 			
@@ -3166,7 +3281,77 @@ break;
 				} 
 				// The image copy 
 				imagecopy($dst_im, $src_im, $dst_x, $dst_y, $src_x, $src_y, $src_w, $src_h); 
-			} 
+			}
+
+            function getCropProdstarv($wref) {
+			global $bid4,$bid8,$bid9,$sesion,$technology;
+
+				$basecrop = $grainmill = $bakery = 0;
+                $owner = $this->getVrefField($wref, 'owner');
+                $bonus = $this->getUserField($owner, b4, 0);  
+
+                $buildarray = $this->getResourceLevel($wref);
+				$cropholder = array();
+				for($i=1;$i<=38;$i++) {
+                    if($buildarray['f'.$i.'t'] == 4) {
+                        array_push($cropholder,'f'.$i);
+                    }
+                    if($buildarray['f'.$i.'t'] == 8) {
+                        $grainmill = $buildarray['f'.$i];
+                    }
+                    if($buildarray['f'.$i.'t'] == 9) {
+                        $bakery = $buildarray['f'.$i];
+                    }
+				}
+                $q = "SELECT type FROM `" . TB_PREFIX . "odata` WHERE conqured = $wref";
+                $result = mysql_query($q, $this->connection) or die(mysql_error());
+                $oasis = mysql_fetch_array($result);
+				foreach($oasis as $oa){
+                    switch($oa['type']) {
+                        case 1:
+                        case 2:
+                        $wood += 1;
+                        break;
+                        case 3:
+                        $wood += 1;
+                        $cropo += 1;
+                        break;
+                        case 4:
+                        case 5:
+                        $clay += 1;
+                        break;
+                        case 6:
+                        $clay += 1;
+                        $cropo += 1;
+                        break;
+                        case 7:
+                        case 8:
+                        $iron += 1;
+                        break;
+                        case 9:
+                        $iron += 1;
+                        $cropo += 1;
+                        break;
+                        case 10:
+                        case 11:
+                        $cropo += 1;
+                        break;
+                        case 12:
+                        $cropo += 2;
+                        break;
+                    }
+				}
+				for($i=0;$i<=count($cropholder)-1;$i++) { $basecrop+= $bid4[$buildarray[$cropholder[$i]]]['prod']; }
+				$crop = $basecrop + $basecrop * 0.25 * $cropo;
+				if($grainmill >= 1 || $bakery >= 1) {
+                    $crop += $basecrop /100 * ($bid8[$grainmill]['attri'] + $bid9[$bakery]['attri']);
+				}
+				if($bonus > time()) {
+                    $crop *= 1.25;
+				}
+				$crop *= SPEED;
+				return $crop;
+            }
         }
         ;
 

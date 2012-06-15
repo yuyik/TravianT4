@@ -132,7 +132,7 @@ if($hero['r3']!=0){echo $hero['r3']*10*SPEED;}else if($hero['r4']!=0){echo $hero
   </div>
 	<div class="boxes boxesColor gray"><div class="boxes-tl"></div><div class="boxes-tr"></div><div class="boxes-tc"></div><div class="boxes-ml"></div><div class="boxes-mr"></div><div class="boxes-mc"></div><div class="boxes-bl"></div><div class="boxes-br"></div><div class="boxes-bc"></div><div class="boxes-contents">
 
-<div class="attribute health tooltip" title="These are your Hero`s Health Points <?php echo $hero['autoregen']; ?>% </font>">
+<div class="attribute health tooltip" title="Your hero regeneration: <?php echo $hero['autoregen']*INCREASE_SPEED; ?>% per day </font>">
 <?php if($hero['dead']==0){ ?>
 			<div class="element attribName">Health</div>
 			<div class="element current power"><span class="value"><?php echo round($hero['health']); ?></span>%</div>
@@ -170,7 +170,7 @@ if(!$checkT){
         echo "<span class=\"regeneratebtn\"><button type=\"submit\" value=\"Újraélesztés\" onclick=\"window.location.href = 'hero_inventory.php?r=1'; return false;\" name=\"save\" id=\"save\"><div class=\"button-container\"><div class=\"button-position\"><div class=\"btl\"><div class=\"btr\"><div class=\"btc\"></div></div></div><div class=\"bml\"><div class=\"bmr\"><div class=\"bmc\"></div></div></div><div class=\"bbl\"><div class=\"bbr\"><div class=\"bbc\"></div></div></div></div><div class=\"button-contents\">Újraélesztés</div></div></button></span>";
     }
 }else{
-	echo "A hős újraéledéséig <span id='timer1'>".$generator->getTimeFormat($checkT['eachtime']-time())."</span> idő van hátra.";
+	echo "Hero will be ready in <span id='timer1'>".$generator->getTimeFormat($checkT['eachtime']-time())."</span>";
 }
     ?>
         <div class="regenerateCosts">
@@ -241,7 +241,7 @@ if(!$checkT){
 <div class="attribute speed tooltip" title="Your Heros speed determines how many fields he travels an hour <?php echo $hero['speed']; ?> </font>">
 	<div class="element attribName">Speed</div>
     <div class="element power">
-    	<span class="currect"><?php echo $hero['speed']; ?></span> Fields Per Hour
+    	<span class="currect"><?php echo $hero['speed']*INCREASE_SPEED; ?></span> Fields Per Hour
     </div>
     <div class="clear"></div>
 </div>
@@ -290,13 +290,11 @@ if(isset($_GET['product'])){
 	for($i=0;$i<=4;$i++){
     	if($_GET['product'] == 'r'.$i){
         	if('r'.$i == 'r0'){
-            	$prod = ($hero['product']/4);
 				header("Location: hero_inventory.php");
             }else{
-            	$prod = $hero['product'];
 				header("Location: hero_inventory.php");
             }
-    		$database->modifyHero('r'.$i, $prod, $heroid, 0);
+    		$database->modifyHero('r'.$i, 1, $heroid, 0);
 			header("Location: hero_inventory.php");
         }else{
         	$database->modifyHero('r'.$i, 0, $heroid, 0);

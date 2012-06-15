@@ -143,15 +143,15 @@ class Battle {
 		}
 
 		if(!$scout){
-			return $this->calculateBattle($attacker,$defender,$wall,$post['a1_v'],$deftribe,$post['palast'],$post['ew1'],$post['ew2'],$post['ktyp']+3,$def_ab,$att_ab,$post['kata'],1);
+			return $this->calculateBattle($attacker,$defender,$wall,$post['a1_v'],$deftribe,$post['palast'],$post['ew1'],$post['ew2'],$post['ktyp']+3,$def_ab,$att_ab,$post['kata'],1,0,0);
 		}else{
-			return $this->calculateBattle($attacker,$defender,$wall,$post['a1_v'],$deftribe,$post['palast'],$post['ew1'],$post['ew2'],1,$def_ab,$att_ab,$post['kata'],1);
+			return $this->calculateBattle($attacker,$defender,$wall,$post['a1_v'],$deftribe,$post['palast'],$post['ew1'],$post['ew2'],1,$def_ab,$att_ab,$post['kata'],1,0,0);
 		}
 	}
 
 
 	//1 raid 0 normal
-	function calculateBattle($Attacker,$Defender,$def_wall,$att_tribe,$def_tribe,$residence,$attpop,$defpop,$type,$def_ab,$att_ab,$tblevel,$stonemason,$walllevel) {
+	function calculateBattle($Attacker,$Defender,$def_wall,$att_tribe,$def_tribe,$residence,$attpop,$defpop,$type,$def_ab,$att_ab,$tblevel,$stonemason,$walllevel,$AttackerID,$DefenderID) {
 		global $bid34,$database;
 		// Definieer de array met de eenheden
 		$calvary = array(4,5,6,15,16,23,24,25,26,35,36,45,46);
@@ -167,8 +167,8 @@ class Battle {
         
         //exit($type);
 
-        if ($Attacker['hero'] != 0) $atkhero = $database->getHeroData($Attacker['id']);
-		if ($Defender['hero'] != 0) $defhero = $database->getHeroData($Defender['id']);
+        if ($Attacker['hero'] != 0) $atkhero = $database->getHeroData($AttackerID);
+		if ($Defender['hero'] != 0) $defhero = $database->getHeroData($DefenderID);
         //
         // Berekenen het totaal aantal punten van Aanvaller
         //
@@ -252,7 +252,7 @@ class Battle {
 					$units['Def_unit'][$y] = $Defender['u'.$y];
 				}
 			}
-			if($Defender['hero']){
+			if($Defender['hero'] && $defhero['hide'] == 0){
 				$dp +=  ($defhero['power'] + ($defhero['power'] + 300 * 6 / 7) * (pow(1.007, $defhero['defBonus']) - 1));
 			}
 			$units['Def_unit']['hero'] = $Defender['hero'];
@@ -270,7 +270,7 @@ class Battle {
 				$involve += $Defender['u'.$y]; 
 				$units['Def_unit'][$y] = $Defender['u'.$y];
 			}
-			if($Defender['hero']){
+			if($Defender['hero'] && $defhero['hide'] == 0){
 				$dp +=  ($defhero['power'] + ($defhero['power'] + 300 * 6 / 7) * (pow(1.007, $defhero['defBonus']) - 1));
 				$cdp += ($defhero['power'] + ($defhero['power'] + 300 * 6 / 7) * (pow(1.007, $defhero['defBonus']) - 1));
 			}
@@ -457,7 +457,7 @@ class Battle {
             }
         }
 		
-		if ($units['Def_unit']['hero']>0){
+		if ($units['Def_unit']['hero']>0 && $defhero['hide'] == 0){
             $hero_id=$defhero['uid'];
             $hero_health=$defhero['health'];
             $damage_health=round(100*$result[2]);

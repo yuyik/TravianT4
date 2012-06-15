@@ -77,7 +77,8 @@ if($message->unread) {
 							<div class="contentTitle">&nbsp;</div>
 <div class="contentContainer">
 <div id="content" class="player">
-<h1 class="titleInHeader">Player profile</h1>
+<?php $username = $database->getUserField($_GET['uid'],"username",0); ?>
+<h1 class="titleInHeader">Player profile <?php if(isset($_GET['uid']) && is_numeric($_GET['uid'])){ echo "- ".$username; } ?></h1>
 <script type="text/javascript"> 
 					window.addEvent('domready', function()
 					{

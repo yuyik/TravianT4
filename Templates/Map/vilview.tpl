@@ -13,25 +13,25 @@ if($database->getOasisV($d)){
         <span class="coordinates coordinatesWithText">
         <span class="coordText">
         <?php if(!$basearray['occupied'] && $basearray['oasistype'] && !$basearray['fieldtype']){
-        		echo "Not capture the village";
+        		echo "Unoccupied oasis";
             }elseif($basearray['occupied'] && $basearray['oasistype'] && !$basearray['fieldtype']){
             	echo "Abádi Captive";
             }elseif($basearray['occupied'] && !$basearray['oasistype'] && $basearray['fieldtype']){
             	echo $basearray['name'];
-            }else{ echo "Elhagyott oázis"; } ?>
+            }else{ echo "Abandoned valley"; } ?>
         </span>
         <span class="coordinateY"><?php echo "(".$basearray['y'].""; ?></span>
         <span class="coordinatePipe">|</span>
         <span class="coordinateX"><?php echo "".$basearray['x'].")"; ?></span>
         </span>
         <span class="clear"> </span>
-        <?php if($basearray['occupied'] && $basearray['capital']) { echo "<span class=\"mainVillage\">(főfalu)</span>"; } ?>
+        <?php if($basearray['occupied'] && $basearray['capital']) { echo "<span class=\"mainVillage\">(capital)</span>"; } ?>
         <span class="clear">&nbsp;</span>
 </h1>
 <div id="tileDetails" class="village <?php echo ($basearray['fieldtype'] == 0)? 'oasis-'.$basearray['oasistype'] : 'village-'.$basearray['fieldtype'] ?>">
 <div class="detailImage">
 <div id="options">
-<div class="option"><a href="karte.php?x=<?php echo $basearray['y']; ?>&y=<?php echo $basearray['x']; ?>" class="a arrow">Térkép központosítása</a></div>
+<div class="option"><a href="karte.php?x=<?php echo $basearray['y']; ?>&y=<?php echo $basearray['x']; ?>" class="a arrow">Centre map</a></div>
  <?php if(!$basearray['occupied']) { ?>
  <div class="option">
  <?php 
@@ -46,13 +46,13 @@ if($database->getOasisV($d)){
         $enough_cp = false;
       }
       
-			$otext = ($basearray['occupied'] == 1)? "Elfoglalt" : "Szabad"; 
+			$otext = ($basearray['occupied'] == 1)? "Occupied" : "Unoccupied"; 
 			if($village->unitarray['u'.$session->tribe.'0'] >= 3 AND $enough_cp) {
-        $test = "<a class=\"a arrow\" href=\"a2b.php?id=".$d."&amp;s=1\">Új falu alapítás</a>";
+        $test = "<a class=\"a arrow\" href=\"a2b.php?id=".$d."&amp;s=1\">Found new village</a>";
       } elseif($village->unitarray['u'.$session->tribe.'0'] >= 3 AND !$enough_cp) {
-        $test = "<span class=\"a arrow disabled\" title=\"(".$cps."/".$need_cps." kultúr pont\">Új falu</span>";
+        $test = "<span class=\"a arrow disabled\" title=\"(".$cps."/".$need_cps." culture points\">Found new village</span>";
       } else {
-        $test = "<span class=\"a arrow disabled\">Új falu alapítás</span>";
+        $test = "<span class=\"a arrow disabled\">Found new village</span>";
       }
  	
 		echo ($basearray['fieldtype']==0)? 
@@ -60,11 +60,11 @@ if($database->getOasisV($d)){
 		($basearray['owner'] == $session->uid)?
 		
 		
-		"<a class=\"a arrow\" href=\"build.php?id=39\">$otext oázis kifosztása (gyülekezőtér építése)</a>" : 
-		"<span class=\"a arrow disabled\">$otext oázis kifosztása (gyülekezőtér építése)</span>" : 
+		"<a class=\"a arrow\" href=\"build.php?id=39\">Raid $otext oasis (build rally point)</a>" : 
+		"<span class=\"a arrow disabled\">Raid $otext oasis (build rally point)</span>" : 
 		
 		
-		"<a class=\"a arrow\" href=\"a2b.php?z=".$d."&o\">$otext oázis kifosztása</a>" :
+		"<a class=\"a arrow\" href=\"a2b.php?z=".$d."&o\">Raid $otext oasis</a>" :
 		"$test"
 			?>
 	</div>
@@ -79,23 +79,23 @@ if($database->getOasisV($d)){
           $data2 = mysql_fetch_assoc($query2);
           
           if($database->checkBan($data2['id'])) {
-			echo "<span class=\"a arrow disabled\" title=\"Szabályok megsértése miatt zárolva\">Zárolt játékos</span>";
+			echo "<span class=\"a arrow disabled\" title=\"player banned\">Player banned</span>";
           } else if($data2['protect'] < time()) {
-            echo $village->resarray['f39']? "<a class=\"a arrow\" href=\"a2b.php?z=".$d."\">Egységek küldése.</a>" : "<span class=\"a arrow disabled\" title=\"(gyülekezőtér építése)\">Egységek küldése.</span>"; 
+            echo $village->resarray['f39']? "<a class=\"a arrow\" href=\"a2b.php?z=".$d."\">Send troops.</a>" : "<span class=\"a arrow disabled\" title=\"(build rally point)\">Send troops.</span>"; 
           } else {
-            echo "<span class=\"a arrow disabled\" title=\"(Szponzorált játékos)\">Egységek küldése.</span>";
+            echo "<span class=\"a arrow disabled\" title=\"(beginner protection until -)\">Send troops.</span>";//need to fix showing protection time
           }
           ?>
 </div>
     <div class="option">
     <?php
-    echo $building->getTypeLevel(17)? "<a class=\"a arrow\" href=\"build.php?z=".$d."&id=" . $building->getTypeField(17) . "\">Kereskedő küldése</a>" : "<span class=\"a arrow disabled\" title=\"(piac építése)\">Kereskedő küldése.</span>"; ?>
+    echo $building->getTypeLevel(17)? "<a class=\"a arrow\" href=\"build.php?z=".$d."&id=" . $building->getTypeField(17) . "\">Send merchants</a>" : "<span class=\"a arrow disabled\" title=\"(build marketplace)\">Send merchants.</span>"; ?>
     </div>
     <?php }else if ($basearray['occupied']==1 && $basearray['oasistype']!=0 && $basearray['wref'] != $_SESSION['wid']) { ?>
         
         <div class="option">
         <?php
-            echo $village->resarray['f39']? "<a class=\"a arrow\" href=\"a2b.php?z=".$d."\">Egységek küldése.</a>" : "<span class=\"a arrow disabled\" title=\"(gyülekezőtér építése)\">Egységek küldése.</span>"; 
+            echo $village->resarray['f39']? "<a class=\"a arrow\" href=\"a2b.php?z=".$d."\">Send troops.</a>" : "<span class=\"a arrow disabled\" title=\"(build rally point)\">Send troops.</span>"; 
           ?>
           </div>
           <?php } ?>
@@ -111,28 +111,28 @@ if($database->getOasisV($d)){
     ?>
 		<tbody>
 			<tr class="first">
-				<th>Nép:</th>
+				<th>Tribe:</th>
 				<td><?php switch($uinfo['tribe']) { case 1: echo TRIBE1; break; case 2: echo TRIBE2; break; case 3: echo TRIBE3; break; case 5: echo TRIBE5; break;} ?></td>
 			</tr>
 			<tr>
-				<th>Szövettség:</th>
+				<th>Alliance:</th>
 				<?php if($uinfo['alliance'] == 0){
 			echo '<td>-</td>';
 			} else echo '
 			<td><a href="allianz.php?aid='.$uinfo['alliance'].'">'.$database->getUserAlliance($basearray['owner']).'</a></td>'; ?>
 			</tr>
 			<tr>
-				<th>Tulajdonos:</th>
+				<th>Owner:</th>
 				<td><a href="spieler.php?uid=<?php echo $basearray['owner']; ?>"><?php echo $database->getUserField($basearray['owner'],username,0); ?></a></td>
 			</tr>
 			<tr>
-				<th>Falu:</th>
+				<th>Village:</th>
 				<td><a href="karte.php?z=<?php echo $basearray['wref']; ?>"><?php echo $vilowner['name']; ?></a></td>
 			</tr>
 		</tbody>
 	</table><Br />
  <?php } ?>
-	<h4><?php if(!$basearray['fieldtype'] && !$basearray['oasistype']){ echo ""; } else { echo "Földfelosztás"; } ?></h4>
+	<h4><?php if(!$basearray['fieldtype'] && !$basearray['oasistype']){ echo ""; } else { echo "Land distribution"; } ?></h4>
 	<table cellpadding="0" cellspacing="0" id="distribution" class="transparent">       
 		<tbody>
 <?php 
@@ -326,27 +326,27 @@ echo $tt;
 }
 else if ($basearray['occupied'] && !$basearray['oasistype']){
 ?><br />
-    <h4>Játékos</h4>
+    <h4>Player</h4>
 	<table cellpadding="0" cellspacing="0" id="village_info" class="transparent">
     <?php $uinfo = $database->getUserArray($basearray['owner'],1); ?>
 		<tbody>
 			<tr class="first">
-				<th>Nép</th>
-				<td><?php switch($uinfo['tribe']) { case 1: echo "Római"; break; case 2: echo "Germán"; break; case 3: echo "Gall"; break; case 5: echo "Natar"; break;} ?></td>
+				<th>Tribe</th>
+				<td><?php switch($uinfo['tribe']) { case 1: echo "Roman"; break; case 2: echo "Teuton"; break; case 3: echo "Gaul"; break; case 5: echo "Natar"; break;} ?></td>
 			</tr>
 			<tr>
-				<th>Szövettség</th>
+				<th>Alliance</th>
 				<?php if($uinfo['alliance'] == 0){
 			echo '<td>-</td>';
 			} else echo '
 			<td><a href="allianz.php?aid='.$uinfo['alliance'].'">'.$database->getUserAlliance($basearray['owner']).'</a></td>'; ?>
 			</tr>
 			<tr>
-				<th>Tulajdonos</th>
+				<th>Owner</th>
 				<td><a href="spieler.php?uid=<?php echo $basearray['owner']; ?>"><?php echo $database->getUserField($basearray['owner'],'username',0); ?></a></td>
 			</tr>
 			<tr>
-				<th>Népesség</th>
+				<th>Population</th>
 				<td><?php echo $basearray['pop']; ?></td>
 			</tr>
 		</tbody>
@@ -354,12 +354,12 @@ else if ($basearray['occupied'] && !$basearray['oasistype']){
     <?php } ?>
 <br />
 
-<h4>Jelentések</h4>
+<h4>Reports</h4>
     <table cellpadding="0" cellspacing="0" id="troop_info" class="rep transparent">
     <tbody>
 <?php
 
-$noticeClass = array("Kémkedés jelentése","Mint támadó, győzelem, veszteségek nélkül","Mint támadó, győzelem, veszteségekkel.","Mint támadó vereség (egy katonád sem tért vissza).","Mint védő, győzelem, veszteségek nélkül.","Mint védő, győzelem, veszteségekkell.","Mint védő, vereség (egy katonád sem élte túl).","Mint védő, vereség (veszteségek nélkül)","A támogatás megérkezett","Jelentés a kalandról.","A kereskedő főként fát szállított.","A kereskedő főként agyagot szállított.","A kereskedő főként vasat szállított.","A kereskedő főként búzát szállított.","","Különféle (pl. natar támadás)");
+$noticeClass = array("Kémkedés jelentése","Mint támadó, győzelem, veszteségek nélkül","Mint támadó, győzelem, veszteségekkel.","Mint támadó vereség (egy katonád sem tért vissza).","Mint védő, győzelem, veszteségek nélkül.","Mint védő, győzelem, veszteségekkell.","Mint védő, vereség (egy katonád sem élte túl).","Mint védő, vereség (veszteségek nélkül)","A támogatás megérkezett","Jelentés a kalandról.","A kereskedő főként fát szállított.","A kereskedő főként Clayot szállított.","A kereskedő főként vasat szállított.","A kereskedő főként búzát szállított.","","Különféle (pl. natar támadás)");
 
 if($session->uid == $database->getVillage($d)){
 	$limit = "ntype=0 and ntype=4 and ntype=5 and ntype=6 and ntype=7";

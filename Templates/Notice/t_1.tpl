@@ -1,6 +1,6 @@
 ﻿
 <?php
-$noticeClass = array("Kémkedés jelentése","Mint támadó, győzelem, veszteségek nélkül","Mint támadó, győzelem, veszteségekkel.","Mint támadó vereség (egy katonád sem tért vissza).","Mint védő, győzelem, veszteségek nélkül.","Mint védő, győzelem, veszteségekkell.","Mint védő, vereség (egy katonád sem élte túl).","Mint védő, vereség (veszteségek nélkül)","A támogatás megérkezett","Jelentés a kalandról.","A kereskedő főként fát szállított.","A kereskedő főként agyagot szállított.","A kereskedő főként vasat szállított.","A kereskedő főként búzát szállított.","","Különféle (pl. natar támadás)");
+$noticeClass = array("Scout Report","Won as attacker without losses","Won as attacker with losses","Lost as attacker with losses","Won as defender without losses","Won as defender with losses","Lost as defender with losses","Lost as defender without losses","Reinforcement arrived","","Wood Delivered","Clay Delivered","Iron Delivered","Crop Delivered","","Won as defender without losses","Won as defender with losses","Lost as defender with losses","Won scouting as attacker","Lost scouting as attacker","Won scouting as defender","Lost scouting as defender","Scout Report");
 $prefix = "".TB_PREFIX."ndata";
 $limit2 = "and ntype=1 or ntype=2 or ntype=3 or ntype=4 or ntype=5 or ntype=6 or ntype=7";
 $sql = mysql_query("SELECT * FROM $prefix WHERE uid = $session->uid and archive=0 $limit2 ORDER BY time DESC");
@@ -142,7 +142,7 @@ $paginationDisplay .=  '<img alt="Utolsó" src="img/x.gif" class="last disabled"
 $outputList = '';
 $name = 1;
 if($query == 0) {        
-    $outputList .= "<td colspan=\"4\" class=\"none\">Nincs új jelentés.</td>";
+    $outputList .= "<td colspan=\"4\" class=\"none\">There are no reports available.</td>";
 }else{
 while($row = mysql_fetch_array($sql2)){ 
     $id = $row["id"];
@@ -200,7 +200,7 @@ if($dataarray[1]){
 <form method="post" action="berichte.php" name="msg">
 <input type="hidden" name="t" id="t" value="<?php echo $_GET['t']; ?>">
 	<table cellpadding="1" cellspacing="1" id="overview" class="row_table_data">
-		<thead><tr><th colspan="2">Címzett:</th><th class="sent">Elküldve</th></tr></thead>
+		<thead><tr><th colspan="2">Subject:</th><th class="sent">Sent</th></tr></thead>
         <tbody>
    <?php 
 
@@ -229,7 +229,7 @@ if($dataarray[1]){
 					element.checked = this.checked;
 				}, this);
 			">
-			<span><label for="sAll">Összes kijelölése</label></span>
+			<span><label for="sAll">Check all</label></span>
 		</div>
 <?php } ?>
 

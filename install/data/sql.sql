@@ -442,6 +442,8 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%bdata` (
   `type` tinyint(2) unsigned NOT NULL,
   `loopcon` tinyint(1) unsigned NOT NULL,
   `timestamp` int(10) unsigned NOT NULL,
+  `master` tinyint(1) unsigned NOT NULL,
+  `level` tinyint(3) unsigned NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
@@ -860,29 +862,30 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%gold_fin_log` (
 --
 
 CREATE TABLE IF NOT EXISTS `%PREFIX%hero` (
-  `heroid` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
-  `uid` smallint(5) unsigned NOT NULL,
-  `wref` int(10) unsigned NOT NULL,
-  `level` int(10) unsigned NOT NULL,
-  `speed` int(10) unsigned NOT NULL,
+  `heroid` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `uid` int(11) unsigned NOT NULL,
+  `wref` int(11) unsigned NOT NULL,
+  `level` mediumint(3) unsigned NOT NULL,
+  `speed` int(11) unsigned NOT NULL,
   `points` tinyint(3) unsigned NOT NULL,
-  `experience` int(10) NOT NULL,
-  `dead` int(1) NOT NULL,
+  `experience` int(11) NOT NULL,
+  `dead` tinyint(1) NOT NULL,
   `health` float(4,1) unsigned NOT NULL,
   `power` int(10) unsigned NOT NULL,
-  `itempower` int(10) unsigned NOT NULL,
-  `offBonus` int(10) unsigned NOT NULL,
-  `defBonus` int(10) unsigned NOT NULL,
-  `product` int(10) unsigned NOT NULL,
-  `r0` int(10) unsigned NOT NULL,
-  `r1` int(10) unsigned NOT NULL,
-  `r2` int(10) unsigned NOT NULL,
-  `r3` int(10) unsigned NOT NULL,
-  `r4` int(10) unsigned NOT NULL,
-  `autoregen` int(2) NOT NULL,
-  `lastupdate` int(10) unsigned NOT NULL,
-  `lastadv` int(10) unsigned NOT NULL,
+  `itempower` tinyint(3) unsigned NOT NULL,
+  `offBonus` tinyint(3) unsigned NOT NULL,
+  `defBonus` tinyint(3) unsigned NOT NULL,
+  `product` tinyint(3) unsigned NOT NULL,
+  `r0` tinyint(1) unsigned NOT NULL,
+  `r1` tinyint(1) unsigned NOT NULL,
+  `r2` tinyint(1) unsigned NOT NULL,
+  `r3` tinyint(1) unsigned NOT NULL,
+  `r4` tinyint(1) unsigned NOT NULL,
+  `autoregen` tinyint(3) NOT NULL,
+  `lastupdate` int(11) unsigned NOT NULL,
+  `lastadv` int(11) unsigned NOT NULL,
   `hash` varchar(45) NOT NULL,
+  `hide` tinyint(1) unsigned NOT NULL DEFAULT '1',
   PRIMARY KEY (`heroid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
@@ -1500,8 +1503,9 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%vdata` (
   `exp2` int(10) NOT NULL,
   `exp3` int(10) NOT NULL,
   `created` int(11) NOT NULL,
-  PRIMARY KEY (`wref`),
-  KEY `wref` (`wref`)
+  `natar` tinyint(1) unsigned NOT NULL,
+  `starv` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`wref`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --

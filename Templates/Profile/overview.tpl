@@ -93,7 +93,7 @@ foreach($varray as $vil) {
                     	echo "<td colspan=\"2\"> <a class=\"arrow\" href=\"spieler.php?s=1\">Edit Profile</a></td>";
                     }
                 } else {
-            		echo "<td colspan=\"2\"> <a class=\"message messageStatus messageStatusUnread\" href=\"nachrichten.php?t=1&amp;id=".$_GET['uid']."\">Üzenet írása</a></td>";
+            		echo "<td colspan=\"2\"> <a class=\"message messageStatus messageStatusUnread\" href=\"nachrichten.php?t=1&amp;id=".$_GET['uid']."\">Send message</a></td>";
 			 	}
              ?>
 	</tr>
@@ -140,28 +140,28 @@ $type = $row["type"];
 switch($type) {
 case 1:
 case 2:
-echo  "<img class='r1' src='img/x.gif' title='Fa'>";
+echo  "<img class='r1' src='img/x.gif' title='Lumber'>";
 break;
 case 3:
-echo  "<img class='r1' src='img/x.gif' title='Fa'> <img class='r4' src='img/x.gif' title='Búza'>";
+echo  "<img class='r1' src='img/x.gif' title='Lumber'> <img class='r4' src='img/x.gif' title='Crop'>";
 break;
 case 4:
 case 5:
-echo  "<img class='r2' src='img/x.gif' title='Agyag'>";
+echo  "<img class='r2' src='img/x.gif' title='Clay'>";
 break;
 case 6:
-echo  "<img class='r2' src='img/x.gif' title='Agyag'> <img class='r4' src='img/x.gif' title='Búza'>";
+echo  "<img class='r2' src='img/x.gif' title='Clay'> <img class='r4' src='img/x.gif' title='Crop'>";
 case 7:
 case 8:
-echo  "<img class='r3' src='img/x.gif' title='Vasérc'>";
+echo  "<img class='r3' src='img/x.gif' title='Iron'>";
 break;
 case 9:
-echo  "<img class='r3' src='img/x.gif' title='Vasérc'> <img class='r4' src='img/x.gif' title='Búza'>";
+echo  "<img class='r3' src='img/x.gif' title='Iron'> <img class='r4' src='img/x.gif' title='Crop'>";
 break;
 case 10:
 case 11:
 case 12:
-echo  "<img class='r4' src='img/x.gif' title='Búza'>";
+echo  "<img class='r4' src='img/x.gif' title='Crop'>";
 break;
 }
 }

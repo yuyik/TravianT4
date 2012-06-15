@@ -53,7 +53,9 @@ class Building {
 			return 10;
 		} else if($this->isMax($tid,$id,2) && $this->isLoop($id) && $this->isCurrent($id)) {
 			return 10;
-		} 
+		} else if($this->isMax($tid,$id,3) && $this->isLoop($id) && $this->isCurrent($id) && count($database->getMasterJobs($village->wid)) > 0) {
+			return 10;
+		}
 		else {
 			if($this->allocated <= $this->maxConcurrent) {
 				$resRequired = $this->resourceRequired($id,$village->resarray['f'.$id.'t']);
@@ -169,48 +171,49 @@ class Building {
 	public function procResType($ref) {
 		global $session;
 		switch($ref) {
-            case 1: $build = "Favágó"; break;
-            case 2: $build = "Agyagbánya"; break;
-            case 3: $build = "Vasércbánya"; break;
-            case 4: $build = "Búzafarm"; break;
-            case 5: $build = "Fűrészüzem"; break;
-            case 6: $build = "Agyagégető"; break;
-            case 7: $build = "Vasöntöde"; break;
-            case 8: $build = "Malom"; break;
-            case 9: $build = "Pékség"; break;
-            case 10: $build = "Raktár"; break;
-            case 11: $build = "Magtár"; break;
-            case 12: $build = "Kovács"; break;
-            case 14: $build = "Gyakorlótér"; break;
-            case 15: $build = "Főépület"; break;
-            case 16: $build = "Gyülekezőtér"; break;
-            case 17: $build = "Piac"; break;
-            case 18: $build = "Követség"; break;
-            case 19: $build = "Kaszárnya"; break;
-            case 20: $build = "Istálló"; break;
-            case 21: $build = "Műhely"; break;
-            case 22: $build = "Akadémia"; break;
-            case 23: $build = "Rejtekhely"; break;
-            case 24: $build = "Fórum"; break;
-            case 25: $build = "Rezidencia"; break;
-            case 26: $build = "Palota"; break;
-            case 27: $build = "Kincstár"; break;
-            case 28: $build = "Kereskedelmi központ"; break;
-            case 29: $build = "Nagy kaszárnya"; break;
-            case 30: $build = "Nagy istálló"; break;
-            case 31: $build = "Kőfal"; break;
-            case 32: $build = "Földfal"; break;
-            case 33: $build = "Cölöpfal"; break;
-            case 34: $build = "Kőfaragó"; break;
-            case 35: $build = "Sörfőzde"; break;
-            case 36: $build = "tele döntéshozatali"; break;
-            case 37: $build = "Hősök háza"; break;
-            case 38: $build = "Nagy raktár"; break;
-            case 39: $build = "Nagy magtár"; break;
-            case 40: $build = "Világcsoda"; break;
-            case 41: $build = "Lóitató"; break;
-            case 42: $build = "Műhely2"; break;
-            default: $build = "Error"; break;
+			case 1: $build = "Woodcutter"; break;
+			case 2: $build = "Clay Pit"; break;
+			case 3: $build = "Iron Mine"; break;
+			case 4: $build = "Cropland"; break;
+			case 5: $build = "Sawmill"; break;
+			case 6: $build = "Brickyard"; break;
+			case 7: $build = "Iron Foundry"; break;
+			case 8: $build = "Grain Mill"; break;
+			case 9: $build = "Bakery"; break;
+			case 10: $build = "Warehouse"; break;
+			case 11: $build = "Granary"; break;
+			case 12: $build = "Blacksmith"; break;
+			case 13: $build = "Armoury"; break;
+			case 14: $build = "Tournament Square"; break;
+			case 15: $build = "Main Building"; break;
+			case 16: $build = "Rally Point"; break;
+			case 17: $build = "Marketplace"; break;
+			case 18: $build = "Embassy"; break;
+			case 19: $build = "Barracks"; break;
+			case 20: $build = "Stable"; break;
+			case 21: $build = "Workshop"; break;
+			case 22: $build = "Academy"; break;
+			case 23: $build = "Cranny"; break;
+			case 24: $build = "Town Hall"; break;
+			case 25: $build = "Residence"; break;
+			case 26: $build = "Palace"; break;
+			case 27: $build = "Treasury"; break;
+			case 28: $build = "Trade Office"; break;
+			case 29: $build = "Great Barracks"; break;
+			case 30: $build = "Great Stable"; break;
+			case 31: $build = "City Wall"; break;
+			case 32: $build = "Earth Wall"; break;
+			case 33: $build = "Palisade"; break;
+			case 34: $build = "Stonemason's Lodge"; break;
+			case 35: $build = "Brewery"; break;
+			case 36: $build = "Trapper"; break;
+			case 37: $build = "Hero's Mansion"; break;
+			case 38: $build = "Great Warehouse"; break;
+			case 39: $build = "Great Granary"; break;
+			case 40: $build = "Wonder of the World"; break;
+			case 41: $build = "Horse Drinking Trough"; break;
+			case 42: $build = "Great Workshop"; break;
+			default: $build = "Error"; break;
 		}
 		return $build;
 	}
@@ -295,7 +298,8 @@ class Building {
 					$time = $this->buildArray[0]['timestamp'] + $uprequire['time'];
 				}
 			}
-			if($database->addBuilding($village->wid,$id,$village->resarray['f'.$id.'t'],$loop,$time+($loop==1?15:0))) {
+			$level = $database->getResourceLevel($village->wid);
+			if($database->addBuilding($village->wid,$id,$village->resarray['f'.$id.'t'],$loop,$time+($loop==1?ceil(60/SPEED):0),0,$level['f'.$id] + 1 + count($database->getBuildingByField($village->wid,$id)))) {
 				$database->modifyResource($village->wid,$uprequire['wood'],$uprequire['clay'],$uprequire['iron'],$uprequire['crop'],0);
 				$logging->addBuildLog($village->wid,$this->procResType($village->resarray['f'.$id.'t']),($village->resarray['f'.$id]+($loopsame>0?2:1)),0);
 				if($id >= 19) {
@@ -335,7 +339,8 @@ class Building {
 					$time = $this->buildArray[0]['timestamp'] + round($dataarray[$village->resarray['f'.$id]-1]['time'] / 4);
 				}
 			}
-			if($database->addBuilding($village->wid,$id,$village->resarray['f'.$id.'t'],$loop,$time,0)) {
+			$level = $database->getResourceLevel($village->wid);
+			if($database->addBuilding($village->wid,$id,$village->resarray['f'.$id.'t'],$loop,$time,0,0,$level['f'.$id] + 1 + count($database->getBuildingByField($village->wid,$id)))) {
 				$logging->addBuildLog($village->wid,$this->procResType($village->resarray['f'.$id.'t']),($village->resarray['f'.$id]-1),2);
 				header("Location: dorf2.php");
 			}
@@ -365,7 +370,8 @@ class Building {
 				}
 			}
 			if($this->meetRequirement($tid)) {
-				if($database->addBuilding($village->wid,$id,$tid,$loop,$time)) {
+			$level = $database->getResourceLevel($village->wid);
+				if($database->addBuilding($village->wid,$id,$tid,$loop,$time,0,$level['f'.$id] + 1 + count($database->getBuildingByField($village->wid,$id)))) {
 					$logging->addBuildLog($village->wid,$this->procResType($tid),($village->resarray['f'.$id]+1),1);
 					$database->modifyResource($village->wid,$uprequire['wood'],$uprequire['clay'],$uprequire['iron'],$uprequire['crop'],0);
 					header("Location: dorf2.php");

@@ -138,7 +138,7 @@ $paginationDisplay .=  '<img alt="صفحه آخر" src="img/x.gif" class="last d
 $outputList = '';
 $name = 1;
 if($query == 0) {        
-    $outputList .= "<td colspan=\"4\" class=\"none\">No sent messages</td>";
+    $outputList .= "<td colspan=\"4\" class=\"none\">There are no sent messages available.</td>";
 }else{
 while($row = mysql_fetch_array($sql2)){ 
     $id = $row["id"];

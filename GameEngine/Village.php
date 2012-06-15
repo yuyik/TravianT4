@@ -89,12 +89,18 @@ class Village {
         $uniqueA = $database->getOwnUniqueArtefactInfo($session->uid,4,3);
         $upkeep = $technology->getUpkeep($this->unitall,0);
 		$heroData = $database->getHeroData($session->uid);
-		if($heroData['dead']==0 && $this->capital){
-			$hwood = $heroData['r1'];
-			$hclay = $heroData['r2'];
-			$hiron = $heroData['r3'];
-			$hcrop = $heroData['r4'];
-			$hproduct = $heroData['r0'];
+		if($heroData['dead']==0 && $heroData['wref']==$this->wid){
+			$hwood = $heroData['r1']*10*SPEED*$heroData['product'];
+			$hclay = $heroData['r2']*10*SPEED*$heroData['product'];
+			$hiron = $heroData['r3']*10*SPEED*$heroData['product'];
+			$hcrop = $heroData['r4']*10*SPEED*$heroData['product'];
+			$hproduct = $heroData['r0']*3*SPEED*$heroData['product'];
+		}else{
+			$hwood = 0;
+			$hclay = 0;
+			$hiron = 0;
+			$hcrop = 0;
+			$hproduct = 0;
 		}
 		
         $this->production['wood'] = $this->getWoodProd()+$hwood+$hproduct;

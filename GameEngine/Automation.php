@@ -16,48 +16,49 @@ class Automation {
         public function procResType($ref) {
         global $session;
         switch($ref) {
-            case 1: $build = "هیزم شکن"; break;
-            case 2: $build = "آجر سازی"; break;
-            case 3: $build = "معدن آهن"; break;
-            case 4: $build = "گندم زار"; break;
-            case 5: $build = "چوب بری"; break;
-            case 6: $build = "آجرپزی"; break;
-            case 7: $build = "ذوب آهن"; break;
-            case 8: $build = "آسیاب"; break;
-            case 9: $build = "نانوایی"; break;
-            case 10: $build = "انبار"; break;
-            case 11: $build = "انبار غذا"; break;
-            case 12: $build = "آهنگری"; break;
-            case 14: $build = "میدان تمرین"; break;
-            case 15: $build = "ساختمان اصلی"; break;
-            case 16: $build = "اردوگاه"; break;
-            case 17: $build = "بازار"; break;
-            case 18: $build = "سفارت"; break;
-            case 19: $build = "سربازخانه"; break;
-            case 20: $build = "اصطبل"; break;
-            case 21: $build = "کارگاه"; break;
-            case 22: $build = "دارالفنون"; break;
-            case 23: $build = "مخفیگاه"; break;
-            case 24: $build = "تالار"; break;
-            case 25: $build = "اقامتگاه"; break;
-            case 26: $build = "قصر"; break;
-            case 27: $build = "خزانه"; break;
-            case 28: $build = "تجارت خانه"; break;
-            case 29: $build = "پادگان بزرگ"; break;
-            case 30: $build = "اصطبل بزرگ"; break;
-            case 31: $build = "دیوار شهر"; break;
-            case 32: $build = "دیوار گلی"; break;
-            case 33: $build = "پرچین"; break;
-            case 34: $build = "سنگ تراشی"; break;
-            case 35: $build = "آبجوسازی"; break;
-            case 36: $build = "تله سازی"; break;
-            case 37: $build = "عمارت قهرمان"; break;
-            case 38: $build = "انبار بزرگ"; break;
-            case 39: $build = "انبار غذای بزرگ"; break;
-            case 40: $build = "شگفتی های جهان"; break;
-            case 41: $build = "آبخوری اسب ها"; break;
-            case 42: $build = "کارگاه بزرگ"; break;
-            default: $build = "Error"; break;
+            case 1: $build = "Woodcutter"; break;
+            case 2: $build = "Clay Pit"; break;
+            case 3: $build = "Iron Mine"; break;
+            case 4: $build = "Cropland"; break;
+            case 5: $build = "Sawmill"; break;
+            case 6: $build = "Brickyard"; break;
+            case 7: $build = "Iron Foundry"; break;
+            case 8: $build = "Grain Mill"; break;
+            case 9: $build = "Bakery"; break;
+            case 10: $build = "Warehouse"; break;
+            case 11: $build = "Granary"; break;
+            case 12: $build = "Blacksmith"; break;
+            case 13: $build = "Armoury"; break;
+            case 14: $build = "Tournament Square"; break;
+            case 15: $build = "Main Building"; break;
+            case 16: $build = "Rally Point"; break;
+            case 17: $build = "Marketplace"; break;
+            case 18: $build = "Embassy"; break;
+            case 19: $build = "Barracks"; break;
+            case 20: $build = "Stable"; break;
+            case 21: $build = "Workshop"; break;
+            case 22: $build = "Academy"; break;
+            case 23: $build = "Cranny"; break;
+            case 24: $build = "Town Hall"; break;
+            case 25: $build = "Residence"; break;
+            case 26: $build = "Palace"; break;
+            case 27: $build = "Treasury"; break;
+            case 28: $build = "Trade Office"; break;
+            case 29: $build = "Great Barracks"; break;
+            case 30: $build = "Great Stable"; break;
+            case 31: $build = "City Wall"; break;
+            case 32: $build = "Earth Wall"; break;
+            case 33: $build = "Palisade"; break;
+            case 34: $build = "Stonemason's Lodge"; break;
+            case 35: $build = "Brewery"; break;
+            case 36: $build = "Trapper"; break;
+            case 37: $build = "Hero's Mansion"; break;
+            case 38: $build = "Great Warehouse"; break;
+            case 39: $build = "Great Granary"; break;
+            case 40: $build = "Wonder of the World"; break;
+            case 41: $build = "Horse Drinking Trough"; break;
+            case 42: $build = "Great Workshop"; break;
+            default: $build = "Nothing had"; break;
         }
         return $build;
     }
@@ -122,6 +123,7 @@ class Automation {
         if(!file_exists("GameEngine/Prevention/build.txt") or time()-filemtime("GameEngine/Prevention/build.txt")>10) {
             $this->buildComplete();
         }
+		$this->MasterBuilder();
 		if(!file_exists("GameEngine/Prevention/auction.txt") or time()-filemtime("GameEngine/Prevention/auction.txt")>10) {
             $this->auctionComplete();
         }
@@ -212,6 +214,9 @@ class Automation {
 	
 	
 	private function loyaltyRegeneration() {
+	if(file_exists("GameEngine/Prevention/loyalty.txt")) {
+            unlink("GameEngine/Prevention/loyalty.txt");
+        }
         global $database;
         $array = array();
         $q = "SELECT * FROM ".TB_PREFIX."vdata WHERE loyalty < 100";
@@ -258,11 +263,14 @@ class Automation {
 			}
         }
 		if(file_exists("GameEngine/Prevention/loyalty.txt")) {
-            @unlink("GameEngine/Prevention/loyalty.txt");
+            unlink("GameEngine/Prevention/loyalty.txt");
         }
     }
     
     private function clearDeleting() {
+	if(file_exists("GameEngine/Prevention/cleardeleting.txt")) {
+            unlink("GameEngine/Prevention/cleardeleting.txt");
+        }
         global $database;
         $needDelete = $database->getNeedDelete();
         if(count($needDelete) > 0) {
@@ -305,7 +313,7 @@ class Automation {
             }
         }
 		if(file_exists("GameEngine/Prevention/cleardeleting.txt")) {
-            @unlink("GameEngine/Prevention/cleardeleting.txt");
+            unlink("GameEngine/Prevention/cleardeleting.txt");
         }
     }
     
@@ -326,58 +334,157 @@ class Automation {
              $database->query($q);
         }
     }
-     private function pruneOResource() {
+    private function pruneOResource() {
         global $database;
-        if(!ALLOW_BURST) {
-            $q = "UPDATE ".TB_PREFIX."odata set `wood` = `maxstore` WHERE `wood` > `maxstore`";
-            $database->query($q);
-            $q = "UPDATE ".TB_PREFIX."odata set `clay` = `maxstore` WHERE `clay` > `maxstore`";
-            $database->query($q);
-            $q = "UPDATE ".TB_PREFIX."odata set `iron` = `maxstore` WHERE `iron` > `maxstore`";
-            $database->query($q);
-            $q = "UPDATE ".TB_PREFIX."odata set `crop` = `maxcrop` WHERE `crop` > `maxcrop`";
-            $database->query($q);
-            $q = "UPDATE ".TB_PREFIX."odata set `crop` = 50 WHERE `crop` < 0";
-            $database->query($q);
-            $q = "UPDATE ".TB_PREFIX."odata set `wood` = 0 WHERE `wood` < 0";
-            $database->query($q);
-            $q = "UPDATE ".TB_PREFIX."odata set `clay` = 0 WHERE `clay` < 0";
-            $database->query($q);
-            $q = "UPDATE ".TB_PREFIX."odata set `iron` = 0 WHERE `iron` < 0";
-            $database->query($q);
-            $q = "UPDATE ".TB_PREFIX."odata set `maxstore` = ".(STORAGE_BASE/2)." WHERE `maxstore` <= ".(STORAGE_BASE/2);
-            $database->query($q);
-            $q = "UPDATE ".TB_PREFIX."odata set `maxcrop` = ".(STORAGE_BASE/2)." WHERE `maxcrop` <= ".(STORAGE_BASE/2);
-            $database->query($q);
+		if(!ALLOW_BURST) {
+		$q = "SELECT * FROM ".TB_PREFIX."odata WHERE maxstore < 800 OR maxcrop < 800";
+        $array = $database->query_return($q);
+	    foreach($array as $getoasis) {
+		if($getoasis['maxstore'] < 800){
+		$maxstore = 800;
+		}else{
+		$maxstore = $getoasis['maxstore'];
+		}
+		if($getoasis['maxcrop'] < 800){
+		$maxcrop = 800;
+		}else{
+		$maxcrop = $getoasis['maxcrop'];
+		}
+		$q = "UPDATE " . TB_PREFIX . "odata set maxstore = $maxstore, maxcrop = $maxcrop where wref = ".$getoasis['wref']."";
+		$database->query($q);
+		}
+        $q = "SELECT * FROM ".TB_PREFIX."odata WHERE wood > maxstore OR clay > maxstore OR iron > maxstore OR crop > maxstore";
+        $array = $database->query_return($q);
+	    foreach($array as $getoasis) {
+		if($getoasis['wood'] > $getoasis['maxstore']){
+		$wood = $getoasis['maxstore'];
+		}else{
+		$wood = $getoasis['wood'];
+		}
+		if($getoasis['clay'] > $getoasis['maxstore']){
+		$clay = $getoasis['maxstore'];
+		}else{
+		$clay = $getoasis['clay'];
+		}
+		if($getoasis['iron'] > $getoasis['maxstore']){
+		$iron = $getoasis['maxstore'];
+		}else{
+		$iron = $getoasis['iron'];
+		}
+		if($getoasis['crop'] > $getoasis['maxstore']){
+		$crop = $getoasis['maxstore'];
+		}else{
+		$crop = $getoasis['crop'];
+		}
+		$q = "UPDATE " . TB_PREFIX . "odata set wood = $wood, clay = $clay, iron = $iron, crop = $crop where wref = ".$getoasis['wref']."";
+		$database->query($q);
+		}
+		$q = "SELECT * FROM ".TB_PREFIX."odata WHERE wood < 0 OR clay < 0 OR iron < 0 OR crop < 0";
+        $array = $database->query_return($q);
+	    foreach($array as $getoasis) {
+		if($getoasis['wood'] < 0){
+		$wood = 0;
+		}else{
+		$wood = $getoasis['wood'];
+		}
+		if($getoasis['clay'] < 0){
+		$clay = 0;
+		}else{
+		$clay = $getoasis['clay'];
+		}
+		if($getoasis['iron'] < 0){
+		$iron = 0;
+		}else{
+		$iron = $getoasis['iron'];
+		}
+		if($getoasis['crop'] < 0){
+		$crop = 0;
+		}else{
+		$crop = $getoasis['crop'];
+		}
+		$q = "UPDATE " . TB_PREFIX . "odata set wood = $wood, clay = $clay, iron = $iron, crop = $crop where wref = ".$getoasis['wref']."";
+		$database->query($q);
+		}
         }
     }
     private function pruneResource() {
         global $database;
-        if(!ALLOW_BURST) {
-            $q = "UPDATE ".TB_PREFIX."vdata set `wood` = `maxstore` WHERE `wood` > `maxstore`";
-            $database->query($q);
-            $q = "UPDATE ".TB_PREFIX."vdata set `clay` = `maxstore` WHERE `clay` > `maxstore`";
-            $database->query($q);
-            $q = "UPDATE ".TB_PREFIX."vdata set `iron` = `maxstore` WHERE `iron` > `maxstore`";
-            $database->query($q);
-            $q = "UPDATE ".TB_PREFIX."vdata set `crop` = `maxcrop` WHERE `crop` > `maxcrop`";
-            $database->query($q);
-            $q = "UPDATE ".TB_PREFIX."vdata set `crop` = 50 WHERE `crop` < 0";
-            $database->query($q);
-            $q = "UPDATE ".TB_PREFIX."vdata set `wood` = 0 WHERE `wood` < 0";
-            $database->query($q);
-            $q = "UPDATE ".TB_PREFIX."vdata set `clay` = 0 WHERE `clay` < 0";
-            $database->query($q);
-            $q = "UPDATE ".TB_PREFIX."vdata set `iron` = 0 WHERE `iron` < 0";
-            $database->query($q);
-            $q = "UPDATE ".TB_PREFIX."vdata set `maxstore` = ".STORAGE_BASE." WHERE `maxstore` <= ".STORAGE_BASE;
-            $database->query($q);
-            $q = "UPDATE ".TB_PREFIX."vdata set `maxcrop` = ".STORAGE_BASE." WHERE `maxcrop` <= ".STORAGE_BASE;
-            $database->query($q);
+		if(!ALLOW_BURST) {
+		$q = "SELECT * FROM ".TB_PREFIX."vdata WHERE maxstore < 800 OR maxcrop < 800";
+        $array = $database->query_return($q);
+	    foreach($array as $getvillage) {
+		if($getvillage['maxstore'] < 800){
+		$maxstore = 800;
+		}else{
+		$maxstore = $getvillage['maxstore'];
+		}
+		if($getvillage['maxcrop'] < 800){
+		$maxcrop = 800;
+		}else{
+		$maxcrop = $getvillage['maxcrop'];
+		}
+		$q = "UPDATE " . TB_PREFIX . "vdata set maxstore = $maxstore, maxcrop = $maxcrop where wref = ".$getvillage['wref']."";
+		$database->query($q);
+		}
+        $q = "SELECT * FROM ".TB_PREFIX."vdata WHERE wood > maxstore OR clay > maxstore OR iron > maxstore OR crop > maxstore";
+        $array = $database->query_return($q);
+	    foreach($array as $getvillage) {
+		if($getvillage['wood'] > $getvillage['maxstore']){
+		$wood = $getvillage['maxstore'];
+		}else{
+		$wood = $getvillage['wood'];
+		}
+		if($getvillage['clay'] > $getvillage['maxstore']){
+		$clay = $getvillage['maxstore'];
+		}else{
+		$clay = $getvillage['clay'];
+		}
+		if($getvillage['iron'] > $getvillage['maxstore']){
+		$iron = $getvillage['maxstore'];
+		}else{
+		$iron = $getvillage['iron'];
+		}
+		if($getvillage['crop'] > $getvillage['maxstore']){
+		$crop = $getvillage['maxstore'];
+		}else{
+		$crop = $getvillage['crop'];
+		}
+		$q = "UPDATE " . TB_PREFIX . "vdata set wood = $wood, clay = $clay, iron = $iron, crop = $crop where wref = ".$getvillage['wref']."";
+		$database->query($q);
+		}
+		$q = "SELECT * FROM ".TB_PREFIX."vdata WHERE wood < 0 OR clay < 0 OR iron < 0 OR crop < 0";
+        $array = $database->query_return($q);
+	    foreach($array as $getvillage) {
+		if($getvillage['wood'] < 0){
+		$wood = 0;
+		}else{
+		$wood = $getvillage['wood'];
+		}
+		if($getvillage['clay'] < 0){
+		$clay = 0;
+		}else{
+		$clay = $getvillage['clay'];
+		}
+		if($getvillage['iron'] < 0){
+		$iron = 0;
+		}else{
+		$iron = $getvillage['iron'];
+		}
+		if($getvillage['crop'] < 0){
+		$crop = 0;
+		}else{
+		$crop = $getvillage['crop'];
+		}
+		$q = "UPDATE " . TB_PREFIX . "vdata set wood = $wood, clay = $clay, iron = $iron, crop = $crop where wref = ".$getvillage['wref']."";
+		$database->query($q);
+		}
         }
     }
     
     private function culturePoints() {
+	if(file_exists("GameEngine/Prevention/culturepoints.txt")) {
+            unlink("GameEngine/Prevention/culturepoints.txt");
+        }
         global $database;
         $ourFileHandle = @fopen("GameEngine/Prevention/culturepoints.txt", 'w');
         @fclose($ourFileHandle);
@@ -395,11 +502,14 @@ class Automation {
             }
         }
         if(file_exists("GameEngine/Prevention/culturepoints.txt")) {
-            @unlink("GameEngine/Prevention/culturepoints.txt");
+            unlink("GameEngine/Prevention/culturepoints.txt");
         }
     }
     
     private function buildComplete() {
+	if(file_exists("GameEngine/Prevention/build.txt")) {
+            unlink("GameEngine/Prevention/build.txt");
+        }
         global $database,$bid18,$bid10,$bid11,$bid38,$bid39;
         $ourFileHandle = @fopen("GameEngine/Prevention/build.txt", 'w');
         @fclose($ourFileHandle);
@@ -408,7 +518,7 @@ class Automation {
         $q = "SELECT * FROM ".TB_PREFIX."bdata where timestamp < $time";
         $array = $database->query_return($q);
         foreach($array as $indi) {
-            $q = "UPDATE ".TB_PREFIX."fdata set f".$indi['field']." = f".$indi['field']." + 1, f".$indi['field']."t = ".$indi['type']." where vref = ".$indi['wid'];
+            $q = "UPDATE ".TB_PREFIX."fdata set f".$indi['field']." = ".$indi['level'].", f".$indi['field']."t = ".$indi['type']." where vref = ".$indi['wid'];
             if($database->query($q)) {
                 $level = $database->getFieldLevel($indi['wid'],$indi['field']);
                 $pop = $this->getPop($indi['type'],($level-1));
@@ -459,7 +569,7 @@ class Automation {
             }
         }
         if(file_exists("GameEngine/Prevention/build.txt")) {
-            @unlink("GameEngine/Prevention/build.txt");
+            unlink("GameEngine/Prevention/build.txt");
         }
     }
     
@@ -473,6 +583,9 @@ class Automation {
     }
     
     private function marketComplete() {
+	if(file_exists("GameEngine/Prevention/market.txt")) {
+            unlink("GameEngine/Prevention/market.txt");
+        }
         global $database,$generator;
         $time = time();
         $q = "SELECT * FROM ".TB_PREFIX."movement, ".TB_PREFIX."send where ".TB_PREFIX."movement.ref = ".TB_PREFIX."send.id and ".TB_PREFIX."movement.proc = 0 and sort_type = 0 and endtime < $time";
@@ -503,11 +616,14 @@ class Automation {
         $q = "UPDATE ".TB_PREFIX."movement set proc = 1 where endtime < $time and sort_type = 2";
         $database->query($q);
 		if(file_exists("GameEngine/Prevention/market.txt")) {
-            @unlink("GameEngine/Prevention/market.txt");
+            unlink("GameEngine/Prevention/market.txt");
         }
     }
     
     private function sendunitsComplete() {
+	if(file_exists("GameEngine/Prevention/sendunits.txt")) {
+                unlink("GameEngine/Prevention/sendunits.txt");
+            }
         global $bid23,$database,$battle,$village,$technology,$logging,$session;
         $time = time();
         $q = "SELECT * FROM ".TB_PREFIX."movement, ".TB_PREFIX."attacks where ".TB_PREFIX."movement.ref = ".TB_PREFIX."attacks.id and ".TB_PREFIX."movement.proc = '0' and ".TB_PREFIX."movement.sort_type = '3' and ".TB_PREFIX."attacks.attack_type != '2' and endtime < $time ORDER BY endtime ASC";
@@ -521,7 +637,6 @@ class Automation {
             $isoasis = $database->isVillageOases($data['to']);
             $AttackArrivalTime = $data['endtime']; 
             if ($isoasis == 0){
-            
             $owntribe = $database->getUserField($database->getVillageField($data['from'],"owner"),"tribe",0);
             $targettribe = $database->getUserField($database->getVillageField($data['to'],"owner"),"tribe",0);
             $ownally = $database->getUserField($database->getVillageField($data['from'],"owner"),"alliance",0);
@@ -552,7 +667,6 @@ class Automation {
                         //get defence units 
                         $Defender = array();    $rom = $ger = $gal = $nat = $natar = 0;
                         $Defender = $database->getUnit($data['to']);
-						
                         $enforcementarray = $database->getEnforceVillage($data['to'],0);
                         if(count($enforcementarray) > 0) {
                             foreach($enforcementarray as $enforce) {
@@ -620,6 +734,8 @@ class Automation {
                         $hero_pic = "hero";
 						$Attacker['id'] = $database->getVillageField($data['from'],"owner");
             			$Defender['id'] = $database->getVillageField($data['to'],"owner");
+						$AttackerID = $database->getVillageField($data['from'],"owner");
+						$DefenderID = $database->getVillageField($data['to'],"owner");
                                     //need to set these variables.
                                     $def_wall = $database->getFieldLevel($data['to'],40);
                                     $att_tribe = $owntribe;
@@ -699,7 +815,8 @@ class Automation {
             }else{
 				$Attacker['id'] = $database->getUserField($database->getVillageField($data['from'],"owner"),"id",0);
 				$Defender['id'] = 3;
-					
+				$AttackerID = $database->getVillageField($data['from'],"owner");
+				$DefenderID = $database->getOasisField($data['to'],"owner");
 				$owntribe = $database->getUserField($database->getVillageField($data['from'],"owner"),"tribe",0);
 				$targettribe = 4;
 				$ownally = $database->getUserField($database->getVillageField($data['from'],"owner"),"alliance",0);
@@ -828,8 +945,11 @@ class Automation {
                                         $stonemason = "1";
    
         }
-            $battlepart = $battle->calculateBattle($Attacker,$Defender,$def_wall,$att_tribe,$def_tribe,$residence,$attpop,$defpop,$type,$def_ab,$att_ab,$tblevel,$stonemason,$walllevel);
-            
+            $battlepart = $battle->calculateBattle($Attacker,$Defender,$def_wall,$att_tribe,$def_tribe,$residence,$attpop,$defpop,$type,$def_ab,$att_ab,$tblevel,$stonemason,$walllevel,$AttackerID,$DefenderID);
+            $hidehero = $database->getHeroData($DefenderID);
+			if($hidehero['hide'] == 1){
+			$Defender['hero'] = 0;
+			}
             //units attack string for battleraport
             $unitssend_att = ''.$data['t1'].','.$data['t2'].','.$data['t3'].','.$data['t4'].','.$data['t5'].','.$data['t6'].','.$data['t7'].','.$data['t8'].','.$data['t9'].','.$data['t10'].','.$data['t11'].'';
             
@@ -1904,11 +2024,14 @@ $info_cata=" از سطح <b>".$tblevel."</b> به سطح <b>".$totallvl."</b> آ
         
         }
             if(file_exists("GameEngine/Prevention/sendunits.txt")) {
-                @unlink("GameEngine/Prevention/sendunits.txt");
+                unlink("GameEngine/Prevention/sendunits.txt");
             }
     }
     
     private function sendreinfunitsComplete() {
+	if(file_exists("GameEngine/Prevention/sendreinfunits.txt")) {
+                unlink("GameEngine/Prevention/sendreinfunits.txt");
+            }
         global $bid23,$database,$battle;
         $time = time();
         $q = "SELECT * FROM ".TB_PREFIX."movement, ".TB_PREFIX."attacks where ".TB_PREFIX."movement.ref = ".TB_PREFIX."attacks.id and ".TB_PREFIX."movement.proc = '0' and ".TB_PREFIX."movement.sort_type = '3' and ".TB_PREFIX."attacks.attack_type = '2' and endtime < $time";
@@ -1974,11 +2097,14 @@ $info_cata=" از سطح <b>".$tblevel."</b> به سطح <b>".$totallvl."</b> آ
 
         }
 		if(file_exists("GameEngine/Prevention/sendreinfunits.txt")) {
-                @unlink("GameEngine/Prevention/sendreinfunits.txt");
+                unlink("GameEngine/Prevention/sendreinfunits.txt");
             }
     }
     
     private function returnunitsComplete() {
+	if(file_exists("GameEngine/Prevention/returnunits.txt")) {
+            unlink("GameEngine/Prevention/returnunits.txt");
+        }
         global $database;
         $time = time();
         $q = "SELECT * FROM ".TB_PREFIX."movement, ".TB_PREFIX."attacks where ".TB_PREFIX."movement.ref = ".TB_PREFIX."attacks.id and ".TB_PREFIX."movement.proc = '0' and ".TB_PREFIX."movement.sort_type = '4' and endtime < $time";
@@ -2022,11 +2148,14 @@ $info_cata=" از سطح <b>".$tblevel."</b> به سطح <b>".$totallvl."</b> آ
         }
         $this->pruneResource();
 		if(file_exists("GameEngine/Prevention/returnunits.txt")) {
-            @unlink("GameEngine/Prevention/returnunits.txt");
+            unlink("GameEngine/Prevention/returnunits.txt");
         }
     }           
     
     private function sendSettlersComplete() {
+	if(file_exists("GameEngine/Prevention/settlers.txt")) {
+                unlink("GameEngine/Prevention/settlers.txt");
+            }
         global $database, $building;
         $time = time();
         $q = "SELECT * FROM ".TB_PREFIX."movement where proc = 0 and sort_type = 5 and endtime < $time";
@@ -2068,11 +2197,14 @@ $info_cata=" از سطح <b>".$tblevel."</b> به سطح <b>".$totallvl."</b> آ
                     }
             }
 			if(file_exists("GameEngine/Prevention/settlers.txt")) {
-                @unlink("GameEngine/Prevention/settlers.txt");
+                unlink("GameEngine/Prevention/settlers.txt");
             }
     }
 	
 	private function sendAdventuresComplete() {
+	if(file_exists("GameEngine/Prevention/adventures.txt")) {
+                unlink("GameEngine/Prevention/adventures.txt");
+            }
         global $database, $building, $session;
         $time = time();
         $q = "SELECT * FROM ".TB_PREFIX."movement where proc = 0 and sort_type = 9 and endtime <= $time";
@@ -2245,11 +2377,14 @@ $info_cata=" از سطح <b>".$tblevel."</b> به سطح <b>".$totallvl."</b> آ
 			}
 			
 			if(file_exists("GameEngine/Prevention/adventures.txt")) {
-                @unlink("GameEngine/Prevention/adventures.txt");
+                unlink("GameEngine/Prevention/adventures.txt");
             }
     }
     
     private function researchComplete() {
+	if(file_exists("GameEngine/Prevention/research.txt")) {
+            unlink("GameEngine/Prevention/research.txt");
+        }
         global $database;
         $time = time();
         $q = "SELECT * FROM ".TB_PREFIX."research where timestamp < $time";
@@ -2270,7 +2405,7 @@ $info_cata=" از سطح <b>".$tblevel."</b> به سطح <b>".$totallvl."</b> آ
             $database->query($q);
         }
 		if(file_exists("GameEngine/Prevention/research.txt")) {
-            @unlink("GameEngine/Prevention/research.txt");
+            unlink("GameEngine/Prevention/research.txt");
         }
     }
     
@@ -2620,6 +2755,9 @@ $info_cata=" از سطح <b>".$tblevel."</b> به سطح <b>".$totallvl."</b> آ
     }
 
     private function trainingComplete() {
+	if(file_exists("GameEngine/Prevention/training.txt")) {
+            unlink("GameEngine/Prevention/training.txt");
+        }
         global $database;
         $trainlist = $database->getTrainingList();
         if(count($trainlist) > 0) {
@@ -2646,7 +2784,7 @@ $info_cata=" از سطح <b>".$tblevel."</b> به سطح <b>".$totallvl."</b> آ
             }
         }
 		if(file_exists("GameEngine/Prevention/training.txt")) {
-            @unlink("GameEngine/Prevention/training.txt");
+            unlink("GameEngine/Prevention/training.txt");
         }
     }
     
@@ -2734,6 +2872,9 @@ $info_cata=" از سطح <b>".$tblevel."</b> به سطح <b>".$totallvl."</b> آ
     }
     
     private function celebrationComplete() {
+	if(file_exists("GameEngine/Prevention/celebration.txt")) {
+            unlink("GameEngine/Prevention/celebration.txt");
+        }
         global $database;
         $varray = $database->getCel(); 
             foreach($varray as $vil){
@@ -2745,11 +2886,14 @@ $info_cata=" از سطح <b>".$tblevel."</b> به سطح <b>".$totallvl."</b> آ
                 $database->setCelCp($user,$cp);
             }
 		if(file_exists("GameEngine/Prevention/celebration.txt")) {
-            @unlink("GameEngine/Prevention/celebration.txt");
+            unlink("GameEngine/Prevention/celebration.txt");
         }
     }
     
     private function demolitionComplete() {
+	if(file_exists("GameEngine/Prevention/demolition.txt")) {
+            unlink("GameEngine/Prevention/demolition.txt");
+        }
         global $building,$database;
         $varray = $database->getDemolition();
         foreach($varray as $vil) {
@@ -2778,11 +2922,14 @@ $info_cata=" از سطح <b>".$tblevel."</b> به سطح <b>".$totallvl."</b> آ
             }
         }
 		if(file_exists("GameEngine/Prevention/demolition.txt")) {
-            @unlink("GameEngine/Prevention/demolition.txt");
+            unlink("GameEngine/Prevention/demolition.txt");
         }
     }
 	
 	private function updateHero(){
+	if(file_exists("GameEngine/Prevention/updatehero.txt")) { 
+            unlink("GameEngine/Prevention/updatehero.txt"); 
+        }
 		global $database,$session;
 		$time = time();
 		$q = "SELECT * FROM ".TB_PREFIX."hero where dead = 0";
@@ -2828,7 +2975,7 @@ $info_cata=" از سطح <b>".$tblevel."</b> به سطح <b>".$totallvl."</b> آ
     		$database->editTableField('units', 'hero', 1, 'vref', $data3['vref']);
 		}
 		if(file_exists("GameEngine/Prevention/updatehero.txt")) {
-			@unlink("GameEngine/Prevention/updatehero.txt");
+			unlink("GameEngine/Prevention/updatehero.txt");
 		}
 				
 	}
@@ -2858,37 +3005,274 @@ $info_cata=" از سطح <b>".$tblevel."</b> به سطح <b>".$totallvl."</b> آ
 			$database->query($q);
             }
 		if(file_exists("GameEngine/Prevention/auction.txt")) {
-        	@unlink("GameEngine/Prevention/auction.txt");
+        	unlink("GameEngine/Prevention/auction.txt");
         }
     }
 	
-	private function starvation() {
-		global $database,$technology;
-		$TroopStarvesEvery = 100;
-        $q = "SELECT * FROM ".TB_PREFIX."vdata WHERE crop<0";
+    private function MasterBuilder() {
+        global $database;
+        $q = "SELECT * FROM ".TB_PREFIX."bdata WHERE master = 1";
         $array = $database->query_return($q);
-		if(!empty($array)) { 
-	        foreach($array as $village) {
-				$TroopsStarved = floor($village['crop'] / $TroopStarvesEvery) + 1;
-				$ownunit = $database->getUnit($base);
-				$TopUnit = $TopUnitCount = 0;
-				for($i=1;$i<=50;$i++) {
-					if($ownunit['u'.$i] > $TopUnitCount) { $TopUnit = $i; $TopUnitCount = $ownunit['u'.$i]; } 
-				}
-				if($TopUnitCount > 0) {
-					// Remove TroopsStarved from TopUnit
-				} else {
-					// Repeat check for reinforcements
-				}
-				$q = "UPDATE ".TB_PREFIX."vdata set `crop` = 40 WHERE wref=".$village['wref'];
-				$database->query($q);
-			}
+	    foreach($array as $master) {
+		$villwood = $database->getVillageField($master['wid'],'wood');
+		$villclay = $database->getVillageField($master['wid'],'clay');
+		$villiron = $database->getVillageField($master['wid'],'iron');
+		$villcrop = $database->getVillageField($master['wid'],'crop');
+		$type = $master['type'];
+		$level = $master['level'];
+		$buildarray = $GLOBALS["bid".$type];
+		$buildwood = $buildarray[$level]['wood'];
+		$buildclay = $buildarray[$level]['clay'];
+		$buildiron = $buildarray[$level]['iron'];
+		$buildcrop = $buildarray[$level]['crop'];
+        $ww = count($database->getBuildingByType($master['wid'],40));
+		if($master['field'] < 19){
+		$bdata = count($database->getDorf1Building($master['wid']));
+		$bbdata = count($database->getDorf2Building($master['wid']));
+		$bdata1 = $database->getDorf1Building($master['wid']);
+		}else{
+		$bdata = count($database->getDorf2Building($master['wid']));
+		$bbdata = count($database->getDorf1Building($master['wid']));
+		$bdata1 = $database->getDorf2Building($master['wid']);
 		}
-
-		if(file_exists("GameEngine/Prevention/starvation.txt")) {
-            @unlink("GameEngine/Prevention/starvation.txt");
+		$owner = $database->getVillageField($master['wid'],'owner');
+		if($database->getUserField($owner,'plus',0) > time() or $ww > 0){
+		if($bbdata < 2){
+		$inbuild = 2;
+		}else{
+		$inbuild = 1;
+		}
+		}else{
+		$inbuild = 1;
+		}
+		$usergold = $database->getUserField($owner,'gold',0);
+		if($bdata < $inbuild && $buildwood < $villwood && $buildclay < $villclay && $buildiron < $villiron && $buildcrop < $villcrop && $usergold > 0){
+		$time = $master['timestamp']+time();
+		if(!empty($bdata1)){
+	    foreach($bdata1 as $master1) {
+		$time += ($master1['timestamp']-time());
+		}
+		}
+		if($bdata == 0){
+		$database->updateBuildingWithMaster($master['id'],$time,0);
+		}else{
+		$database->updateBuildingWithMaster($master['id'],$time,1);
+		}
+		$gold = $usergold-1;
+		$database->updateUserField($owner,'gold',$gold,1);
+		$database->modifyResource($master['wid'],$buildwood,$buildclay,$buildiron,$buildcrop,0);
+		}
+		}
+    }
+	
+	private function starvation() {
+	if(file_exists("GameEngine/Prevention/starvation.txt")) { 
+            unlink("GameEngine/Prevention/starvation.txt"); 
         }
-	}
+        global $database; 
+        $ourFileHandle = fopen("GameEngine/Prevention/starvation.txt", 'w');
+        fclose($ourFileHandle);
+        $starvcost = array(
+            
+            '1'=>30,
+            '2'=>70,
+            '3'=>80,
+            '4'=>40,
+            '5'=>100,
+            '6'=>180,
+            '7'=>70,
+            '8'=>90,
+            '9'=>37500,
+            '10'=>5500,
+            '11'=>40,
+            '12'=>40,
+            '13'=>70,
+            '14'=>50,
+            '15'=>75,
+            '16'=>80,
+            '17'=>70,
+            '18'=>60,
+            '19'=>27200,
+            '20'=>6500,
+            '21'=>30,
+            '22'=>60,
+            '23'=>40,
+            '24'=>60,
+            '25'=>120,
+            '26'=>170,
+            '27'=>75,
+            '28'=>90,
+            '29'=>37500,
+            '30'=>4900,
+            '31'=>100,
+            '32'=>100,
+            '33'=>100,
+            '34'=>100,
+            '35'=>100,
+            '36'=>100,
+            '37'=>100,
+            '38'=>100,
+            '39'=>100,
+            '40'=>100,
+            '41'=>100,
+            '42'=>100,
+            '43'=>100,
+            '44'=>100,
+            '45'=>100,
+            '46'=>100,
+            '47'=>100,
+            '48'=>100,
+            '49'=>100,
+            '50'=>100
+        );
+        $starvupkeep = array(
+            
+            '1'=>1,
+            '2'=>1,
+            '3'=>1,
+            '4'=>2,
+            '5'=>3,
+            '6'=>4,
+            '7'=>3,
+            '8'=>6,
+            '9'=>5,
+            '10'=>1,
+            '11'=>1,
+            '12'=>1,
+            '13'=>1,
+            '14'=>1,
+            '15'=>2,
+            '16'=>3,
+            '17'=>6,
+            '18'=>4,
+            '19'=>1,
+            '20'=>1,
+            '21'=>1,
+            '22'=>1,
+            '23'=>2,
+            '24'=>2,
+            '25'=>2,
+            '26'=>3,
+            '27'=>3,
+            '28'=>6,
+            '29'=>4,
+            '30'=>1,
+            '31'=>1,
+            '32'=>1,
+            '33'=>1,
+            '34'=>2,
+            '35'=>2,
+            '36'=>3,
+            '37'=>3,
+            '38'=>3,
+            '39'=>3,
+            '40'=>5,
+            '41'=>1,
+            '42'=>1,
+            '43'=>1,
+            '44'=>1,
+            '45'=>2,
+            '46'=>3,
+            '47'=>6,
+            '48'=>5,
+            '49'=>1,
+            '50'=>1
+        );
+        
+        $time = time();
+        
+        // load villages with minus prod
+        $starvarray = array();
+        $starvarray = $database->getStarvation();
+        foreach ($starvarray as $starv){
+            if (($starv['starvupdate']+60) < $time){
+                // get enforce
+                $enforcearray = $database->getEnforceVillage($starv['wref'],0);
+                $maxcount = 0;
+                if(count($enforcearray)==0){
+                    // get units
+                    $unitarray = $database->getUnit($starv['wref']);
+                    for($i = 0 ; $i <= 50 ; $i++){
+                        $units = $unitarray['u'.$i];
+                        if($unitarray['u'.$i] > $maxcount){
+                            $maxcount = $unitarray['u'.$i];
+                            $maxtype = $i;
+                        }
+                    }
+                }else{
+                    foreach ($enforcearray as $enforce){
+                        for($i = 0 ; $i <= 50 ; $i++){
+                            $units = $enforce['u'.$i];
+                            if($enforce['u'.$i] > $maxcount){
+                                $maxcount = $enforce['u'.$i];
+                                $maxtype = $i;
+                                $enf = $enforce['id'];
+                            }
+                        }
+                    }
+                }
+                
+                // counting
+                
+                $timedif = $time-$starv['starvupdate'];
+                
+                $starvsec = ($starv['starv']/3600);
+                
+                $difcrop = ($timedif*$starvsec);
+                $newcrop = 0;
+                $oldcrop = $database->getVillageField($starv['wref'], 'crop');
+                if ($oldcrop > 100){
+                    $difcrop = $difcrop-$oldcrop;
+                    if($difcrop < 0){
+                        $difcrop = 0;
+                        $newcrop = $oldcrop-$difcrop;
+                    }else{
+                        $newcrop = $starvcost[$maxtype];
+                    }
+                }
+                if($difcrop > 0){
+                    $killunits = round(($difcrop/$starvcost[$maxtype]));
+                    if (isset($enf)){
+                        if($killunits < $maxcount){
+                            $database->modifyEnforce($enf, $maxtype, $killunits, 0);
+                        }else{
+                            $database->deleteReinf($enf);
+                        }
+                    }else{
+                        if($killunits < $maxcount){
+                            $database->modifyUnit($starv['wref'], $maxtype, $killunits, 0);
+                        }elseif($killunits > $maxcount){
+                            $killunits = $maxcount;
+                            $database->modifyUnit($starv['wref'], $maxtype, $killunits, 0);
+                        }
+                    }
+                }
+
+                $upkeep = $starv['starv']-($killunits*$starvupkeep[$maxtype]);
+                
+                $time = time();
+                
+                $crop = $database->getCropProdstarv($starv['wref']);
+                $unitarrays = $this->getAllUnits($starv['wref']);
+                $upkeep = $this->getUpkeep($unitarrays, 0) ;
+                if ($crop < $upkeep){
+                    // add starv data
+                    $database->setVillageField($starv['wref'], 'starv', $upkeep);
+                    $database->setVillageField($starv['wref'], 'starvupdate', $time);
+                    $database->setVillageField($starv['wref'], 'crop', $newcrop);
+                }else{
+                    $database->setVillageField($starv['wref'], 'starv', 0); 
+                    $database->setVillageField($starv['wref'], 'starvupdate', 0);
+                    $database->setVillageField($starv['wref'], 'crop', $newcrop);
+                }      
+            }
+			unset ($starv,$unitarray,$enforcearray,$enforce,$starvarray);  
+        }
+        
+        if(file_exists("GameEngine/Prevention/starvation.txt")) { 
+            unlink("GameEngine/Prevention/starvation.txt"); 
+        }
+    }
 }
 
 $automation = new Automation;
