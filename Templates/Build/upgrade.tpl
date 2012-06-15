@@ -24,7 +24,7 @@ if($bindicate == 1) {
 <span class="resources r5"><img class="r5" src="img/x.gif" title="Consumption"><?php echo $uprequire['pop']; ?></span>
 <div class="clear"></div>
 <span class="clocks">
-<img class="clock" src="img/x.gif" title="Idő">
+<img class="clock" src="img/x.gif" title="duration">
 <?php
 echo $generator->getTimeFormat($uprequire['time']);
 
@@ -71,7 +71,7 @@ echo "&nbsp;&nbsp;<button ".$disable." type=\"button\" value=\"npc\" class=\"ico
     	echo "<button type=\"button\" value=\"Upgrade level\" class=\"build\" onclick=\"window.location.href = 'dorf1.php?a=$id&c=$session->checker'; return false;\">
 <div class=\"button-container\"><div class=\"button-position\"><div class=\"btl\"><div class=\"btr\"><div class=\"btc\"></div></div></div>
 <div class=\"bml\"><div class=\"bmr\"><div class=\"bmc\"></div></div></div><div class=\"bbl\"><div class=\"bbr\"><div class=\"bbc\"></div></div></div>
-</div><div class=\"button-contents\">Kiépítés ";
+</div><div class=\"button-contents\">Build to level ";
         }
         else {
         echo "<button type=\"button\" value=\"Upgrade level\" class=\"build\" onclick=\"window.location.href = 'dorf2.php?a=$id&c=$session->checker'; return false;\">
