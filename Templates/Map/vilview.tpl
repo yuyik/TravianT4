@@ -359,7 +359,7 @@ else if ($basearray['occupied'] && !$basearray['oasistype']){
     <tbody>
 <?php
 
-$noticeClass = array("Kémkedés jelentése","Mint támadó, győzelem, veszteségek nélkül","Mint támadó, győzelem, veszteségekkel.","Mint támadó vereség (egy katonád sem tért vissza).","Mint védő, győzelem, veszteségek nélkül.","Mint védő, győzelem, veszteségekkell.","Mint védő, vereség (egy katonád sem élte túl).","Mint védő, vereség (veszteségek nélkül)","A támogatás megérkezett","Jelentés a kalandról.","A kereskedő főként fát szállított.","A kereskedő főként Clayot szállított.","A kereskedő főként vasat szállított.","A kereskedő főként búzát szállított.","","Különféle (pl. natar támadás)");
+$noticeClass = array("Scout Report","Won as attacker without losses","Won as attacker with losses","Lost as attacker with losses","Won as defender without losses","Won as defender with losses","Lost as defender with losses","Lost as defender without losses","Reinforcement arrived","","Wood Delivered","Clay Delivered","Iron Delivered","Crop Delivered","","Won as defender without losses","Won as defender with losses","Lost as defender with losses","Won scouting as attacker","Lost scouting as attacker","Won scouting as defender","Lost scouting as defender","Scout Report");
 
 if($session->uid == $database->getVillage($d)){
 	$limit = "ntype=0 and ntype=4 and ntype=5 and ntype=6 and ntype=7";

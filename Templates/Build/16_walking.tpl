@@ -6,16 +6,16 @@ for($y=0;$y<$total_for;$y++){
 $timer += 1;
 
 if($units[$y]['attack_type'] == 2){
-	$attack_type = "Támogatás";
+	$attack_type = "Reinforcing";
 	}
 if($units[$y]['attack_type'] == 1){
-	$attack_type = "Kémlelés";
+	$attack_type = "Scouting";
 	}
 if($units[$y]['attack_type'] == 3){
-	$attack_type = "Normál támadás";
+	$attack_type = "Attack to";
 	}
 if($units[$y]['attack_type'] == 4){
-	$attack_type = "Fosztogatás";
+	$attack_type = "Raid to";
 	}
 $isoasis = $database->isVillageOases($units[$y]['to']);
 if ($isoasis ==0){ 	
@@ -61,7 +61,7 @@ if($units[$y]['attack_type'] == 2){ $style = ""; }else{ $style = "outRaid"; }
                   	echo "<td><img src=\"img/x.gif\" class=\"unit uhero\" title=\"".$technology->getUnitName(51)."\" alt=\"".$technology->getUnitName(51)."\" /></td>";	
 			?>
 			</tr>
- <tr><th>Egységek</th>
+ <tr><th>Troops</th>
             <?php
             for($i=1;$i<=11;$i++) {
             	if($units[$y]['t'.$i] == 0) {
@@ -80,10 +80,10 @@ if($units[$y]['attack_type'] == 2){ $style = ""; }else{ $style = "outRaid"; }
 				<th>Érkezés</th>
 				<td colspan="11">
 				<?php
-				    echo "<div class=\"in small\"> <span id=timer$timer>".$generator->getTimeFormat($units[$y]['endtime']-time())."</span> óra</div>";
+				    echo "<div class=\"in small\"> <span id=timer$timer>".$generator->getTimeFormat($units[$y]['endtime']-time())."</span> hrs</div>";
 				    $datetime = $generator->procMtime($units[$y]['endtime']);
 				    echo "<div class=\"at small\">";
-				    echo " ".$datetime[1]." óra </div>";
+				    echo " ".$datetime[1]." hrs </div>";
     		?>
 					<!--<div class="abort"><a href="build.php?id=39&a=4&t=5360004"><img src="img/x.gif" class="del" title="Annuleren" alt="Annuleren" /></a>-->
 					</div>
@@ -129,7 +129,7 @@ $timer += 1;
                   echo "<td><img src=\"img/x.gif\" class=\"unit uhero\" title=\"".$technology->getUnitName(51)."\" alt=\"".$technology->getUnitName(51)."\" /></td>"; 
             ?>
             </tr>
- <tr><th>Egységek</th>
+ <tr><th>Troops</th>
             <td class="none">0</td>
             <td class="none">0</td>
             <td class="none">0</td>
@@ -148,10 +148,10 @@ $timer += 1;
                 <th>Érkezés</th>
                 <td colspan="11">
                 <?php
-                    echo "<div class=\"in small\"><span id=timer$timer>".$generator->getTimeFormat($adventures[$y]['endtime']-time())."</span> óra</div>";
+                    echo "<div class=\"in small\"><span id=timer$timer>".$generator->getTimeFormat($adventures[$y]['endtime']-time())."</span> hrs</div>";
                     $datetime = $generator->procMtime($adventures[$y]['endtime']);
                     echo "<div class=\"at small\">";
-                    echo $datetime[1]." óra</div>";
+                    echo $datetime[1]." hrs</div>";
             ?>
                     <!--<div class="abort"><a href="build.php?id=39&a=4&t=5360004"><img src="img/x.gif" class="del" title="Annuleren" alt="Annuleren" /></a>-->
                     </div>
@@ -197,7 +197,7 @@ $timer += 1;
                   }
             ?>
             </tr>
- <tr><th>Egységek</th>
+ <tr><th>Troops</th>
             <td class="none">0</td>
             <td class="none">0</td>
             <td class="none">0</td>
@@ -215,7 +215,7 @@ $timer += 1;
                 <th>Érkezés</th>
                 <td colspan="10">
                 <?php
-                    echo "<div class=\"in small\"><span id=timer$timer>".$generator->getTimeFormat($settlers[$y]['endtime']-time())."</span> óra</div>";
+                    echo "<div class=\"in small\"><span id=timer$timer>".$generator->getTimeFormat($settlers[$y]['endtime']-time())."</span> hrs</div>";
                     $datetime = $generator->procMtime($settlers[$y]['endtime']);
                     echo "<div class=\"at small\">";
                     echo " ".$datetime[1]."</div>";

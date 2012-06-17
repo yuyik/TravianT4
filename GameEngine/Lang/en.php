@@ -495,5 +495,32 @@ define("MASS_SENT","Mass IGM was sent");
 	define("ACTIVE","Active");
 	define("ONLINE","Online");
 	define("PLAYER_STATISTICS","Players statistics");
+	
+//NOTICES
+define("REPORT_SUBJECT","Subject:");
+define("REPORT_ATTACKER","Attacker");
+define("REPORT_DEFENDER","Defender");
+define("REPORT_RESOURCES","Resources");
+define("REPORT_FROM_VIL","from village");
+define("REPORT_FROM_ALLY","from ally");
+define("REPORT_SENT","Sent on:");
+define("REPORT_SENDER","Sender");
+define("REPORT_RECEIVER","Receiver");
+define("REPORT_AT","At");
+define("REPORT_TO","To");
+define("REPORT_SEND_RES","send resources");
+define("REPORT_DEL_BTN","delete report");
+define("REPORT_DEL_QST","Are you sure that you want to delete the report?");
+define("REPORT_WARSIM","combat simulator");
+define("REPORT_ATK_AGAIN","return on the attack");
+define("REPORT_TROOPS","Troops");
+define("REPORT_REINF","Reinforecment");
+define("REPORT_CASUALTIES","Casualties");
+define("REPORT_INFORMATION","information");
+define("REPORT_BOUNTY","Bounty");
+define("REPORT_CLOCK","Time");
+define("REPORT_UPKEEP","Upkeep");
+define("REPORT_PER_HOURS","per hour");
+define("REPORT_SEND_REINF_TO","send reinforcement to village");
 
 ?>

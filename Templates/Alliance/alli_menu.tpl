@@ -26,11 +26,12 @@
 					<div class="background-end">&nbsp;</div>
 					<div class="content"><a href="allianz.php?s=6"><span class="tabItem">Chat</span></a></div>
 				</div>
+				<?php if($session->is_sitter == 0){?>
 				<div title="" class="container <?php if(isset($_GET['s']) && $_GET['s'] == 5) { echo "active"; }else{ echo "normal"; } ?>">
 					<div class="background-start">&nbsp;</div>
 					<div class="background-end">&nbsp;</div>
 					<div class="content"><a href="allianz.php?s=5"><span class="tabItem">options</span></a></div>
-				</div><div class="clear"></div>
+				</div><?php } ?><div class="clear"></div>
 		</div>
 
 <?php 

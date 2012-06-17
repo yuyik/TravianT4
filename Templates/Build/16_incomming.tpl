@@ -7,11 +7,11 @@ for($y=0;$y < $total_for;$y++){
 $timer += 1;
 if ($units[$y]['sort_type']==3){
 	if ($units[$y]['attack_type']==3){
-		$actionType = "Támadás ";
+		$actionType = "Attack on ";
 	} else if ($units[$y]['attack_type']==4){
-		$actionType = "Fosztogatás ";
+		$actionType = "Raid on ";
 	} else if ($units[$y]['attack_type']==2){
-		$actionType = "Támogatás ";
+		$actionType = "Reinforment from ";
 	}
 
 	if($units[$y]['attack_type'] != 1){
@@ -39,7 +39,7 @@ if ($units[$y]['sort_type']==3){
                   	echo "<td><img src=\"img/x.gif\" class=\"unit u$i\" title=\"".$technology->getUnitName($i)."\" alt=\"".$technology->getUnitName($i)."\" /></td>";	
                   }
                   echo "<td><img src=\"img/x.gif\" class=\"unit uhero\" title=\"".$technology->getUnitName(51)."\" alt=\"".$technology->getUnitName(51)."\" /></td>";	
-                  echo "</tr><tr><th>Egységek</th>";
+                  echo "</tr><tr><th>Troops</th>";
                   
                   
 
@@ -65,10 +65,10 @@ if($village->resarray['f39'] >= 5){
 									<tr>
 										<th>Érkezés</th>
 										<td colspan="11">
-										<div class="in small"><span id=timer'.$timer.'>'.$generator->getTimeFormat($units[$y]['endtime']-time()).'</span> óra.</div>';
+										<div class="in small"><span id=timer'.$timer.'>'.$generator->getTimeFormat($units[$y]['endtime']-time()).'</span> hrs.</div>';
 										    $datetime = $generator->procMtime($units[$y]['endtime']);
 										    echo "<div class=\"at small\">";
-										    echo " ".$datetime[1]." óra</div>
+										    echo " ".$datetime[1]." hrs</div>
 											</div>
 										</td>
 									</tr>
@@ -118,7 +118,7 @@ $to = $database->getMInfo($units[$y]['vref']);
                   }	
 			?>
 			</tr>
- <tr><th>Egységek</th>
+ <tr><th>Troops</th>
             <?php
             for($i=1;$i<=10;$i++) {
             	if($units[$y]['t'.$i] == 0) {
@@ -152,7 +152,7 @@ $to = $database->getMInfo($units[$y]['vref']);
     <span class="resource" title="Fa"><img class="r1" src="img/x.gif" alt="Fa"><?php echo $dataarray['0']; ?></span>
     <span class="resource" title="Agyag"><img class="r2" src="img/x.gif" alt="Agyag"><?php echo $dataarray['1']; ?></span>
     <span class="resource" title="Vasérc"><img class="r3" src="img/x.gif" alt="Vasérc"><?php echo $dataarray['2']; ?></span>
-    <span class="resource" title="Búza"><img class="r4" src="img/x.gif" alt="Búza"><?php echo $dataarray['3']; ?></span>
+    <span class="resource" title="Crop"><img class="r4" src="img/x.gif" alt="Crop"><?php echo $dataarray['3']; ?></span>
     </div>
     <div class="carry">
     <?php
@@ -180,7 +180,7 @@ $to = $database->getMInfo($units[$y]['vref']);
 				<td colspan="<?php echo $colspan; ?>">
 				<?php
                 
-				    echo "<div class=\"in small\"><span id=timer".$timer.">".$generator->getTimeFormat($units[$y]['endtime']-time())."</span> óra.</div>";
+				    echo "<div class=\"in small\"><span id=timer".$timer.">".$generator->getTimeFormat($units[$y]['endtime']-time())."</span> hrs.</div>";
 				    $datetime = $generator->procMtime($units[$y]['endtime']);
 				    echo "<div class=\"at small\">";
 				    echo " ".$datetime[1]."</div>";

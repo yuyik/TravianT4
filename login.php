@@ -1,5 +1,4 @@
 ﻿<?php
-date_default_timezone_set('Europe/Budapest');
 
 include("GameEngine/Account.php");
 include "Templates/html.tpl";

@@ -10,22 +10,22 @@ A falvad harcosai gyülekeznek itt. Várnak hogy mehessenek hódítani, harcolni
 				<div class="container normal">
 					<div class="background-start">&nbsp;</div>
 					<div class="background-end">&nbsp;</div>
-					<div class="content"><a href="build.php?id=<?php echo $id; ?>"><span class="tabItem">Nézet</span></a></div>
+					<div class="content"><a href="build.php?id=<?php echo $id; ?>"><span class="tabItem">Overview</span></a></div>
 				</div>
 				<div class="container normal">
 					<div class="background-start">&nbsp;</div>
 					<div class="background-end">&nbsp;</div>
-					<div class="content"><a href="a2b.php"><span class="tabItem">Egységek kiküldése</span></a></div>
+					<div class="content"><a href="a2b.php"><span class="tabItem">Send Troops</span></a></div>
 				</div>
 				<div class="container normal">
 					<div class="background-start">&nbsp;</div>
 					<div class="background-end">&nbsp;</div>
-					<div class="content"><a href="warsim.php"><span class="tabItem">Harc-Szimulátor</span></a></div>
+					<div class="content"><a href="warsim.php"><span class="tabItem">Combat Simulator</span></a></div>
 				</div>
                 <div class="container active">
 					<div class="background-start">&nbsp;</div>
 					<div class="background-end">&nbsp;</div>
-					<div class="content"><a href="build.php?id=39&amp;t=99"><span class="tabItem">Farmlista</span></a></div>
+					<div class="content"><a href="build.php?id=39&amp;t=99"><span class="tabItem">Farm list</span></a></div>
 				</div>
 </div>
 

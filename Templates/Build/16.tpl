@@ -3,7 +3,7 @@
 <div id="build" class="gid16">
 <div class="build_desc">
 <a href="#" onClick="return Travian.Game.iPopup(16,4);" class="build_logo">
-<img class="g16 big white" src="img/x.gif" alt="Gyülekezőtér" title="Gyülekezőtér" />
+<img class="g16 big white" src="img/x.gif" alt="Rally point" title="Rally point" />
 </a>
 Your village's troops meet here. From here you can send them out to conquer, raid or reinforce other villages.</div>
 <?php include("upgrade.tpl"); ?>
@@ -39,7 +39,7 @@ for($i=0;$i<$units_incomming;$i++){
 		$units_incomming -= 1;
 }
 if($units_incomming >= 1){
-echo "<h4 class=\"spacer\">incoming troops (".$units_incomming.")</h4>";
+echo "<h4 class=\"spacer\">Troops on their way (".$units_incomming.")</h4>";
 include("16_incomming.tpl");
 	} 
 ?>
@@ -57,7 +57,7 @@ $units_incomming += count($settlers);
 $units_incomming += count($adventures);
 
 if($units_incomming >= 1){
-	echo "<h4 class=\"spacer\">Kimenő csapatok (".$units_incomming.")</h4>";
+	echo "<h4 class=\"spacer\">Imcomming troops (".$units_incomming.")</h4>";
 	include("16_walking.tpl"); 
 }
 
@@ -117,19 +117,19 @@ if($units_incomming >= 1){
 				echo "</tr></tbody>
 				<tbody class=\"infos\"><tr><th>Wheat Consumption</th>";
                 if($enforce['hero'] > 0){ echo "<td colspan=\"11\">"; }else{ echo "<td colspan=\"10\">"; }
-                echo "<div class='sup'>".$technology->getUpkeep($enforce,$tribe)."<img class=\"r4\" src=\"img/x.gif\" title=\"Búza\" alt=\"Búza\" />Óránként </div><div class='sback'><a href='a2b.php?w=".$enforce['id']."'>Helyreállítás</a></div></td></tr>";
+                echo "<div class='sup'>".$technology->getUpkeep($enforce,$tribe)."<img class=\"r4\" src=\"img/x.gif\" title=\"Crop\" alt=\"Crop\" />per hour </div><div class='sback'><a href='a2b.php?w=".$enforce['id']."'>Helyreállítás</a></div></td></tr>";
             
 				echo "</tbody></table>";
 			}
 		}
         
             if(count($village->enforcetoyou) > 0) {
-            echo "<h4 class=\"spacer\">Támogatás</h4>";
+            echo "<h4 class=\"spacer\">Reinforcement</h4>";
             foreach($village->enforcetoyou as $enforce) {
                   echo "<table class=\"troop_details\" cellpadding=\"1\" cellspacing=\"1\"><thead><tr><td class=\"role\">
                   <a href=\"karte.php?d=".$enforce['from']."&c=".$generator->getMapCheck($enforce['from'])."\">".$database->getVillageField($enforce['from'],"name")."</a></td>";
                   if($enforce['hero'] > 0){ echo "<td colspan=\"11\">"; }else{ echo "<td colspan=\"10\">"; }
-                  echo "<a href=\"karte.php?d=".$enforce['vref']."&c=".$generator->getMapCheck($enforce['vref'])."\">Támogatás ".$database->getVillageField($enforce['vref'],"name")." faluban</a>";
+                  echo "<a href=\"karte.php?d=".$enforce['vref']."&c=".$generator->getMapCheck($enforce['vref'])."\">Reinforcement to ".$database->getVillageField($enforce['vref'],"name")." village</a>";
                   echo "</td></tr></thead><tbody class=\"units\">";
                   $tribe = $database->getUserField($database->getVillageField($enforce['from'],"owner"),"tribe",0);
                   $start = ($tribe-1)*10+1;
@@ -149,7 +149,7 @@ if($units_incomming >= 1){
                   if($enforce['hero'] > 0){
                 	echo "<td><img src=\"img/x.gif\" class=\"unit uhero\" title=\"".$technology->getUnitName(51)."\" /></td>";
                   }
-                  echo "</tr><tr><th>Egységek</th>";
+                  echo "</tr><tr><th>Troops</th>";
                   for($i=$start;$i<=($start+9);$i++) {
                   	if($enforce['u'.$i] == 0) {
 						echo "<td class=\"none\">";
@@ -165,7 +165,7 @@ if($units_incomming >= 1){
                   echo "</tr></tbody>
             <tbody class=\"infos\"><tr><th>Wheat Consuption</th>";
             if($enforce['hero'] > 0){ echo "<td colspan=\"11\">"; }else{ echo "<td colspan=\"10\">"; }
-            echo "<div class='sup'>".$technology->getUpkeep($enforce,$tribe)."<img class=\"r4\" src=\"img/x.gif\" title=\"Búza\" alt=\"Búza\" />Óránként</div><div class='sback'><a href='a2b.php?r=".$enforce['id']."'>Visszavon</a></div></td></tr>";
+            echo "<div class='sup'>".$technology->getUpkeep($enforce,$tribe)."<img class=\"r4\" src=\"img/x.gif\" title=\"Crop\" alt=\"Crop\" />Per hour</div><div class='sback'><a href='a2b.php?r=".$enforce['id']."'>Send back</a></div></td></tr>";
             
                   echo "</tbody></table>";
             }

@@ -19,7 +19,7 @@ foreach($varray as $vil) {
     if($_GET['uid']==2){
     echo '<img src="gpack/travian_Travian_4.0_41/img/t/t10_2.jpg" border="0">';
     } else {
-    echo '<img class="heroImage" style="width:160px;height:205px;" src="hero_body.php?uid='.$_GET['uid'].'&size=profile&'.md5($_GET['uid']).'" alt="hős">';
+    echo '<img class="heroImage" style="width:160px;height:205px;" src="hero_body.php?uid='.$_GET['uid'].'&size=profile&'.md5($_GET['uid']).'" alt="hero">';
     }
 ?>
 <table cellpadding="1" cellspacing="1" id="details" class="transparent">

@@ -93,6 +93,7 @@ if($message->unread) {
        }
 
        if(isset($_GET['s'])) {
+	   if($_GET['s'] != 5 or $session->is_sitter == 0){
        	switch($_GET['s']) {
        		case 2:
        			include ("Templates/Alliance/forum.tpl");
@@ -115,7 +116,9 @@ if($message->unread) {
        			break;
        	}
        	// Options
-       } elseif(isset($_POST['o'])) {
+       }else{
+		header("Location: ".$_SERVER['PHP_SELF']);
+	   }} elseif(isset($_POST['o'])) {
        	switch($_POST['o']) {
        		case 1:
        			if(isset($_POST['s']) == 5 && isset($_POST['a_user'])) {

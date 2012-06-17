@@ -89,7 +89,9 @@ if($message->unread) {
 					});
 				</script>
 <?php
+if($_GET['uid'] == $session->uid) {
 include("Templates/Profile/menu.tpl");
+}
 if(isset($_GET['uid'])) {
 	if($_GET['uid'] >= 2) {
 		$user = $database->getUserArray($_GET['uid'],1);
@@ -114,6 +116,9 @@ else if (isset($_GET['s'])) {
 	}
 	if($_GET['s'] == 4) {
 		include("Templates/Profile/graphic.tpl");
+	}
+	if($_GET['s'] > 4 or $session->is_sitter == 1) {
+	header("Location: ".$_SERVER['PHP_SELF']."?uid=".preg_replace("/[^a-zA-Z0-9_-]/","",$session->uid));
 	}
 }
 if (isset($_GET['id'])==$session->uid && isset($_GET['type'])==3) {

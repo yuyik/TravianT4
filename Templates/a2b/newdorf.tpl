@@ -12,7 +12,7 @@ echo '<pre>';
 echo '</pre>';
 ?>
 
-<h1>Alapíts új falut</h1>
+<h1>Found new village</h1>
 <!--<p>De kolonisten kunnen nog niet vertrekken.<br> Voor het stichten van een nieuw dorp is er nog 750 grondstoffen hout, klei, ijzer en graan nodig.</p>-->
 				<form method="POST" action="build.php">
 				<input type="hidden" name="a" value="new" />
@@ -34,7 +34,7 @@ echo '</pre>';
 				} ?>
 		</tr>
 		<tr>
-			<th>Egységek</th>
+			<th>Troops</th>
 				<?php for($i=1;$i<=9;$i++) {
 					echo "<td class=\"none\">0</td>";
 				} ?>
@@ -43,13 +43,13 @@ echo '</pre>';
 	</tbody>
 	<tbody class="infos">
 		<tr>
-			<th>Érkezési idő</th>
-				<td colspan="10"><img class="clock" src="img/x.gif" alt="Időtartam" title="Időtartam" /> <?php echo $generator->getTimeFormat($time); ?></td>
+			<th>Duration</th>
+				<td colspan="10"><img class="clock" src="img/x.gif" alt="duration" title="duration" /> <?php echo $generator->getTimeFormat($time); ?></td>
 		</tr>
 	</tbody>
 	<tbody class="infos">
 		<tr>
-			<th>Nyersanyagok:</th>
+			<th>Resources</th>
 				<td colspan="10">
 				<img class="r1" src="img/x.gif" alt="Wood" title="Wood" /> 750 | 
 				<img class="r2" src="img/x.gif" alt="Clay" title="Clay" /> 750 | 
@@ -76,10 +76,10 @@ if($cps >= $need_cps) {
 <button type="submit" value="ok" name="s1" id="btn_ok"><div class="button-container"><div class="button-position"><div class="btl"><div class="btr"><div class="btc"></div></div></div><div class="bml"><div class="bmr"><div class="bmc"></div></div></div><div class="bbl"><div class="bbr"><div class="bbc"></div></div></div></div><div class="button-contents">Új falu</div></div></button>
 <?php
 	}else {
-		echo "<span class=\"none\">Nincs elég nyersanyagod, hogy új falut alapíts!</span>";
+		echo "<span class=\"none\">There are not enough resources to found new village!</span>";
 	}
 } else {
-  print "<span class=\"none\">$cps/$need_cps kultúr pont</span>";
+  print "<span class=\"none\">$cps/$need_cps culture points</span>";
 }
 ?>
 </form>

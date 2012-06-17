@@ -83,7 +83,7 @@ $end = ($tribe*10);
 
                         <td>
                         <?php if($process['2'] == 3){ ?>
-                        <font class="none"><b>Természet</b></font>
+                        <font class="none"><b>Nature</b></font>
                         <?php } else { ?>
                         <a href="spieler.php?uid=<?php echo $process['2']; ?>">
                         <?php if($process['2'] == 2){
@@ -126,7 +126,7 @@ $end = ($tribe*10);
                 for($i=$start;$i<=($end);$i++) {
                       echo "<td><img src=\"img/x.gif\" class=\"unit u$i\" title=\"".$technology->getUnitName($i)."\" alt=\"".$technology->getUnitName($i)."\" /></td>";    
                   } if ($process['t11'] != ''){
-                  echo "<td><img src=\"img/x.gif\" class=\"unit uhero\" title=\"Hős\" alt=\"Hős\" /></td>";    
+                  echo "<td><img src=\"img/x.gif\" class=\"unit uhero\" title=\"Hero\" alt=\"Hero\" /></td>";    
                   
                   }?>
                         
@@ -166,8 +166,8 @@ $end = ($tribe*10);
                 
                 <tr>
             <th>options</th>
-            <td colspan="11"><input class="radio" name="spy" value="1" checked="checked" type="radio">Nyersanyagok és egységek kikémlelése<br>
-            <input class="radio" name="spy" value="2" type="radio">Védelmi berendezések és egységek kikémlelése                                            </td>
+            <td colspan="11"><input class="radio" name="spy" value="1" checked="checked" type="radio">Scout resources and troops<br>
+            <input class="radio" name="spy" value="2" type="radio">Scout defences and troops                                            </td>
         </tr>
     </tbody>
     <?php } ?>
@@ -285,7 +285,7 @@ $end = ($tribe*10);
                         </select>
                     <?php }?>
 
-                    <span class="info">(Katapultos támadás)</span>
+                    <span class="info">(will be attacked by catapult(s))</span>
                      </td>
                 </tr>
             </tbody><?PHP  
@@ -293,12 +293,12 @@ $end = ($tribe*10);
             else if($process['c']=='4')
             {
                 ?><tbody class="infos">  
-                <th>Cél:</th>
+                <th>Destination:</th>
 
             <td colspan="10">
                 <?PHP
                 
-                echo"Notice : Catapulats only hit things in <b>normális támadásban</b> ";
+                echo"Warning: Catapult will <b>ONLY</b> shoot with a normal attack (they dont shoot with raids!)";
                 ?>
                 </td>
 
