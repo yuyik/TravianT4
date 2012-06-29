@@ -18,7 +18,7 @@ echo "<div class=\"headline\"><span class=\"f10 c5\">Error importing database. C
 <td><span class="f9 c6">Create SQL Structure:</span></td><td> <button type="submit" value="Upgrade level" class="build">
 <div class="button-container"><div class="button-position"><div class="btl"><div class="btr"><div class="btc"></div></div></div>
 <div class="bml"><div class="bmr"><div class="bmc"></div></div></div><div class="bbl"><div class="bbr"><div class="bbc"></div></div></div>
-</div><div class="button-contents">Create..</div></div></button></td></tr>
+</div><div class="button-contents">Create</div></div></button></td></tr>
 
 </div>
 <input type="hidden" name="substruc" value="1">

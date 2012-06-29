@@ -116,7 +116,7 @@
        			$form->addError("name2", NAME_NO_EXIST);
        		}
        		// ¿La invitacion es a si mismo?
-       		if($post['a_name'] == ($session->username)) {
+       		if($post['a_name'] == (addslashes($session->username))) {
        			$form->addError("name3", SAME_NAME);
        		}
        		// ¿Esta ya invitado a la alianza?
@@ -143,7 +143,7 @@
        			// Insertamos invitacion
        			$database->sendInvitation($UserData['id'], $aid, $session->uid);
        			// Log the notice
-       			$database->insertAlliNotice($session->alliance, 'A <a href="spieler.php?uid=' . $session->uid . '">' . $session->username . '</a> بازیکن  <a href="spieler.php?uid=' . $UserData['id'] . '">' . $UserData['username'] . '</a> szövettség meghívott.');
+       			$database->insertAlliNotice($session->alliance, 'A <a href="spieler.php?uid=' . $session->uid . '">' . addslashes($session->username) . '</a> بازیکن  <a href="spieler.php?uid=' . $UserData['id'] . '">' . $UserData['username'] . '</a> szövettség meghívott.');
        		}
        	}
 
@@ -155,7 +155,7 @@
        		foreach($this->inviteArray as $invite) {
        			if($invite['id'] == $get['d']) {
        				$database->removeInvitation($get['d']);
-       				$database->insertAlliNotice($session->alliance, '<a href="spieler.php?uid=' . $session->uid . '">' . $session->username . '</a> The invitation was.');
+       				$database->insertAlliNotice($session->alliance, '<a href="spieler.php?uid=' . $session->uid . '">' . addslashes($session->username) . '</a> The invitation was.');
        			}
        		}
        		//header("Location: build.php?id=".$get['id']);
@@ -170,7 +170,7 @@
        		foreach($inviteArray as $invite) {
        			if($invite['id'] == $get['d']) {
        				$database->removeInvitation($get['d']);
-       				$database->insertAlliNotice($session->alliance, '<a href="spieler.php?uid=' . $session->uid . '">' . $session->username . '</a> The invitation was.');
+       				$database->insertAlliNotice($session->alliance, '<a href="spieler.php?uid=' . $session->uid . '">' . addslashes($session->username) . '</a> The invitation was.');
        			}
        		}
        		//header("Location: build.php?id=".$get['id']);
@@ -187,7 +187,7 @@
        				$database->updateUserField($database->RemoveXSS($invite['uid']), "alliance", $database->RemoveXSS($invite['alliance']), 1);
        				$database->createAlliPermissions($database->RemoveXSS($invite['uid']), $database->RemoveXSS($invite['alliance']), '', '0', '0', '0', '0', '0', '0', '0', '0');
        				// Log the notice
-       				$database->insertAlliNotice($invite['alliance'], '<a href="spieler.php?uid=' . $session->uid . '">' . $session->username . '</a> The invitation was.');
+       				$database->insertAlliNotice($invite['alliance'], '<a href="spieler.php?uid=' . $session->uid . '">' . addslashes($session->username) . '</a> The invitation was.');
        			}
        		}
        		header("Location: build.php?id=" . $get['id']);
@@ -222,7 +222,7 @@
        			// Asign Permissions
        			$database->createAlliPermissions($database->RemoveXSS($session->uid), $database->RemoveXSS($aid), 'Founder of the alliance', '1', '1', '1', '1', '1', '1', '1', '1');
        			// log the notice
-       			$database->insertAlliNotice($session->alliance, 'Unity by <a href="spieler.php?uid=' . $session->uid . '">' . $session->username . '</a> was founded.');
+       			$database->insertAlliNotice($session->alliance, 'Unity by <a href="spieler.php?uid=' . $session->uid . '">' . addslashes($session->username) . '</a> was founded.');
        			header("Location: build.php?id=" . $post['id']);
        		}
        	}
@@ -257,7 +257,7 @@
        		} else {
        			$database->setAlliName($database->RemoveXSS($session->alliance), $database->RemoveXSS($get['ally2']), $database->RemoveXSS($get['ally1']));
        			// log the notice
-       			$database->insertAlliNotice($session->alliance, '<a href="spieler.php?uid=' . $session->uid . '">' . $session->username . '</a> The name change.');
+       			$database->insertAlliNotice($session->alliance, '<a href="spieler.php?uid=' . $session->uid . '">' . addslashes($session->username) . '</a> The name change.');
        		}
        	}
 
@@ -276,7 +276,7 @@
        		} else {
        			$database->submitAlliProfile($database->RemoveXSS($session->alliance), $database->RemoveXSS($post['be2']), $database->RemoveXSS($post['be1']));
        			// log the notice
-       			$database->insertAlliNotice($session->alliance, '<a href="spieler.php?uid=' . $session->uid . '">' . $session->username . '</a> Description of the change');
+       			$database->insertAlliNotice($session->alliance, '<a href="spieler.php?uid=' . $session->uid . '">' . addslashes($session->username) . '</a> Description of the change');
        		}
        	}
 
@@ -295,7 +295,7 @@
        		} else {
        			$database->updateAlliPermissions($post['a_user'], $session->alliance, $post['a_titel'], $post['e1'], $post['e2'], $post['e3'], $post['e4'], $post['e5'], $post['e6'], $post['e7']);
        			// log the notice
-       			$database->insertAlliNotice($session->alliance, '<a href="spieler.php?uid=' . $session->uid . '">' . $session->username . '</a> Access changed.');
+       			$database->insertAlliNotice($session->alliance, '<a href="spieler.php?uid=' . $session->uid . '">' . addslashes($session->username) . '</a> Access changed.');
        		}
 
        	}
@@ -316,7 +316,7 @@
        			$database->updateUserField($post['a_user'], 'alliance', 0, 1);
        			$database->deleteAlliPermissions($post['a_user']);
        			// log the notice
-       			$database->insertAlliNotice($session->alliance, '<a href="spieler.php?uid=' . $session->uid . '">' . $session->username . '</a> player <a href="spieler.php?uid=' . $post['a_user'] . '">' . $UserData['username'] . '</a> Kicked.');
+       			$database->insertAlliNotice($session->alliance, '<a href="spieler.php?uid=' . $session->uid . '">' . addslashes($session->username) . '</a> player <a href="spieler.php?uid=' . $post['a_user'] . '">' . $UserData['username'] . '</a> Kicked.');
        			//header("Location: build.php?id=".$post['id']);
        		}
        	}
@@ -333,7 +333,7 @@
        			$database->updateUserField($session->uid, 'alliance', 0, 1);
        			$database->deleteAlliPermissions($session->uid);
        			$database->deleteAlliance($session->alliance);
-       			$database->insertAlliNotice($session->alliance, '<a href="spieler.php?uid=' . $session->uid . '">' . $session->username . '</a> Union left the');
+       			$database->insertAlliNotice($session->alliance, '<a href="spieler.php?uid=' . $session->uid . '">' . addslashes($session->username) . '</a> Union left the');
        			header("Location: dorf1.php");
        		}
        	}

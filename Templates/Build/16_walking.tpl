@@ -77,7 +77,7 @@ if($units[$y]['attack_type'] == 2){ $style = ""; }else{ $style = "outRaid"; }
            </tr></tbody>
 		<tbody class="infos">
 			<tr>
-				<th>Érkezés</th>
+				<th>Arrival</th>
 				<td colspan="11">
 				<?php
 				    echo "<div class=\"in small\"> <span id=timer$timer>".$generator->getTimeFormat($units[$y]['endtime']-time())."</span> hrs</div>";
@@ -145,7 +145,7 @@ $timer += 1;
            </tr></tbody>
         <tbody class="infos">
             <tr>
-                <th>Érkezés</th>
+                <th>Arrival</th>
                 <td colspan="11">
                 <?php
                     echo "<div class=\"in small\"><span id=timer$timer>".$generator->getTimeFormat($adventures[$y]['endtime']-time())."</span> hrs</div>";
@@ -212,7 +212,7 @@ $timer += 1;
            </tr></tbody>
         <tbody class="infos">
             <tr>
-                <th>Érkezés</th>
+                <th>Arrival</th>
                 <td colspan="10">
                 <?php
                     echo "<div class=\"in small\"><span id=timer$timer>".$generator->getTimeFormat($settlers[$y]['endtime']-time())."</span> hrs</div>";

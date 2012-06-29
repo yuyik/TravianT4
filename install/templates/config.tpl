@@ -47,6 +47,7 @@ echo "<div class=\"headline\"><span class=\"f10 c5\">Error creating constant.php
 			<td>Beginners Protection:</td>
 			<td>
             <select name="beginner" dir="ltr" class="text" id="autodeltime">
+				  <option value="0" selected="selected">None</option>
                   <option value="3600" selected="selected">1 hour</option>
                   <option value="10800">3 Hour</option>
                   <option value="21600">6 hours</option>

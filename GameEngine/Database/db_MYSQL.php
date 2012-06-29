@@ -338,7 +338,7 @@
         			$q = "INSERT IGNORE INTO " . TB_PREFIX . "online (name, time, sitter) VALUES ('$name', ".time().", ".$sit.")";
         			return mysql_query($q, $this->connection);
         		} else {
-        			$q = "DELETE FROM " . TB_PREFIX . "online WHERE name ='" . $session->username . "'";
+        			$q = "DELETE FROM " . TB_PREFIX . "online WHERE name ='" . addslashes($session->username) . "'";
         			return mysql_query($q, $this->connection);
         		}
         	}

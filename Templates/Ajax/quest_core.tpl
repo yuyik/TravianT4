@@ -36,7 +36,7 @@ if (isset($qact)){
 	$database->updateUserField($_SESSION['username'],'quest','3',0);
 	$_SESSION['qst']= 3;
     $today = date("mdHi");
-	mysql_query("UPDATE ".TB_PREFIX."users set plus = ('".mktime(date("H"),date("i"), date("s"),date("m") , date("d"), date("Y"))."')+3600*24 where `username`='".$session->username."'") or die(mysql_error());
+	mysql_query("UPDATE ".TB_PREFIX."users set plus = ('".mktime(date("H"),date("i"), date("s"),date("m") , date("d"), date("Y"))."')+3600*24 where `id`='".$session->uid."'") or die(mysql_error());
 	break;
 
 	case '4':
@@ -364,7 +364,7 @@ header("Content-Type: application/json;");
                 }
 	  ?>
 
-{"markup":"\n\t\t<div id=\"popup3\"><div id=\"qstd\"><h4>Üdvözlünk a Travian világában!<\/h4><div class=\"spoken\">&rdquo;Ahogy látom ez a kis falu megválasztott téged törzsi vezetőjének. A kezdetekben én leszek majd mint tanácsadó melletted.<br><br>Szeretnéd esetleg a hősöd kinézetét először megváltoztatni?” <br \/><\/div><span id=\"qst_accpt\"><a class=\"qle arrow\" href=\"javascript: qst_next('','enter'); \">Az első küldetéshez!<\/a><a class=\"qri arrow\" href=\"javascript: qst_fhandle();\">Legelőször körbenézek<\/a><input type=\"hidden\" id=\"qst_val\" value=\"2\" \/><div class=\"clear\"><\/div><\/span><\/div><\/div>\n\t\t<div id=\"qstbg\" class=\"intro<?php echo $tribes;?>\"><\/div>\n\t\t","number":null,"reward":false,"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>g","msrc":"<?php echo $messagelol; ?>","altstep":1}
+{"markup":"\n\t\t<div id=\"qstd\"><h1> <img class=\"point\" src=\"img\/x.gif\" alt=\"\" title=\"\"\/> Welcome to <?php echo SERVER_NAME; ?>!<\/h1><br \/><i>&rdquo;As I see you have been made senator of this little village. I will be your counselor for the first few days and never leave your (left) side.&rdquo;<\/i><br \/><br \/><span id=\"qst_accpt\"><a class=\"qle\" href=\"javascript: qst_next('','enter'); \">To the first task.<\/a><a class=\"qri\" href=\"javascript: qst_fhandle();\">Look\u00a0around\u00a0on\u00a0your\u00a0own.<\/a><input type=\"hidden\" id=\"qst_val\" value=\"2\" \/><br \/><\/span><\/div>\n\t\t<div id=\"qstbg\" class=\"intro\"><\/div>\n\t\t","number":null,"reward":false,"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>g","msrc":"<?php echo $messagelol; ?>","altstep":1}
 
 <?php } elseif($_SESSION['qst']== 1){
 
@@ -419,11 +419,11 @@ $rallypoint = $building->getTypeLevel(16);
       	}
 if ($rallypoint == 0){
 ?>
-{"markup":"\n\t\<div id=\"popup3\"><div id=\"qstd\"><h4>Küldetés 4: Gyülekezőtér<\/h4><div class=\"spoken\">&rdquo;A környékeden van pár titokzatos hely, amelyet érdemes lehet felfedezni. A kalandozás előkészítéseképpen szükséged lesz egy gyülekezőtérre.  <br> A többi épülettől eltérően, a gyülekezőtér csak egyetlen helyre építhető. A <a href=\"build.php?id=39\">terület<\/a> a főépülettől jobbra lefelé található.”<\/div><div class=\"rew\"><p class=\"ta_aw\">Feladat:<\/p>Építsd meg a gyülekezőteret.<\/div><span id=\"qst_accpt\"><\/span><\/div>\n\t\t<div id=\"qstbg\" class=\"rally\"><\/div>\n\t\t","number":"-4","reward":false,"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>","msrc":"<?php echo $messagelol; ?>","altstep":0}
+{"markup":"\n\t\<div id=\"popup3\"><div id=\"qstd\"><h4>Task 4: Rally Point<\/h4><div class=\"spoken\">&rdquo;In your surroundings, there are many mysterious places for you to explore. To prepare for these adventures, you need a rally point. <br> The rally point must be built on a specific building site in your village centre. The <a href=\"build.php?id=39\">building site<\/a> itself is curved.”<\/div><div class=\"rew\"><p class=\"ta_aw\">Order:<\/p>Build the rally point.<\/div><span id=\"qst_accpt\"><\/span><\/div>\n\t\t<div id=\"qstbg\" class=\"rally\"><\/div>\n\t\t","number":"-4","reward":false,"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>","msrc":"<?php echo $messagelol; ?>","altstep":0}
 
 <?php $_SESSION['qstnew']='0'; }else{ $_SESSION['qstnew']='1'; ?>
 
-{"markup":"\n\t\t<div id=\"popup3\"><div id=\"qstd\"><h4>Küldetés 4: Gyülekezőtér<\/h4><div class=\"spoken\">&rdquo;Remek, megtaláltad a mezőt és felépítetted a gyülekezőteret.Segítettem kicsit és azonnal felépítettem az épületet.”<\/div><div class=\"rew\"><p class=\"ta_aw\"><input type=\"hidden\" id=\"qst_val\" value=\"2\" \/>A jutalmad:<\/p>Gyülekezőtér már készen is van<\/div><span id=\"qst_accpt\"><a class=\"arrow\" href=\"javascript: qst_next('','5');\">A jutalom begyűjtése és tovább a következő küldetéshez.<\/a><\/span><\/div>\n\t\t<div id=\"qstbg\" class=\"rally\"><\/div>\n\t\t","number":4,"reward":false,"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>g","msrc":"<?php echo $messagelol; ?>","altstep":0}
+{"markup":"\n\t\t<div id=\"popup3\"><div id=\"qstd\"><h4>Task 4: Rally Point<\/h4><div class=\"spoken\">&rdquo;Remek, megtaláltad a mezőt és felépítetted a gyülekezőteret.Segítettem kicsit és azonnal felépítettem az épületet.”<\/div><div class=\"rew\"><p class=\"ta_aw\"><input type=\"hidden\" id=\"qst_val\" value=\"2\" \/>A jutalmad:<\/p>Gyülekezőtér már készen is van<\/div><span id=\"qst_accpt\"><a class=\"arrow\" href=\"javascript: qst_next('','5');\">A jutalom begyűjtése és tovább a következő küldetéshez.<\/a><\/span><\/div>\n\t\t<div id=\"qstbg\" class=\"rally\"><\/div>\n\t\t","number":4,"reward":false,"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>g","msrc":"<?php echo $messagelol; ?>","altstep":0}
 
 <?php }?>
 

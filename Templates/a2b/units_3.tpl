@@ -1,4 +1,4 @@
-<h1>Kampány</h1>
+<h1>Send Troops</h1>
 <?php
 if(isset($_GET['bid'])) {
 	$bid = $_GET['bid'];

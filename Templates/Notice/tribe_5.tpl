@@ -30,7 +30,7 @@ for($i=$start;$i<=($start+9);$i++) {
 if($dataarray[139]){
 	echo "<td class=\"uniticon last\"><img src=\"img/x.gif\" class=\"unit uhero\" title=\"".$technology->getUnitName(51)."\" alt=\"".$technology->getUnitName(51)."\" /></td>";
 }
-echo "</tr></tbody><tbody class=\"units\"><tr><th>Egységek</th>";
+echo "</tr></tbody><tbody class=\"units\"><tr><th>Troops</th>";
 for($i=129;$i<=138;$i++) {
 	if($i==138 && !$dataarray[139]){ $last = ' last'; }else{ $last = ''; }
 	if($dataarray[$i] == 0) {

@@ -122,7 +122,7 @@ $query = mysql_num_rows($sql);
 $outputList = '';
 $timer = 1;
 if($query == 0) {        
-    $outputList .= "<td colspan=\"6\" class=\"none\"><center>nincs kaland</center></td>";
+    $outputList .= "<td colspan=\"6\" class=\"none\"><center>No adventure found.</center></td>";
 }else{
 	while($row = mysql_fetch_array($sql)){ 
 include "Templates/Auction/alt.tpl";

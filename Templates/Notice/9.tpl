@@ -76,7 +76,7 @@ for($i=$start;$i<=$end;$i++) {
 	</tbody>
 	<tbody class="units last">
 		<tr>
-			<th>Egységek</th>
+			<th>Troops</th>
 	<td class="unit none">0</td>
 	<td class="unit none">0</td>
 	<td class="unit none">0</td>
@@ -94,7 +94,7 @@ for($i=$start;$i<=$end;$i++) {
 	<tbody class="infos">
 		<tr><td class="empty" colspan="12"></td></tr>
 		<tr>
-			<th>Információk</th>
+			<th>Information</th>
 			<td class="dropItems" colspan="11">
             <?php if($dataarray[1]!='dead'){ ?>
 				<img src="img/x.gif" class="iExperience" title="Tapasztalat:">
@@ -113,7 +113,7 @@ for($i=$start;$i<=$end;$i++) {
 	<tbody class="goods">
 		<tr><td class="empty" colspan="12"></td></tr>
 		<tr>
-			<th>Trófea</th>
+			<th>Bounty</th>
 			<td colspan="11">
             <?php
            	if($dataarray[1]){

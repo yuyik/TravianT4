@@ -18,7 +18,7 @@ echo "<div class=\"headline\"><span class=\"f10 c5\">Error creating wdata. Check
 <td><span class="f9 c6">Create World Data:</span></td><td> <button type="submit" value="Upgrade level" class="build">
 <div class="button-container"><div class="button-position"><div class="btl"><div class="btr"><div class="btc"></div></div></div>
 <div class="bml"><div class="bmr"><div class="bmc"></div></div></div><div class="bbl"><div class="bbr"><div class="bbc"></div></div></div>
-</div><div class="button-contents">Create..</div></div></button></td></tr>
+</div><div class="button-contents">Create</div></div></button></td></tr>
 
 <br /><br /><font color="Red"><b>Warning:</b> This can take some time. Do not click, just wait till the next page has been loaded!</font>
 </div>

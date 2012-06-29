@@ -23,7 +23,7 @@ if ($units[$y]['sort_type']==3){
                   <td colspan=\"11\" class=\"troopHeadline\">";
                   echo "<a href=\"spieler.php?uid=".$database->getVillageField($units[$y]['to'],"owner")."\">";
                   echo $actionType ." ". $village->vname;
-                  echo " faluba</a></td></tr></thead><tbody class=\"units\">";
+                  echo " village</a></td></tr></thead><tbody class=\"units\">";
                   $tribe = $database->getUserField($database->getVillageField($units[$y]['from'],"owner"),"tribe",0);
                   $start = ($tribe-1)*10+1;
                   $end = ($tribe*10);
@@ -63,7 +63,7 @@ if($village->resarray['f39'] >= 5){
                   echo '
                   <tbody class="infos">
 									<tr>
-										<th>Érkezés</th>
+										<th>Arrival</th>
 										<td colspan="11">
 										<div class="in small"><span id=timer'.$timer.'>'.$generator->getTimeFormat($units[$y]['endtime']-time()).'</span> hrs.</div>';
 										    $datetime = $generator->procMtime($units[$y]['endtime']);
@@ -94,7 +94,7 @@ $to = $database->getMInfo($units[$y]['vref']);
 		<tr>
 			<td class="role"><a href="karte.php?d=<?php echo $village->wid."&c=".$generator->getMapCheck($village->wid); ?>"><?php echo $village->vname; ?></a></td>
             <?php if($units[$y]['t11']!=0){ $colspan = '11'; }else{ $colspan = '10'; } ?>
-			<td colspan="<?php echo $colspan; ?>" class="troopHeadline"><a href="karte.php?d=<?php echo $to['wref']."&c=".$generator->getMapCheck($to['wref']); ?>"><?php echo $actionType ." ". $to['name']; ?> faluba</a></td>
+			<td colspan="<?php echo $colspan; ?>" class="troopHeadline"><a href="karte.php?d=<?php echo $to['wref']."&c=".$generator->getMapCheck($to['wref']); ?>"><?php echo $actionType ." ". $to['name']; ?> village</a></td>
 		</tr>
 	</thead>
 	<tbody class="units">
@@ -146,12 +146,12 @@ $to = $database->getMInfo($units[$y]['vref']);
         $dataarray = explode(",",$units[$y]['data']);
         
         ?>
-    <tr><th>Zsákmány</th>
+    <tr><th>Bounty</th>
     <td colspan="<?php echo $colspan; ?>">
     <div class="res">
-    <span class="resource" title="Fa"><img class="r1" src="img/x.gif" alt="Fa"><?php echo $dataarray['0']; ?></span>
-    <span class="resource" title="Agyag"><img class="r2" src="img/x.gif" alt="Agyag"><?php echo $dataarray['1']; ?></span>
-    <span class="resource" title="Vasérc"><img class="r3" src="img/x.gif" alt="Vasérc"><?php echo $dataarray['2']; ?></span>
+    <span class="resource" title="Lumber"><img class="r1" src="img/x.gif" alt="Lumber"><?php echo $dataarray['0']; ?></span>
+    <span class="resource" title="Clay"><img class="r2" src="img/x.gif" alt="Clay"><?php echo $dataarray['1']; ?></span>
+    <span class="resource" title="Iron"><img class="r3" src="img/x.gif" alt="Iron"><?php echo $dataarray['2']; ?></span>
     <span class="resource" title="Crop"><img class="r4" src="img/x.gif" alt="Crop"><?php echo $dataarray['3']; ?></span>
     </div>
     <div class="carry">
@@ -176,7 +176,7 @@ $to = $database->getMInfo($units[$y]['vref']);
     </tr>
     <?php } ?>
 			<tr>
-				<th>Érkezés</th>
+				<th>Arrival</th>
 				<td colspan="<?php echo $colspan; ?>">
 				<?php
                 

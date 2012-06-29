@@ -2341,7 +2341,7 @@ $info_cata=" از سطح <b>".$tblevel."</b> به سطح <b>".$totallvl."</b> آ
 				if(($getHero['health']-$health)<=0){
 					$database->modifyHero2('dead', 1, $ownerID, 0);
 					$database->modifyHero2('health', $health, $ownerID, 2);
-					$database->addNotice($ownerID,$data['to'],$ally,9,''.addslashes($from['name']).' در حال کاوش ('.addslashes($coor['x']).'|'.addslashes($coor['y']).') است.',''.$from['wref'].',dead,قهرمان در ماجراجویی کشته شد.,,'.$health.','.$exp.'',$data['endtime']);
+					$database->addNotice($ownerID,$data['to'],$ally,9,''.addslashes($from['name']).' explores ('.addslashes($coor['x']).'|'.addslashes($coor['y']).')',''.$from['wref'].',dead,your hero did not survive the adventure.,,'.$health.','.$exp.'',$data['endtime']);
 				}else{
 					if($btype>=7){
 						$nntype = $ntype[$btype];
@@ -2371,9 +2371,9 @@ $info_cata=" از سطح <b>".$tblevel."</b> به سطح <b>".$totallvl."</b> آ
 						}
 					}
 					if($btype==0 or $btype==2){
-						$database->addNotice($ownerID,$data['to'],$ally,9,''.addslashes($from['name']).' در حال کاوش ('.addslashes($coor['x']).'|'.addslashes($coor['y']).') است.',''.$from['wref'].',,هیچ چیز با ارزشی پیدا نشد.,,'.$health.','.$exp.'',$data['endtime']);
+						$database->addNotice($ownerID,$data['to'],$ally,9,''.addslashes($from['name']).' explores('.addslashes($coor['x']).'|'.addslashes($coor['y']).')',''.$from['wref'].',,هیچ چیز با ارزشی پیدا نشد.,,'.$health.','.$exp.'',$data['endtime']);
 					}else{
-						$database->addNotice($ownerID,$data['to'],$ally,9,''.addslashes($from['name']).' در حال کاوش ('.addslashes($coor['x']).'|'.addslashes($coor['y']).') است.',''.$from['wref'].','.$btype.','.$nntype.','.$num.','.$health.','.$exp.'',$data['endtime']);
+						$database->addNotice($ownerID,$data['to'],$ally,9,''.addslashes($from['name']).' explores ('.addslashes($coor['x']).'|'.addslashes($coor['y']).')',''.$from['wref'].','.$btype.','.$nntype.','.$num.','.$health.','.$exp.'',$data['endtime']);
 					}
 					$database->modifyHero2('health', $health, $ownerID, 2);
 					$ref = $database->addAttack($from['wref'],0,0,0,0,0,0,0,0,0,0,1,3,0,0,0);
@@ -2955,14 +2955,6 @@ $info_cata=" از سطح <b>".$tblevel."</b> به سطح <b>".$totallvl."</b> آ
 						$health = round(($hdata['autoregen']/24),1);
 						$database->modifyHero("health",$health,$hdata['heroid'],1);
 						$database->modifyHero("lastupdate",time(),$hdata['heroid'],0);
-					}
-				}
-				if($hdata['lastadv']!=0){
-					if(($time-$hdata['lastadv'])>=rand(7200,14400)) {
-						$exprand = rand(2,10);
-						$database->modifyHero("experience",$exprand,$hdata['heroid'],1);
-						$database->addAdventure($hdata['wref'], $hdata['uid']);
-						$database->modifyHero("lastadv",time(),$hdata['heroid'],0);
 					}
 				}
 				$hero_levels = $GLOBALS["hero_levels"];

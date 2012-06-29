@@ -16,7 +16,6 @@ $founder = $database->getVillage($village->wid);
 				<input type="hidden" name="h" value="<?php echo $_GET['id']; ?>" />
 				<input type="hidden" name="id" value="39" />
 				<input type="hidden" name="timestamp" value="<?php echo time()+$time ?>" />
-        <span id="text">Would you like to do an adventure? Your Hero may not return</span>
 		<table class="troop_details" cellpadding="1" cellspacing="1">
 	<thead>
 		<tr>
@@ -43,7 +42,7 @@ $founder = $database->getVillage($village->wid);
 	<tbody class="infos">
 		<tr>
 			<th>Arrival</th>
-				<td colspan="11"><img class="clock" src="img/x.gif" alt="Idő" title="Idő" /> <?php echo $generator->getTimeFormat($time); ?></td>
+				<td colspan="11"><img class="clock" src="img/x.gif" alt="Duration" title="Duration" /> <?php echo $generator->getTimeFormat($time); ?></td>
 		</tr>
 	</tbody>
 </table>
@@ -53,17 +52,17 @@ if($herodetail['dead']==0){
 	if($database->getHUnit($village->wid)){
 ?>
 	<p class="button">
-		<button type="submit" value="ok" name="s1" id="btn_ok"><div class="button-container"><div class="button-position"><div class="btl"><div class="btr"><div class="btc"></div></div></div><div class="bml"><div class="bmr"><div class="bmc"></div></div></div><div class="bbl"><div class="bbr"><div class="bbc"></div></div></div></div><div class="button-contents">Go On Adventure</div></div></button>
+		<button type="submit" value="ok" name="s1" id="btn_ok"><div class="button-container"><div class="button-position"><div class="btl"><div class="btr"><div class="btc"></div></div></div><div class="bml"><div class="bmr"><div class="bmc"></div></div></div><div class="bbl"><div class="bbr"><div class="bbc"></div></div></div></div><div class="button-contents">Start Adventure</div></div></button>
 	</p>
 <?php }else{ ?>
-<button type="button" title="A hősöd nincs a faluban." value="Kalandra fel!" class="disabled"><div class="button-container"><div class="button-position"><div class="btl"><div class="btr"><div class="btc"></div></div></div><div class="bml"><div class="bmr"><div class="bmc"></div></div></div><div class="bbl"><div class="bbr"><div class="bbc"></div></div></div></div><div class="button-contents">Go On Adventure</div></div></button>
+<button type="button" title="A hősöd nincs a faluban." value="Kalandra fel!" class="disabled"><div class="button-container"><div class="button-position"><div class="btl"><div class="btr"><div class="btc"></div></div></div><div class="bml"><div class="bmr"><div class="bmc"></div></div></div><div class="bbl"><div class="bbr"><div class="bbc"></div></div></div></div><div class="button-contents">Start Adventure</div></div></button>
 <?php } ?>
 <?php }else{ ?>
-<button type="button" title="A hősöd halott." value="Kalandra fel" class="disabled"><div class="button-container"><div class="button-position"><div class="btl"><div class="btr"><div class="btc"></div></div></div><div class="bml"><div class="bmr"><div class="bmc"></div></div></div><div class="bbl"><div class="bbr"><div class="bbc"></div></div></div></div><div class="button-contents">Go On Adventure</div></div></button>
+<button type="button" title="A hősöd halott." value="Kalandra fel" class="disabled"><div class="button-container"><div class="button-position"><div class="btl"><div class="btr"><div class="btc"></div></div></div><div class="bml"><div class="bmr"><div class="bmc"></div></div></div><div class="bbl"><div class="bbr"><div class="bbc"></div></div></div></div><div class="button-contents">Start Adventure</div></div></button>
 <?php 
 }
 }else{ 
 ?>
-<button type="button" title="Kiképzés" value="Kalandra fel" class="disabled"><div class="button-container"><div class="button-position"><div class="btl"><div class="btr"><div class="btc"></div></div></div><div class="bml"><div class="bmr"><div class="bmc"></div></div></div><div class="bbl"><div class="bbr"><div class="bbc"></div></div></div></div><div class="button-contents">Go On Adventure</div></div></button>
+<button type="button" title="Kiképzés" value="Kalandra fel" class="disabled"><div class="button-container"><div class="button-position"><div class="btl"><div class="btr"><div class="btc"></div></div></div><div class="bml"><div class="bmr"><div class="bmc"></div></div></div><div class="bbl"><div class="bbr"><div class="bbc"></div></div></div></div><div class="button-contents">Start Adventure</div></div></button>
 <?php } ?>
 </form>

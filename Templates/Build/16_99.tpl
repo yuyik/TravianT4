@@ -1,10 +1,10 @@
-﻿<h1 class="titleInHeader">Gyülekezőtér <span class="level">szint <?php echo $village->resarray['f'.$id]; ?></span></h1>
+﻿<h1 class="titleInHeader">Rally Point <span class="level">szint <?php echo $village->resarray['f'.$id]; ?></span></h1>
 <div id="build" class="gid16">
 <div class="build_desc">
 <a href="#" onClick="return Travian.Game.iPopup(16,4);" class="build_logo">
-<img class="g16 big white" src="img/x.gif" alt="Gyülekezőtér" title="Gyülekezőtér" />
+<img class="g16 big white" src="img/x.gif" alt="Rally Point" title="Rally Point" />
 </a>
-A falvad harcosai gyülekeznek itt. Várnak hogy mehessenek hódítani, harcolni, rabolni, vagy éppen támogatni szövetséges falvakat..</div>
+Your village's troops meet here. From here you can send them out to conquer, raid or reinforce other villages.</div>
 <?php include("upgrade.tpl"); ?>
 <div class="contentNavi tabNavi">
 				<div class="container normal">
