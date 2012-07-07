@@ -4,7 +4,7 @@
         <td><b>Admin</b></td>
         <td><b>LOG</b></td> 
         <td><b>Date</b></td>
-        <td><b>عملیات</b></td>
+        <td><b>Operation</b></td>
     </tr>
 <?php
 	$no = count($database->getAdminLog());

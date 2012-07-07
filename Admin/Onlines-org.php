@@ -3,33 +3,33 @@ $active = $admin->getUserActive();
 ?>
 <div align="center">
 	<ul class="tabs"><center>
-		<li>(<?php echo count($active);?>)Player(s) online</li>
+		<li>بازیکنان آنلاین (<?php echo count($active);?>)</li>
         </center>
 	</ul>
 </div>
-<table id="member" border="1" cellpadding="3" align="center"> 
+<table id="member" border="1" cellpadding="3" align="center" dir="rtl"> 
     <tr style="height:30px;">
-        <td><center>Name</center></td>
-        <td><b>Time / Date</b></td>
-        <td><b>Rank</b></td> 
-        <td><b>Population</b></td> 
-        <td><b>Village</b></td> 
-        <td><b>Gold</b></td>  
-        <td><b>Silver</b></td>
+        <td dir="rtl"><center>نام [<b>دسترسی</b>]</center></td>
+        <td><b>زمان</b></td>
+        <td><b>نژاد</b></td> 
+        <td><b>جمعیت</b></td> 
+        <td><b>دهکده ها</b></td> 
+        <td><b>طلا</b></td>  
+        <td><b>نقره</b></td>
         <td></td>
     </tr>
 <?php
 	$time = time() - (60*5);
 	$sql = mysql_query("SELECT * FROM ".TB_PREFIX."users where timestamp > $time and id > 3 ORDER BY username ASC $limit");
 	$query = mysql_num_rows($sql);
-	if (isset($_GET['page'])) { // Get page number
-		$page = preg_replace('#[^0-9]#i', '', $_GET['page']); // Filter out everything, except numbers
+	if (isset($_GET['page'])) { // دریافت شماره صفحه
+		$page = preg_replace('#[^0-9]#i', '', $_GET['page']); // فیلتر کردن همه چیز به جز اعداد
 	} else {
 		$page = 1;
 	}
 	
-	$itemsPerPage = 10; //The number of displayed items per page
-	$lastPage = ceil($query / $itemsPerPage); // Get the last page
+	$itemsPerPage = 10; //تعداد آیتم های قابل نمایش در هر صفحه
+	$lastPage = ceil($query / $itemsPerPage); // دریافت مقدار آخرین صفحه
 	if ($page < 1) {
 		$page = 1;
 	} else if ($page > $lastPage) {
@@ -108,39 +108,39 @@ $active = $admin->getUserActive();
 	$nextPage = $_GET['page'] + 1;
 	$previous = $_GET['page'] - 1;
 	if ($page == "1" && $lastPage == "1"){
-		$paginationDisplay .=  '<img alt="First" src="../img/x.gif" class="first disabled"> ';
-		$paginationDisplay .=  '<img alt="previous" src="../img/x.gif" class="previous disabled">';
+		$paginationDisplay .=  '<img alt="صفحه اول" src="../img/x.gif" class="first disabled"> ';
+		$paginationDisplay .=  '<img alt="صفحه قبل" src="../img/x.gif" class="previous disabled">';
 		$paginationDisplay .= $centerPages;
-		$paginationDisplay .=  '<img alt="next" src="../img/x.gif" class="next disabled"> ';
-		$paginationDisplay .=  '<img alt="last" src="../img/x.gif" class="last disabled">';
+		$paginationDisplay .=  '<img alt="صفحه بعد" src="../img/x.gif" class="next disabled"> ';
+		$paginationDisplay .=  '<img alt="صفحه آخر" src="../img/x.gif" class="last disabled">';
 		
 	}elseif ($lastPage == 0){
-		$paginationDisplay .=  '<img alt="first" src="../img/x.gif" class="first disabled"> ';
-		$paginationDisplay .=  '<img alt="previous" src="../img/x.gif" class="previous disabled">';
+		$paginationDisplay .=  '<img alt="صفحه اول" src="../img/x.gif" class="first disabled"> ';
+		$paginationDisplay .=  '<img alt="صفحه قبل" src="../img/x.gif" class="previous disabled">';
 		$paginationDisplay .= $centerPages;
-		$paginationDisplay .=  '<img alt="next" src="../img/x.gif" class="next disabled"> ';
-		$paginationDisplay .=  '<img alt="last" src="../img/x.gif" class="last disabled">';
+		$paginationDisplay .=  '<img alt="صفحه بعد" src="../img/x.gif" class="next disabled"> ';
+		$paginationDisplay .=  '<img alt="صفحه آخر" src="../img/x.gif" class="last disabled">';
 		
 	}elseif ($page == "1" && $lastPage != "1"){
-		$paginationDisplay .=  '<img alt="first" src="../img/x.gif" class="first disabled"> ';
-		$paginationDisplay .=  '<img alt="previous" src="../img/x.gif" class="previous disabled">';
+		$paginationDisplay .=  '<img alt="صفحه اول" src="../img/x.gif" class="first disabled"> ';
+		$paginationDisplay .=  '<img alt="صفحه قبل" src="../img/x.gif" class="previous disabled">';
 		$paginationDisplay .= $centerPages;
-		$paginationDisplay .=  '<a class="next" href="page=' . $nextPage . '"><img alt="next page" src="../img/x.gif"></a> ';
-		$paginationDisplay .=  '<a class="last" href="page=' . $lastPage . '"><img alt="last page" src="../img/x.gif"></a>';
+		$paginationDisplay .=  '<a class="next" href="page=' . $nextPage . '"><img alt="صفحه بعد" src="../img/x.gif"></a> ';
+		$paginationDisplay .=  '<a class="last" href="page=' . $lastPage . '"><img alt="صفحه آخر" src="../img/x.gif"></a>';
 	
 	}elseif ($page != "1" && $page != $lastPage){
-		$paginationDisplay .=  '<a class="first" href="page=1"><img alt="first" src="../img/x.gif"></a> ';
-		$paginationDisplay .=  '<a class="previous" href="page=' . $previous . '"><img alt="previous" src="../img/x.gif"></a>';
+		$paginationDisplay .=  '<a class="first" href="page=1"><img alt="صفحه اول" src="../img/x.gif"></a> ';
+		$paginationDisplay .=  '<a class="previous" href="page=' . $previous . '"><img alt="صفحه قبل" src="../img/x.gif"></a>';
 		$paginationDisplay .= $centerPages;
-		$paginationDisplay .=  '<a class="next" href="page=' . $nextPage . '"><img alt="next" src="../img/x.gif"></a> ';
-		$paginationDisplay .=  '<a class="last" href="page=' . $lastPage . '"><img alt="last" src="../img/x.gif"></a>';
+		$paginationDisplay .=  '<a class="next" href="page=' . $nextPage . '"><img alt="صفحه بعد" src="../img/x.gif"></a> ';
+		$paginationDisplay .=  '<a class="last" href="page=' . $lastPage . '"><img alt="صفحه آخر" src="../img/x.gif"></a>';
 	
 	}elseif ($page == $lastPage){
-		$paginationDisplay .=  '<a class="first" href="page=1"><img alt="first" src="../img/x.gif"></a> ';
-		$paginationDisplay .=  '<a class="previous" href="page=' . $previous . '"><img alt="previous" src="../img/x.gif"></a>';
+		$paginationDisplay .=  '<a class="first" href="page=1"><img alt="صفحه اول" src="../img/x.gif"></a> ';
+		$paginationDisplay .=  '<a class="previous" href="page=' . $previous . '"><img alt="صفحه قبل" src="../img/x.gif"></a>';
 		$paginationDisplay .= $centerPages;
-		$paginationDisplay .=  '<img alt="next" src="../img/x.gif" class="next disabled"> ';
-		$paginationDisplay .=  '<img alt="last" src="../img/x.gif" class="last disabled">';
+		$paginationDisplay .=  '<img alt="صفحه بعد" src="../img/x.gif" class="next disabled"> ';
+		$paginationDisplay .=  '<img alt="صفحه آخر" src="../img/x.gif" class="last disabled">';
 	}
 	
 	$limit = 'LIMIT ' .($page - 1) * $itemsPerPage .',' .$itemsPerPage; 
@@ -158,35 +158,35 @@ if($query>0){
 			$totalpop += $varray['pop'];
 		}
 		if($row['tribe'] == 1){
-			$tribe = "roman";
+			$tribe = "رومی ها";
 		} else if($row['tribe'] == 2){
-			$tribe = "teuton";
+			$tribe = "توتن ها";
 		} else if($row['tribe'] == 3){
-			$tribe = "gaul";
+			$tribe = "گول ها";
 		}
 		if($row['access'] == 9){
-			$access = "[<b>Admin</b>]";
+			$access = "[<b>مدیر</b>]";
         } elseif($row['access'] == 8){
-			$access = "[<b>Multihunter</b>]";
+			$access = "[<b>مولتی هانتر</b>]";
         } elseif($row['access'] == 0){
-			$access = "[<b>Ban</b>]";
+			$access = "[<b>بازداشت</b>]";
         }else{ $access = ""; }
 		
 		echo '
 				<tr>
-					<td dir="ltr"><a href="?p=Users&uid='.$uid.'">'.$row['username'].'</a> '.$access.'</td>
+					<td dir="rtl"><a href="?p=Users&uid='.$uid.'">'.$row['username'].'</a> '.$access.'</td>
 					<td>'.date("d/m/Y H:i",$row['timestamp']).'</td>
 					<td>'.$tribe.'</td>
 					<td>'.$totalpop.'</td>
 					<td>'.count($vil).'</td>
-					<td><img src="../img/admin/gold.gif" class="gold" alt="Gold" title="players '.$row['gold'].' gold"/> '.$row['gold'].'</td>
-					<td><img src="../img/admin/silver.gif" class="gold" alt="Silver" title="players '.$row['silver'].' silver"/> '.$row['silver'].'</td>
-					<td><a href="?p=Users&uid='.$uid.'"><img title="edit player" border="0" src="../img/admin/edit.gif"></a></td>
+					<td><img src="../img/admin/gold.gif" class="gold" alt="Gold" title="این بازیکن '.$row['gold'].' طلا دارد"/> '.$row['gold'].'</td>
+					<td><img src="../img/admin/silver.gif" class="gold" alt="Silver" title="این بازیکن '.$row['silver'].' نقره دارد"/> '.$row['silver'].'</td>
+					<td><a href="?p=Users&uid='.$uid.'"><img title="ویرایش بازیکن" border="0" src="../img/admin/edit.gif"></a></td>
 				</tr>  
 			';
 	}
 }else{
-	echo '<tr><td colspan="8" align="center">No player is online</td></tr>';
+	echo '<tr><td colspan="8" align="center">هیچ بازیکنی آنلاین نیست</td></tr>';
 } 
 
 ?>    
