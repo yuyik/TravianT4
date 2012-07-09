@@ -267,55 +267,66 @@ class Automation {
         }
     }
     
-    private function clearDeleting() {
+	private function clearDeleting() {
 	if(file_exists("GameEngine/Prevention/cleardeleting.txt")) {
-            unlink("GameEngine/Prevention/cleardeleting.txt");
-        }
-        global $database;
-        $needDelete = $database->getNeedDelete();
-        if(count($needDelete) > 0) {
-            foreach($needDelete as $need) {
-                $needVillage = $database->getVillagesID($need['uid']); //wref
-                foreach($needVillage as $village) {
-                    $q = "DELETE FROM ".TB_PREFIX."abdata where wref = ".$village['wref'];
-                    $database->query($q);
-                    $q = "DELETE FROM ".TB_PREFIX."bdata where wid = ".$village['wref'];
-                    $database->query($q);
-                    $q = "DELETE FROM ".TB_PREFIX."enforcement where vref = ".$village['wref'];
-                    $database->query($q);
-                    $q = "DELETE FROM ".TB_PREFIX."fdata where vref = ".$village['wref'];
-                    $database->query($q);
-                    $q = "DELETE FROM ".TB_PREFIX."market where vref = ".$village['wref'];
-                    $database->query($q);
-                    $q = "DELETE FROM ".TB_PREFIX."movement where to = ".$village['wref']." or from = ".$village['wref'];
-                    $database->query($q);
-                    $q = "DELETE FROM ".TB_PREFIX."odata where wref = ".$village['wref'];
-                    $database->query($q);
-                    $q = "DELETE FROM ".TB_PREFIX."research where vref = ".$village['wref'];
-                    $database->query($q);
-                    $q = "DELETE FROM ".TB_PREFIX."tdata where vref = ".$village['wref'];
-                    $database->query($q);
-                    $q = "DELETE FROM ".TB_PREFIX."training where vref =".$village['wref'];
-                    $database->query($q);
-                    $q = "DELETE FROM ".TB_PREFIX."units where vref =".$village['wref'];
-                    $database->query($q);
-                    $q = "DELETE FROM ".TB_PREFIX."vdata where wref = ".$village['wref'];
-                    $database->query($q);
-                    $q = "UPDATE ".TB_PREFIX."wdata set occupied = 0 where id = ".$village['wref'];
-                    $database->query($q);
-                }
-                $q = "DELETE FROM ".TB_PREFIX."mdata where target = ".$need['uid']." or owner = ".$need['uid'];
-                $database->query($q);
-                $q = "DELETE FROM ".TB_PREFIX."ndata where uid = ".$need['uid'];
-                $database->query($q);
-                $q = "DELETE FROM ".TB_PREFIX."users where id = ".$need['uid'];
-                $database->query($q);
-            }
-        }
+			unlink("GameEngine/Prevention/cleardeleting.txt");
+		}
+		global $database;
+		$ourFileHandle = fopen("GameEngine/Prevention/cleardeleting.txt", 'w');
+		fclose($ourFileHandle);
+		$needDelete = $database->getNeedDelete();
+		if(count($needDelete) > 0) {
+			foreach($needDelete as $need) {
+				$needVillage = $database->getVillagesID($need['uid']);
+				foreach($needVillage as $village) {
+				$getvillage = $database->getVillage($village);
+					$q = "DELETE FROM ".TB_PREFIX."abdata where wref = ".$village;
+					$database->query($q);
+					$q = "DELETE FROM ".TB_PREFIX."bdata where wid = ".$village;
+					$database->query($q);
+					$q = "DELETE FROM ".TB_PREFIX."enforcement where vref = ".$village;
+					$database->query($q);
+					$q = "DELETE FROM ".TB_PREFIX."fdata where vref = ".$village;
+					$database->query($q);
+					$q = "DELETE FROM ".TB_PREFIX."market where vref = ".$village;
+					$database->query($q);
+					$q = "DELETE FROM ".TB_PREFIX."movement where to = ".$village." or from = ".$village;
+					$database->query($q);
+					$q = "DELETE FROM ".TB_PREFIX."odata where wref = ".$village;
+					$database->query($q);
+					$q = "DELETE FROM ".TB_PREFIX."research where vref = ".$village;
+					$database->query($q);
+					$q = "DELETE FROM ".TB_PREFIX."tdata where vref = ".$village;
+					$database->query($q);
+					$q = "DELETE FROM ".TB_PREFIX."training where vref =".$village;
+					$database->query($q);
+					$q = "DELETE FROM ".TB_PREFIX."units where vref =".$village;
+					$database->query($q);
+					if($getvillage['capital'] == 0){
+					$q = "DELETE FROM ".TB_PREFIX."vdata where vref = ".$village;
+					$database->query($q);
+					$q = "UPDATE ".TB_PREFIX."wdata set occupied = 0 where id = ".$village;
+					$database->query($q);
+					}else{
+					$q = "UPDATE ".TB_PREFIX."vdata set capital = 0, owner = 2 where id = ".$village;
+					$database->query($q);
+					$database->addTech($village);
+					$database->addABTech($village);
+					$database->addUnits($village);
+					}
+				}
+				$q = "DELETE FROM ".TB_PREFIX."mdata where target = ".$need['uid']." or owner = ".$need['uid'];
+				$database->query($q);
+				$q = "DELETE FROM ".TB_PREFIX."ndata where uid = ".$need['uid'];
+				$database->query($q);
+				$q = "DELETE FROM ".TB_PREFIX."users where id = ".$need['uid'];
+				$database->query($q);
+			}
+		}
 		if(file_exists("GameEngine/Prevention/cleardeleting.txt")) {
-            unlink("GameEngine/Prevention/cleardeleting.txt");
-        }
-    }
+			unlink("GameEngine/Prevention/cleardeleting.txt");
+		}
+	}
     
     private function ClearUser() {
         global $database;
