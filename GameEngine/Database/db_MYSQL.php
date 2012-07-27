@@ -2001,34 +2001,43 @@
         		return $row[0];
         	}
 
-        	function trainUnit($vid, $unit, $amt, $pop, $each, $time, $mode) {
-        		global $village, $building, $session, $technology;
+			function trainUnit($vid, $unit, $amt, $pop, $each, $time, $mode) {
+				global $village, $building, $session, $technology;
 
-        		if(!$mode) {
-        			$barracks = array(1, 2, 3, 11, 12, 13, 14, 21, 22, 31, 32, 33, 34, 41, 42, 43, 44);
-        			$stables = array(4, 5, 6, 15, 16, 23, 24, 25, 26, 35, 36, 45, 46);
-        			$workshop = array(7, 8, 17, 18, 27, 28, 37, 38, 47, 48);
-        			$residence = array(9, 10, 19, 20, 29, 30, 39, 40, 49, 50);
+				if(!$mode) {
+					$barracks = array(1, 2, 3, 11, 12, 13, 14, 21, 22, 31, 32, 33, 34, 41, 42, 43, 44);
+					$stables = array(4, 5, 6, 15, 16, 23, 24, 25, 26, 35, 36, 45, 46);
+					$workshop = array(7, 8, 17, 18, 27, 28, 37, 38, 47, 48);
+					$residence = array(9, 10, 19, 20, 29, 30, 39, 40, 49, 50);
 
-        			if(in_array($unit, $barracks)) {
-        				$queued = $technology->getTrainingList(1);
-        			} elseif(in_array($unit, $stables)) {
-        				$queued = $technology->getTrainingList(2);
-        			} elseif(in_array($unit, $workshop)) {
-        				$queued = $technology->getTrainingList(3);
-        			} elseif(in_array($unit, $residence)) {
-        				$queued = $technology->getTrainingList(4);
-        			}
-        			if(count($queued) > 0) {
-        				$time = $queued[count($queued) - 1]['commence'] + $queued[count($queued) - 1]['eachtime'] * $queued[count($queued) - 1]['amt'];
-        			}
-        			$now = time();
-        			$q = "INSERT INTO " . TB_PREFIX . "training values (0,$vid,$unit,$amt,$pop,$now,$each,$time)";
-        		} else {
-        			$q = "DELETE FROM " . TB_PREFIX . "training where id = $vid";
-        		}
-        		return mysql_query($q, $this->connection);
-        	}
+					if(in_array($unit, $barracks)) {
+						$queued = $technology->getTrainingList(1);
+					} elseif(in_array($unit, $stables)) {
+						$queued = $technology->getTrainingList(2);
+					} elseif(in_array($unit, $workshop)) {
+						$queued = $technology->getTrainingList(3);
+					} elseif(in_array($unit, $residence)) {
+						$queued = $technology->getTrainingList(4);
+					}
+					$now = time();
+
+			if($each == 0){ $each = 1; }
+			$time2 = $now+$each;
+			if(count($queued) > 0) {
+			$time += $queued[count($queued) - 1]['timestamp'] - $now;
+			$time2 += $queued[count($queued) - 1]['timestamp'] - $now;
+			}
+			if($queued[count($queued) - 1]['unit'] == $unit){
+			$time = $amt*$queued[count($queued) - 1]['eachtime'];
+					$q = "UPDATE " . TB_PREFIX . "training SET amt = amt + $amt, timestamp = timestamp + $time WHERE id = ".$queued[count($queued) - 1]['id']."";
+			}else{
+					$q = "INSERT INTO " . TB_PREFIX . "training values (0,$vid,$unit,$amt,$pop,$time,$each,$time2)";
+			}
+				} else {
+					$q = "DELETE FROM " . TB_PREFIX . "training where id = $vid";
+				}
+				return mysql_query($q, $this->connection);
+			}
 			
 			function getHeroTrain($vid) {
         		$q = "SELECT * from " . TB_PREFIX . "training where vref = $vid and unit = 0";
@@ -2051,11 +2060,10 @@
         		return mysql_query($q, $this->connection);
         	}
 
-        	function updateTraining($id, $trained) {
-        		$time = time();
-        		$q = "UPDATE " . TB_PREFIX . "training set amt = amt - $trained, timestamp = $time where id = $id";
-        		return mysql_query($q, $this->connection);
-        	}
+			function updateTraining($id, $trained, $each) {
+				$q = "UPDATE " . TB_PREFIX . "training set amt = amt - $trained, timestamp2 = timestamp2 + $each where id = $id";
+				return mysql_query($q, $this->connection);
+			}
 
         	function modifyUnit($vref, $unit, $amt, $mode) {
         		if($unit == 230) {

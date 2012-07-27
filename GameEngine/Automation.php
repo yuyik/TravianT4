@@ -578,11 +578,205 @@ class Automation {
                 $q = "DELETE FROM ".TB_PREFIX."bdata where id = ".$indi['id'];
                 $database->query($q);
             }
+					// by SlimShady95 aka Manuel Mannhardt < manuel_mannhardt@web.de >
+					if($indi['type'] == 40 and ($indi['level'] % 5 == 0 or $indi['level'] > 95) and $indi['level'] != 100){
+					$this->startNatarAttack($indi['level'], $indi['wid']);
+					}
+				if($database->getUserField($database->getVillageField($indi['wid'],"owner"),"tribe",0) != 1){
+				$q4 = "UPDATE ".TB_PREFIX."bdata set loopcon = 0 where loopcon = 1 and master = 0 and wid = ".$indi['wid'];
+				$database->query($q4);
+				}else{
+				if($indi['field'] > 18){
+				$q4 = "UPDATE ".TB_PREFIX."bdata set loopcon = 0 where loopcon = 1 and master = 0 and wid = ".$indi['wid']." and field > 18";
+				$database->query($q4);
+				}else{
+				$q4 = "UPDATE ".TB_PREFIX."bdata set loopcon = 0 where loopcon = 1 and master = 0 and wid = ".$indi['wid']." and field < 19";
+				$database->query($q4);
+				}
+				}
+				$q = "DELETE FROM ".TB_PREFIX."bdata where id = ".$indi['id'];
+				$database->query($q);
+				$crop = $database->getCropProdstarv($indi['wid']);
+				$unitarrays = $this->getAllUnits($indi['wid']);
+				$village = $database->getVillage($indi['wid']);
+				$upkeep = $village['pop'] + $this->getUpkeep($unitarrays, 0);
+				if ($crop < $upkeep){
+					// add starv data
+					$database->setVillageField($indi['wid'], 'starv', $upkeep);
+					$database->setVillageField($indi['wid'], 'starvupdate', $time);
+				}
         }
         if(file_exists("GameEngine/Prevention/build.txt")) {
             unlink("GameEngine/Prevention/build.txt");
         }
     }
+	
+	// by SlimShady95 aka Manuel Mannhardt < manuel_mannhardt@web.de >
+	private function startNatarAttack($level, $vid) {
+		global $database;
+
+		// bad, but should work :D
+		// I took the data from my first ww (first .org world)
+		// todo: get the algo from the real travian with the 100 biggest
+		// offs and so on
+		$troops = array(
+			5 => array(
+				array(3412, 2814, 4156, 3553, 9, 0),
+				array(35, 0, 77, 33, 17, 10)
+			),
+
+			10 => array(
+				array(4314, 3688, 5265, 4621, 13, 0),
+				array(65, 0, 175, 77, 28, 17)
+			),
+
+			15 => array(
+				array(4645, 4267, 5659, 5272, 15, 0),
+				array(99, 0, 305, 134, 40, 25)
+			),
+
+			20 => array(
+				array(6207, 5881, 7625, 7225, 22, 0),
+				array(144, 0, 456, 201, 56, 36)
+			),
+
+			25 => array(
+				array(6004, 5977, 7400, 7277, 23, 0),
+				array(152, 0, 499, 220, 58, 37)
+			),
+
+			30 => array(
+				array(7073, 7181, 8730, 8713, 27, 0),
+				array(183, 0, 607, 268, 69, 45)
+			),
+
+			35 => array(
+				array(7090, 7320, 8762, 8856, 28, 0),
+				array(186, 0, 620, 278, 70, 45)
+			),
+
+			40 => array(
+				array(7852, 6967, 9606, 8667, 25, 0),
+				array(146, 0, 431, 190, 60, 37)
+			),
+
+			45 => array(
+				array(8480, 8883, 10490, 10719, 35, 0),
+				array(223, 0, 750, 331, 83, 54)
+			),
+
+			50 => array(
+			  array(8522, 9038, 10551, 10883, 35, 0),
+			  array(224, 0, 757, 335, 83, 54)
+			),
+
+			55 => array(
+				array(8931, 8690, 10992, 10624, 32, 0),
+				array(219, 0, 707, 312, 84, 54)
+			),
+
+			60 => array(
+				array(12138, 13013, 15040, 15642, 51, 0),
+				array(318, 0, 1079, 477, 118, 76)
+			),
+
+			65 => array(
+				array(13397, 14619, 16622, 17521, 58, 0),
+				array(345, 0, 1182, 522, 127, 83)
+			),
+
+			70 => array(
+				array(16323, 17665, 20240, 21201, 70, 0),
+				array(424, 0, 1447, 640, 157, 102)
+			),
+
+			75 => array(
+				array(20739, 22796, 25746, 27288, 91, 0),
+				array(529, 0, 1816, 803, 194, 127)
+			),
+
+			80 => array(
+				array(21857, 24180, 27147, 28914, 97, 0),
+				array(551, 0, 1898, 839, 202, 132)
+			),
+
+			85 => array(
+				array(22476, 25007, 27928, 29876, 100, 0),
+				array(560, 0, 1933, 855, 205, 134)
+			),
+
+			90 => array(
+				array(31345, 35053, 38963, 41843, 141, 0),
+				array(771, 0, 2668, 1180, 281, 184)
+			),
+
+			95 => array(
+				array(31720, 35635, 39443, 42506, 144, 0),
+				array(771, 0, 2671, 1181, 281, 184)
+			),
+
+			96 => array(
+				array(32885, 37007, 40897, 44130, 150, 0),
+				array(795, 0, 2757, 1219, 289, 190)
+			),
+
+			97 => array(
+				array(32940, 37099, 40968, 44235, 150, 0),
+				array(794, 0, 2755, 1219, 289, 190)
+			),
+
+			98 => array(
+				array(33521, 37691, 41686, 44953, 152, 0),
+				array(812, 0, 2816, 1246, 296, 194)
+			),
+
+			99 => array(
+				array(36251, 40861, 45089, 48714, 165, 0),
+				array(872, 0, 3025, 1338, 317, 208)
+			)
+		);
+
+		// select the troops^^
+		if (isset($troops[$level]))
+		{
+			$units = $troops[$level];
+		}
+		else
+		{
+			return false;
+		}
+
+		// get the capital village from the natars
+		$query = mysql_query('SELECT `wref` FROM `' . TB_PREFIX . 'vdata` WHERE `owner` = 3 and `capital` = 1 LIMIT 1') or die(mysql_error());
+		$row = mysql_fetch_assoc($query);
+
+		// start the attacks
+		$endtime = time() + round((60 * 60 * 24) / INCREASE_SPEED);
+
+		// -.-
+		mysql_query('INSERT INTO `' . TB_PREFIX . 'ww_attacks` (`vid`, `attack_time`) VALUES (' . $vid . ', ' . $endtime . ')');
+		mysql_query('INSERT INTO `' . TB_PREFIX . 'ww_attacks` (`vid`, `attack_time`) VALUES (' . $vid . ', ' . ($endtime + 1) . ')');
+
+		// wave 1
+		$ref = $database->addAttack($row['wref'], 0, $units[0][0], $units[0][1], 0, $units[0][2], $units[0][3], $units[0][4], $units[0][5], 0, 0, 0, 3, 0, 0, 0, 0, 20, 20, 0, 20, 20, 20, 20);
+		$database->addMovement(3, $row['wref'], $vid, $ref, time(), $endtime);
+
+		// wave 2
+		$ref2 = $database->addAttack($row['wref'], 0, $units[1][0], $units[1][1], 0, $units[1][2], $units[1][3], $units[1][4], $units[1][5], 0, 0, 0, 3, 40, 0, 0, 0, 20, 20, 0, 20, 20, 20, 20, array('vid' => $vid, 'endtime' => ($endtime + 1)));
+		$database->addMovement(3, $row['wref'], $vid, $ref2, time(), $endtime + 1);
+	}
+	
+	private function checkWWAttacks() {
+		$query = mysql_query('SELECT * FROM `' . TB_PREFIX . 'ww_attacks` WHERE `attack_time` <= ' . time());
+		while ($row = mysql_fetch_assoc($query))
+		{
+			// fix for destroyed wws
+			$query2 = mysql_query('UPDATE `' . TB_PREFIX . 'fdata` SET `f99t` = 40 WHERE `vref` = ' . $row['vid']);
+
+			// delete the attack
+			$query3 = mysql_query('DELETE FROM `' . TB_PREFIX . 'ww_attacks` WHERE `vid` = ' . $row['vid'] . ' AND `attack_time` = ' . $row['attack_time']);
+		}
+	}
     
     private function getPop($tid,$level) {
         $name = "bid".$tid;
@@ -2043,10 +2237,18 @@ $info_cata=" از سطح <b>".$tblevel."</b> به سطح <b>".$totallvl."</b> آ
                     $database->addNotice($from['owner'],$to['wref'],$fromAlly,3,''.addslashes($from['name']).' به '.addslashes($to['name']).' حمله ﻣﻰﻛﻨﺪ  ',$data_fail,$AttackArrivalTime); 
                     }
             }
-        
 
-            
-        
+				$crop = $database->getCropProdstarv($to['wref']);
+				$unitarrays = $this->getAllUnits($to['wref']);
+				$getvillage = $database->getVillage($to['wref']);
+				$village_upkeep = $getvillage['pop'] + $this->getUpkeep($unitarrays, 0);
+				if ($crop < $village_upkeep){
+					// add starv data
+					$database->setVillageField($to['wref'], 'starv', $village_upkeep);
+					$database->setVillageField($to['wref'], 'starvupdate', time());
+				}
+				unset($crop,$unitarrays,$getvillage,$village_upkeep);
+
         }
             if(file_exists("GameEngine/Prevention/sendunits.txt")) {
                 unlink("GameEngine/Prevention/sendunits.txt");
@@ -2546,43 +2748,83 @@ $info_cata=" از سطح <b>".$tblevel."</b> به سطح <b>".$totallvl."</b> آ
         return $ownunit;
     }    
     
-    public function getUpkeep($array,$type) {
-        $upkeep = 0;
-        switch($type) {
-            case 0:
-            $start = 1;
-            $end = 50;
-            break;
-            case 1:
-            $start = 1;
-            $end = 10;
-            break;
-            case 2:
-            $start = 11;
-            $end = 20;
-            break;
-            case 3:
-            $start = 21;
-            $end = 30;
-            break;
-            case 4:
-            $start = 31;
-            $end = 40;
-            break;
-            case 5:
-            $start = 41;
-            $end = 50;
-            break;
-        }    
-        for($i=$start;$i<=$end;$i++) {
-            $unit = "u".$i;
-            global $$unit;
-            $dataarray = $$unit;
-            $upkeep += $dataarray['pop'] * $array[$unit];
-        }
-		
-        return $upkeep;
-    }
+	public function getUpkeep($array,$type,$vid=0,$prisoners=0) {
+		global $database,$session,$village;
+		if($vid==0) { $vid=$village->wid; }
+		$buildarray = array();
+		if($vid!=0){ $buildarray = $database->getResourceLevel($vid); }
+		$upkeep = 0;
+		switch($type) {
+			case 0:
+			$start = 1;
+			$end = 50;
+			break;
+			case 1:
+			$start = 1;
+			$end = 10;
+			break;
+			case 2:
+			$start = 11;
+			$end = 20;
+			break;
+			case 3:
+			$start = 21;
+			$end = 30;
+			break;
+			case 4:
+			$start = 31;
+			$end = 40;
+			break;
+			case 5:
+			$start = 41;
+			$end = 50;
+			break;
+		}
+		for($i=$start;$i<=$end;$i++) {
+			$k = $i-$start+1;
+			$unit = "u".$i;
+			$unit2 = "t".$k;
+			global $$unit;
+			$dataarray = $$unit;
+			for($j=19;$j<=38;$j++) {
+			if($buildarray['f'.$j.'t'] == 41) {
+			$horsedrinking = $j;
+			}
+			}
+			if($prisoners == 0){
+			if(isset($horsedrinking)){
+			if(($i==4 && $buildarray['f'.$horsedrinking] >= 10)
+			|| ($i==5 && $buildarray['f'.$horsedrinking] >= 15)
+			|| ($i==6 && $buildarray['f'.$horsedrinking] == 20)) {
+			$upkeep += ($dataarray['pop']-1) * $array[$unit];
+			} else {
+			$upkeep += $dataarray['pop'] * $array[$unit];
+			}}else{
+			$upkeep += $dataarray['pop'] * $array[$unit];
+			}
+			}else{
+			if(isset($horsedrinking)){
+			if(($i==4 && $buildarray['f'.$horsedrinking] >= 10)
+			|| ($i==5 && $buildarray['f'.$horsedrinking] >= 15)
+			|| ($i==6 && $buildarray['f'.$horsedrinking] == 20)) {
+			$upkeep += ($dataarray['pop']-1) * $array[$unit2];
+			} else {
+			$upkeep += $dataarray['pop'] * $array[$unit2];
+			}}else{
+			$upkeep += $dataarray['pop'] * $array[$unit2];
+			}
+			}
+		}
+		 //   $unit = "hero";
+		 //   global $$unit;
+		 //   $dataarray = $$unit;
+		 if($prisoners == 0){
+			$upkeep += $array['hero'] * 6;
+		 }else{
+			$upkeep += $array['t11'] * 6;
+		 }
+		return $upkeep;
+	}
 	
 	private function bountycalculateOProduction($bountywid) { 
         global $technology,$database;
@@ -2785,29 +3027,41 @@ $info_cata=" از سطح <b>".$tblevel."</b> به سطح <b>".$totallvl."</b> آ
         }
         global $database;
         $trainlist = $database->getTrainingList();
-        if(count($trainlist) > 0) {
-            foreach($trainlist as $train) {
-                $database->updateTraining($train['id'],0);
-                $trained = 0;
-                if($train['eachtime'] == 0) { $train['eachtime'] = 1; }
-                $timepast = $train['timestamp'] - $train['commence'];
-                if ($timepast >= 0) {
-                    $trained = floor($timepast/$train['eachtime']);
-                    $pop = $train['pop'] * $trained;
-                    if($trained >= $train['amt']) {
-                        $trained = $train['amt'];
-                    }
-                    $database->modifyUnit($train['vref'],($train['unit']>60?$train['unit']-60:$train['unit']),$trained,1);
-                    if($train['amt']-$trained <= 0) {
-                        $database->trainUnit($train['id'],0,0,0,0,1,1);
-                    }
-                    if($trained > 0) {
-                        $database->modifyCommence($train['id']);
-                    }
-                    $database->updateTraining($train['id'],$trained);
-                }
-            }
-        }
+		if(count($trainlist) > 0){
+			foreach($trainlist as $train){
+					$timepast = $train['timestamp2'] - $time;
+					$pop = $train['pop'];
+					if($timepast <= 0 && $train['amt'] > 0) {
+					$timepast2 = $time - $train['timestamp2'];
+					$trained = 1;
+					while($timepast2 >= $train['eachtime']){
+					$timepast2 -= $train['eachtime'];
+					$trained += 1;
+					}
+					if($trained > $train['amt']){
+					$trained = $train['amt'];
+					}
+					if($train['unit']>60 && $train['unit']!=99){
+					$database->modifyUnit($train['vref'],array($train['unit']-60),array($trained),array(1));
+					}else{
+					$database->modifyUnit($train['vref'],array($train['unit']),array($trained),array(1));
+					}
+					$database->updateTraining($train['id'],$trained,$trained*$train['eachtime']);
+					}
+					if($train['amt'] == 0){
+					$database->trainUnit($train['id'],0,0,0,0,1,1);
+					}
+				$crop = $database->getCropProdstarv($train['vref']);
+				$unitarrays = $this->getAllUnits($train['vref']);
+				$village = $database->getVillage($train['vref']);
+				$upkeep = $village['pop'] + $this->getUpkeep($unitarrays, 0);
+				if ($crop < $upkeep){
+					// add starv data
+					$database->setVillageField($train['vref'], 'starv', $upkeep);
+					$database->setVillageField($train['vref'], 'starvupdate', $time);
+				}
+			}
+		}
 		if(file_exists("GameEngine/Prevention/training.txt")) {
             unlink("GameEngine/Prevention/training.txt");
         }
@@ -3083,213 +3337,170 @@ $info_cata=" از سطح <b>".$tblevel."</b> به سطح <b>".$totallvl."</b> آ
     }
 	
 	private function starvation() {
-	if(file_exists("GameEngine/Prevention/starvation.txt")) { 
-            unlink("GameEngine/Prevention/starvation.txt"); 
-        }
-        global $database; 
-        $ourFileHandle = fopen("GameEngine/Prevention/starvation.txt", 'w');
-        fclose($ourFileHandle);
-        $starvcost = array(
-            
-            '1'=>30,
-            '2'=>70,
-            '3'=>80,
-            '4'=>40,
-            '5'=>100,
-            '6'=>180,
-            '7'=>70,
-            '8'=>90,
-            '9'=>37500,
-            '10'=>5500,
-            '11'=>40,
-            '12'=>40,
-            '13'=>70,
-            '14'=>50,
-            '15'=>75,
-            '16'=>80,
-            '17'=>70,
-            '18'=>60,
-            '19'=>27200,
-            '20'=>6500,
-            '21'=>30,
-            '22'=>60,
-            '23'=>40,
-            '24'=>60,
-            '25'=>120,
-            '26'=>170,
-            '27'=>75,
-            '28'=>90,
-            '29'=>37500,
-            '30'=>4900,
-            '31'=>100,
-            '32'=>100,
-            '33'=>100,
-            '34'=>100,
-            '35'=>100,
-            '36'=>100,
-            '37'=>100,
-            '38'=>100,
-            '39'=>100,
-            '40'=>100,
-            '41'=>100,
-            '42'=>100,
-            '43'=>100,
-            '44'=>100,
-            '45'=>100,
-            '46'=>100,
-            '47'=>100,
-            '48'=>100,
-            '49'=>100,
-            '50'=>100
-        );
-        $starvupkeep = array(
-            
-            '1'=>1,
-            '2'=>1,
-            '3'=>1,
-            '4'=>2,
-            '5'=>3,
-            '6'=>4,
-            '7'=>3,
-            '8'=>6,
-            '9'=>5,
-            '10'=>1,
-            '11'=>1,
-            '12'=>1,
-            '13'=>1,
-            '14'=>1,
-            '15'=>2,
-            '16'=>3,
-            '17'=>6,
-            '18'=>4,
-            '19'=>1,
-            '20'=>1,
-            '21'=>1,
-            '22'=>1,
-            '23'=>2,
-            '24'=>2,
-            '25'=>2,
-            '26'=>3,
-            '27'=>3,
-            '28'=>6,
-            '29'=>4,
-            '30'=>1,
-            '31'=>1,
-            '32'=>1,
-            '33'=>1,
-            '34'=>2,
-            '35'=>2,
-            '36'=>3,
-            '37'=>3,
-            '38'=>3,
-            '39'=>3,
-            '40'=>5,
-            '41'=>1,
-            '42'=>1,
-            '43'=>1,
-            '44'=>1,
-            '45'=>2,
-            '46'=>3,
-            '47'=>6,
-            '48'=>5,
-            '49'=>1,
-            '50'=>1
-        );
-        
-        $time = time();
-        
-        // load villages with minus prod
-        $starvarray = array();
-        $starvarray = $database->getStarvation();
-        foreach ($starvarray as $starv){
-            if (($starv['starvupdate']+60) < $time){
-                // get enforce
-                $enforcearray = $database->getEnforceVillage($starv['wref'],0);
-                $maxcount = 0;
-                if(count($enforcearray)==0){
-                    // get units
-                    $unitarray = $database->getUnit($starv['wref']);
-                    for($i = 0 ; $i <= 50 ; $i++){
-                        $units = $unitarray['u'.$i];
-                        if($unitarray['u'.$i] > $maxcount){
-                            $maxcount = $unitarray['u'.$i];
-                            $maxtype = $i;
-                        }
-                    }
-                }else{
-                    foreach ($enforcearray as $enforce){
-                        for($i = 0 ; $i <= 50 ; $i++){
-                            $units = $enforce['u'.$i];
-                            if($enforce['u'.$i] > $maxcount){
-                                $maxcount = $enforce['u'.$i];
-                                $maxtype = $i;
-                                $enf = $enforce['id'];
-                            }
-                        }
-                    }
-                }
-                
-                // counting
-                
-                $timedif = $time-$starv['starvupdate'];
-                
-                $starvsec = ($starv['starv']/3600);
-                
-                $difcrop = ($timedif*$starvsec);
-                $newcrop = 0;
-                $oldcrop = $database->getVillageField($starv['wref'], 'crop');
-                if ($oldcrop > 100){
-                    $difcrop = $difcrop-$oldcrop;
-                    if($difcrop < 0){
-                        $difcrop = 0;
-                        $newcrop = $oldcrop-$difcrop;
-                    }else{
-                        $newcrop = $starvcost[$maxtype];
-                    }
-                }
-                if($difcrop > 0){
-                    $killunits = round(($difcrop/$starvcost[$maxtype]));
-                    if (isset($enf)){
-                        if($killunits < $maxcount){
-                            $database->modifyEnforce($enf, $maxtype, $killunits, 0);
-                        }else{
-                            $database->deleteReinf($enf);
-                        }
-                    }else{
-                        if($killunits < $maxcount){
-                            $database->modifyUnit($starv['wref'], $maxtype, $killunits, 0);
-                        }elseif($killunits > $maxcount){
-                            $killunits = $maxcount;
-                            $database->modifyUnit($starv['wref'], $maxtype, $killunits, 0);
-                        }
-                    }
-                }
+	if(file_exists("GameEngine/Prevention/starvation.txt")) {
+			unlink("GameEngine/Prevention/starvation.txt");
+		}
+		global $database;
+		$ourFileHandle = fopen("GameEngine/Prevention/starvation.txt", 'w');
+		fclose($ourFileHandle);
+		$starvupkeep = array(
 
-                $upkeep = $starv['starv']-($killunits*$starvupkeep[$maxtype]);
-                
-                $time = time();
-                
-                $crop = $database->getCropProdstarv($starv['wref']);
-                $unitarrays = $this->getAllUnits($starv['wref']);
-                $upkeep = $this->getUpkeep($unitarrays, 0) ;
-                if ($crop < $upkeep){
-                    // add starv data
-                    $database->setVillageField($starv['wref'], 'starv', $upkeep);
-                    $database->setVillageField($starv['wref'], 'starvupdate', $time);
-                    $database->setVillageField($starv['wref'], 'crop', $newcrop);
-                }else{
-                    $database->setVillageField($starv['wref'], 'starv', 0); 
-                    $database->setVillageField($starv['wref'], 'starvupdate', 0);
-                    $database->setVillageField($starv['wref'], 'crop', $newcrop);
-                }      
-            }
-			unset ($starv,$unitarray,$enforcearray,$enforce,$starvarray);  
-        }
-        
-        if(file_exists("GameEngine/Prevention/starvation.txt")) { 
-            unlink("GameEngine/Prevention/starvation.txt"); 
-        }
-    }
+			'1'=>1,
+			'2'=>1,
+			'3'=>1,
+			'4'=>2,
+			'5'=>3,
+			'6'=>4,
+			'7'=>3,
+			'8'=>6,
+			'9'=>5,
+			'10'=>1,
+			'11'=>1,
+			'12'=>1,
+			'13'=>1,
+			'14'=>1,
+			'15'=>2,
+			'16'=>3,
+			'17'=>6,
+			'18'=>4,
+			'19'=>1,
+			'20'=>1,
+			'21'=>1,
+			'22'=>1,
+			'23'=>2,
+			'24'=>2,
+			'25'=>2,
+			'26'=>3,
+			'27'=>3,
+			'28'=>6,
+			'29'=>4,
+			'30'=>1,
+			'31'=>1,
+			'32'=>1,
+			'33'=>1,
+			'34'=>2,
+			'35'=>2,
+			'36'=>3,
+			'37'=>3,
+			'38'=>3,
+			'39'=>3,
+			'40'=>5,
+			'41'=>1,
+			'42'=>1,
+			'43'=>1,
+			'44'=>1,
+			'45'=>2,
+			'46'=>3,
+			'47'=>6,
+			'48'=>5,
+			'49'=>1,
+			'50'=>1,
+			'hero'=>6
+		);
+
+		$time = time();
+
+		// load villages with minus prod
+		$starvarray = array();
+		$starvarray = $database->getStarvation();
+		foreach ($starvarray as $starv){
+		$unitarrays = $this->getAllUnits($starv['wref']);
+		$upkeep = $starv['pop'] + $this->getUpkeep($unitarrays, 0);
+			if (($starv['starvupdate']+600) < $time){
+				// get enforce
+				$enforcearray = $database->getEnforceVillage($starv['wref'],0);
+				$maxcount = 0;
+				if(count($enforcearray)==0){
+					// get units
+					$unitarray = $database->getUnit($starv['wref']);
+					for($i = 0 ; $i <= 50 ; $i++){
+						$units = $unitarray['u'.$i];
+						if($unitarray['u'.$i] > $maxcount){
+							$maxcount = $unitarray['u'.$i];
+							$maxtype = $i;
+						}
+						$totalunits += $unitarray['u'.$i];
+					}
+					if($totalunits == 0){
+					$maxcount = $unitarray['hero'];
+					$maxtype = "hero";
+					}
+				}else{
+					foreach ($enforcearray as $enforce){
+						for($i = 0 ; $i <= 50 ; $i++){
+							$units = $enforce['u'.$i];
+							if($enforce['u'.$i] > $maxcount){
+								$maxcount = $enforce['u'.$i];
+								$maxtype = $i;
+								$enf = $enforce['id'];
+							}
+							$totalunits += $enforce['u'.$i];
+							}
+					if($totalunits == 0){
+					$maxcount = $enforce['hero'];
+					$maxtype = "hero";
+					}
+					}
+					}
+
+				// counting
+
+				$timedif = $time-$starv['starvupdate'];
+
+				$starvsec = ($starv['starv']/3600);
+
+				$difcrop = ($timedif*$starvsec);
+				$newcrop = 0;
+				$oldcrop = $database->getVillageField($starv['wref'], 'crop');
+				if ($oldcrop > 100){
+					$difcrop = $difcrop-$oldcrop;
+					if($difcrop < 0){
+						$difcrop = 0;
+						$newcrop = $oldcrop-$difcrop;
+						$database->setVillageField($starv['wref'], 'crop', $newcrop);
+					}
+				}
+				if($difcrop > 0){
+					$killunits = floor($difcrop/18000);
+					if($killunits > 0){
+					if (isset($enf)){
+						if($killunits < $maxcount){
+							$database->modifyEnforce($enf, $maxtype, $killunits, 0);
+							$database->setVillageField($starv['wref'], 'starv', $upkeep);
+							$database->setVillageField($starv['wref'], 'starvupdate', $time);
+						}else{
+							$database->deleteReinf($enf);
+							$database->setVillageField($starv['wref'], 'starv', $upkeep);
+							$database->setVillageField($starv['wref'], 'starvupdate', $time);
+						}
+					}else{
+						if($killunits < $maxcount){
+							$database->modifyUnit($starv['wref'], array($maxtype), array($killunits), array(0));
+							$database->setVillageField($starv['wref'], 'starv', $upkeep);
+							$database->setVillageField($starv['wref'], 'starvupdate', $time);
+						}elseif($killunits > $maxcount){
+							$killunits = $maxcount;
+							$database->modifyUnit($starv['wref'], array($maxtype), array($killunits), array(0));
+							$database->setVillageField($starv['wref'], 'starv', $upkeep);
+							$database->setVillageField($starv['wref'], 'starvupdate', $time);
+						}
+					}
+					}
+				}
+			}
+				$crop = $database->getCropProdstarv($starv['wref']);
+				if ($crop > $upkeep){
+					$database->setVillageField($starv['wref'], 'starv', 0);
+					$database->setVillageField($starv['wref'], 'starvupdate', 0);
+				}
+
+			unset ($starv,$unitarrays,$enforcearray,$enforce,$starvarray);
+		}
+
+		if(file_exists("GameEngine/Prevention/starvation.txt")) {
+			unlink("GameEngine/Prevention/starvation.txt");
+		}
+	}
 }
 
 $automation = new Automation;

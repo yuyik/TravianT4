@@ -105,8 +105,8 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%abdata` (
 
 CREATE TABLE IF NOT EXISTS `%PREFIX%activate` (
   `id` int(255) unsigned NOT NULL AUTO_INCREMENT,
-  `username` varchar(45) NOT NULL,
-  `password` varchar(45) NOT NULL,
+  `username` varchar(100) NOT NULL,
+  `password` varchar(100) NOT NULL,
   `email` text NOT NULL,
   `tribe` tinyint(1) unsigned NOT NULL,
   `access` tinyint(1) unsigned NOT NULL DEFAULT '1',
@@ -129,7 +129,7 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%activate` (
 --
 
 CREATE TABLE IF NOT EXISTS `%PREFIX%active` (
-  `username` varchar(15) NOT NULL,
+  `username` varchar(100) NOT NULL,
   `timestamp` int(11) unsigned NOT NULL,
   PRIMARY KEY (`username`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
@@ -240,9 +240,9 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%artefacts` (
   `type` int(3) unsigned NOT NULL,
   `size` int(10) unsigned NOT NULL,
   `conquered` int(10) unsigned NOT NULL,
-  `name` varchar(85) NOT NULL,
+  `name` varchar(100) NOT NULL,
   `desc` text NOT NULL,
-  `effect` varchar(45) NOT NULL,
+  `effect` varchar(100) NOT NULL,
   `img` varchar(20) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
@@ -258,8 +258,8 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%artefacts` (
 
 CREATE TABLE IF NOT EXISTS `%PREFIX%alidata` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(25) NOT NULL,
-  `tag` varchar(8) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `tag` varchar(100) NOT NULL,
   `leader` int(10) unsigned NOT NULL,
   `coor` int(10) unsigned NOT NULL,
   `advisor` int(10) unsigned NOT NULL,
@@ -333,7 +333,7 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%ali_permission` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `uid` int(10) unsigned NOT NULL,
   `alliance` int(10) unsigned NOT NULL,
-  `rank` varchar(20) NOT NULL,
+  `rank` varchar(100) NOT NULL,
   `opt1` int(1) unsigned NOT NULL DEFAULT '0',
   `opt2` int(1) unsigned NOT NULL DEFAULT '0',
   `opt3` int(1) unsigned NOT NULL DEFAULT '0',
@@ -1334,14 +1334,14 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%tech_log` (
 --
 
 CREATE TABLE IF NOT EXISTS `%PREFIX%training` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `vref` int(10) unsigned NOT NULL,
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `vref` int(11) unsigned NOT NULL,
   `unit` tinyint(2) unsigned NOT NULL,
-  `amt` int(10) unsigned NOT NULL,
-  `pop` int(10) unsigned NOT NULL,
-  `timestamp` int(10) unsigned NOT NULL,
-  `eachtime` int(10) unsigned NOT NULL,
-  `commence` int(10) unsigned NOT NULL,
+  `amt` int(11) unsigned NOT NULL,
+  `pop` int(11) unsigned NOT NULL,
+  `timestamp` int(11) unsigned NOT NULL,
+  `eachtime` int(11) unsigned NOT NULL,
+  `timestamp2` int(11) unsigned NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
@@ -1425,8 +1425,8 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%units` (
 
 CREATE TABLE IF NOT EXISTS `%PREFIX%users` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `username` varchar(45) NOT NULL,
-  `password` varchar(45) NOT NULL,
+  `username` varchar(100) NOT NULL,
+  `password` varchar(100) NOT NULL,
   `email` text NOT NULL,
   `tribe` tinyint(1) unsigned NOT NULL,
   `access` tinyint(1) unsigned NOT NULL DEFAULT '1',
@@ -1446,7 +1446,7 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%users` (
   `sit1` int(10) unsigned NOT NULL DEFAULT '0',
   `sit2` int(10) unsigned NOT NULL DEFAULT '0',
   `alliance` int(10) unsigned NOT NULL DEFAULT '0',
-  `sessid` varchar(45) NOT NULL,
+  `sessid` varchar(100) NOT NULL,
   `act` varchar(10) NOT NULL,
   `timestamp` int(10) unsigned NOT NULL DEFAULT '0',
   `ap` int(10) unsigned NOT NULL DEFAULT '0',
@@ -1485,7 +1485,7 @@ INSERT INTO `%PREFIX%users` (`id`, `username`, `password`, `email`, `tribe`, `ac
 CREATE TABLE IF NOT EXISTS `%PREFIX%vdata` (
   `wref` int(10) unsigned NOT NULL,
   `owner` int(10) unsigned NOT NULL,
-  `name` varchar(45) NOT NULL,
+  `name` varchar(100) NOT NULL,
   `capital` tinyint(1) unsigned NOT NULL,
   `pop` int(10) unsigned NOT NULL,
   `cp` int(10) unsigned NOT NULL,
@@ -1533,3 +1533,19 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%wdata` (
 --
 -- Dumping data for table `%prefix%wdata`
 --
+
+-- --------------------------------------------------------
+--
+-- Table structure for table `%prefix%ww_attacks`
+--
+
+CREATE TABLE IF NOT EXISTS `%PREFIX%ww_attacks` (
+  `vid` int(25) NOT NULL,
+  `attack_time` int(25) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 ;
+
+--
+-- Dumping data for table `%prefix%password`
+--
+
+-- --------------------------------------------------------
