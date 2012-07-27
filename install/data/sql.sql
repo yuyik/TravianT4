@@ -1505,6 +1505,7 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%vdata` (
   `created` int(11) NOT NULL,
   `natar` tinyint(1) unsigned NOT NULL,
   `starv` int(10) unsigned NOT NULL,
+  `starvupdate` int(10) unsigned NOT NULL,
   PRIMARY KEY (`wref`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
