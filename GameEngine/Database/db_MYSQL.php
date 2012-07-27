@@ -3300,7 +3300,7 @@ break;
 			global $bid4,$bid8,$bid9,$sesion,$technology;
 
 				$basecrop = $grainmill = $bakery = 0;
-                $owner = $this->getVrefField($wref, 'owner');
+                $owner = $this->getVillageField($wref, 'owner');
                 $bonus = $this->getUserField($owner, b4, 0);  
 
                 $buildarray = $this->getResourceLevel($wref);
@@ -3317,8 +3317,7 @@ break;
                     }
 				}
                 $q = "SELECT type FROM `" . TB_PREFIX . "odata` WHERE conqured = $wref";
-                $result = mysql_query($q, $this->connection) or die(mysql_error());
-                $oasis = mysql_fetch_array($result);
+                $oasis = $this->query_return($q);
 				foreach($oasis as $oa){
                     switch($oa['type']) {
                         case 1:
