@@ -3300,7 +3300,7 @@ break;
 			global $bid4,$bid8,$bid9,$sesion,$technology;
 
 				$basecrop = $grainmill = $bakery = 0;
-                $owner = $this->getVrefField($wref, 'owner');
+                $owner = $this->getVillageField($wref, 'owner');
                 $bonus = $this->getUserField($owner, b4, 0);  
 
                 $buildarray = $this->getResourceLevel($wref);
