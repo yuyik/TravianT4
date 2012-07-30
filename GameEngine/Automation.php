@@ -102,6 +102,8 @@ class Automation {
         $this->ClearUser();
         $this->ClearInactive();
         $this->pruneResource();
+		$this->pruneOResource();
+		$this->addAdventures();
         if(!file_exists("GameEngine/Prevention/loyalty.txt") or time()-filemtime("GameEngine/Prevention/loyalty.txt")>10) {
 	        $this->loyaltyRegeneration();
 		}
@@ -151,6 +153,7 @@ class Automation {
         if(!file_exists("GameEngine/Prevention/sendunits.txt") or time()-filemtime("GameEngine/Prevention/sendunits.txt")>10) {
             $this->sendunitsComplete();
         }
+		$this->updateStore();
     }
 	
 	private function getfieldDistance($coorx1, $coory1, $coorx2, $coory2) {
@@ -364,7 +367,7 @@ class Automation {
 		$q = "UPDATE " . TB_PREFIX . "odata set maxstore = $maxstore, maxcrop = $maxcrop where wref = ".$getoasis['wref']."";
 		$database->query($q);
 		}
-        $q = "SELECT * FROM ".TB_PREFIX."odata WHERE wood > maxstore OR clay > maxstore OR iron > maxstore OR crop > maxstore";
+        $q = "SELECT * FROM ".TB_PREFIX."odata WHERE wood > maxstore OR clay > maxstore OR iron > maxstore OR crop > maxcrop";
         $array = $database->query_return($q);
 	    foreach($array as $getoasis) {
 		if($getoasis['wood'] > $getoasis['maxstore']){
@@ -437,7 +440,7 @@ class Automation {
 		$q = "UPDATE " . TB_PREFIX . "vdata set maxstore = $maxstore, maxcrop = $maxcrop where wref = ".$getvillage['wref']."";
 		$database->query($q);
 		}
-        $q = "SELECT * FROM ".TB_PREFIX."vdata WHERE wood > maxstore OR clay > maxstore OR iron > maxstore OR crop > maxstore";
+        $q = "SELECT * FROM ".TB_PREFIX."vdata WHERE wood > maxstore OR clay > maxstore OR iron > maxstore OR crop > maxcrop";
         $array = $database->query_return($q);
 	    foreach($array as $getvillage) {
 		if($getvillage['wood'] > $getvillage['maxstore']){
@@ -2545,7 +2548,12 @@ $info_cata=" از سطح <b>".$tblevel."</b> به سطح <b>".$totallvl."</b> آ
 					$exp = rand(10,80);
 					$sgh = 2000;
 				}
-				$health = round((3.007 / ((100+$tp*$hero['power'])+$hero['itempower'])) * $sgh,1);
+				if($tribe==1){
+					$tp = 100;
+				}else{
+					$tp = 80;
+				}
+				$health = round((3.007 / ((100+$tp*$getHero['power'])+$hero['itempower'])) * $sgh);
 				
 				$database->modifyHero2('experience', $exp, $ownerID, 1);
 				$database->setMovementProc($data['moveid']);
@@ -2584,7 +2592,7 @@ $info_cata=" از سطح <b>".$tblevel."</b> به سطح <b>".$totallvl."</b> آ
 						}
 					}
 					if($btype==0 or $btype==2){
-						$database->addNotice($ownerID,$data['to'],$ally,9,''.addslashes($from['name']).' explores('.addslashes($coor['x']).'|'.addslashes($coor['y']).')',''.$from['wref'].',,هیچ چیز با ارزشی پیدا نشد.,,'.$health.','.$exp.'',$data['endtime']);
+						$database->addNotice($ownerID,$data['to'],$ally,9,''.addslashes($from['name']).' explores('.addslashes($coor['x']).'|'.addslashes($coor['y']).')',''.$from['wref'].',,Nothing valuable was found,,'.$health.','.$exp.'',$data['endtime']);
 					}else{
 						$database->addNotice($ownerID,$data['to'],$ally,9,''.addslashes($from['name']).' explores ('.addslashes($coor['x']).'|'.addslashes($coor['y']).')',''.$from['wref'].','.$btype.','.$nntype.','.$num.','.$health.','.$exp.'',$data['endtime']);
 					}
@@ -3229,6 +3237,17 @@ $info_cata=" از سطح <b>".$tblevel."</b> به سطح <b>".$totallvl."</b> آ
 				}
 			}
 		}
+		$q = "SELECT * FROM ".TB_PREFIX."hero where dead = 1";
+		$harray = $database->query_return($q);
+		if(!empty($harray)) {
+	        foreach($harray as $hdata) {
+				$hero_levels = $GLOBALS["hero_levels"];
+				if($hdata['experience']>=$hero_levels[$hdata['level']+1]){
+					$database->modifyHero("level",1,$hdata['heroid'],1);
+					$database->modifyHero("points",4,$hdata['heroid'],1);
+				}
+			}
+		}
 		$q2 = "SELECT * FROM ".TB_PREFIX."training where unit = 0";
 		$dataarray2 = $database->query_return($q2);
 		foreach($dataarray2 as $data3) {
@@ -3252,6 +3271,9 @@ $info_cata=" از سطح <b>".$tblevel."</b> به سطح <b>".$totallvl."</b> آ
 	}
 	
 	private function auctionComplete() {
+		if(file_exists("GameEngine/Prevention/auction.txt")) { 
+            unlink("GameEngine/Prevention/auction.txt"); 
+        }
 		global $database;
         $time = time();
         $q = "SELECT * FROM ".TB_PREFIX."auction where finish = 0 and time < $time";
@@ -3278,6 +3300,17 @@ $info_cata=" از سطح <b>".$tblevel."</b> به سطح <b>".$totallvl."</b> آ
 		if(file_exists("GameEngine/Prevention/auction.txt")) {
         	unlink("GameEngine/Prevention/auction.txt");
         }
+    }
+
+	private function addAdventures() {
+		global $database;
+        $time = time();
+        $q = "SELECT * FROM ".TB_PREFIX."hero where $time - lastadv > 3600";
+        $dataarray = $database->query_return($q);
+            foreach($dataarray as $data) {
+			$database->addAdventure($database->getVFH($data['uid']), $data['uid']);
+			$database->modifyHero('lastadv', $time, $data['heroid']);
+            }
     }
 	
     private function MasterBuilder() {
@@ -3501,6 +3534,54 @@ $info_cata=" از سطح <b>".$tblevel."</b> به سطح <b>".$totallvl."</b> آ
 			unlink("GameEngine/Prevention/starvation.txt");
 		}
 	}
+
+ // by SlimShady95, aka Manuel Mannhardt < manuel_mannhardt@web.de > UPDATED FROM songeriux < haroldas.snei@gmail.com >
+	private function updateStore() {
+		global $bid10, $bid38, $bid11, $bid39;
+
+		$result = mysql_query('SELECT * FROM `' . TB_PREFIX . 'fdata`');
+		while ($row = mysql_fetch_assoc($result))
+		{
+			$ress = $crop = 0;
+			for ($i = 19; $i < 40; ++$i)
+			{
+				if ($row['f' . $i . 't'] == 10)
+				{
+					$ress += $bid10[$row['f' . $i]]['attri'];
+				}
+
+				if ($row['f' . $i . 't'] == 38)
+				{
+					$ress += $bid38[$row['f' . $i]]['attri'];
+				}
+
+
+
+				if ($row['f' . $i . 't'] == 11)
+				{
+					$crop += $bid11[$row['f' . $i]]['attri'];
+				}
+
+				if ($row['f' . $i . 't'] == 39)
+				{
+					$crop += $bid39[$row['f' . $i]]['attri'];
+				}
+			}
+
+			if ($ress == 0)
+			{
+				$ress = 800;
+			}
+
+			if ($crop == 0)
+			{
+				$crop = 800;
+			}
+
+			mysql_query('UPDATE `' . TB_PREFIX . 'vdata` SET `maxstore` = ' . $ress . ', `maxcrop` = ' . $crop . ' WHERE `wref` = ' . $row['vref']) or die(mysql_error());
+		}
+	}
+
 }
 
 $automation = new Automation;
