@@ -1,4 +1,5 @@
 ﻿<?php
+ob_start();
 include("GameEngine/Village.php");
 $start = $generator->pageLoadTimeStart();
 include "Templates/html.tpl";
@@ -286,12 +287,27 @@ if($herodetail['color']==4){
 		<button type="submit" value="save" name="save" id="btn_login" onClick="document.snd.attributes.value=screen.width+':'+screen.height;">
         <div class="button-container"><div class="button-position"><div class="btl"><div class="btr"><div class="btc"></div></div></div><div class="bml"><div class="bmr"><div class="bmc"></div></div></div><div class="bbl"><div class="bbr"><div class="bbc"></div></div></div></div>
         <div class="button-contents">Save</div></div>
+        </button>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+		<button type="submit" value="random" name="random" id="btn_login" onClick="document.snd.attributes.value=screen.width+':'+screen.height;">
+        <div class="button-container"><div class="button-position"><div class="btl"><div class="btr"><div class="btc"></div></div></div><div class="bml"><div class="bmr"><div class="bmc"></div></div></div><div class="bbl"><div class="bbr"><div class="bbc"></div></div></div></div>
+        <div class="button-contents">Random</div></div>
         </button>
 		<input type="hidden" name="uid" value="<?php echo $session->uid; ?>" /><input type="hidden" name="HeroFace" value="<?php echo $herodetail['face']; ?>" /><input type="hidden" name="color" value="<?php echo $herodetail['color']; ?>" /><input type="hidden" name="HeroHair" value="<?php echo $herodetail['hair']; ?>" /><input type="hidden" name="HeroEar" value="<?php echo $herodetail['ear']; ?>" /><input type="hidden" name="HeroEyebrow" value="<?php echo $herodetail['eyebrow']; ?>" /><input type="hidden" name="HeroEye" value="<?php echo $herodetail['eye']; ?>" /><input type="hidden" name="HeroNose" value="<?php echo $herodetail['nose']; ?>" /><input type="hidden" name="HeroMouth" value="<?php echo $herodetail['mouth']; ?>" /><input type="hidden" name="HeroBeard" value="<?php echo $herodetail['beard']; ?>" />
         </form>
     </div>
 <?php
 if($_POST){
+if($_POST['random'] == "random"){
+$_POST['HeroFace'] = rand(0,4);
+$_POST['color'] = rand(0,4);
+$_POST['HeroHair'] = rand(0.5);
+$_POST['HeroEar'] = rand(0,4);
+$_POST['HeroEyebrow'] = rand(0,4);
+$_POST['HeroEye'] = rand(0,4);
+$_POST['HeroNose'] = rand(0,4);
+$_POST['HeroMouth'] = rand(0,3);
+$_POST['HeroBeard'] = rand(0.5);
+}
 	$database->editTableField('heroface', 'face', $_POST['HeroFace'], 'uid', $_POST['uid']);
 	$database->editTableField('heroface', 'color', $_POST['color'], 'uid', $_POST['uid']);
 	$database->editTableField('heroface', 'hair', $_POST['HeroHair'], 'uid', $_POST['uid']);
@@ -301,7 +317,7 @@ if($_POST){
 	$database->editTableField('heroface', 'nose', $_POST['HeroNose'], 'uid', $_POST['uid']);
 	$database->editTableField('heroface', 'mouth', $_POST['HeroMouth'], 'uid', $_POST['uid']);
 	$database->editTableField('heroface', 'beard', $_POST['HeroBeard'], 'uid', $_POST['uid']);
-	//Zoltánheader("Location: hero.php");
+	header("Location: hero.php");
 }
 ?>
 	</div>

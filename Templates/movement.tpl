@@ -145,8 +145,8 @@ $aantal2 = $database->getMovement2(9,$village->wid,0);
 			foreach($aantal2 as $receive) {
 				$action = 'att3';
 				$aclass = 'a3';
-				$title = 'Kaland';
-				$short = 'Kaland';
+				$title = 'Adventure';
+				$short = 'Adventure';
 			}
 			
 		echo '

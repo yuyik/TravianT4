@@ -39,25 +39,25 @@ for($i=0;$i<$units_incomming;$i++){
 		$units_incomming -= 1;
 }
 if($units_incomming >= 1){
-echo "<h4 class=\"spacer\">Troops on their way (".$units_incomming.")</h4>";
+echo "<h4 class=\"spacer\">Incomming troops (".$units_incomming.")</h4>";
 include("16_incomming.tpl");
 	} 
 ?>
 
 <?php
-$units_type = $database->getMovement("3",$village->wid,0);
+$units_type1 = $database->getMovement("3",$village->wid,0);
 $settlers = $database->getMovement("5",$village->wid,0);
 $adventures = $database->getMovement("9",$village->wid,0);
-$units_incomming = count($units_type);
-for($i=0;$i<$units_incomming;$i++){
-if($units_type[$i]['vref'] != $village->wid)
-		$units_incomming -= 1;
+$units_walking = count($units_type1);
+for($i=0;$i<$units_walking;$i++){
+if($units_type1[$i]['vref'] != $village->wid)
+		$units_walking -= 1;
 }
-$units_incomming += count($settlers);
-$units_incomming += count($adventures);
+$units_walking += count($settlers);
+$units_walking += count($adventures);
 
-if($units_incomming >= 1){
-	echo "<h4 class=\"spacer\">Imcomming troops (".$units_incomming.")</h4>";
+if($units_walking >= 1){
+	echo "<h4 class=\"spacer\">Troops on their way (".$units_walking.")</h4>";
 	include("16_walking.tpl"); 
 }
 

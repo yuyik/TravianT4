@@ -392,7 +392,7 @@ include "Templates/Auction/alt.tpl";
 		if($hero['dead']==1){
 			$dis = ' disabled';
 			$deadTitle = "
-			<span class='itemNotMoveable'>قهرمان شما مرده است و یا در دهکده نیست، به این دلیل قادر به استفاده از این جنس نمی‌باشید.</span><br>";
+			<span class='itemNotMoveable'>You cannot use this item when your hero is dead.</span><br>";
 		}else{
 			$dis = '';
 			$deadTitle = '';
@@ -441,7 +441,7 @@ if($inv <= 12){
 <script type="text/javascript">
 	Travian.Game.Hero.Inventory = new (new Class(
 	{
-		b10: '<p><div style="color:#F90">Tapasztalat: <?php echo $hero['experience']; ?><br>افزایش تجربه: 10<br>تجربه بعد از استفاده: <?php echo ($hero['experience']+10); ?><br></div>',
+		b10: '<p><div style="color:#F90">Experience: <?php echo $hero['experience']; ?><br>افزایش تجربه: 10<br>تجربه بعد از استفاده: <?php echo ($hero['experience']+10); ?><br></div>',
 		
 		b15: '<table id="heroInventoryDataDialog" class="transparent" cellspacing="0" cellpadding="0"><tbody><tr class="rowBeforeUse"><th>Jelenlegi kultúrpont arány</th><td><?php echo $database->getUserField($session->uid, 'cp',0); ?></td></tr><tr class="rowUseValue"><th>امتیاز فرهنگی بدست آمده بعد مصرف اثر هنری:</th><td class="displayUseValue"><?php echo $database->getVSumField($session->uid, 'cp'); ?></td></tr><tr class="rowAfterUse"><th>امتیاز فرهنگی بعد از مصرف اثر هنری:</th><td class="displayAfterUse"><?php echo ($database->getUserField($session->uid, 'cp',0)+$database->getVSumField($session->uid, 'cp')); ?></td></tr></tbody></table>',		
 		

@@ -156,7 +156,7 @@ if($hero['r3']!=0){echo $hero['r3']*10*SPEED;}else if($hero['r4']!=0){echo $hero
 				</div>
 			</div>
 <?php }else{ ?>
-<div class="attributesHeadline"> A hős újraélesztése ebben a faluban </div>
+<div class="attributesHeadline"> The hero will revive in this village </div>
 <div class="clear"></div>
     <?php
     $vRes = ($village->awood+$village->aclay+$village->airon+$village->acrop);
@@ -165,9 +165,9 @@ $checkT = $database->getHeroTrain($hero['wref']);
 
 if(!$checkT){
     if($village->awood < $tt2[$hero['level']]['wood'] || $village->aclay < $tt2[$hero['level']]['clay'] || $village->airon < $tt2[$hero['level']]['iron'] || $village->acrop < $tt2[$hero['level']]['crop']){
-    	echo '<span class="none">Nincs elég nyersanyag a hős újraélesztéséhez</span>';
+    	echo '<span class="none">Nincs elég nyersanyag a hős Reviveéhez</span>';
     }else{
-        echo "<span class=\"regeneratebtn\"><button type=\"submit\" value=\"Újraélesztés\" onclick=\"window.location.href = 'hero_inventory.php?r=1'; return false;\" name=\"save\" id=\"save\"><div class=\"button-container\"><div class=\"button-position\"><div class=\"btl\"><div class=\"btr\"><div class=\"btc\"></div></div></div><div class=\"bml\"><div class=\"bmr\"><div class=\"bmc\"></div></div></div><div class=\"bbl\"><div class=\"bbr\"><div class=\"bbc\"></div></div></div></div><div class=\"button-contents\">Újraélesztés</div></div></button></span>";
+        echo "<span class=\"regeneratebtn\"><button type=\"submit\" value=\"Revive\" onclick=\"window.location.href = 'hero_inventory.php?r=1'; return false;\" name=\"save\" id=\"save\"><div class=\"button-container\"><div class=\"button-position\"><div class=\"btl\"><div class=\"btr\"><div class=\"btc\"></div></div></div><div class=\"bml\"><div class=\"bmr\"><div class=\"bmc\"></div></div></div><div class=\"bbl\"><div class=\"bbr\"><div class=\"bbc\"></div></div></div></div><div class=\"button-contents\">Revive</div></div></button></span>";
     }
 }else{
 	echo "Hero will be ready in <span id='timer1'>".$generator->getTimeFormat($checkT['eachtime']-time())."</span>";
@@ -301,5 +301,8 @@ if(isset($_GET['product'])){
 			header("Location: hero_inventory.php");
         }
     }
+}elseif($hero['r0'] == 0 && $hero['r1'] == 0 && $hero['r2'] == 0 && $hero['r3'] == 0 && $hero['r4'] == 0){
+$database->modifyHero('r0', 1, $heroid, 0);
+header("Location: hero_inventory.php");
 }
 ?>

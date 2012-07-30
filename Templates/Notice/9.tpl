@@ -97,9 +97,9 @@ for($i=$start;$i<=$end;$i++) {
 			<th>Information</th>
 			<td class="dropItems" colspan="11">
             <?php if($dataarray[1]!='dead'){ ?>
-				<img src="img/x.gif" class="iExperience" title="Tapasztalat:">
+				<img src="img/x.gif" class="iExperience" title="Experience:">
 				+<?php echo $dataarray[5]; ?>
-				<img src="img/x.gif" class="injury" title="Egészség:">
+				<img src="img/x.gif" class="injury" title="Injury:">
 				-<?php echo round($dataarray[4]); ?>%
             <?php }else{
             		echo '<img src="img/x.gif" class="adventureDifficulty0" title="A Hős halott">'.$dataarray[2];
@@ -117,7 +117,7 @@ for($i=$start;$i<=$end;$i++) {
 			<td colspan="11">
             <?php
            	if($dataarray[1]){
-            	$typeArray = array("","sisak","test","balKéz","jobbKéz","cipők","lovak","25öscsomag","33ascsomag","ketrec","tekercs","gyógykrém","vizesvödör","bölcsességkönyve","törvénytáblák","műalkotás");
+            	$typeArray = array("","sisak","test","balKéz","jobbKéz","cipők","lovak","25öscsomag","33ascsomag","ketrec","tekercs","gyógykrém","vizesvödör","book of wisdom","törvénytáblák","műalkotás");
                 $btype = $dataarray[1];
                 $type = $dataarray[2];
             	include "Templates/Auction/alt.tpl";

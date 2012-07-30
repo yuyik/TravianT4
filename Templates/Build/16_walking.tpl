@@ -107,7 +107,7 @@ $timer += 1;
     <thead>
         <tr>
             <td class="role"><a href="karte.php?d=<?php echo $village->wid."&c=".$generator->getMapCheck($village->wid); ?>"><?php echo $village->vname; ?></a></td>
-            <td colspan="11" class="troopHeadline"><a href="karte.php?d=<?php echo $adventures[$y]['to']."&c=".$generator->getMapCheck($adventures[$y]['to']); ?>">Hős kalandozás (<?php echo $coor['x']."|".$coor['y']; ?>)</a></td>
+            <td colspan="11" class="troopHeadline"><a href="karte.php?d=<?php echo $adventures[$y]['to']."&c=".$generator->getMapCheck($adventures[$y]['to']); ?>">Go to adventure (<?php echo $coor['x']."|".$coor['y']; ?>)</a></td>
         </tr>
     </thead>
     <tbody class="units">
