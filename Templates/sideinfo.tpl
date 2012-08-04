@@ -52,7 +52,7 @@ $allianceinfo = $database->getAlliance($aid);
 	<img class="nationBig nationBig<?php echo $session->tribe; ?>" title="<?php echo $ttitle; ?>" src="img/x.gif"/> 
 	</div> 
 <?php
-if($aid['alliance'] != 0){
+if($id['alliance'] != 0){
 echo "<div class='sideInfoAlly'><a class='signLink' href='allianz.php' title='".SIDEINFO_ALLIANCE."'><span class='wrap'>".$allianceinfo['tag']."</span></a><a href='allianz.php?s=2' class='crest' title='".SIDEINFO_ALLY_FORUM."'><img src='img/x.gif'></a></div>";
 }
 include("Templates/multivillage.tpl");
