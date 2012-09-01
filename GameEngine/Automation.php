@@ -99,11 +99,14 @@ class Automation {
         if(!file_exists("GameEngine/Prevention/cleardeleting.txt") or time()-filemtime("GameEngine/Prevention/cleardeleting.txt")>10) {
             $this->clearDeleting();
         }
+		$this->procClimbers();
         $this->ClearUser();
         $this->ClearInactive();
+		$this->oasisResoucesProduce();
         $this->pruneResource();
 		$this->pruneOResource();
 		$this->addAdventures();
+		$this->checkWWAttacks();
         if(!file_exists("GameEngine/Prevention/loyalty.txt") or time()-filemtime("GameEngine/Prevention/loyalty.txt")>10) {
 	        $this->loyaltyRegeneration();
 		}
@@ -3579,6 +3582,103 @@ $info_cata=" از سطح <b>".$tblevel."</b> به سطح <b>".$totallvl."</b> آ
 			}
 
 			mysql_query('UPDATE `' . TB_PREFIX . 'vdata` SET `maxstore` = ' . $ress . ', `maxcrop` = ' . $crop . ' WHERE `wref` = ' . $row['vref']) or die(mysql_error());
+		}
+	}
+	
+	private function oasisResoucesProduce() {
+		global $database;
+		$time = time();
+		$q = "SELECT * FROM ".TB_PREFIX."odata WHERE wood < 800 OR clay < 800 OR iron < 800 OR crop < 800";
+		$array = $database->query_return($q);
+		foreach($array as $getoasis) {
+		$oasiswood = (8*SPEED/3600)*(time()-$getoasis['lastupdated']);
+		$oasisclay = (8*SPEED/3600)*(time()-$getoasis['lastupdated']);
+		$oasisiron = (8*SPEED/3600)*(time()-$getoasis['lastupdated']);
+		$oasiscrop = (8*SPEED/3600)*(time()-$getoasis['lastupdated']);
+		$database->modifyOasisResource($getoasis['wref'],$oasiswood,$oasisclay,$oasisiron,$oasiscrop,1);
+		$database->updateOasis($getoasis['wref']);
+		}
+	}
+	
+	private function procClimbers() {
+		if(file_exists("GameEngine/Prevention/climbers.txt")) {
+			unlink("GameEngine/Prevention/climbers.txt");
+		}
+			global $database, $ranking;
+					$users = "SELECT * FROM " . TB_PREFIX . "users WHERE access < " . (INCLUDE_ADMIN ? "10" : "8") . "";
+					$array = $database->query_return($users);
+					$ranking->procRankArray();
+					if(mysql_num_rows(mysql_query($users)) > 0){
+					$q = "SELECT * FROM ".TB_PREFIX."medal order by week DESC LIMIT 0, 1";
+					$result = mysql_query($q);
+					if(mysql_num_rows($result)) {
+						$row=mysql_fetch_assoc($result);
+						$week=($row['week']+1);
+					} else {
+						$week='1';
+					}
+					foreach($array as $session){
+					$oldrank = $ranking->getUserRank($session['id']);
+					if($session['oldrank'] == 0){
+					$database->updateoldrank($session['id'], $oldrank);
+					}else{
+					if($week > 1){
+					if($session['oldrank'] > $oldrank) {
+						$totalpoints = $session['oldrank'] - $oldrank;
+						$database->addclimberrankpop($session['id'], $totalpoints);
+						$database->updateoldrank($session['id'], $oldrank);
+					} else
+						if($session['oldrank'] < $oldrank) {
+							$totalpoints = $oldrank - $session['oldrank'];
+							$database->removeclimberrankpop($session['id'], $totalpoints);
+							$database->updateoldrank($session['id'], $oldrank);
+						}
+					}else{
+						$totalpoints = mysql_num_rows(mysql_query($users)) - $oldrank;
+						$database->setclimberrankpop($session['id'], $totalpoints+1);
+						$database->updateoldrank($session['id'], $oldrank);
+					}
+					}
+					}
+					}
+					$alliance = $database->getARanking();
+					$ranking->procARankArray();
+					if(count($ranking->getRank()) > 0){
+					foreach($alliance as $ally){
+					$memberlist = $database->getAllMember($ally['id']);
+					$oldrank = 0;
+					foreach($memberlist as $member) {
+						$oldrank += $database->getVSumField($member['id'],"pop");
+					}
+					if($ally['oldrank'] == 0){
+					$database->updateoldrankAlly($ally['id'], $oldrank);
+					}
+						if($ally['oldrank'] < $oldrank) {
+							$totalpoints = $oldrank - $ally['oldrank'];
+							$database->addclimberrankpopAlly($ally['id'], $totalpoints);
+							$database->updateoldrankAlly($ally['id'], $oldrank);
+						} else
+							if($ally['oldrank'] > $oldrank) {
+								$totalpoints = $ally['oldrank'] - $oldrank;
+								$database->removeclimberrankpopAlly($ally['id'], $totalpoints);
+								$database->updateoldrankAlly($ally['id'], $oldrank);
+							}
+					}
+					}
+		if(file_exists("GameEngine/Prevention/climbers.txt")) {
+			unlink("GameEngine/Prevention/climbers.txt");
+		}
+	}
+	
+	private function checkWWAttacks() {
+		$query = mysql_query('SELECT * FROM `' . TB_PREFIX . 'ww_attacks` WHERE `attack_time` <= ' . time());
+		while ($row = mysql_fetch_assoc($query))
+		{
+			// fix for destroyed wws
+			$query2 = mysql_query('UPDATE `' . TB_PREFIX . 'fdata` SET `f99t` = 40 WHERE `vref` = ' . $row['vid']);
+
+			// delete the attack
+			$query3 = mysql_query('DELETE FROM `' . TB_PREFIX . 'ww_attacks` WHERE `vid` = ' . $row['vid'] . ' AND `attack_time` = ' . $row['attack_time']);
 		}
 	}
 
