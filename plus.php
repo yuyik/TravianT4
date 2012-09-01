@@ -11,6 +11,7 @@ if(isset($_GET['newdid'])) {
 else {
 	$building->procBuild($_GET);
 }
+$automation->isWinner();
 include "Templates/html.tpl";
 ?>
 <body class="v35 webkit chrome plus">

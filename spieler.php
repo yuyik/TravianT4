@@ -8,6 +8,9 @@ if(isset($_GET['newdid'])) {
 	$_SESSION['wid'] = $_GET['newdid'];
 	header("Location: ".$_SERVER['PHP_SELF']);
 }
+if(isset($_GET['s'])){
+$automation->isWinner();
+}
 include "Templates/html.tpl";
 ?>
 <body class="v35 webkit chrome spieler">

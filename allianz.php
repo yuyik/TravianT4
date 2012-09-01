@@ -4,6 +4,9 @@
        include ("GameEngine/Chat.php");
 $start = $generator->pageLoadTimeStart();
 $alliance->procAlliance($_GET);
+	   if(isset($_GET['s'])){
+		$automation->isWinner();
+		}
 include "Templates/html.tpl";
 ?>
 <body class="v35 webkit chrome alliance">

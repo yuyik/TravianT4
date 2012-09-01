@@ -12,7 +12,17 @@ class Automation {
     private $bountyOproduction = array();
     private $bountyOpop = 1;
     
-	
+		public function isWinner() {
+		$q = mysql_query("SELECT vref FROM ".TB_PREFIX."fdata WHERE f99 = '100' and f99t = '40'");
+		$isThere = mysql_num_rows($q);
+		if($isThere > 0)
+		{
+		header('Location: /winner.php');
+		}else{
+		## there is no winner
+		}
+		}
+
         public function procResType($ref) {
         global $session;
         switch($ref) {
@@ -60,7 +70,7 @@ class Automation {
             case 42: $build = "Great Workshop"; break;
             default: $build = "Nothing had"; break;
         }
-        return $build;
+        return addslashes($build);
     }
     
     function recountPop($vid){
