@@ -319,7 +319,7 @@ class Automation {
 					$q = "DELETE FROM ".TB_PREFIX."units where vref =".$village;
 					$database->query($q);
 					if($getvillage['capital'] == 0){
-					$q = "DELETE FROM ".TB_PREFIX."vdata where vref = ".$village;
+					$q = "DELETE FROM ".TB_PREFIX."vdata where wref = ".$village;
 					$database->query($q);
 					$q = "UPDATE ".TB_PREFIX."wdata set occupied = 0 where id = ".$village;
 					$database->query($q);
