@@ -1536,6 +1536,15 @@
 				$q = "UPDATE ".TB_PREFIX."bdata SET timestamp = $time WHERE id = '".$dbarray['id']."'";
                 $this->query($q);
             }
+			
+			function FinishRallyPoint($wid) {
+				$time = time()-1;
+                $q = "SELECT * FROM " . TB_PREFIX . "bdata where wid = $wid and type = 16 order by master,timestamp ASC";
+                $result = mysql_query($q);
+				$dbarray = mysql_fetch_array($result);
+				$q = "UPDATE ".TB_PREFIX."bdata SET timestamp = $time WHERE id = '".$dbarray['id']."'";
+                $this->query($q);
+            }
 
             function getMasterJobs($wid) {
                 $q = "SELECT * FROM " . TB_PREFIX . "bdata where wid = $wid and master = 1 order by master,timestamp ASC";
@@ -3370,6 +3379,35 @@ break;
 				$crop *= SPEED;
 				return $crop;
             }
+			
+		function getfieldDistance($wid) {
+		$q = "SELECT * FROM " . TB_PREFIX . "vdata where owner > 4 and wref != $wid";
+		$array = $this->query_return($q);
+		$coor = $this->getCoor($wid);
+		$prevdist = 0;
+		$q2 = "SELECT * FROM " . TB_PREFIX . "vdata where owner = 4";
+		$array2 = mysql_fetch_array(mysql_query($q2));
+		$vill = $array2['wref'];
+		if(mysql_num_rows(mysql_query($q)) > 0){
+		foreach($array as $village){
+		$coor2 = $this->getCoor($village['wref']);
+				$max = 2 * WORLD_MAX + 1;
+				$x1 = intval($coor['x']);
+				$y1 = intval($coor['y']);
+				$x2 = intval($coor2['x']);
+				$y2 = intval($coor2['y']);
+				$distanceX = min(abs($x2 - $x1), abs($max - abs($x2 - $x1)));
+				$distanceY = min(abs($y2 - $y1), abs($max - abs($y2 - $y1)));
+				$dist = sqrt(pow($distanceX, 2) + pow($distanceY, 2));
+		if($dist < $prevdist or $prevdist == 0){
+				$prevdist = $dist;
+				$vill = $village['wref'];
+		}
+		}
+		}
+				return $vill;
+		}
+
         }
         ;
 

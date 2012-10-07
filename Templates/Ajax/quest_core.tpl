@@ -27,9 +27,10 @@ if (isset($qact)){
 
 	case '2':
 	$database->updateUserField($_SESSION['username'],'quest','2',0);		
-	$_SESSION['qst']= 2;	
-	break;
-	$database->FinishWoodcutter($session->villages[0]);	
+	$_SESSION['qst']= 2;
+	
+	//Give Reward
+	$database->FinishWoodcutter($session->villages[0]);
 	break;
 
 	case '3':
@@ -53,7 +54,7 @@ if (isset($qact)){
     
 	$rSubmited=$qact2;
     //Give Reward
-	$database->modifyResource($session->villages[0],80,110,60,40,1);
+	$database->FinishRallyPoint($session->villages[0]);
 	break;
 	
 	case '6':
@@ -96,6 +97,7 @@ if (isset($qact)){
     
     case 'coor':
 	$x=$qact2;
+	$y=$qact2;
 	break;
 	
 	case '10':
@@ -457,7 +459,7 @@ if ($ironL<1 || $clayL<1){?>
 
 //Check message is viewed or no
 if ($message->unread || $RB==true){?>
-{"markup":"\n\t\t<div id=\"popup3\"><div id=\"qstd\"><h4>Task 7: Messages<\/h4><div class=\"spoken\">&rdquo;You can talk to other players using the messaging system. I sent a message to you. Read it and come back here.\r\n<br \/><br \/>\r\nP.S. Don't forget: on the left the reports, on the right the messages.&rdquo;<\/div><div class=\"rew\"><p class=\"ta_aw\">Order:<\/p>Olvasd el a legújabb üzenetedet<\/div><span id=\"qst_accpt\"><\/span><\/div><\/div>\n\t\t<div id=\"qstbg\" class=\"msg\"><\/div>\n\t\t","number":"-6","reward":false,"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>","msrc":"i2","altstep":0}
+{"markup":"\n\t\t<div id=\"popup3\"><div id=\"qstd\"><h4>Task 7: Messages<\/h4><div class=\"spoken\">&rdquo;You can talk to other players using the messaging system. I sent a message to you. Read it and come back here.\r\n<br \/><br \/>\r\nP.S. Don't forget: on the left the reports, on the right the messages.&rdquo;<\/div><div class=\"rew\"><p class=\"ta_aw\">Order:<\/p>Read your new message.<\/div><span id=\"qst_accpt\"><\/span><\/div><\/div>\n\t\t<div id=\"qstbg\" class=\"msg\"><\/div>\n\t\t","number":"-6","reward":false,"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>","msrc":"i2","altstep":0}
 <?php $_SESSION['qstnew']='0'; }else{ $_SESSION['qstnew']='1'; ?>
 {"markup":"\n\t\t<div id=\"popup3\"><div id=\"qstd\"><h4>Task 7: Messages<\/h4><div class=\"spoken\">&rdquo;You received it? Very good.\r\n<br \/><br \/>\r\nHere is some Gold. With Gold you can do several things, e.g. extend your <b><font color=\"#71D000\">P<\/font><font color=\"#FF6F0F\">l<\/font><font color=\"#71D000\">u<\/font><font color=\"#FF6F0F\">s<\/font><\/b>-Account or increase your resource production.To do so click <a href=\"plus.php?id=3\"><font color=\"#000000\"><?php echo SERVER_NAME; ?><\/font> <b><font color=\"#71D000\">P<\/font><font color=\"#FF6F0F\">l<\/font><font color=\"#71D000\">u<\/font><font color=\"#FF6F0F\">s<\/font><\/b><\/a> in the left hand menu.&rdquo;<\/div><div class=\"rew\"><p class=\"ta_aw\"><input type=\"hidden\" id=\"qst_val\" value=\"2\" \/>Task reward:<\/p><span class=\"gold\"><img src=\"img\/x.gif\" class=\"gold\" title=\"Arany\"> 20<\/span><\/div><span id=\"qst_accpt\"><a class=\"arrow\" href=\"javascript: qst_next('','8');\">Continue with the next task.<\/a><\/span><\/div>\n\t\t<div id=\"qstbg\" class=\"msg\"><\/div>\n\t\t","number":6,"reward":{"gold":20},"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>g","msrc":"<?php echo $messagelol; ?>","altstep":0}
 <?php }?>
@@ -492,18 +494,20 @@ if ($ironL<2 || $clayL<2 || $woodL<2 || $cropL<2){?>
 {"markup":"\n\t\t<div id=\"popup3\"><div id=\"qstd\"><h4>Task 8: One Each!<\/h4><div class=\"spoken\">&rdquo;Very good, great develop of resources production.&rdquo;<\/div><div class=\"rew\"><p class=\"ta_aw\"><input type=\"hidden\" id=\"qst_val\" value=\"2\" \/>Task reward:<\/p><span class=\"resources r1\"><img class=\"r1\" title=\"Lumber\" src=\"img\/x.gif\" alt=\"Lumber\">100<\/span><span class=\"resources r2\"><img class=\"r2\" title=\"Clay\" src=\"img\/x.gif\" alt=\"Clay\">120<\/span><span class=\"resources r3\"><img class=\"r3\" title=\"Iron\" src=\"img\/x.gif\" alt=\"Iron\">40<\/span><span class=\"resources r4\"><img class=\"r4\" title=\"Crop\" src=\"img/x.gif\" alt=\"Crop\">40<\/span><\/div><br><span id=\"qst_accpt\"><a class=\"arrow\" href=\"javascript: qst_next('','9');\">Continue with the next task.<\/a><\/span><\/div>\n\t\t<div id=\"qstbg\" class=\"res_one_of_each\"><\/div>\n\t\t","number":8,"reward":{"wood":100,"clay":120,"iron":40,"crop":40},"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>g","msrc":"<?php echo $messagelol; ?>","altstep":0}
 <?php }?>
 
+
 <?php } elseif($_SESSION['qst']== 9){
 
 $getvID = $database->getVillageID($session->uid);
-$coor = $database->getCoor($getvID);
-
-if ($x!=$coor[y]){
+$nvillage = $database->getfieldDistance($getvID);
+$ncoor = $database->getCoor($nvillage);
+$nvillagename = $database->getVillageField($nvillage,"name");
+if ($x!=$ncoor['x'] or $y!=$ncoor['y']){
 
 ?>
 
-{"markup":"\n\t\t<div id=\"popup3\"><div id=\"qstd\"><h4>Task 9: Neighbours!<\/h4><div class=\"spoken\">&rdquo;Around you, there are many different villages. One of them is named <b><?php echo $village->vname; ?><\/b>. Click on 'map' in the header menu and look for that village. The name of your neighbours' villages can be seen when hovering your mouse over any of them.&rdquo;<\/div><div class=\"rew\"><p class=\"ta_aw\">Order:<\/p>Look for the coordinates of <b><?php echo $village->vname; ?><\/b> and enter them here.<\/div><div class=\"coordinatesInput\"><div class=\"xCoord\"><label for=\"xCoordInputQuest\">X:<\/label><input maxlength=\"4\" value=\"\" id=\"qst_val\" name=\"x\" id=\"xCoordInputQuest\" class=\"text coordinates x \"><\/div><div class=\"yCoord\"><label for=\"yCoordInputQuest\">Y:<\/label><input maxlength=\"4\" value=\"\" name=\"y\" id=\"yCoordInputQuest\" class=\"text coordinates y \"><\/div><div class=\"clear\"><\/div><\/div><button type=\"button\" value=\"complete task\" class=\"coordinatesButton\" onclick=\"qst_next('','coor',document.getElementById('qst_val').value)\"><div class=\"button-container\"><div class=\"button-position\"><div class=\"btl\"><div class=\"btr\"><div class=\"btc\"><\/div><\/div><\/div><div class=\"bml\"><div class=\"bmr\"><div class=\"bmc\"><\/div><\/div><\/div><div class=\"bbl\"><div class=\"bbr\"><div class=\"bbc\"><\/div><\/div><\/div><\/div><div class=\"button-contents\">complete task<\/div><\/div><\/button><span id=\"qst_accpt\"><\/span><\/div><\/div>\n\t\t<div id=\"qstbg\" class=\"neighbour\"><\/div>\n\t\t","number":-9,"reward":false,"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>","msrc":"<?php echo $messagelol; ?>","altstep":0}
+{"markup":"\n\t\t<div id=\"popup3\"><div id=\"qstd\"><h4>Task 9: Neighbours!<\/h4><div class=\"spoken\">&rdquo;Around you, there are many different villages. One of them is named <b><?php echo $nvillagename; ?><\/b>. Click on 'map' in the header menu and look for that village. The name of your neighbours' villages can be seen when hovering your mouse over any of them.&rdquo;<\/div><div class=\"rew\"><p class=\"ta_aw\">Order:<\/p>Look for the coordinates of <b><?php echo $nvillagename; ?><\/b> and enter them here.<\/div><div class=\"coordinatesInput\"><div class=\"xCoord\"><label for=\"xCoordInputQuest\">X:<\/label><input maxlength=\"4\" value=\"\" id=\"qst_val\" name=\"x\" id=\"xCoordInputQuest\" class=\"text coordinates x \"><\/div><div class=\"yCoord\"><label for=\"yCoordInputQuest\">Y:<\/label><input maxlength=\"4\" value=\"\" name=\"y\" id=\"yCoordInputQuest\" class=\"text coordinates y \"><\/div><div class=\"clear\"><\/div><\/div><button type=\"button\" value=\"complete task\" class=\"coordinatesButton\" onclick=\"qst_next('','coor',document.getElementById('qst_val').value)\"><div class=\"button-container\"><div class=\"button-position\"><div class=\"btl\"><div class=\"btr\"><div class=\"btc\"><\/div><\/div><\/div><div class=\"bml\"><div class=\"bmr\"><div class=\"bmc\"><\/div><\/div><\/div><div class=\"bbl\"><div class=\"bbr\"><div class=\"bbc\"><\/div><\/div><\/div><\/div><div class=\"button-contents\">complete task<\/div><\/div><\/button><span id=\"qst_accpt\"><\/span><\/div><\/div>\n\t\t<div id=\"qstbg\" class=\"neighbour\"><\/div>\n\t\t","number":-9,"reward":false,"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>","msrc":"<?php echo $messagelol; ?>","altstep":0}
 <?php $_SESSION['qstnew']='0'; }else{ $_SESSION['qstnew']='1'; ?>
-{"markup":"\n\t\t<div id=\"popup3\"><div id=\"qstd\"><h4>Task 9: Neighbours!<\/h4><div class=\"spoken\">&rdquo;Exactly, there <b> <? Php echo $ village-> vname;?> <\/b> Village! As many resources as you reach this village. Well, almost as much ...”&rdquo;<\/div><div class=\"rew\"><p class=\"ta_aw\"><input type=\"hidden\" id=\"qst_val\" value=\"2\" \/>Task reward:<\/p><span class=\"resources r1\"><img class=\"r1\" title=\"Lumber\" src=\"img\/x.gif\" alt=\"Lumber\">60<\/span><span class=\"resources r2\"><img class=\"r2\" title=\"Clay\" src=\"img\/x.gif\" alt=\"Clay\">30<\/span><span class=\"resources r3\"><img class=\"r3\" title=\"Iron\" src=\"img\/x.gif\" alt=\"Iron\">40<\/span><span class=\"resources r4\"><img class=\"r4\" title=\"Crop\" src=\"img/x.gif\" alt=\"Crop\">90<\/span><\/div><br><span id=\"qst_accpt\"><a class=\"arrow\" href=\"javascript: qst_next('','10');\">Continue with the next task.<\/a><\/span><\/div>\n\t\t<div id=\"qstbg\" class=\"neighbour\"><\/div>\n\t\t","number":9,"reward":{"wood":60,"clay":30,"iron":40,"crop":90},"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>g","msrc":"<?php echo $messagelol; ?>","altstep":0}
+{"markup":"\n\t\t<div id=\"popup3\"><div id=\"qstd\"><h4>Task 9: Neighbours!<\/h4><div class=\"spoken\">&rdquo;Exactly, there <b> <?php echo $nvillagename;?> <\/b> Village! As many resources as you reach this village. Well, almost as much ...”&rdquo;<\/div><div class=\"rew\"><p class=\"ta_aw\"><input type=\"hidden\" id=\"qst_val\" value=\"2\" \/>Task reward:<\/p><span class=\"resources r1\"><img class=\"r1\" title=\"Lumber\" src=\"img\/x.gif\" alt=\"Lumber\">60<\/span><span class=\"resources r2\"><img class=\"r2\" title=\"Clay\" src=\"img\/x.gif\" alt=\"Clay\">30<\/span><span class=\"resources r3\"><img class=\"r3\" title=\"Iron\" src=\"img\/x.gif\" alt=\"Iron\">40<\/span><span class=\"resources r4\"><img class=\"r4\" title=\"Crop\" src=\"img/x.gif\" alt=\"Crop\">90<\/span><\/div><br><span id=\"qst_accpt\"><a class=\"arrow\" href=\"javascript: qst_next('','10');\">Continue with the next task.<\/a><\/span><\/div>\n\t\t<div id=\"qstbg\" class=\"neighbour\"><\/div>\n\t\t","number":9,"reward":{"wood":60,"clay":30,"iron":40,"crop":90},"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>g","msrc":"<?php echo $messagelol; ?>","altstep":0}
 <?php }?>
 
 <?php } elseif($_SESSION['qst']== 10){

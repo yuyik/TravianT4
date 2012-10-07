@@ -1,5 +1,6 @@
 ﻿<?php
 
+if(isset($_GET['aid']) && !is_numeric($_GET['aid'])) die('Hacking Attemp');
        include ("GameEngine/Village.php");
        include ("GameEngine/Chat.php");
 $start = $generator->pageLoadTimeStart();
@@ -8,6 +9,7 @@ $alliance->procAlliance($_GET);
 		$automation->isWinner();
 		}
 include "Templates/html.tpl";
+if($_GET['aid'] or $_GET['fid'] or $_GET['fid2'] or $session->alliance!=0){
 ?>
 <body class="v35 webkit chrome alliance">
 <div id="wrapper"> 
@@ -242,3 +244,8 @@ include("Templates/quest.tpl");
 </div>
 </body>
 </html>
+<?php
+}else{
+header("Location: spieler.php");
+}
+?>
