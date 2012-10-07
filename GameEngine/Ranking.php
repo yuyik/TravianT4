@@ -158,7 +158,7 @@
 				)allitag
 					
 				FROM " . TB_PREFIX . "users
-				WHERE " . TB_PREFIX . "users.id !=0 AND id !=2 AND id !=3
+				WHERE " . TB_PREFIX . "users.id !=4 AND id !=2 AND id !=3
 				ORDER BY totalpop DESC, totalraid DESC, userid ASC $limit";
 				return mysql_query($q);
 			}
@@ -176,7 +176,7 @@
 				)totalvillages
 				
 				FROM " . TB_PREFIX . "users
-				WHERE " . TB_PREFIX . "users.id > 3
+				WHERE " . TB_PREFIX . "users.id > 4
 				ORDER BY apall DESC, userid ASC $limit";
 				return mysql_query($q);
 			}
@@ -195,7 +195,7 @@
 				)totalvillages
 					
 				FROM " . TB_PREFIX . "users
-				WHERE " . TB_PREFIX . "users.id > 3
+				WHERE " . TB_PREFIX . "users.id > 4
 				ORDER BY dpall DESC, userid ASC $limit";
 				return mysql_query($q);
 			}
@@ -391,7 +391,7 @@
 				)totalpop
 				
 				FROM " . TB_PREFIX . "users
-				WHERE " . TB_PREFIX . "users.id > 3
+				WHERE " . TB_PREFIX . "users.id > 4
 				ORDER BY experience DESC, totalpop ASC, userid ASC";
 				$result = mysql_query($q);
 				$i = 1;
@@ -424,7 +424,7 @@
 				)totalpop
 				
 				FROM " . TB_PREFIX . "users
-				WHERE " . TB_PREFIX . "users.id > 3
+				WHERE " . TB_PREFIX . "users.id > 4
 				ORDER BY experience DESC, totalpop ASC, userid ASC $limit";
 				
 				return mysql_query($q);
@@ -446,7 +446,7 @@
 				)totalvillages
 				
 				FROM " . TB_PREFIX . "users
-				WHERE " . TB_PREFIX . "users.id > 3
+				WHERE " . TB_PREFIX . "users.id > 4
 				ORDER BY ap DESC, userid ASC";
 					
 				$result = mysql_query($q);
@@ -475,7 +475,7 @@
 				)totalvillages
 				
 				FROM " . TB_PREFIX . "users
-				WHERE " . TB_PREFIX . "users.id > 3
+				WHERE " . TB_PREFIX . "users.id > 4
 				ORDER BY dp DESC, userid ASC";
 					
 				$result = mysql_query($q);
@@ -504,7 +504,7 @@
 				)totalvillages
 				
 				FROM " . TB_PREFIX . "users
-				WHERE " . TB_PREFIX . "users.id > 3
+				WHERE " . TB_PREFIX . "users.id > 4
 				ORDER BY clp DESC, userid ASC";
 					
 				$result = mysql_query($q);
@@ -532,7 +532,7 @@
 				)totalvillages
 				
 				FROM " . TB_PREFIX . "users
-				WHERE " . TB_PREFIX . "users.id > 3
+				WHERE " . TB_PREFIX . "users.id > 4
 				ORDER BY RR DESC, userid ASC";
 					
 				$result = mysql_query($q);

@@ -35,12 +35,12 @@ echo "<div id=\"sideInfoCountdown\"><div class=\"head\"></div>";
 echo "<div class=\"content\">";
 
 		$uurover=$generator->getTimeFormat($displayarray['protect']-time());
-        echo "Még van <b><span
-		id=\"timer1\">".$uurover."</span></b> óráig kezdővédelmed.</div></div>";
+        echo "You have <b><span
+		id=\"timer1\">".$uurover."</span></b> hours of protection.</div></div>";
 } elseif($timestamp) {
 echo "<div id=\"sideInfoCountdown\"><div class=\"head\"></div>";
 echo "<div class=\"content\">";
 		$time=$generator->getTimeFormat(($timestamp-time()));
-        echo "Törlés <span id=\"timer1\">".$time."</span> .</div></div>";
+        echo "Delete in <span id=\"timer1\">".$time."</span> .</div></div>";
 }
 ?>

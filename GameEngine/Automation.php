@@ -3617,7 +3617,7 @@ $info_cata=" از سطح <b>".$tblevel."</b> به سطح <b>".$totallvl."</b> آ
 			global $database, $ranking;
 					$users = "SELECT * FROM " . TB_PREFIX . "users WHERE access < " . (INCLUDE_ADMIN ? "10" : "8") . "";
 					$array = $database->query_return($users);
-					$ranking->procRankArray();
+					$ranking->procUsersRanking();
 					if(mysql_num_rows(mysql_query($users)) > 0){
 					$q = "SELECT * FROM ".TB_PREFIX."medal order by week DESC LIMIT 0, 1";
 					$result = mysql_query($q);
@@ -3652,8 +3652,8 @@ $info_cata=" از سطح <b>".$tblevel."</b> به سطح <b>".$totallvl."</b> آ
 					}
 					}
 					$alliance = $database->getARanking();
-					$ranking->procARankArray();
-					if(count($ranking->getRank()) > 0){
+					$ranking->procAllianceRanking();
+					if(count($database->getARanking2()) > 0){
 					foreach($alliance as $ally){
 					$memberlist = $database->getAllMember($ally['id']);
 					$oldrank = 0;
@@ -3677,18 +3677,6 @@ $info_cata=" از سطح <b>".$tblevel."</b> به سطح <b>".$totallvl."</b> آ
 					}
 		if(file_exists("GameEngine/Prevention/climbers.txt")) {
 			unlink("GameEngine/Prevention/climbers.txt");
-		}
-	}
-	
-	private function checkWWAttacks() {
-		$query = mysql_query('SELECT * FROM `' . TB_PREFIX . 'ww_attacks` WHERE `attack_time` <= ' . time());
-		while ($row = mysql_fetch_assoc($query))
-		{
-			// fix for destroyed wws
-			$query2 = mysql_query('UPDATE `' . TB_PREFIX . 'fdata` SET `f99t` = 40 WHERE `vref` = ' . $row['vid']);
-
-			// delete the attack
-			$query3 = mysql_query('DELETE FROM `' . TB_PREFIX . 'ww_attacks` WHERE `vid` = ' . $row['vid'] . ' AND `attack_time` = ' . $row['attack_time']);
 		}
 	}
 

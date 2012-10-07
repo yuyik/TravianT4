@@ -1875,6 +1875,12 @@
         		return $this->mysql_fetch_all($result);
         	}
 			
+			function getARanking2() {
+        		$q = "SELECT id,name,tag FROM " . TB_PREFIX . "alidata where id != ''";
+        		$result = mysql_query($q, $this->connection);
+        		return mysql_num_rows($result);
+        	}
+			
         	function getHeroRanking() {
         		$q = "SELECT * FROM " . TB_PREFIX . "hero";
         		$result = mysql_query($q, $this->connection);
