@@ -2019,22 +2019,34 @@
 			function trainUnit($vid, $unit, $amt, $pop, $each, $time, $mode) {
 				global $village, $building, $session, $technology;
 
-				if(!$mode) {
-					$barracks = array(1, 2, 3, 11, 12, 13, 14, 21, 22, 31, 32, 33, 34, 41, 42, 43, 44);
-					$stables = array(4, 5, 6, 15, 16, 23, 24, 25, 26, 35, 36, 45, 46);
-					$workshop = array(7, 8, 17, 18, 27, 28, 37, 38, 47, 48);
-					$residence = array(9, 10, 19, 20, 29, 30, 39, 40, 49, 50);
+		if(!$mode) {
+			$barracks = array(1,2,3,11,12,13,14,21,22,31,32,33,34,35,36,37,38,39,40,41,42,43,44);
+			$greatbarracks = array(61,62,63,71,72,73,84,81,82,91,92,93,94,95,96,97,98,99,100,101,102,103,104);
+			$stables = array(4,5,6,15,16,23,24,25,26,45,46);
+			$greatstables = array(64,65,66,75,76,83,84,85,86,105,106);
+			$workshop = array(7,8,17,18,27,28,47,48);
+			$greatworkshop = array(67,68,77,78,87,88,107,108);
+			$residence = array(9,10,19,20,29,30,49,50);
+			$trapper = array(99);
 
-					if(in_array($unit, $barracks)) {
-						$queued = $technology->getTrainingList(1);
-					} elseif(in_array($unit, $stables)) {
-						$queued = $technology->getTrainingList(2);
-					} elseif(in_array($unit, $workshop)) {
-						$queued = $technology->getTrainingList(3);
-					} elseif(in_array($unit, $residence)) {
-						$queued = $technology->getTrainingList(4);
-					}
-					$now = time();
+			if(in_array($unit, $barracks)) {
+				$queued = $technology->getTrainingList(1);
+			} elseif(in_array($unit, $stables)) {
+				$queued = $technology->getTrainingList(2);
+			} elseif(in_array($unit, $workshop)) {
+				$queued = $technology->getTrainingList(3);
+			} elseif(in_array($unit, $residence)) {
+				$queued = $technology->getTrainingList(4);
+			} elseif(in_array($unit, $greatstables)) {
+				$queued = $technology->getTrainingList(6);
+			} elseif(in_array($unit, $greatbarracks)) {
+				$queued = $technology->getTrainingList(5);
+			} elseif(in_array($unit, $greatworkshop)) {
+				$queued = $technology->getTrainingList(7);
+			} elseif(in_array($unit, $trapper)) {
+				$queued = $technology->getTrainingList(8);
+			}
+			$now = time();
 
 			if($each == 0){ $each = 1; }
 			$time2 = $now+$each;

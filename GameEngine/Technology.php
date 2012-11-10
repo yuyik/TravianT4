@@ -79,14 +79,15 @@ class Technology {
 	public function getTrainingList($type) {
 		global $database,$village;
 		$trainingarray = $database->getTraining($village->wid);
-        $listarray = array();
-		$barracks = array(1,2,3,11,12,13,14,21,22,31,32,33,34,41,42,43,44);
-		$greatbarracks = array(61,62,63,71,72,73,84,81,82,91,92,93,94,101,102,103,104);
-		$stables = array(4,5,6,15,16,23,24,25,26,35,36,45,46);
-		$greatstables = array(64,65,66,75,76,83,84,85,86,95,96,105,106);
-		$workshop = array(7,8,17,18,27,28,37,38,47,48);
-		$greatworkshop = array(67,68,77,78,87,88,97,98,107,108);
-		$residence = array(9,10,19,20,29,30,39,40,49,50);
+		$listarray = array();
+		$barracks = array(1,2,3,11,12,13,14,21,22,31,32,33,34,35,36,37,38,39,40,41,42,43,44);
+		$greatbarracks = array(61,62,63,71,72,73,84,81,82,91,92,93,94,95,96,97,98,99,100,101,102,103,104);
+		$stables = array(4,5,6,15,16,23,24,25,26,45,46);
+		$greatstables = array(64,65,66,75,76,83,84,85,86,105,106);
+		$workshop = array(7,8,17,18,27,28,47,48);
+		$greatworkshop = array(67,68,77,78,87,88,107,108);
+		$residence = array(9,10,19,20,29,30,49,50);
+		$trapper = array(99);
 		if(count($trainingarray) > 0) {
 			foreach($trainingarray as $train) {
 				if($type == 1 && in_array($train['unit'],$barracks)) {
@@ -118,6 +119,10 @@ class Technology {
 				if($type == 7 && in_array($train['unit'],$greatworkshop)) {
 					$train['name'] = $this->unarray[$train['unit']-60];
 					$train['unit'] -= 60;
+					array_push($listarray,$train);
+				}
+				if($type == 8 && in_array($train['unit'],$trapper)) {
+					$train['name'] = $this->unarray[$train['unit']];
 					array_push($listarray,$train);
 				}
 			}
@@ -416,9 +421,10 @@ private function trainUnit($unit,$amt,$great=false) {
             $clay = ${'u'.$unit}['clay'] * $amt * ($great?3:1);
             $iron = ${'u'.$unit}['iron'] * $amt * ($great?3:1);
             $crop = ${'u'.$unit}['crop'] * $amt * ($great?3:1);
-
+			$each = ($each == 0) ? 1 : $each;
+			$time = $each*$amt;
             if($database->modifyResource($village->wid,$wood,$clay,$iron,$crop,0)) {
-                $database->trainUnit($village->wid,$unit+($great?60:0),$amt,${'u'.$unit}['pop'],$each,time(),0);
+                $database->trainUnit($village->wid,$unit+($great?60:0),$amt,${'u'.$unit}['pop'],$each,time()+$time,0);
             }
         }
     } 	
@@ -427,7 +433,7 @@ private function trainUnit($unit,$amt,$great=false) {
 		global $session,$building;
 		switch($tech) {
 			case 2:
-			if($building->getTypeLevel(22) >= 1 && $building->getTypeLevel(12) >= 1) { return true; } else { return false; }
+			if($building->getTypeLevel(22) >= 1 && $building->getTypeLevel(13) >= 1) { return true; } else { return false; }
 			break;
 			case 3:
 			if($building->getTypeLevel(22) >= 5 && $building->getTypeLevel(12) >= 1) { return true; } else { return false; }
@@ -539,10 +545,10 @@ private function trainUnit($unit,$amt,$great=false) {
 		$ABTech = $database->getABTech($village->wid);
 		$CurrentTech = $ABTech["a".$get['a']];
 		$unit = ($session->tribe-1)*10+intval($get['a']);
-		if(($this->getTech($unit) || ($unit % 10) == 1) && ($CurrentTech < $building->getTypeLevel(12)) && $get['c'] == $session->mchecker) {
+		if(($this->getTech($unit) || ($unit % 10) == 1) && ($CurrentTech < $building->getTypeLevel(13)) && $get['c'] == $session->mchecker) {
 			global ${'ab'.strval($unit)};
 			$data = ${'ab'.strval($unit)};
-			$time = time() + round(($data[$CurrentTech+1]['time'] * ($bid13[$building->getTypeLevel(12)]['attri'] / 100))/SPEED);
+			$time = time() + round(($data[$CurrentTech+1]['time'] * ($bid13[$building->getTypeLevel(13)]['attri'] / 100))/SPEED);
 			if ($database->modifyResource($village->wid,$data[$CurrentTech+1]['wood'],$data[$CurrentTech+1]['clay'],$data[$CurrentTech+1]['iron'],$data[$CurrentTech+1]['crop'],0)) {
 				$database->addResearch($village->wid,"a".$get['a'],$time);
 				$logging->addTechLog($village->wid,"a".$get['a'],$CurrentTech+1);

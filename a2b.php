@@ -39,7 +39,6 @@ if(isset($_GET['o'])) {
     $checked  ="checked=checked";
 }
 	$process = $units->procUnits($_POST);
-	$automation->isWinner();
 include "Templates/html.tpl";
 ?>
 

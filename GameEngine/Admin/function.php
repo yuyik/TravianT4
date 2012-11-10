@@ -8,6 +8,7 @@
 ##  Copyright:     TravianX (c) 2010-2011. All rights reserved.                ##
 ##                                                                             ##
 #################################################################################
+
 class funct {   
   
   function CheckLogin(){
@@ -59,7 +60,7 @@ class funct {
       break; 
     } 
     if($get['action'] == 'logout'){
-      header("Location: index.php");  
+      header("Location: admin.php");  
     }else{
       header("Location: ".$_SERVER['HTTP_REFERER']);
     }                
@@ -83,20 +84,17 @@ class funct {
       }    
   }
   
-  function LogIN($username,$password,$img){
+  function LogIN($username,$password){
     global $admin,$database;
-	if($admin->Login($username,$password)){  
-		if($img == $_SESSION['secimg']){
-			//$_SESSION['username'] = $username; 
-			$_SESSION['access'] = $database->getUserField($username,'access',1);   
-			$_SESSION['id'] = $database->getUserField($username,'id',1); 
-			header("Location: index.php"); 
-		}else{
-			header("Location: index.php?error=2");
-		}
-	}else{
-		header("Location: index.php?error=1");
-	}
+    if($admin->Login($username,$password)){       
+      //$_SESSION['username'] = $username; 
+      $_SESSION['access'] = $database->getUserField($username,'access',1);   
+      $_SESSION['id'] = $database->getUserField($username,'id',1); 
+      header("Location: ".$_SERVER['HTTP_REFERER']);     
+      //header("Location: admin.php");      
+    }else{
+      echo "Error";
+    }
   }
   
   function LogOut(){      
@@ -165,6 +163,6 @@ if($funct->CheckLogin()){
   }
 }
 if($_POST['action']=='login'){
-  $funct->LogIN($_POST['name'],$_POST['pw'],$_POST['img']);
+  $funct->LogIN($_POST['name'],$_POST['pw']);
 }
 ?>

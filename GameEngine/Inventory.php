@@ -7,7 +7,7 @@ if($_POST && $_POST['a']=='inventory'){
 	$hero = $database->HeroFace($uid);
 	$heroData = $database->getHeroData($uid);
 	$itemData = $database->getItemData($data['id']);
-	
+
 	if($data['btype']==1){
 		$database->editProcItem($data['id'], 1);
 		$database->setHeroInventory($uid, 'helmet', $data['id']);
@@ -19,7 +19,7 @@ if($_POST && $_POST['a']=='inventory'){
 			$database->modifyHeroFace($uid, 'helmet', $data['type']);
 		}
 	}
-	
+
 	/*elseif($data['btype']==2){
 		//$database->editProcItem($data['id'], 1);
 		if($hero['helmet']!=0){
@@ -28,7 +28,7 @@ if($_POST && $_POST['a']=='inventory'){
 			
 		}
 	}*/
-	
+
 	elseif($data['btype']==3){
 		$database->editProcItem($data['id'], 1);
 		$database->setHeroInventory($uid, 'leftHand', $data['id']);
@@ -40,7 +40,7 @@ if($_POST && $_POST['a']=='inventory'){
 			$database->modifyHeroFace($uid, 'leftHand', $data['type']);
 		}
 	}
-	
+
 	elseif($data['btype']==4){
 		$database->editProcItem($data['id'], 1);
 		$id2 = $database->getHeroItemID2($uid, 4, $hero['rightHand']);
@@ -323,7 +323,7 @@ if($_POST && $_POST['a']=='inventory'){
 			$database->modifyHeroFace($uid, 'rightHand', $data['type']);
 		}
 	}
-	
+
 	elseif($data['btype']==5){
 		$database->editProcItem($data['id'], 1);
 		$database->setHeroInventory($uid, 'shoes', $data['id']);
@@ -335,7 +335,7 @@ if($_POST && $_POST['a']=='inventory'){
 			$database->modifyHeroFace($uid, 'foot', $data['type']);
 		}
 	}
-	
+
 	elseif($data['btype']==6){
 		$database->editProcItem($data['id'], 1);
 		$database->setHeroInventory($uid, 'horse', $data['id']);
@@ -361,7 +361,7 @@ if($_POST && $_POST['a']=='inventory'){
 			$database->modifyHeroFace($uid, 'horse', $data['type']);
 			$database->modifyHero2('speed', $value, $uid, 1);
 	}
-	
+
 	/*elseif($data['btype']==7){
 		$database->editProcItem($data['id'], 1);
 		if($hero['bag']!=0){
@@ -372,7 +372,7 @@ if($_POST && $_POST['a']=='inventory'){
 			$database->modifyHeroFace($uid, 'bag', $data['type']);
 		}
 	}*/
-	
+
 	/*elseif($data['btype']==8){
 		$database->editProcItem($data['id'], 1);
 		if($hero['bag']!=0){
@@ -383,7 +383,7 @@ if($_POST && $_POST['a']=='inventory'){
 			$database->modifyHeroFace($uid, 'bag', $data['type']);
 		}
 	}*/
-	
+
 	/*elseif($data['btype']==9){
 		$database->editProcItem($data['id'], 1);
 		if($hero['bag']!=0){
@@ -394,7 +394,7 @@ if($_POST && $_POST['a']=='inventory'){
 			$database->modifyHeroFace($uid, 'bag', $data['type']);
 		}
 	}*/
-	
+
 	elseif($data['btype']==10){
 		if($data['amount'] <= $itemData['num']){
 			$value = ($data['amount']*10);
@@ -416,7 +416,7 @@ if($_POST && $_POST['a']=='inventory'){
 		}
 		header("Location: hero_inventory.php");
 	}
-	
+
 	elseif($data['btype']==11){
 		if($heroData['health']<100){
 			if($data['amount'] <= $itemData['num']){
@@ -438,7 +438,7 @@ if($_POST && $_POST['a']=='inventory'){
 			}
 		}
 	}
-	
+
 	elseif($data['btype']==12){
 		if($heroData['dead']!=0){
 			$database->modifyHero2('dead', 0, $uid, 0);
@@ -447,7 +447,7 @@ if($_POST && $_POST['a']=='inventory'){
 			$database->editProcItem($data['id'], 1);
 		}
 	}
-	
+
 	elseif($data['btype']==13){
 		if($session->tribe == 1){ $tp = 100; }else{ $tp = 80; }
 		$rp = 30;
@@ -455,9 +455,9 @@ if($_POST && $_POST['a']=='inventory'){
 		$offPoints = $heroData['offBonus'];
 		$defPoints = $heroData['defBonus'];
 		$productPoints = $heroData['product'];
-		
+
 		$AllPoints = ($powerPoints+$offPoints+$defPoints+$productPoints);
-		
+
 		$database->modifyHero2('points', $AllPoints, $uid, 0);
 		$database->modifyHero2('power', 0, $uid, 0);
 		$database->modifyHero2('offBonus', 0, $uid, 0);
@@ -468,7 +468,7 @@ if($_POST && $_POST['a']=='inventory'){
 		}
 		$database->editProcItem($data['id'], 1);
 	}
-	
+
 	elseif($data['btype']==14){
 		if($village->loyalty<=125){
 			if($data['amount'] <= $itemData['num']){
@@ -490,7 +490,7 @@ if($_POST && $_POST['a']=='inventory'){
 		}
 		header("Location: hero_inventory.php");
 	}
-	
+
 	elseif($data['btype']==15){
 		if($data['amount'] <= $itemData['num']){
 			$value = ($data['amount']*$database->getVSumField($uid, 'cp'));
@@ -503,6 +503,6 @@ if($_POST && $_POST['a']=='inventory'){
 			}
 		}
 	}
-	
+
 }
 ?>

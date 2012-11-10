@@ -8,9 +8,6 @@ if(isset($_GET['newdid'])) {
 	$_SESSION['wid'] = $_GET['newdid'];
 	header("Location: ".$_SERVER['PHP_SELF']);
 }
-if(isset($_GET['s'])){
-$automation->isWinner();
-}
 include "Templates/html.tpl";
 ?>
 <body class="v35 webkit chrome spieler">
@@ -38,11 +35,11 @@ include "Templates/html.tpl";
 							<a class="" href="statistiken.php" accesskey="4" title="<?php echo HEADER_STATS; ?>"></a>
 						</li>
 <?php
-    	if(count($database->getMessage($session->uid,8)) >= 1000) {
     	if(count($database->getMessage($session->uid,7)) >= 1000) {
 			$unmsg = "+1000";
 		} else { $unmsg = count($database->getMessage($session->uid,7)); }
 		
+    	if(count($database->getMessage($session->uid,8)) >= 1000) {
 			$unnotice = "+1000";
 		} else { $unnotice = count($database->getMessage($session->uid,8)); }
 ?>
@@ -123,8 +120,6 @@ else if (isset($_GET['s'])) {
 	if($_GET['s'] > 4 or $session->is_sitter == 1) {
 	header("Location: ".$_SERVER['PHP_SELF']."?uid=".preg_replace("/[^a-zA-Z0-9_-]/","",$session->uid));
 	}
-}else{
-header("Location: ".$_SERVER['PHP_SELF']."?uid=".preg_replace("/[^a-zA-Z0-9_-]/","",$session->uid));
 }
 if (isset($_GET['id'])==$session->uid && isset($_GET['type'])==3) {
 	$owner = $_GET['owner'];

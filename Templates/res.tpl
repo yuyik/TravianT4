@@ -1,10 +1,13 @@
-
 <?php
 $totalproduction = $village->allcrop; // all crops + bakery + grain mill
-$crop = round($village->acrop);
+$heroData = $database->getHeroData($session->uid);
+if($heroData['dead']==0 && $heroData['wref']==$village->wid){
+$totalproduction += $heroData['r4']*10*SPEED*$heroData['product'];
+$totalproduction += $heroData['r0']*3*SPEED*$heroData['product'];
+}
 ?>
 <ul id="res">
-		<li class="r1" title="<div style=color:#FFF><b><?php echo LUMBER; ?></b></div>Termelés: <?php echo $village->getProd("wood"); ?>"> 
+		<li class="r1" title="<div style=color:#FFF><b><?php echo LUMBER; ?></b></div>Production: <?php echo $village->getProd("wood"); ?>"> 
 		<p> 
         	<img src="img/x.gif" alt="<?php echo LUMBER; ?>"/> 
 			<span id="l1" class="value "><?php echo round($village->awood)."/".$village->maxstore; ?></span> 
@@ -14,7 +17,7 @@ $crop = round($village->acrop);
       	</div>
         </li> 
         
-		<li class="r2" title="<div style=color:#FFF><b><?php echo CLAY; ?></b></div>Termelés: <?php echo $village->getProd("clay"); ?>"> 
+		<li class="r2" title="<div style=color:#FFF><b><?php echo CLAY; ?></b></div>Production: <?php echo $village->getProd("clay"); ?>"> 
 		<p> 
         	<img src="img/x.gif" alt="<?php echo CLAY; ?>"/> 
 			<span id="l2" class="value "><?php echo round($village->aclay)."/".$village->maxstore; ?></span> 
@@ -24,7 +27,7 @@ $crop = round($village->acrop);
 		</p> 
 
         	</li> 
-		<li class="r3" title="<div style=color:#FFF><b><?php echo IRON; ?></b></div>Termelés: <?php echo $village->getProd("iron"); ?>"> 
+		<li class="r3" title="<div style=color:#FFF><b><?php echo IRON; ?></b></div>Production: <?php echo $village->getProd("iron"); ?>"> 
 		<p> 
         	<img src="img/x.gif" alt="<?php echo IRON; ?>"/> 
 			<span id="l3" class="value "><?php echo round($village->airon)."/".$village->maxstore; ?></span>
@@ -34,7 +37,7 @@ $crop = round($village->acrop);
 		</p> 
 
         	</li> 
-		<li class="r4" title="<div style=color:#FFF><b><?php echo CROP; ?></b></div>Termelés: <?php echo $village->getProd("crop"); ?>"> 
+		<li class="r4" title="<div style=color:#FFF><b><?php echo CROP; ?></b></div>Production: <?php echo $village->getProd("crop"); ?>"> 
 		<p> 
         	<img src="img/x.gif" alt="<?php echo CROP; ?>"/> 
 			<span id="l4" class="value "><?php echo round($village->acrop)."/".$village->maxcrop; ?></span>
@@ -44,7 +47,7 @@ $crop = round($village->acrop);
 		</p> 
 
         	</li> 
-		<li class="r5" title="<div style=color:#FFF><b>Búzamérleg</b></div>Fogyasztás / Termelés"> 
+		<li class="r5" title="<div style=color:#FFF><b><?php echo CROP_COM; ?></b></div><?php echo ($village->pop+$technology->getUpkeep($village->unitall,0))."/".$totalproduction.""; ?>"> 
 		<p> 
         	<img src="img/x.gif" alt="<?php echo CROP_COM; ?>"/> 
 			<span id="l5" class="value "><?php echo ($village->pop+$technology->getUpkeep($village->unitall,0))."/".$totalproduction.""; ?></span> 

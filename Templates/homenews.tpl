@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 #################################################################################
 ##                                                                             ##
 ##              -= YOU MUST NOT REMOVE OR CHANGE THIS NOTICE =-                ##
@@ -23,16 +23,16 @@ if (HOME1 or HOME2 or HOME3){
     <div id="news-content">
         <h3 class="news bold"><?php echo NEWS; ?></h3>
         <?php
-            if(HOME1){echo '<div class="news-items"><div class="news">'; include("Templates/News/home/home1.tpl"); echo '</div></div>';};
+            if(HOME1){echo '<div class="news-items"><div class="news">'; include("Templates/News/home/home1.tpl"); echo '</div></div>';}
                 if(HOME1 & HOME2 == true){echo '<div class="news-divider"></div>';}
                 else if(HOME1 & HOME3 == true){echo '<div class="news-divider"></div>';}
                 else echo '';
             
-            if(HOME2){echo '<div class="news-items"><div class="news">'; include("Templates/News/home/home2.tpl"); echo '</div></div>';};
+            if(HOME2){echo '<div class="news-items"><div class="news">'; include("Templates/News/home/home2.tpl"); echo '</div></div>';}
                 if(HOME2 & HOME3 == true){echo '<div class="news-divider"></div>';}
                 else echo '';
             
-            if(HOME3){echo '<div class="news-items"><div class="news">'; include("Templates/News/home/home3.tpl"); echo '</div></div>';};
+            if(HOME3){echo '<div class="news-items"><div class="news">'; include("Templates/News/home/home3.tpl"); echo '</div></div>';}
         ?>
     </div>
     <div id="news-bottom"></div>

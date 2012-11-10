@@ -2,7 +2,7 @@
 <div id="build" class="gid19">
 <div class="build_desc">
 <a href="#" onClick="return Travian.Game.iPopup(19,4);" class="build_logo">
-	<img class="building big white g19" src="img/x.gif" alt="Kaszárnya" title="Kaszárnya" />
+	<img class="building big white g19" src="img/x.gif" alt="Barracks" title="Barracks" />
 </a>
 All foot soldiers are trained in the barracks. The higher the level of the barracks, the faster the troops are trained.</div>
 <?php
@@ -23,7 +23,7 @@ include("upgrade.tpl");
 						
     <?php
 	} else {
-		echo "<b>A képzések elkezdhetőek, ha a kaszárnya kiépült.</b><br>\n";
+		echo "<b>Training can commence when barracks are completed.</b><br>\n";
 	}
     $trainlist = $technology->getTrainingList(1);
     if(count($trainlist) > 0) {
@@ -44,14 +44,17 @@ include("upgrade.tpl");
 			echo "<img class=\"unit u".$train['unit']."\" src=\"img/x.gif\" alt=\"".$train['name']."\" title=\"".$train['name']."\" />";
 			echo $train['amt']." ".$train['name']."</td><td class=\"dur\">";
 			if ($TrainCount == 1 ) {
-				$NextFinished = $generator->getTimeFormat(($train['commence']+$train['eachtime'])-time());
-				echo "<span id=timer1>".$generator->getTimeFormat(($train['commence']+($train['eachtime']*$train['amt']))-time())."</span>";
+				$NextFinished = $generator->getTimeFormat($train['timestamp2']-time());
+				echo "<span id=timer1>".$generator->getTimeFormat($train['timestamp']-time())."</span>";
 			} else {
 				echo $generator->getTimeFormat($train['eachtime']*$train['amt']);
 			}
 			echo "</td><td class=\"fin\">";
-			$time = $generator->procMTime($train['commence']+($train['eachtime']*$train['amt']));
-			echo " ".$time[1]." óra";
+			$time = $generator->procMTime($train['timestamp']);
+			if($time[0] != "today") {
+				echo "on ".$time[0]." at ";
+            }
+			echo $time[1];
 		} ?>
 		</tr><tr class="next"><td colspan="3">The next unit is ready in <span id="timer2"><?php echo $NextFinished; ?></span> </td></tr>
 		</tbody></table>

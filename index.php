@@ -51,9 +51,6 @@
 				</div>
 	            <div id="top-nav">
                     <div id="top-nav-menu">
-                        <div id="logo">
-                            <a href="index.php"><img src="img/x.gif" class="logo" alt="" /></a>
-                        </div>
                         <ul id="top-navigation">
                             <li><a href="#tutorial" class="popcon"><?php echo GAME_TOUR; ?></a></li>
                             <li><a href="<?php echo FORUM_LINK; ?>" target="blank" id="forum"><?php echo FORUM; ?></a></li>
@@ -96,20 +93,6 @@
 	                	</div>
                 	</div>
 					<?php include("Templates/homenews.tpl");?>
-                    <div id="shop">
-	                	<div class="article"><?php echo $lang['index2']['shop title']; ?></div>
-	                	<div class="link">
-							<img class="ticker-btn" alt="" src="img/x.gif">
-							<a target="blank" class="tlink" href="<?php echo $lang['index2']['shop link']; ?>"><?php echo $lang['index2']['shop']; ?></a>
-						</div>
-	                </div>
-                    <div id="fb-widget">
-						<div id="fb-widget-head"></div>
-						<div id="fb-widget-content">
-							<iframe id="fb-container" src="http://www.facebook.com/plugins/likebox.php?href=<?php echo $lang['index2']['facebook']; ?>&amp;width=182&amp;colorscheme=light&amp;connections=9&amp;stream=false&amp;header=false&amp;height=260" scrolling="no" frameborder="0"></iframe>
-						</div>
-						<div id="fb-widget-bottom"></div>
-	                </div>
 				</div>
 	            <div id="content-main">
 	            	<div id="wit">

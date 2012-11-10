@@ -11,11 +11,11 @@ foreach($varray as $vil) {
 <div align="center">
 	<ul class="tabs">
     <?php if(isset($_GET['Edit'])){ ?>
-		<li><a id="a_title_1" href="?p=Users&uid=<?php echo $user['id'];?>">Profile player</a></li>
-		<li><a id="a_title_2" class="current" href="#">Edit profile</a></li>
+		<li><a id="a_title_1" href="?p=Users&uid=<?php echo $user['id'];?>">پروفایل بازیکن</a></li>
+		<li><a id="a_title_2" class="current" href="#">ویرایش پروفایل</a></li>
     <?php }else{ ?>
-		<li><a id="a_title_1" onclick="SetCurrent(1);" class="current" href="#">Player profile</a></li>
-		<li>Edit player</li>
+		<li><a id="a_title_1" onclick="SetCurrent(1);" class="current" href="#">پروفایل بازیکن</a></li>
+		<li>ویرایش بازیکن</li>
 	<?php } ?>
 	</ul>
 </div>
@@ -28,11 +28,11 @@ foreach($varray as $vil) {
 <table width="600" border="1" align="center" cellpadding="3" id="profile">
       <thead>
 	    	<tr bgcolor="#E2E2E2" height="25">
-				<th colspan="2">Player <a href="?p=Users&uid=<?php echo $user['id'];?>"><?php echo $user['username'];?></a></th>
+				<th colspan="2">بازیکن <a href="?p=Users&uid=<?php echo $user['id'];?>"><?php echo $user['username'];?></a></th>
     		</tr>                                       
     		<tr align="center" bgcolor="#E2E2E2" height="25">
-                <td><B>Specification</B></td>
-                <td><B>Description</B></td>
+                <td><B>مشخصات</B></td>
+                <td><B>توضیحات</B></td>
        	</tr>
    	</thead>
 		<tbody>
@@ -40,15 +40,15 @@ foreach($varray as $vil) {
                 <td class="details">
               <table cellpadding="3" cellspacing="0" border="1" width="100%">
                         <tr align="right">
-                            <th>Rating:</th>
+                            <th>رتبه:</th>
                             <td><?php echo $ranking->getUserRank($user['username']); ?></td>
                         </tr>
 						<tr align="right">
-                            <th>Rank</th>
-                            <td><?php if($user['tribe'] == 1) {echo "Roman";}else if($user['tribe'] == 2) {echo "Teuton";}else if($user['tribe'] == 3) {echo "Gaul";} ?></td>
+                            <th>نژاد</th>
+                            <td><?php if($user['tribe'] == 1) {echo "رومی ها";}else if($user['tribe'] == 2) {echo "توتن ها";}else if($user['tribe'] == 3) {echo "گول ها";} ?></td>
 			            </tr>
 			            <tr align="right">
-                            <th>Alliance:</th>
+                            <th>اتحاد:</th>
                             <td><?php
 				if($user['alliance'] == 0) {
 					echo "-";
@@ -60,24 +60,24 @@ foreach($varray as $vil) {
                 			</td>
             			</tr>
             			<tr align="right">
-                            <th>Village:</th>
+                            <th>دهکده ها:</th>
                             <td><?php echo count($varray);?></td>
                         </tr>
 			            <tr align="right">
-			                <th>Population:</th>
+			                <th>جمعیت:</th>
 				                <td><?php echo $totalpop;?></td>
 			            </tr>
             <?php 
             if(isset($user['birthday']) && $user['birthday'] != 0) {
 				$age = date("Y")-substr($user['birthday'],0,4);
-				echo "<tr align='right'><th>Age: </th><td>$age</td></tr>";
+				echo "<tr align='right'><th>سن: </th><td>$age</td></tr>";
             }
             if(isset($user['gender']) && $user['gender'] != 0) {
-				$gender = ($user['gender']== 1)? "Man" : "Woman";
-				echo "<tr align='right'><th>Gender: </th><td>".$gender."</td></tr>";
+				$gender = ($user['gender']== 1)? "مرد" : "زن";
+				echo "<tr align='right'><th>جنسیت: </th><td>".$gender."</td></tr>";
             }
 
-            echo "<tr align='right'><th>E-mail: </th><td>".$user['email']."</td></tr>";
+            echo "<tr align='right'><th>ایمیل: </th><td>".$user['email']."</td></tr>";
 			?>
                 <tr><td colspan="2" class="empty"></td></tr>
           <tr>
@@ -92,22 +92,22 @@ foreach($varray as $vil) {
         
 	<?php
 		if($_SESSION['access'] == ADMIN){
-			echo '<tr align="right"><td colspan="2"><a href="?p=Users&uid='.$user['id'].'&Edit">&raquo;<b>Edit profile</b></a></td></tr>';
+			echo '<tr align="right"><td colspan="2"><a href="?p=Users&uid='.$user['id'].'&Edit">&raquo;<b> ویرایش پروفایل</b></a></td></tr>';
 		}
 	?>
-		<tr align="right"><td colspan="2"><a href="?p=Messages&uid=<?php echo $user['id']; ?>&Send">&raquo;<b> Write message</b></a></td></tr>
+		<tr align="right"><td colspan="2"><a href="?p=Messages&uid=<?php echo $user['id']; ?>&Send">&raquo;<b> نوشتن نامه</b></a></td></tr>
 	<?php if($_SESSION['access'] == ADMIN){ ?>
 	<tr><td colspan="2"><a onclick="return (function(){
-				('<b>Delete player <?php echo $user['username'];?></b><br><br>Do you want to delete this player ?').dialog(
+				('<b>حذف بازیکن <?php echo $user['username'];?></b><br><br>آیا میخواهید این بازیکن را حذف کنید؟').dialog(
 				{
 					onOkay: function(dialog, contentElement)
 					{
 						window.location.href = '?p=Users&uid=<?php echo $user['id']; ?>&Edit'}
 				});
 				return false;
-			})()" href="#">&raquo;<b> Player deleted</b></a></td></tr>
+			})()" href="#">&raquo;<b> حذف بازیکن</b></a></td></tr>
 	<?php } ?>
-		<tr align="right"><td colspan="2"><a href="?p=Users&uid=<?php echo $user['id']; ?>&Ban">&raquo;<b>Ban </b></a></td></tr>
+		<tr align="right"><td colspan="2"><a href="?p=Users&uid=<?php echo $user['id']; ?>&Ban">&raquo;<b> بازداشت</b></a></td></tr>
 		<tr><td colspan="2" class="empty"></td></tr>
             <tr>
             	<td colspan="2" class="desc2">
@@ -115,9 +115,12 @@ foreach($varray as $vil) {
                 </td>
             </tr>
         </table>
+        
         </td>
     </tr>
+
     </tbody>
+
 </table>
 <?php } } ?>
 </div>

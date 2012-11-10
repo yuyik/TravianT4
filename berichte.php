@@ -81,33 +81,33 @@ if($message->unread) {
 <div class="contentTitle">&nbsp;</div>
 <div class="contentContainer">
 <div id="content" class="reports">
-<h1 class="titleInHeader">Reports</h1>
+<h1 class="titleInHeader">Report</h1>
 <div class="contentNavi subNavi">
 				<div title="" class="container <?php if (!isset($_GET['t'])) { echo "active"; }else{ echo "normal"; } ?>">
 					<div class="background-start">&nbsp;</div>
 					<div class="background-end">&nbsp;</div>
-					<div class="content"><a href="berichte.php"><span class="tabItem">All</span></a></div>
+					<div class="content"><a href="berichte.php"><span class="tabItem">Tutti</span></a></div>
 				</div>
 				<div title="" class="container <?php if (isset($_GET['t']) && $_GET['t'] == 1) { echo "active"; }else{ echo "normal"; } ?>">
 					<div class="background-start">&nbsp;</div>
 					<div class="background-end">&nbsp;</div>
-					<div class="content"><a href="berichte.php?t=1"><span class="tabItem">Trade</span></a></div>
+					<div class="content"><a href="berichte.php?t=1"><span class="tabItem">Truppe</span></a></div>
 				</div>
 				<div title="" class="container <?php if (isset($_GET['t']) && $_GET['t'] == 2) { echo "active"; }else{ echo "normal"; } ?>">
 					<div class="background-start">&nbsp;</div>
 					<div class="background-end">&nbsp;</div>
-					<div class="content"><a href="berichte.php?t=2"><span class="tabItem">Reinforcement</span></a></div>
+					<div class="content"><a href="berichte.php?t=2"><span class="tabItem">Commercio</span></a></div>
 				</div>
 				<div title="" class="container <?php if (isset($_GET['t']) && $_GET['t'] == 3) { echo "active"; }else{ echo "normal"; } ?>">
 					<div class="background-start">&nbsp;</div>
 					<div class="background-end">&nbsp;</div>
-					<div class="content"><a href="berichte.php?t=3"><span class="tabItem">Attacks</span></a></div>
+					<div class="content"><a href="berichte.php?t=3"><span class="tabItem">Vari</span></a></div>
 				</div>
                 <?php if($session->plus) { ?>
 				<div title="" class="container <?php if (isset($_GET['t']) && $_GET['t'] == 4) { echo "active"; }else{ echo "normal"; } ?>">
 					<div class="background-start">&nbsp;</div>
 					<div class="background-end">&nbsp;</div>
-					<div class="content"><a href="berichte.php?t=4"><span class="tabItem">Miscellaneous</span></a></div>
+					<div class="content"><a href="berichte.php?t=4"><span class="tabItem">Info generali</span></a></div>
 				</div> <?php } ?>
 <div class="clear"></div>
 </div>

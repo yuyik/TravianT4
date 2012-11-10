@@ -8,9 +8,6 @@ if(isset($_GET['newdid'])) {
 else {
 	$message->procMessage($_POST);
 }
-if($_GET['t'] == 1){
-$automation->isWinner();
-}
 include "Templates/html.tpl";
 ?>
  

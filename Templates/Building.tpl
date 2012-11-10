@@ -1,5 +1,4 @@
-﻿
-<div class="boxes buildingList">
+﻿<div class="boxes buildingList">
 <div class="boxes-tl"></div>
 <div class="boxes-tr"></div>
 <div class="boxes-tc"></div>
@@ -19,6 +18,7 @@
 		  <a class="arrow" href="?cmd=buildingFinish" onclick="return confirm('Complete instantly for 2 gold?')">Finish all</a>
 		  <b> (price: <img src="img/x.gif" class="gold" alt="Arany"> 2)</b>
 		</div>
+			<?php
             }
             ?></th>
 		</tr></thead>

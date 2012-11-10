@@ -116,7 +116,7 @@
        			$form->addError("name2", NAME_NO_EXIST);
        		}
        		// ¿La invitacion es a si mismo?
-       		if($post['a_name'] == (addslashes($session->username))) {
+       		if($post['a_name'] == ($session->username)) {
        			$form->addError("name3", SAME_NAME);
        		}
        		// ¿Esta ya invitado a la alianza?
@@ -143,7 +143,7 @@
        			// Insertamos invitacion
        			$database->sendInvitation($UserData['id'], $aid, $session->uid);
        			// Log the notice
-       			$database->insertAlliNotice($session->alliance, 'A <a href="spieler.php?uid=' . $session->uid . '">' . addslashes($session->username) . '</a> بازیکن  <a href="spieler.php?uid=' . $UserData['id'] . '">' . $UserData['username'] . '</a> szövettség meghívott.');
+       			$database->insertAlliNotice($session->alliance, '<a href="spieler.php?uid=' . $session->uid . '">' . $session->username . '</a> بازیکن  <a href="spieler.php?uid=' . $UserData['id'] . '">' . $UserData['username'] . '</a> را به اتحاد دعوت کرد.');
        		}
        	}
 
@@ -155,7 +155,7 @@
        		foreach($this->inviteArray as $invite) {
        			if($invite['id'] == $get['d']) {
        				$database->removeInvitation($get['d']);
-       				$database->insertAlliNotice($session->alliance, '<a href="spieler.php?uid=' . $session->uid . '">' . addslashes($session->username) . '</a> The invitation was.');
+       				$database->insertAlliNotice($session->alliance, '<a href="spieler.php?uid=' . $session->uid . '">' . $session->username . '</a> دعوت را پس گرفت.');
        			}
        		}
        		//header("Location: build.php?id=".$get['id']);
@@ -170,7 +170,7 @@
        		foreach($inviteArray as $invite) {
        			if($invite['id'] == $get['d']) {
        				$database->removeInvitation($get['d']);
-       				$database->insertAlliNotice($session->alliance, '<a href="spieler.php?uid=' . $session->uid . '">' . addslashes($session->username) . '</a> The invitation was.');
+       				$database->insertAlliNotice($session->alliance, '<a href="spieler.php?uid=' . $session->uid . '">' . $session->username . '</a> دعوت را پس گرفت.');
        			}
        		}
        		//header("Location: build.php?id=".$get['id']);
@@ -187,7 +187,7 @@
        				$database->updateUserField($database->RemoveXSS($invite['uid']), "alliance", $database->RemoveXSS($invite['alliance']), 1);
        				$database->createAlliPermissions($database->RemoveXSS($invite['uid']), $database->RemoveXSS($invite['alliance']), '', '0', '0', '0', '0', '0', '0', '0', '0');
        				// Log the notice
-       				$database->insertAlliNotice($invite['alliance'], '<a href="spieler.php?uid=' . $session->uid . '">' . addslashes($session->username) . '</a> The invitation was.');
+       				$database->insertAlliNotice($invite['alliance'], '<a href="spieler.php?uid=' . $session->uid . '">' . $session->username . '</a> به اتحادیه پیوست.');
        			}
        		}
        		header("Location: build.php?id=" . $get['id']);
@@ -220,9 +220,9 @@
        			$aid = $database->createAlliance($database->RemoveXSS($post['ally1']), $database->RemoveXSS($post['ally2']), $session->uid, $max);
        			$database->updateUserField($database->RemoveXSS($session->uid), "alliance", $database->RemoveXSS($aid), 1);
        			// Asign Permissions
-       			$database->createAlliPermissions($database->RemoveXSS($session->uid), $database->RemoveXSS($aid), 'Founder of the alliance', '1', '1', '1', '1', '1', '1', '1', '1');
+       			$database->createAlliPermissions($database->RemoveXSS($session->uid), $database->RemoveXSS($aid), 'موسس اتحاد', '1', '1', '1', '1', '1', '1', '1', '1');
        			// log the notice
-       			$database->insertAlliNotice($session->alliance, 'Unity by <a href="spieler.php?uid=' . $session->uid . '">' . addslashes($session->username) . '</a> was founded.');
+       			$database->insertAlliNotice($session->alliance, 'اتحاد توسط <a href="spieler.php?uid=' . $session->uid . '">' . $session->username . '</a> تاسیس شد.');
        			header("Location: build.php?id=" . $post['id']);
        		}
        	}
@@ -257,7 +257,7 @@
        		} else {
        			$database->setAlliName($database->RemoveXSS($session->alliance), $database->RemoveXSS($get['ally2']), $database->RemoveXSS($get['ally1']));
        			// log the notice
-       			$database->insertAlliNotice($session->alliance, '<a href="spieler.php?uid=' . $session->uid . '">' . addslashes($session->username) . '</a> The name change.');
+       			$database->insertAlliNotice($session->alliance, '<a href="spieler.php?uid=' . $session->uid . '">' . $session->username . '</a> نام اتحاد را تغییر داد.');
        		}
        	}
 
@@ -276,7 +276,7 @@
        		} else {
        			$database->submitAlliProfile($database->RemoveXSS($session->alliance), $database->RemoveXSS($post['be2']), $database->RemoveXSS($post['be1']));
        			// log the notice
-       			$database->insertAlliNotice($session->alliance, '<a href="spieler.php?uid=' . $session->uid . '">' . addslashes($session->username) . '</a> Description of the change');
+       			$database->insertAlliNotice($session->alliance, '<a href="spieler.php?uid=' . $session->uid . '">' . $session->username . '</a> توضیحات اتحاد را تغییر داد');
        		}
        	}
 
@@ -295,7 +295,7 @@
        		} else {
        			$database->updateAlliPermissions($post['a_user'], $session->alliance, $post['a_titel'], $post['e1'], $post['e2'], $post['e3'], $post['e4'], $post['e5'], $post['e6'], $post['e7']);
        			// log the notice
-       			$database->insertAlliNotice($session->alliance, '<a href="spieler.php?uid=' . $session->uid . '">' . addslashes($session->username) . '</a> Access changed.');
+       			$database->insertAlliNotice($session->alliance, '<a href="spieler.php?uid=' . $session->uid . '">' . $session->username . '</a> دسترسی ها را تغییر داد.');
        		}
 
        	}
@@ -316,7 +316,7 @@
        			$database->updateUserField($post['a_user'], 'alliance', 0, 1);
        			$database->deleteAlliPermissions($post['a_user']);
        			// log the notice
-       			$database->insertAlliNotice($session->alliance, '<a href="spieler.php?uid=' . $session->uid . '">' . addslashes($session->username) . '</a> player <a href="spieler.php?uid=' . $post['a_user'] . '">' . $UserData['username'] . '</a> Kicked.');
+       			$database->insertAlliNotice($session->alliance, '<a href="spieler.php?uid=' . $session->uid . '">' . $session->username . '</a> بازیکن <a href="spieler.php?uid=' . $post['a_user'] . '">' . $UserData['username'] . '</a> را اخراج کرد.');
        			//header("Location: build.php?id=".$post['id']);
        		}
        	}
@@ -333,7 +333,7 @@
        			$database->updateUserField($session->uid, 'alliance', 0, 1);
        			$database->deleteAlliPermissions($session->uid);
        			$database->deleteAlliance($session->alliance);
-       			$database->insertAlliNotice($session->alliance, '<a href="spieler.php?uid=' . $session->uid . '">' . addslashes($session->username) . '</a> Union left the');
+       			$database->insertAlliNotice($session->alliance, '<a href="spieler.php?uid=' . $session->uid . '">' . $session->username . '</a> اتحادیه را ترک کرد');
        			header("Location: dorf1.php");
        		}
        	}
@@ -348,19 +348,19 @@
        				if($aType >= 1 and $aType <= 3) {
        					if(!$database->diplomacyInviteCheck($database->getAllianceID($aName), $session->alliance)) {
        						$database->diplomacyInviteAdd($session->alliance, $database->getAllianceID($aName), $aType);
-       						$form->addError("name", "Invitations were sent");
+       						$form->addError("name", "دعوتنامه فرستاده شد");
        					} else {
-       						$form->addError("name", "Invitations had been sent previously");
+       						$form->addError("name", "قبلا دعوتنامه فرستاده شده بود");
        					}
 
        				} else {
        					$form->addError("name", "wrong choice made");
        				}
        			} else {
-       				$form->addError("name", "You can invite");
+       				$form->addError("name", "نمیتوانید دعوت کنید");
        			}
        		} else {
-       			$form->addError("name", "There is no unity");
+       			$form->addError("name", "اتحاد وجود ندارد");
        		}
        	}
        }

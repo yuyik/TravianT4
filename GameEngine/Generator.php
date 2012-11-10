@@ -72,39 +72,25 @@ class Generator {
 		return round(($distance/$speed) * 3600 / INCREASE_SPEED);
 	}
    
-   public function getTimeFormat($sec) {
-	   /*if ($time%10 < 5) {
-			$time = $time-($time%10);
-		}
-		else {
-			$time = $time + (10 - $time%10);
-		}*/
+   public function getTimeFormat($time) {
 	   $min = 0;
 	   $hr = 0;
 	   $days = 0;
-	   
-	   while($sec >= 60) :
-		   $sec -= 60;
+	   while($time >= 60) :
+		   $time -= 60;
 		   $min += 1;
 	   endwhile;
-	   while($sec >= 60) :
-		   $sec -= 60;
-		   $min += 1;
-	   endwhile;
-	   
 	   while ($min >= 60) :
 		   $min -= 60;
 		   $hr += 1;
 	   endwhile;
-	   
 	   if ($min < 10) {
 		   $min = "0".$min;
 	   }
-	   if($sec < 10) {
-		   $sec = "0".$sec;
+	   if($time < 10) {
+		   $time = "0".$time;
 	   }
-	   
-		return $hr.":".$min.":".$sec;
+		return $hr.":".$min.":".$time;
    }
 
 	public function procMtime($time) {

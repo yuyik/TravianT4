@@ -1,7 +1,7 @@
-<div align="center">
+﻿<div align="center">
 	<ul class="tabs">
-		<li><a id="a_title_1" onclick="SetCurrent(1);" class="current" href="#">Server news</a></li>
-		<li>News Home</li>
+		<li><a id="a_title_1" onclick="SetCurrent(1);" class="current" href="#">اخبار سرور</a></li>
+		<li>اخبار صفحه اصلی</li>
 	</ul>
 </div>
 <br>
@@ -12,11 +12,11 @@
 <table align="center" width="404" cellpadding="1" cellspacing="1" border="1">
 	<thead>
 		<tr>
-			<th height="21" colspan="2" valign="top">Edit news</th>
+			<th height="21" colspan="2" valign="top">ویرایش خبرها</th>
 		</tr>                                       
 	</thead>
 	<tr>
-		<td height="24" align="center">Select news box:</td>                                    
+		<td height="24" align="center">انتخاب شمارۀ خبر:</td>                                    
 		<td valign="top">
         	<center>                                                   
                 <font size=3>
@@ -28,18 +28,18 @@
         </td>      
     </tr>
     <tr>
-        <td height="24" align="center">Subject:</td>
+        <td height="24" align="center">موضوع:</td>
         <td valign="top"><center><input type="text" name="title" value="" size=30></td>
     </tr>       
     <tr>
-        <td align="center"><strong>Comment:</strong></td>
+        <td align="center"><strong>متن خبر:</strong></td>
         <td valign="top"><center><textarea name="txt" cols="40" rows="10"></textarea></td>      
     </tr>
     <tr>
         <td height="26" valign="top" colspan="2"><br />
             <center>
-            	<button name="submit" type="submit" value="submit" id="submit" class="submit"><div class="button-container"><div class="button-position"><div class="btl"><div class="btr"><div class="btc"></div></div></div><div class="bml"><div class="bmr"><div class="bmc"></div></div></div><div class="bbl"><div class="bbr"><div class="bbc"></div></div></div></div><div class="button-contents">Save</div></div></button>
-                <button name="reset" type="reset" value="reset" id="reset" class="reset"><div class="button-container"><div class="button-position"><div class="btl"><div class="btr"><div class="btc"></div></div></div><div class="bml"><div class="bmr"><div class="bmc"></div></div></div><div class="bbl"><div class="bbr"><div class="bbc"></div></div></div></div><div class="button-contents">Rewrite</div></div></button>
+            	<button name="submit" type="submit" value="submit" id="submit" class="submit"><div class="button-container"><div class="button-position"><div class="btl"><div class="btr"><div class="btc"></div></div></div><div class="bml"><div class="bmr"><div class="bmc"></div></div></div><div class="bbl"><div class="bbr"><div class="bbc"></div></div></div></div><div class="button-contents">تایید</div></div></button>
+                <button name="reset" type="reset" value="reset" id="reset" class="reset"><div class="button-container"><div class="button-position"><div class="btl"><div class="btr"><div class="btc"></div></div></div><div class="bml"><div class="bmr"><div class="bmc"></div></div></div><div class="bbl"><div class="bbr"><div class="bbc"></div></div></div></div><div class="button-contents">بازنویسی</div></div></button>
             </center>
         </td>     
     </tr>
@@ -61,9 +61,9 @@ if($_POST['action']=='News'){
 		unlink ('../Templates/News/newsbox'.$number.'.tpl');
 		$file = fopen('../Templates/News/newsbox'.$number.'.tpl','w+');
 		fwrite($file,''.$st.''.$text.'');
-		echo '<center><font size="5">It is successfully saved</font>';
+		echo '<center><font size="5">خبر با موفقیت ایجاد شد</font>';
 	}else{
-		echo "<center><font size='5' color='red'>The comment box is empty!</font>";
+		echo "<center><font size='5' color='red'>متن خبر خالی است!</font>";
 	}
 }
 ?>

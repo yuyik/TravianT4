@@ -280,7 +280,7 @@
                 $text = $this->wordCensor($text);
                 }
                 if($topic == "") {
-                $topic = "Nincs tárgy";
+                $topic = "بدون موضوع";
                 }
                 if($permission[opt7]==1){  
                 if ($userally != 0) {
@@ -299,7 +299,7 @@
         			$text = $this->wordCensor($text);
         		}
         		if($topic == "") {
-        			$topic = "Nincs tárgy";
+        			$topic = "بدون موضوع";
         		}
         		//if to multihunter
         		if($user == "0") {

@@ -3042,12 +3042,15 @@ $info_cata=" از سطح <b>".$tblevel."</b> به سطح <b>".$totallvl."</b> آ
         return round($crop);
     }
 
-    private function trainingComplete() {
+	private function trainingComplete() {
 	if(file_exists("GameEngine/Prevention/training.txt")) {
-            unlink("GameEngine/Prevention/training.txt");
-        }
-        global $database;
-        $trainlist = $database->getTrainingList();
+			unlink("GameEngine/Prevention/training.txt");
+		}
+		global $database;
+		$time = time();
+		$ourFileHandle = fopen("GameEngine/Prevention/training.txt", 'w');
+		fclose($ourFileHandle);
+		$trainlist = $database->getTrainingList();
 		if(count($trainlist) > 0){
 			foreach($trainlist as $train){
 					$timepast = $train['timestamp2'] - $time;
@@ -3063,13 +3066,14 @@ $info_cata=" از سطح <b>".$tblevel."</b> به سطح <b>".$totallvl."</b> آ
 					$trained = $train['amt'];
 					}
 					if($train['unit']>60 && $train['unit']!=99){
-					$database->modifyUnit($train['vref'],array($train['unit']-60),array($trained),array(1));
+					$database->modifyUnit($train['vref'],$train['unit']-60,$trained,1);
 					}else{
-					$database->modifyUnit($train['vref'],array($train['unit']),array($trained),array(1));
+					$database->modifyUnit($train['vref'],$train['unit'],$trained,1);
 					}
 					$database->updateTraining($train['id'],$trained,$trained*$train['eachtime']);
 					}
-					if($train['amt'] == 0){
+					$new_amt = $train['amt'] - $trained;
+					if($new_amt == 0){
 					$database->trainUnit($train['id'],0,0,0,0,1,1);
 					}
 				$crop = $database->getCropProdstarv($train['vref']);
@@ -3084,9 +3088,9 @@ $info_cata=" از سطح <b>".$tblevel."</b> به سطح <b>".$totallvl."</b> آ
 			}
 		}
 		if(file_exists("GameEngine/Prevention/training.txt")) {
-            unlink("GameEngine/Prevention/training.txt");
-        }
-    }
+			unlink("GameEngine/Prevention/training.txt");
+		}
+	}
     
     private function procDistanceTime($coor,$thiscoor,$ref,$mode) {
         global $bid14,$database,$generator;
