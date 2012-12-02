@@ -433,7 +433,7 @@ private function trainUnit($unit,$amt,$great=false) {
 		global $session,$building;
 		switch($tech) {
 			case 2:
-			if($building->getTypeLevel(22) >= 1 && $building->getTypeLevel(13) >= 1) { return true; } else { return false; }
+			if($building->getTypeLevel(22) >= 1 && $building->getTypeLevel(12) >= 1) { return true; } else { return false; }
 			break;
 			case 3:
 			if($building->getTypeLevel(22) >= 5 && $building->getTypeLevel(12) >= 1) { return true; } else { return false; }
