@@ -748,6 +748,13 @@
         		$result = mysql_query($q, $this->connection);
         		return $this->mysql_fetch_all($result);
         	}
+			
+			function ForumCatAlliance($id) {
+				$q = "SELECT alliance from " . TB_PREFIX . "forum_cat where id = $id";
+				$result = mysql_query($q, $this->connection);
+				$dbarray = mysql_fetch_array($result);
+				return $dbarray['alliance'];
+			}
 
         	function ForumCatName($id) {
         		$q = "SELECT forum_name from " . TB_PREFIX . "forum_cat where id = $id";
@@ -1261,11 +1268,11 @@
         		return mysql_query($q, $this->connection);
         	}
 
-        	function sendMessage($client, $owner, $topic, $message, $send) {
-        		$time = time();
-        		$q = "INSERT INTO " . TB_PREFIX . "mdata values (0,$client,$owner,'$topic',\"$message\",0,0,$send,$time)";
-        		return mysql_query($q, $this->connection);
-        	}
+			function sendMessage($client, $owner, $topic, $message, $send, $alliance, $player, $coor, $report) {
+				$time = time();
+				$q = "INSERT INTO " . TB_PREFIX . "mdata values (0,$client,$owner,'$topic',\"$message\",0,0,$send,$time,0,0,$alliance,$player,$coor,$report)";
+				return mysql_query($q, $this->connection);
+			}
 
         	function setArchived($id) {
         		$q = "UPDATE " . TB_PREFIX . "mdata set archived = 1 where id = $id";
@@ -1277,52 +1284,78 @@
         		return mysql_query($q, $this->connection);
         	}
 
-        	/***************************
-        	Function to get messages
-        	Mode 1: Get inbox
-        	Mode 2: Get sent
-        	Mode 3: Get message
-        	Mode 4: Set viewed
-        	Mode 5: Remove message
-        	Mode 6: Retrieve archive
-        	References: User ID/Message ID, Mode
-        	***************************/
-        	function getMessage($id, $mode) {
-        		global $session;
-        		switch($mode) {
-        			case 1:
-        				$q = "SELECT * FROM " . TB_PREFIX . "mdata WHERE target = $id and send = 0 and archived = 0 ORDER BY time DESC";
-        				break;
-        			case 2:
-        				// removed send no longer needed as we dont send 2 messages any more just 1
-        				$q = "SELECT * FROM " . TB_PREFIX . "mdata WHERE owner = $id ORDER BY time DESC";
-        				break;
-        			case 3:
-        				$q = "SELECT * FROM " . TB_PREFIX . "mdata where id = $id";
-        				break;
-        			case 4:
-        				$q = "UPDATE " . TB_PREFIX . "mdata set viewed = 1 where id = $id AND target = $session->uid";
-        				break;
-        			case 5:
-        				$q = "DELETE FROM " . TB_PREFIX . "mdata where id = $id";
-        				break;
-        			case 6:
-        				$q = "SELECT * FROM " . TB_PREFIX . "mdata where target = $id and send = 0 and archived = 1";
-        				break;
+			/***************************
+			Function to get messages
+			Mode 1: Get inbox
+			Mode 2: Get sent
+			Mode 3: Get message
+			Mode 4: Set viewed
+			Mode 5: Remove message
+			Mode 6: Retrieve archive
+			References: User ID/Message ID, Mode
+			***************************/
+			function getMessage($id, $mode) {
+				global $session;
+				switch($mode) {
+					case 1:
+						$q = "SELECT * FROM " . TB_PREFIX . "mdata WHERE target = $id and send = 0 and archived = 0 ORDER BY time DESC";
+						break;
+					case 2:
+						$q = "SELECT * FROM " . TB_PREFIX . "mdata WHERE owner = $id ORDER BY time DESC";
+						break;
+					case 3:
+						$q = "SELECT * FROM " . TB_PREFIX . "mdata where id = $id";
+						break;
+					case 4:
+						$q = "UPDATE " . TB_PREFIX . "mdata set viewed = 1 where id = $id AND target = $session->uid";
+						break;
+					case 5:
+						$q = "UPDATE " . TB_PREFIX . "mdata set deltarget = 1,viewed = 1 where id = $id";
+						break;
+					case 6:
+						$q = "SELECT * FROM " . TB_PREFIX . "mdata where target = $id and send = 0 and archived = 1";
+						break;
 					case 7:
-        				$q = "SELECT * FROM " . TB_PREFIX . "mdata where target = $id and viewed = 0 and archived = 0";
-        				break;
+						$q = "UPDATE " . TB_PREFIX . "mdata set delowner = 1 where id = $id";
+						break;
 					case 8:
-        				$q = "SELECT * FROM " . TB_PREFIX . "ndata where uid = $id and viewed = 0";
-        				break;
-        		}
-        		if($mode <= 3 || $mode >= 7) {
-        			$result = mysql_query($q, $this->connection);
-        			return $this->mysql_fetch_all($result);
-        		} else {
-        			return mysql_query($q, $this->connection);
-        		}
-        	}
+						$q = "UPDATE " . TB_PREFIX . "mdata set deltarget = 1, delowner = 1, viewed = 1 where id = $id";
+						break;
+					case 9:
+						$q = "SELECT * FROM " . TB_PREFIX . "mdata WHERE target = $id and send = 0 and archived = 0 and deltarget = 0 ORDER BY time DESC";
+						break;
+					case 10:
+						$q = "SELECT * FROM " . TB_PREFIX . "mdata WHERE owner = $id and delowner = 0 ORDER BY time DESC";
+						break;
+					case 11:
+						$q = "SELECT * FROM " . TB_PREFIX . "mdata where target = $id and send = 0 and archived = 1 and deltarget = 0";
+						break;
+				}
+				if($mode <= 3 || $mode == 6 || $mode > 8) {
+					$result = mysql_query($q, $this->connection);
+					return $this->mysql_fetch_all($result);
+				} else {
+					return mysql_query($q, $this->connection);
+				}
+			}
+			
+			function getDelSent($uid) {
+				$q = "SELECT * FROM " . TB_PREFIX . "mdata WHERE owner = $uid and delowner = 1 ORDER BY time DESC";
+				$result = mysql_query($q, $this->connection);
+				return $this->mysql_fetch_all($result);
+			}
+
+			function getDelInbox($uid) {
+				$q = "SELECT * FROM " . TB_PREFIX . "mdata WHERE target = $uid and deltarget = 1 ORDER BY time DESC";
+				$result = mysql_query($q, $this->connection);
+				return $this->mysql_fetch_all($result);
+			}
+
+			function getDelArchive($uid) {
+				$q = "SELECT * FROM " . TB_PREFIX . "mdata WHERE target = $uid and archived = 1 and deltarget = 1 OR owner = $uid and archived = 1 and delowner = 1 ORDER BY time DESC";
+				$result = mysql_query($q, $this->connection);
+				return $this->mysql_fetch_all($result);
+			}
 
         	function unarchiveNotice($id) {
         		$q = "UPDATE " . TB_PREFIX . "ndata set archive = 0 where id = $id";
@@ -1334,10 +1367,10 @@
         		return mysql_query($q, $this->connection);
         	}
 
-        	function removeNotice($id) {
-        		$q = "DELETE FROM " . TB_PREFIX . "ndata where id = $id";
-        		return mysql_query($q, $this->connection);
-        	}
+			function removeNotice($id) {
+				$q = "UPDATE " . TB_PREFIX . "ndata set del = 1 ,viewed = 1 where id = $id";
+				return mysql_query($q, $this->connection);
+			}
 
         	function noticeViewed($id) {
         		$q = "UPDATE " . TB_PREFIX . "ndata set viewed = 1 where id = $id";
@@ -1352,12 +1385,72 @@
         		return mysql_query($q, $this->connection) or die(mysql_error());
         	}
 
-        	function getNotice($uid) {
-        		$q = "SELECT * FROM " . TB_PREFIX . "ndata where uid = $uid ORDER BY time DESC";
-        		$result = mysql_query($q, $this->connection);
-        		return $this->mysql_fetch_all($result);
-        	}
-			
+			function getNotice($uid) {
+				$q = "SELECT * FROM " . TB_PREFIX . "ndata where uid = $uid and del = 0 ORDER BY time DESC";
+				$result = mysql_query($q, $this->connection);
+				return $this->mysql_fetch_all($result);
+			}
+
+			function getNotice2($id, $field) {
+				$q = "SELECT ".$field." FROM " . TB_PREFIX . "ndata where `id` = '$id'";
+				$result = mysql_query($q, $this->connection);
+				$dbarray = mysql_fetch_array($result);
+				return $dbarray[$field];
+			}
+
+			function getNotice3($uid) {
+				$q = "SELECT * FROM " . TB_PREFIX . "ndata where uid = $uid ORDER BY time DESC";
+				$result = mysql_query($q, $this->connection);
+				return $this->mysql_fetch_all($result);
+			}
+
+			function getNotice4($id) {
+				$q = "SELECT * FROM " . TB_PREFIX . "ndata where id = $id ORDER BY time DESC";
+				$result = mysql_query($q, $this->connection);
+				return $this->mysql_fetch_all($result);
+			}
+
+			function createTradeRoute($uid,$wid,$from,$r1,$r2,$r3,$r4,$start,$deliveries,$merchant,$time) {
+			$x = "UPDATE " . TB_PREFIX . "users SET gold = gold - 2 WHERE id = ".$uid."";
+				mysql_query($x, $this->connection);
+				$timeleft = time()+604800;
+			$q = "INSERT into " . TB_PREFIX . "route values (0,$uid,$wid,$from,$r1,$r2,$r3,$r4,$start,$deliveries,$merchant,$time,$timeleft)";
+				return mysql_query($q, $this->connection);
+			}
+
+			function getTradeRoute($uid) {
+				$q = "SELECT * FROM " . TB_PREFIX . "route where uid = $uid ORDER BY timestamp ASC";
+				$result = mysql_query($q, $this->connection);
+				return $this->mysql_fetch_all($result);
+			}
+
+			function getTradeRoute2($id) {
+				$q = "SELECT * FROM " . TB_PREFIX . "route where id = $id";
+				$result = mysql_query($q, $this->connection) or die(mysql_error());
+				$dbarray = mysql_fetch_array($result);
+				return $dbarray;
+			}
+
+			function getTradeRouteUid($id) {
+				$q = "SELECT * FROM " . TB_PREFIX . "route where id = $id";
+				$result = mysql_query($q, $this->connection) or die(mysql_error());
+				$dbarray = mysql_fetch_array($result);
+				return $dbarray['uid'];
+			}
+
+			function editTradeRoute($id,$column,$value,$mode) {
+			if(!$mode){
+				$q = "UPDATE " . TB_PREFIX . "route set $column = $value where id = $id";
+			}else{
+				$q = "UPDATE " . TB_PREFIX . "route set $column = $column + $value where id = $id";
+			}
+				return mysql_query($q, $this->connection);
+			}
+
+			function deleteTradeRoute($id) {
+				$q = "DELETE FROM " . TB_PREFIX . "route where id = $id";
+				return mysql_query($q, $this->connection);
+			}
 			
 			function getAttacks($ref) {
         		$q = "SELECT * FROM " . TB_PREFIX . "attacks where id = '$ref'";
@@ -1843,10 +1936,10 @@
         		}
         	}
 
-        	function addMovement($type, $from, $to, $ref, $data, $endtime) {
-        		$q = "INSERT INTO " . TB_PREFIX . "movement values (0,$type,$from,$to,$ref,'$data',$endtime,0)";
-        		return mysql_query($q, $this->connection);
-        	}
+			function addMovement($type, $from, $to, $ref, $data, $endtime, $send = 1, $wood = 0, $clay = 0, $iron = 0, $crop = 0, $ref2 = 0) {
+				$q = "INSERT INTO " . TB_PREFIX . "movement values (0,$type,$from,$to,$ref,$ref2,'$data',$endtime,0,$send,$wood,$clay,$iron,$crop)";
+				return mysql_query($q, $this->connection);
+			}
 
         	function addAttack($vid, $t1, $t2, $t3, $t4, $t5, $t6, $t7, $t8, $t9, $t10, $t11, $type, $ctar1, $ctar2, $spy) {
         		$q = "INSERT INTO " . TB_PREFIX . "attacks values (0,$vid,$t1,$t2,$t3,$t4,$t5,$t6,$t7,$t8,$t9,$t10,$t11,$type,$ctar1,$ctar2,$spy)";
@@ -3100,13 +3193,6 @@ break;
         		return $dbarray['wref'];
         	}
 			
-			function getNotice2($id, $field) {
-        		$q = "SELECT ".$field." FROM " . TB_PREFIX . "ndata where `id` = '$id'";
-        		$result = mysql_query($q, $this->connection);
-        		$dbarray = mysql_fetch_array($result);
-        		return $dbarray[$field];
-        	}
-			
 			function addAdventure($wref, $uid){
 				$time = time()+(3600*120);
 				$ddd = rand(0,3);
@@ -3392,7 +3478,7 @@ break;
 				return $crop;
             }
 			
-		function getfieldDistance($wid) {
+		function getFieldDistance($wid) {
 		$q = "SELECT * FROM " . TB_PREFIX . "vdata where owner > 4 and wref != $wid";
 		$array = $this->query_return($q);
 		$coor = $this->getCoor($wid);

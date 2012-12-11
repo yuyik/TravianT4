@@ -15,7 +15,7 @@ if($building->walling()) {
 	$wtitle = $building->procResType($building->walling())." Level ".$village->resarray['f40'];
 }
 else {
-	$wtitle = ($village->resarray['f40'] == 0)? "Outer building site" : $building->procResType($village->resarray['f40t'],0)." Szint ".$village->resarray['f40'];
+	$wtitle = ($village->resarray['f40'] == 0)? "Outer building site" : $building->procResType($village->resarray['f40t'],0)." Level ".$village->resarray['f40'];
 }
 ?>
 <map name="clickareas" id="clickareas">
@@ -88,7 +88,7 @@ for ($i=1;$i<=20;$i++) {
     foreach($building->buildArray as $job) {
     	if($job['field'] == ($i+18)) {
         	$img = 'g'.$job['type'].'b';
-            $text = $building->procResType($job['type'])." Szint ".$village->resarray['f'.$job['field']];
+            $text = $building->procResType($job['type'])." Level ".$village->resarray['f'.$job['field']];
         }
     }
 	echo "<img src=\"img/x.gif\" class=\"building d$i $img\" alt=\"$text\" />";

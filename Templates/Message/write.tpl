@@ -47,7 +47,7 @@ echo "RE:".$message->reply['topic']; }} ?>" name="be" onkeyup="copyElement('subj
 				
 			<div id="message_container" class="bbEditor">
 				<div class="boxes boxesColor gray"><div class="boxes-tl"></div><div class="boxes-tr"></div><div class="boxes-tc"></div><div class="boxes-ml"></div><div class="boxes-mr"></div><div class="boxes-mc"></div><div class="boxes-bl"></div><div class="boxes-br"></div><div class="boxes-bc"></div><div class="boxes-contents">
-				<div id="message_toolbar" class="bbToolbar"><button type="button" value="bbBold" class="icon bbButton bbBold bbType{d} bbTag{b}"><img src="img/x.gif" class="bbBold" alt="bbBold"></button><button type="button" value="bbItalic" class="icon bbButton bbItalic bbType{d} bbTag{i}"><img src="img/x.gif" class="bbItalic" alt="bbItalic"></button><button type="button" value="bbUnderscore" class="icon bbButton bbUnderscore bbType{d} bbTag{u}"><img src="img/x.gif" class="bbUnderscore" alt="bbUnderscore"></button><button type="button" value="bbAlliance" class="icon bbButton bbAlliance bbType{d} bbTag{اتحاد}"><img src="img/x.gif" class="bbAlliance" alt="bbAlliance"></button><button type="button" value="bbPlayer" class="icon bbButton bbPlayer bbType{d} bbTag{بازیکن}"><img src="img/x.gif" class="bbPlayer" alt="bbPlayer"></button><button type="button" value="bbCoordinate" class="icon bbButton bbCoordinate bbType{d} bbTag{x|y}"><img src="img/x.gif" class="bbCoordinate" alt="bbCoordinate"></button><button type="button" value="bbReport" class="icon bbButton bbReport bbType{d} bbTag{گزارش}"><img src="img/x.gif" class="bbReport" alt="bbReport"></button><button type="button" value="bbResource" id="message_resourceButton" class="bbWin{resources} bbButton bbResource icon"><img src="img/x.gif" class="bbResource" alt="bbResource"></button><button type="button" value="bbSmilies" id="message_smilieButton" class="bbWin{smilies} bbButton bbSmilies icon"><img src="img/x.gif" class="bbSmilies" alt="bbSmilies"></button><button type="button" value="bbTroops" id="message_troopButton" class="bbWin{troops} bbButton bbTroops icon"><img src="img/x.gif" class="bbTroops" alt="bbTroops"></button><button type="button" value="bbPreview" id="message_previewButton" class="icon bbButton bbPreview"><img src="img/x.gif" class="bbPreview" alt="bbPreview"></button><div class="clear"></div>
+				<div id="message_toolbar" class="bbToolbar"><button type="button" value="bbBold" class="icon bbButton bbBold bbType{d} bbTag{b}"><img src="img/x.gif" class="bbBold" alt="bbBold"></button><button type="button" value="bbItalic" class="icon bbButton bbItalic bbType{d} bbTag{i}"><img src="img/x.gif" class="bbItalic" alt="bbItalic"></button><button type="button" value="bbUnderscore" class="icon bbButton bbUnderscore bbType{d} bbTag{u}"><img src="img/x.gif" class="bbUnderscore" alt="bbUnderscore"></button><button type="button" value="bbAlliance" class="icon bbButton bbAlliance bbType{d} bbTag{alliance0}"><img src="img/x.gif" class="bbAlliance" alt="bbAlliance"></button><button type="button" value="bbPlayer" class="icon bbButton bbPlayer bbType{d} bbTag{player0}"><img src="img/x.gif" class="bbPlayer" alt="bbPlayer"></button><button type="button" value="bbCoordinate" class="icon bbButton bbCoordinate bbType{d} bbTag{coor0}"><img src="img/x.gif" class="bbCoordinate" alt="bbCoordinate"></button><button type="button" value="bbReport" class="icon bbButton bbReport bbType{d} bbTag{report0}"><img src="img/x.gif" class="bbReport" alt="bbReport"></button><button type="button" value="bbResource" id="message_resourceButton" class="bbWin{resources} bbButton bbResource icon"><img src="img/x.gif" class="bbResource" alt="bbResource"></button><button type="button" value="bbSmilies" id="message_smilieButton" class="bbWin{smilies} bbButton bbSmilies icon"><img src="img/x.gif" class="bbSmilies" alt="bbSmilies"></button><button type="button" value="bbTroops" id="message_troopButton" class="bbWin{troops} bbButton bbTroops icon"><img src="img/x.gif" class="bbTroops" alt="bbTroops"></button><button type="button" value="bbPreview" id="message_previewButton" class="icon bbButton bbPreview"><img src="img/x.gif" class="bbPreview" alt="bbPreview"></button><div class="clear"></div>
 					<div id="message_toolbarWindows" class="bbToolbarWindow">
 						<div id="message_resources"><a href="#" class="bbType{o} bbTag{l}"><img src="img/x.gif" class="r1" alt="چوب"></a><a href="#" class="bbType{o} bbTag{cl}"><img src="img/x.gif" class="r2" alt="خشت"></a><a href="#" class="bbType{o} bbTag{c}"><img src="img/x.gif" class="r4" alt="گندم"></a><a href="#" class="bbType{o} bbTag{i}"><img src="img/x.gif" class="r3" alt="آهن"></a></div>
 						<div id="message_smilies"><a href="#" class="bbType{s} bbTag{*aha*}"><img class="smiley aha" src="img/x.gif" alt="*aha*"></a><a href="#" class="bbType{s} bbTag{*angry*}"><img class="smiley angry" src="img/x.gif" alt="*angry*"></a><a href="#" class="bbType{s} bbTag{*cool*}"><img class="smiley cool" src="img/x.gif" alt="*cool*"></a><a href="#" class="bbType{s} bbTag{*cry*}"><img class="smiley cry" src="img/x.gif" alt="*cry*"></a><a href="#" class="bbType{s} bbTag{*cute*}"><img class="smiley cute" src="img/x.gif" alt="*cute*"></a><a href="#" class="bbType{s} bbTag{*depressed*}"><img class="smiley depressed" src="img/x.gif" alt="*depressed*"></a><a href="#" class="bbType{s} bbTag{*eek*}"><img class="smiley eek" src="img/x.gif" alt="*eek*"></a><a href="#" class="bbType{s} bbTag{*ehem*}"><img class="smiley ehem" src="img/x.gif" alt="*ehem*"></a><a href="#" class="bbType{s} bbTag{*emotional*}"><img class="smiley emotional" src="img/x.gif" alt="*emotional*"></a><a href="#" class="bbType{s} bbTag{:D}"><img class="smiley grin" src="img/x.gif" alt=":D"></a><a href="#" class="bbType{s} bbTag{:)}"><img class="smiley happy" src="img/x.gif" alt=":)"></a><a href="#" class="bbType{s} bbTag{*hit*}"><img class="smiley hit" src="img/x.gif" alt="*hit*"></a><a href="#" class="bbType{s} bbTag{*hmm*}"><img class="smiley hmm" src="img/x.gif" alt="*hmm*"></a><a href="#" class="bbType{s} bbTag{*hmpf*}"><img class="smiley hmpf" src="img/x.gif" alt="*hmpf*"></a><a href="#" class="bbType{s} bbTag{*hrhr*}"><img class="smiley hrhr" src="img/x.gif" alt="*hrhr*"></a><a href="#" class="bbType{s} bbTag{*huh*}"><img class="smiley huh" src="img/x.gif" alt="*huh*"></a><a href="#" class="bbType{s} bbTag{*lazy*}"><img class="smiley lazy" src="img/x.gif" alt="*lazy*"></a><a href="#" class="bbType{s} bbTag{*love*}"><img class="smiley love" src="img/x.gif" alt="*love*"></a><a href="#" class="bbType{s} bbTag{*nocomment*}"><img class="smiley nocomment" src="img/x.gif" alt="*nocomment*"></a><a href="#" class="bbType{s} bbTag{*noemotion*}"><img class="smiley noemotion" src="img/x.gif" alt="*noemotion*"></a><a href="#" class="bbType{s} bbTag{*notamused*}"><img class="smiley notamused" src="img/x.gif" alt="*notamused*"></a><a href="#" class="bbType{s} bbTag{*pout*}"><img class="smiley pout" src="img/x.gif" alt="*pout*"></a><a href="#" class="bbType{s} bbTag{*redface*}"><img class="smiley redface" src="img/x.gif" alt="*redface*"></a><a href="#" class="bbType{s} bbTag{*rolleyes*}"><img class="smiley rolleyes" src="img/x.gif" alt="*rolleyes*"></a><a href="#" class="bbType{s} bbTag{:(}"><img class="smiley sad" src="img/x.gif" alt=":("></a><a href="#" class="bbType{s} bbTag{*shy*}"><img class="smiley shy" src="img/x.gif" alt="*shy*"></a><a href="#" class="bbType{s} bbTag{*smile*}"><img class="smiley smile" src="img/x.gif" alt="*smile*"></a><a href="#" class="bbType{s} bbTag{*tongue*}"><img class="smiley tongue" src="img/x.gif" alt="*tongue*"></a><a href="#" class="bbType{s} bbTag{*veryangry*}"><img class="smiley veryangry" src="img/x.gif" alt="*veryangry*"></a><a href="#" class="bbType{s} bbTag{*veryhappy*}"><img class="smiley veryhappy" src="img/x.gif" alt="*veryhappy*"></a><a href="#" class="bbType{s} bbTag{;)}"><img class="smiley wink" src="img/x.gif" alt=";)"></a></div>
@@ -58,7 +58,7 @@ echo "RE:".$message->reply['topic']; }} ?>" name="be" onkeyup="copyElement('subj
 				</div>
 				<div class="line bbLine"></div>
                 <textarea id="message" name="message" class="messageEditor" tabindex="3" cols="1" rows="1" onkeyup="copyElement('body')"  ><?php if(isset($message->reply['message'])) { echo " \n_________________________
-پاسخ:
+Reply:
 \n".$message->reply['message']; } ?></textarea>
 				<div id="message_preview" class="messageEditor preview" style="display: none; "></div>
 			</div>
@@ -97,165 +97,68 @@ echo "RE:".$message->reply['topic']; }} ?>" name="be" onkeyup="copyElement('subj
  <input type="hidden" name="sbmtype" value="default" />
  <input type="hidden" name="sbmvalue" value="" />
 	<div class="friendListContainer">
-		<table cellpadding="1" cellspacing="1" class="friendlist friendlist1">
-			<tbody>
-				
-															<tr>
-							<td class="end"></td>
-							<td class="pla">
-								<input class="text" type="text" name="addfriends[0]" value="" maxlength="15" />
-							</td>
-							<td class="accept"></td>
-						</tr>
-																													<tr>
-							<td class="end"></td>
-							<td class="pla">
-								<input class="text" type="text" name="addfriends[2]" value="" maxlength="15" />
-							</td>
-							<td class="accept"></td>
-						</tr>
-																													<tr>
-							<td class="end"></td>
-							<td class="pla">
-								<input class="text" type="text" name="addfriends[4]" value="" maxlength="15" />
-							</td>
-							<td class="accept"></td>
-						</tr>
-																													<tr>
-							<td class="end"></td>
-							<td class="pla">
-								<input class="text" type="text" name="addfriends[6]" value="" maxlength="15" />
-							</td>
-							<td class="accept"></td>
-						</tr>
-																													<tr>
-							<td class="end"></td>
-							<td class="pla">
-								<input class="text" type="text" name="addfriends[8]" value="" maxlength="15" />
-							</td>
-							<td class="accept"></td>
-						</tr>
-																													<tr>
-							<td class="end"></td>
-							<td class="pla">
-								<input class="text" type="text" name="addfriends[10]" value="" maxlength="15" />
-							</td>
-							<td class="accept"></td>
-						</tr>
-																													<tr>
-							<td class="end"></td>
-							<td class="pla">
-								<input class="text" type="text" name="addfriends[12]" value="" maxlength="15" />
-							</td>
-							<td class="accept"></td>
-						</tr>
-																													<tr>
-							<td class="end"></td>
-							<td class="pla">
-								<input class="text" type="text" name="addfriends[14]" value="" maxlength="15" />
-							</td>
-							<td class="accept"></td>
-						</tr>
-																													<tr>
-							<td class="end"></td>
-							<td class="pla">
-								<input class="text" type="text" name="addfriends[16]" value="" maxlength="15" />
-							</td>
-							<td class="accept"></td>
-						</tr>
-																													<tr>
-							<td class="end"></td>
-							<td class="pla">
-								<input class="text" type="text" name="addfriends[18]" value="" maxlength="15" />
-							</td>
-							<td class="accept"></td>
-						</tr>
-																					</tbody>
-		</table>
-
-		<table cellpadding="1" cellspacing="1" class="friendlist friendlist2">
-			<tbody>
-				
-																								<tr>
-							<td class="end"></td>
-							<td class="pla">
-								<input class="text" type="text" name="addfriends[1]" value="" maxlength="15" />
-							</td>
-							<td class="accept"></td>
-						</tr>
-																													<tr>
-							<td class="end"></td>
-							<td class="pla">
-								<input class="text" type="text" name="addfriends[3]" value="" maxlength="15" />
-							</td>
-							<td class="accept"></td>
-						</tr>
-																													<tr>
-							<td class="end"></td>
-							<td class="pla">
-								<input class="text" type="text" name="addfriends[5]" value="" maxlength="15" />
-							</td>
-							<td class="accept"></td>
-						</tr>
-																													<tr>
-							<td class="end"></td>
-							<td class="pla">
-								<input class="text" type="text" name="addfriends[7]" value="" maxlength="15" />
-							</td>
-							<td class="accept"></td>
-						</tr>
-																													<tr>
-							<td class="end"></td>
-							<td class="pla">
-								<input class="text" type="text" name="addfriends[9]" value="" maxlength="15" />
-							</td>
-							<td class="accept"></td>
-						</tr>
-																													<tr>
-							<td class="end"></td>
-							<td class="pla">
-								<input class="text" type="text" name="addfriends[11]" value="" maxlength="15" />
-							</td>
-							<td class="accept"></td>
-						</tr>
-																													<tr>
-							<td class="end"></td>
-							<td class="pla">
-								<input class="text" type="text" name="addfriends[13]" value="" maxlength="15" />
-							</td>
-							<td class="accept"></td>
-						</tr>
-																													<tr>
-							<td class="end"></td>
-							<td class="pla">
-								<input class="text" type="text" name="addfriends[15]" value="" maxlength="15" />
-							</td>
-							<td class="accept"></td>
-						</tr>
-																													<tr>
-							<td class="end"></td>
-							<td class="pla">
-								<input class="text" type="text" name="addfriends[17]" value="" maxlength="15" />
-							</td>
-							<td class="accept"></td>
-						</tr>
-																													<tr>
-							<td class="end"></td>
-							<td class="pla">
-								<input class="text" type="text" name="addfriends[19]" value="" maxlength="15" />
-							</td>
-							<td class="accept"></td>
-						</tr>
-									
-			</tbody>
-		</table></form>
+	<table cellpadding="1" cellspacing="1" id="friendlist">
+<?php for($i=0;$i<20;$i++) {
+if($user['friend'.$i] == 0 && $user['friend'.$i.'wait'] == 0){
+if(is_int($i/2)){ echo "<tr>"; } ?><td class="end"></td>
+  <td class="pla">
+    <input class="text" type="text" name="addfriends<?php echo $i; ?>" value="" maxlength="20" />
+  </td>
+  <td class="on"></td><?php if(!is_int($i/2)){ echo "</tr>"; }else{ echo "<td></td>";}}else if($user['friend'.$i.'wait'] == 0){
+if(is_int($i/2)){ echo "<tr>"; } ?><td class="end"><a href="nachrichten.php?delfriend=<?php echo $i; ?>"><img class="del" src="img/x.gif" alt="delete" title="delete"></td>
+  <td class="pla">
+  <?php echo "<a href=\"nachrichten.php?t=1&id=".$user['friend'.$i]."\">".$database->getUserField($user['friend'.$i],"username",0)."</a>"; ?>
+  </td>
+		<?php
+		$friend = $database->getUserArray($user['friend'.$i], 1);
+		if ((time()-600) < $friend['timestamp']){ // 0 Min - 10 Min
+            echo "    <td class=on><img class=online1 src=img/x.gif title='Now online' alt='Now online' /></td>";
+        }elseif ((time()-86400) < $friend['timestamp'] && (time()-600) > $friend['timestamp']){ // 10 Min - 1 Days
+            echo "    <td class=on><img class=online2 src=img/x.gif title='Offline' alt='Offline' /></td>";              
+            }elseif ((time()-259200) < $friend['timestamp'] && (time()-86400) > $friend['timestamp']){ // 1-3 Days
+            echo "    <td class=on><img class=online3 src=img/x.gif title='Last 3 days' alt='Last 3 days' /></td>";    
+        }elseif ((time()-604800) < $friend['timestamp'] && (time()-259200) > $friend['timestamp']){
+            echo "    <td class=on><img class=online4 src=img/x.gif title='Last 7 days' alt='Last 7 days' /></td>";    
+        }else{
+             echo "    <td class=on><img class=online5 src=img/x.gif title=inactive alt=inactive /></td>";   
+        }
+if(!is_int($i/2)){ echo "</tr>"; }else{ echo "<td></td>";}
+  }else{
+$friend = $database->getUserArray($user['friend'.$i.'wait'], 1);
+$friendwait = 0;
+for($j=0;$j<20;$j++) {
+if($friend['friend'.$j.'wait'] == $session->uid){
+$wait = $friend['friend'.$j];
+$friendwait = $friend['id'];
+}
+}
+if($wait == 0){
+if(is_int($i/2)){ echo "<tr>"; } ?><td class="end"><a href="nachrichten.php?delfriend=<?php echo $i; ?>"><img class="del" src="img/x.gif" alt="delete" title="delete"></td>
+  <td class="pla">
+  <?php echo "<img src=\"../../".GP_LOCATE."img/a/clock-inactive.gif\" alt=\"wait for confirm\" title=\"wait for confirm\"><a href=\"nachrichten.php?t=1&id=".$user['friend'.$i]."\"> ".$database->getUserField($user['friend'.$i],"username",0)."</a>"; ?>
+  </td>
+		<?php
+            echo "<td class=on></td>";
+if(!is_int($i/2)){ echo "</tr>"; }else{ echo "<td></td>";}
+}else{
+if(is_int($i/2)){ echo "<tr>"; } ?><td class="end"><a href="nachrichten.php?delfriend=<?php echo $i; ?>"><img class="del" src="img/x.gif" alt="delete" title="delete"></td>
+  <td class="pla">
+  <?php echo "<a href=\"nachrichten.php?t=1&id=".$friendwait."\">".$database->getUserField($friendwait,"username",0)."</a>"; ?>
+  </td>		
+            <td class="on"><a href="nachrichten.php?confirm=<?php echo $i; ?>"><img src="../../<?php echo GP_LOCATE; ?>img/a/online6.gif" alt="confirm" title="confirm"></a></td>
+<?php
+if(!is_int($i/2)){ echo "</tr>"; }else{ echo "<td></td>";}
+}
+  }} ?>
+  </tr></table></form>
 		<div class="clear"></div>
 	</div>
 </div></div>
 <script type="text/javascript">
 	Travian.Translation.add(
 	{
-		'nachrichten.adressbuch': 'دفترچه اسامی',
-		'allgemein.save': 'ذخیره'
+		'nachrichten.adressbuch': 'addressbook',
+		'allgemein.save': 'save'
 	});
 </script>
+<span style="color: #DD0000"><b>Warning:</b> you can't use the values <b>[message]</b> or <b>[/message]</b> in your message because it can cause problem with bbcode system.</span>

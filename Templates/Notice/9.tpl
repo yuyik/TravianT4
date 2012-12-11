@@ -117,11 +117,11 @@ for($i=$start;$i<=$end;$i++) {
 			<td colspan="11">
             <?php
            	if($dataarray[1]){
-            	$typeArray = array("","sisak","test","balKéz","jobbKéz","cipők","lovak","25öscsomag","33ascsomag","ketrec","tekercs","gyógykrém","vizesvödör","book of wisdom","törvénytáblák","műalkotás");
+            	$typeArray = array("","helmet","body","leftHand","rightHand","shoes","horse","bandage25","bandage33","cage","scroll","ointment","bucketOfWater","bookOfWisdom","lawTables","artWork");
                 $btype = $dataarray[1];
                 $type = $dataarray[2];
             	include "Templates/Auction/alt.tpl";
-				echo '<img src="img/x.gif" class="itemCategory itemCategory_'.$typeArray[$btype].'" title="'.$title.'">';
+				echo '<img src="img/x.gif" class="reportInfo itemCategory itemCategory_'.$typeArray[$btype].'" title="'.$title.'">';
 				echo ' '.$name.' ('.$dataarray[3].'x)';
             }else{
             	echo $dataarray[2];

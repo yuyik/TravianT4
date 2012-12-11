@@ -1,4 +1,7 @@
-﻿<!-- //////////////// made by TTMTT //////////////// -->
+<!-- //////////////// made by TTMTT //////////////// -->
+<?php
+if($session->access!=BANNED){
+?>
 <script language="JavaScript" type="text/javascript">
 
 function showCheckList() {
@@ -52,19 +55,19 @@ function showCheckList() {
 			newTD1.className = 'ally';
 			newTD2.className = 'tag';
 			newTD3.className = 'ad';
-			newTD1.innerHTML = html_input_1 + 'id="allys_by_id_'+num_fields+'" class="text" maxlength="8" name="allys_by_id['+num_fields+']" onkeyup="checkInputs('+num_fields+',\'allys\')">';
-			newTD2.innerHTML = html_input_1 + 'id="allys_by_name_'+num_fields+'" class="text" maxlength="8" name="allys_by_name['+num_fields+']" onkeyup="checkInputs('+num_fields+',\'allys\')">';
+			newTD1.innerHTML = html_input_1 + 'id="allys_by_id_'+num_fields+'" class="text" maxlength="15" name="allys_by_id['+num_fields+']" onkeyup="checkInputs('+num_fields+',\'allys\')">';
+			newTD2.innerHTML = html_input_1 + 'id="allys_by_name_'+num_fields+'" class="text" maxlength="15" name="allys_by_name['+num_fields+']" onkeyup="checkInputs('+num_fields+',\'allys\')">';
 		}
 
 		if(element_id == 'user_list') {
 			newTD1.className = 'id';
 			newTD2.className = 'pla';
 			newTD3.className = 'ad';
-			newTD1.innerHTML = html_input_1 + 'id="users_by_id_'+num_fields+'" class="text" maxlength="8" name="users_by_id['+num_fields+']" onkeyup="checkInputs('+num_fields+',\'users\')">';
-			newTD2.innerHTML = html_input_1 + 'id="users_by_name_'+num_fields+'" class="text" maxlength="15" name="users_by_name['+num_fields+']" onkeyup="checkInputs('+num_fields+',\'users\')">';
+			newTD1.innerHTML = html_input_1 + 'id="users_by_id_'+num_fields+'" class="text" maxlength="15" name="users_by_id['+num_fields+']" onkeyup="checkInputs('+num_fields+',\'users\')">';
+			newTD2.innerHTML = html_input_1 + 'id="users_by_name_'+num_fields+'" class="text" maxlength="50" name="users_by_name['+num_fields+']" onkeyup="checkInputs('+num_fields+',\'users\')">';
 		}
 
-		newTD3.innerHTML = '<img class="add" src="img/x.gif" title="اضافه" alt="اضافه" onclick="addRow(\''+element_id+'\')">';
+		newTD3.innerHTML = '<img class="add" src="img/x.gif" title="add" alt="add" onclick="addRow(\''+element_id+'\')">';
     }
 
 </script>
@@ -96,14 +99,12 @@ function showCheckList() {
 		}
 	}
     
-	</script>
-    
-    <form method="post" action="allianz.php?s=2">
+	</script><form method="post" action="allianz.php?s=2">
 	<input type="hidden" name="new" value="1">
 
 	<input type="hidden" name="newforum" value="1">
 	<input type="hidden" name="admin" value="1">
-<h4 class="round">New Forum</h4>
+
 	<table cellpadding="1" cellspacing="1" id="new_forum"><tbody>
 	<tr>
 
@@ -119,8 +120,8 @@ function showCheckList() {
 			<th>Type forum</th>
 		<td><select class="dropdown" id="bid" name="bid" onchange="showCheckList();">
         <option value="1">Public forum</option>
-        <option value="2">Alliance Forum</option>
-        <option value="0"selected>Alliance forum</option>
+        <option value="2">Confederation Forum</option>
+        <option value="0"selected>Alliance Forum</option>
         <option value="3">Closed Forum</option></select></td>
 	</tr>
 	</tbody></table><Br />
@@ -141,3 +142,7 @@ function showCheckList() {
 <div class="bml"><div class="bmr"><div class="bmc"></div></div></div><div class="bbl"><div class="bbr"><div class="bbc"></div></div></div>
 </div><div class="button-contents">Create</div></div></button>
 </p></form>
+<?php }else{
+header("Location: banned.php");
+}
+?>

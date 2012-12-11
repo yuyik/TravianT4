@@ -55,7 +55,7 @@ define("SIDEINFO_ALLIANCE","Alliance");
 define("SIDEINFO_CHANGE_TITLE","These double-click to rename the village");
 define("SIDEINFO_CHANGEVIL_TITLE","Village name change");
 define("SIDEINFO_CHANGEVIL_LABEL","New village name");
-define("SIDEINFO_CHANGEVIL_BTN","Cancel");
+define("SIDEINFO_CHANGEVIL_BTN","Accept");
 
 define("LOGOUT_TITLE","Logout complete!");
 define("LOGOUT_H4","Thank you for visiting");

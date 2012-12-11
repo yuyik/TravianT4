@@ -1,5 +1,9 @@
 ﻿<?php
 $input = $message->reading['message'];
+$alliance = $message->reading['alliance'];
+$player = $message->reading['player'];
+$coor = $message->reading['coor'];
+$report = $message->reading['report'];
 include("GameEngine/BBCode.php");
 ?>
 <div id="messageNavigation">
@@ -45,7 +49,7 @@ include("GameEngine/BBCode.php");
 		</div>
 
 		<div class="separator"></div>
-		<div id="message"><?php echo nl2br($bbcoded); ?></div>
+		<div id="message"><?php echo stripslashes(nl2br($bbcoded)); ?></div>
 
 		<div id="answer">
         <form method="post" action="nachrichten.php">

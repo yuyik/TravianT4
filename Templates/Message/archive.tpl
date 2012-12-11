@@ -218,9 +218,15 @@ while($row = mysql_fetch_array($sql2)){
       </div>
     <div class="clear"></div>
 </div><p>
-<button name="delmsg" type="submit" value="del" id="del" class="delete">
+<button name="delmsg" type="submit" value="delmsg" id="del" class="delete">
 <div class="button-container"><div class="button-position"><div class="btl"><div class="btr"><div class="btc"></div></div></div><div class="bml"><div class="bmr"><div class="bmc"></div></div></div><div class="bbl"><div class="bbr"><div class="bbc"></div></div></div></div><div class="button-contents">Delete</div></div>
 </button>
+
+<?php if($session->plus) { ?>
+<button name="start" type="submit" value="start" id="start" class="delete">
+<div class="button-container"><div class="button-position"><div class="btl"><div class="btr"><div class="btc"></div></div></div><div class="bml"><div class="bmr"><div class="bmc"></div></div></div><div class="bbl"><div class="bbr"><div class="bbc"></div></div></div></div><div class="button-contents">UnArchive</div></div>
+</button>
+<?php } ?>
                     
 <input name="ft" value="m3" type="hidden" />
 </form>

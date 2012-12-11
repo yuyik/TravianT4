@@ -72,7 +72,7 @@ CREATE TABLE `%PREFIX%links` (
 --
 
 CREATE TABLE IF NOT EXISTS `%PREFIX%abdata` (
-  `vref` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `vref` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `a1` tinyint(2) unsigned NOT NULL DEFAULT '0',
   `a2` tinyint(2) unsigned NOT NULL DEFAULT '0',
   `a3` tinyint(2) unsigned NOT NULL DEFAULT '0',
@@ -111,7 +111,7 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%activate` (
   `tribe` tinyint(1) unsigned NOT NULL,
   `access` tinyint(1) unsigned NOT NULL DEFAULT '1',
   `act` varchar(10) NOT NULL,
-  `timestamp` int(10) unsigned NOT NULL DEFAULT '0',
+  `timestamp` int(11) unsigned NOT NULL DEFAULT '0',
   `location` text NOT NULL,
   `act2` varchar(10) NOT NULL,
   PRIMARY KEY (`id`)
@@ -146,7 +146,7 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%active` (
 --
 
 CREATE TABLE IF NOT EXISTS `%PREFIX%admin_log` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `user` text NOT NULL,
   `log` text NOT NULL,
   `time` int(25) NOT NULL,
@@ -165,9 +165,9 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%admin_log` (
 --
 
 CREATE TABLE IF NOT EXISTS `%PREFIX%farmlist` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `wref` int(10) unsigned NOT NULL,
-  `owner` int(10) unsigned NOT NULL,
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `wref` int(11) unsigned NOT NULL,
+  `owner` int(11) unsigned NOT NULL,
   `name` varchar(45) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
@@ -183,9 +183,9 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%farmlist` (
 --
 
 CREATE TABLE IF NOT EXISTS `%PREFIX%raidlist` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `lid` int(10) NOT NULL,
-  `towref` int(10) unsigned NOT NULL,
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `lid` int(11) NOT NULL,
+  `towref` int(11) unsigned NOT NULL,
   `x` int(11) NOT NULL,
   `y` int(11) NOT NULL,
   `distance` varchar(5) NOT NULL DEFAULT '0',
@@ -234,12 +234,12 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%allimedal` (
 --
 
 CREATE TABLE IF NOT EXISTS `%PREFIX%artefacts` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `vref` int(10) unsigned NOT NULL,
-  `owner` int(10) unsigned NOT NULL,
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `vref` int(11) unsigned NOT NULL,
+  `owner` int(11) unsigned NOT NULL,
   `type` int(3) unsigned NOT NULL,
-  `size` int(10) unsigned NOT NULL,
-  `conquered` int(10) unsigned NOT NULL,
+  `size` int(11) unsigned NOT NULL,
+  `conquered` int(11) unsigned NOT NULL,
   `name` varchar(100) NOT NULL,
   `desc` text NOT NULL,
   `effect` varchar(100) NOT NULL,
@@ -257,13 +257,13 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%artefacts` (
 --
 
 CREATE TABLE IF NOT EXISTS `%PREFIX%alidata` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
   `tag` varchar(100) NOT NULL,
-  `leader` int(10) unsigned NOT NULL,
-  `coor` int(10) unsigned NOT NULL,
-  `advisor` int(10) unsigned NOT NULL,
-  `recruiter` int(10) unsigned NOT NULL,
+  `leader` int(11) unsigned NOT NULL,
+  `coor` int(11) unsigned NOT NULL,
+  `advisor` int(11) unsigned NOT NULL,
+  `recruiter` int(11) unsigned NOT NULL,
   `notice` text NOT NULL,
   `desc` text NOT NULL,
   `max` tinyint(2) unsigned NOT NULL,
@@ -290,10 +290,10 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%alidata` (
 --
 
 CREATE TABLE IF NOT EXISTS `%PREFIX%ali_invite` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `uid` int(10) unsigned NOT NULL,
-  `alliance` int(10) unsigned NOT NULL,
-  `sender` int(10) NOT NULL,
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `uid` int(11) unsigned NOT NULL,
+  `alliance` int(11) unsigned NOT NULL,
+  `sender` int(11) NOT NULL,
   `timestamp` int(11) NOT NULL,
   `accept` int(1) NOT NULL,
   PRIMARY KEY (`id`)
@@ -311,10 +311,10 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%ali_invite` (
 --
 
 CREATE TABLE IF NOT EXISTS `%PREFIX%ali_log` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `aid` int(10) NOT NULL,
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `aid` int(11) NOT NULL,
   `comment` text NOT NULL,
-  `date` int(10) unsigned NOT NULL,
+  `date` int(11) unsigned NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
@@ -330,9 +330,9 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%ali_log` (
 --
 
 CREATE TABLE IF NOT EXISTS `%PREFIX%ali_permission` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `uid` int(10) unsigned NOT NULL,
-  `alliance` int(10) unsigned NOT NULL,
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `uid` int(11) unsigned NOT NULL,
+  `alliance` int(11) unsigned NOT NULL,
   `rank` varchar(100) NOT NULL,
   `opt1` int(1) unsigned NOT NULL DEFAULT '0',
   `opt2` int(1) unsigned NOT NULL DEFAULT '0',
@@ -357,7 +357,7 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%ali_permission` (
 --
 
 CREATE TABLE IF NOT EXISTS `%PREFIX%attacks` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `vref` int(11) unsigned NOT NULL,
   `t1` int(11) unsigned NOT NULL,
   `t2` int(11) unsigned NOT NULL,
@@ -388,17 +388,17 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%attacks` (
 --
 
 CREATE TABLE IF NOT EXISTS `%PREFIX%auction` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `itemid` int(10) unsigned NOT NULL,
-  `owner` int(10) unsigned NOT NULL,
-  `btype` int(10) unsigned NOT NULL,
-  `type` int(10) unsigned NOT NULL,
-  `num` int(10) unsigned NOT NULL,
-  `uid` int(10) unsigned NOT NULL,
-  `bids` int(10) NOT NULL,
-  `silver` int(10) NOT NULL,
-  `time` int(10) unsigned NOT NULL,
-  `finish` int(10) unsigned NOT NULL,
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `itemid` int(11) unsigned NOT NULL,
+  `owner` int(11) unsigned NOT NULL,
+  `btype` int(11) unsigned NOT NULL,
+  `type` int(11) unsigned NOT NULL,
+  `num` int(11) unsigned NOT NULL,
+  `uid` int(11) unsigned NOT NULL,
+  `bids` int(11) NOT NULL,
+  `silver` int(11) NOT NULL,
+  `time` int(11) unsigned NOT NULL,
+  `finish` int(11) unsigned NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
@@ -414,10 +414,10 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%auction` (
 
 CREATE TABLE IF NOT EXISTS `%PREFIX%banlist` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `uid` int(10) NOT NULL,
+  `uid` int(11) NOT NULL,
   `name` varchar(30) NOT NULL,
   `reason` varchar(30) NOT NULL,
-  `time` int(10) NOT NULL,
+  `time` int(11) NOT NULL,
   `end` varchar(10) NOT NULL,
   `admin` int(11) NOT NULL,
   `active` int(11) NOT NULL,
@@ -436,12 +436,12 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%banlist` (
 --
 
 CREATE TABLE IF NOT EXISTS `%PREFIX%bdata` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `wid` int(10) unsigned NOT NULL,
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `wid` int(11) unsigned NOT NULL,
   `field` tinyint(2) unsigned NOT NULL,
   `type` tinyint(2) unsigned NOT NULL,
   `loopcon` tinyint(1) unsigned NOT NULL,
-  `timestamp` int(10) unsigned NOT NULL,
+  `timestamp` int(11) unsigned NOT NULL,
   `master` tinyint(1) unsigned NOT NULL,
   `level` tinyint(3) unsigned NOT NULL,
   PRIMARY KEY (`id`)
@@ -459,8 +459,8 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%bdata` (
 --
 
 CREATE TABLE IF NOT EXISTS `%PREFIX%build_log` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `wid` int(10) unsigned NOT NULL,
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `wid` int(11) unsigned NOT NULL,
   `log` text NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
@@ -478,7 +478,7 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%build_log` (
 
 CREATE TABLE IF NOT EXISTS `%PREFIX%chat` (
   `id` int(20) unsigned NOT NULL AUTO_INCREMENT,
-  `id_user` int(10) NOT NULL,
+  `id_user` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `alli` varchar(255) NOT NULL,
   `date` varchar(255) NOT NULL,
@@ -497,8 +497,8 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%chat` (
 --
 
 CREATE TABLE IF NOT EXISTS `%PREFIX%deleting` (
-  `uid` int(10) unsigned NOT NULL,
-  `timestamp` int(10) unsigned NOT NULL,
+  `uid` int(11) unsigned NOT NULL,
+  `timestamp` int(11) unsigned NOT NULL,
   PRIMARY KEY (`uid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
@@ -514,9 +514,9 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%deleting` (
 --
 
 CREATE TABLE IF NOT EXISTS `%PREFIX%demolition` (
-  `vref` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `buildnumber` int(10) unsigned NOT NULL DEFAULT '0',
-  `lvl` int(10) unsigned NOT NULL DEFAULT '0',
+  `vref` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `buildnumber` int(11) unsigned NOT NULL DEFAULT '0',
+  `lvl` int(11) unsigned NOT NULL DEFAULT '0',
   `timetofinish` int(11) NOT NULL,
   PRIMARY KEY (`vref`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
@@ -533,8 +533,8 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%demolition` (
 --
 
 CREATE TABLE IF NOT EXISTS `%PREFIX%destroy_log` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `wid` int(10) unsigned NOT NULL,
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `wid` int(11) unsigned NOT NULL,
   `log` text NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
@@ -551,9 +551,9 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%destroy_log` (
 --
 
 CREATE TABLE IF NOT EXISTS `%PREFIX%diplomacy` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `alli1` int(10) unsigned NOT NULL,
-  `alli2` int(10) unsigned NOT NULL,
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `alli1` int(11) unsigned NOT NULL,
+  `alli2` int(11) unsigned NOT NULL,
   `type` tinyint(1) unsigned NOT NULL,
   `accepted` int(1) NOT NULL,
   PRIMARY KEY (`id`)
@@ -572,8 +572,8 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%diplomacy` (
 
 CREATE TABLE IF NOT EXISTS `%PREFIX%adventure` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `wref` int(10) NOT NULL,
-  `uid` int(10) unsigned NOT NULL,
+  `wref` int(11) NOT NULL,
+  `uid` int(11) unsigned NOT NULL,
   `dif` tinyint(1) NOT NULL,
   `time` int(11) unsigned NOT NULL,
   `end` tinyint(1) unsigned NOT NULL,
@@ -591,7 +591,7 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%adventure` (
 --
 
 CREATE TABLE IF NOT EXISTS `%PREFIX%enforcement` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `hero` int(11) unsigned NOT NULL DEFAULT '0',
   `u1` int(11) unsigned NOT NULL DEFAULT '0',
   `u2` int(11) unsigned NOT NULL DEFAULT '0',
@@ -643,8 +643,8 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%enforcement` (
   `u48` int(11) unsigned NOT NULL DEFAULT '0',
   `u49` int(11) unsigned NOT NULL DEFAULT '0',
   `u50` int(11) unsigned NOT NULL DEFAULT '0',
-  `from` int(10) unsigned NOT NULL DEFAULT '0',
-  `vref` int(10) unsigned NOT NULL DEFAULT '0',
+  `from` int(11) unsigned NOT NULL DEFAULT '0',
+  `vref` int(11) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
@@ -660,7 +660,7 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%enforcement` (
 --
 
 CREATE TABLE IF NOT EXISTS `%PREFIX%fdata` (
-  `vref` int(10) unsigned NOT NULL,
+  `vref` int(11) unsigned NOT NULL,
   `f1` tinyint(2) unsigned NOT NULL DEFAULT '0',
   `f1t` tinyint(2) unsigned NOT NULL DEFAULT '0',
   `f2` tinyint(2) unsigned NOT NULL DEFAULT '0',
@@ -844,8 +844,8 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%forum_topic` (
 --
 
 CREATE TABLE IF NOT EXISTS `%PREFIX%gold_fin_log` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `wid` int(10) unsigned NOT NULL,
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `wid` int(11) unsigned NOT NULL,
   `log` text NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
@@ -871,8 +871,8 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%hero` (
   `experience` int(11) NOT NULL,
   `dead` tinyint(1) NOT NULL,
   `health` float(4,1) unsigned NOT NULL,
-  `power` int(10) unsigned NOT NULL,
-  `itempower` int(10) unsigned NOT NULL,
+  `power` int(11) unsigned NOT NULL,
+  `itempower` int(11) unsigned NOT NULL,
   `offBonus` tinyint(3) unsigned NOT NULL,
   `defBonus` tinyint(3) unsigned NOT NULL,
   `product` tinyint(3) unsigned NOT NULL,
@@ -900,7 +900,7 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%hero` (
 --
 
 CREATE TABLE IF NOT EXISTS `%PREFIX%heroface` (
-  `uid` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `uid` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `beard` smallint(2) NOT NULL,
   `ear` smallint(2) NOT NULL,
   `eye` smallint(2) NOT NULL,
@@ -937,13 +937,13 @@ INSERT INTO `%PREFIX%heroface` (`uid`, `beard`, `ear`, `eye`, `eyebrow`, `face`,
 
 CREATE TABLE IF NOT EXISTS `%PREFIX%heroinventory` (
   `uid` tinyint(5) unsigned NOT NULL,
-  `helmet` int(10) NOT NULL,
-  `leftHand` int(10) NOT NULL,
-  `rightHand` int(10) NOT NULL,
-  `body` int(10) NOT NULL,
-  `horse` int(10) NOT NULL,
-  `shoes` int(10) NOT NULL,
-  `bag` int(10) NOT NULL,
+  `helmet` int(11) NOT NULL,
+  `leftHand` int(11) NOT NULL,
+  `rightHand` int(11) NOT NULL,
+  `body` int(11) NOT NULL,
+  `horse` int(11) NOT NULL,
+  `shoes` int(11) NOT NULL,
+  `bag` int(11) NOT NULL,
   
   PRIMARY KEY (`uid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
@@ -959,12 +959,12 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%heroinventory` (
 --
 
 CREATE TABLE IF NOT EXISTS `%PREFIX%heroitems` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `uid` int(10) unsigned NOT NULL,
-  `btype` int(10) unsigned NOT NULL,
-  `type` int(10) unsigned NOT NULL,
-  `num` int(10) NOT NULL,
-  `proc` int(10) unsigned NOT NULL,
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `uid` int(11) unsigned NOT NULL,
+  `btype` int(11) unsigned NOT NULL,
+  `type` int(11) unsigned NOT NULL,
+  `num` int(11) NOT NULL,
+  `proc` int(11) unsigned NOT NULL,
 
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
@@ -980,8 +980,8 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%heroitems` (
 --
 
 CREATE TABLE IF NOT EXISTS `%PREFIX%illegal_log` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `user` int(10) unsigned NOT NULL,
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `user` int(11) unsigned NOT NULL,
   `log` text NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
@@ -998,8 +998,8 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%illegal_log` (
 --
 
 CREATE TABLE IF NOT EXISTS `%PREFIX%login_log` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `uid` int(10) unsigned NOT NULL,
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `uid` int(11) unsigned NOT NULL,
   `ip` varchar(15) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
@@ -1016,7 +1016,7 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%login_log` (
 --
 
 CREATE TABLE IF NOT EXISTS `%PREFIX%market` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `vref` int(11) unsigned NOT NULL,
   `gtype` tinyint(1) unsigned NOT NULL,
   `gamt` int(11) unsigned NOT NULL,
@@ -1041,8 +1041,8 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%market` (
 --
 
 CREATE TABLE IF NOT EXISTS `%PREFIX%market_log` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `wid` int(10) unsigned NOT NULL,
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `wid` int(11) unsigned NOT NULL,
   `log` text NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
@@ -1059,15 +1059,21 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%market_log` (
 --
 
 CREATE TABLE IF NOT EXISTS `%PREFIX%mdata` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `target` int(10) unsigned NOT NULL,
-  `owner` int(10) unsigned NOT NULL,
-  `topic` varchar(45) NOT NULL,
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `target` int(11) unsigned NOT NULL,
+  `owner` int(11) unsigned NOT NULL,
+  `topic` varchar(100) NOT NULL,
   `message` text NOT NULL,
   `viewed` tinyint(1) unsigned NOT NULL,
   `archived` tinyint(1) unsigned NOT NULL,
   `send` tinyint(1) unsigned NOT NULL,
   `time` int(11) unsigned NOT NULL DEFAULT '0',
+  `deltarget` int(11) unsigned NOT NULL,
+  `delowner` int(11) unsigned NOT NULL,
+  `alliance` int(11) unsigned NOT NULL,
+  `player` int(11) unsigned NOT NULL,
+  `coor` int(11) unsigned NOT NULL,
+  `report` int(11) unsigned NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
@@ -1083,11 +1089,11 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%mdata` (
 --
 
 CREATE TABLE IF NOT EXISTS `%PREFIX%medal` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `userid` int(10) unsigned NOT NULL,
-  `categorie` int(10) unsigned NOT NULL,
-  `plaats` int(10) unsigned NOT NULL,
-  `week` int(10) unsigned NOT NULL,
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `userid` int(11) unsigned NOT NULL,
+  `categorie` int(11) unsigned NOT NULL,
+  `plaats` int(11) unsigned NOT NULL,
+  `week` int(11) unsigned NOT NULL,
   `points` varchar(15) NOT NULL,
   `img` varchar(10) NOT NULL,
   PRIMARY KEY (`id`)
@@ -1105,7 +1111,7 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%medal` (
 --
 
 CREATE TABLE IF NOT EXISTS `%PREFIX%movement` (
-  `moveid` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `moveid` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `sort_type` tinyint(4) unsigned NOT NULL DEFAULT '0',
   `from` int(11) unsigned NOT NULL DEFAULT '0',
   `to` int(11) unsigned NOT NULL DEFAULT '0',
@@ -1113,6 +1119,11 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%movement` (
   `data` text NOT NULL,
   `endtime` int(11) unsigned NOT NULL DEFAULT '0',
   `proc` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `send` tinyint(1) unsigned NOT NULL,
+  `wood` int(11) unsigned NOT NULL,
+  `clay` int(11) unsigned NOT NULL,
+  `iron` int(11) unsigned NOT NULL,
+  `crop` int(11) unsigned NOT NULL,
   PRIMARY KEY (`moveid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
@@ -1128,16 +1139,17 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%movement` (
 --
 
 CREATE TABLE IF NOT EXISTS `%PREFIX%ndata` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `uid` int(10) unsigned NOT NULL,
-  `toWref` int(10) unsigned NOT NULL,
-  `ally` int(10) unsigned NOT NULL,
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `uid` int(11) unsigned NOT NULL,
+  `toWref` int(11) unsigned NOT NULL,
+  `ally` int(11) unsigned NOT NULL,
   `topic` text NOT NULL,
   `ntype` tinyint(1) unsigned NOT NULL,
   `data` text NOT NULL,
-  `time` int(10) unsigned NOT NULL,
+  `time` int(11) unsigned NOT NULL,
   `viewed` tinyint(1) unsigned NOT NULL,
   `archive` tinyint(1) unsigned NOT NULL,
+  `del` tinyint(1) unsigned NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
@@ -1153,7 +1165,7 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%ndata` (
 --
 
 CREATE TABLE IF NOT EXISTS `%PREFIX%newproc` (
-  `uid` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `uid` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `npw` varchar(45) NOT NULL,
   `nemail` varchar(45) NOT NULL,
   `act` varchar(10) NOT NULL,
@@ -1174,18 +1186,18 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%newproc` (
 --
 
 CREATE TABLE IF NOT EXISTS `%PREFIX%odata` (
-  `wref` int(10) unsigned NOT NULL,
+  `wref` int(11) unsigned NOT NULL,
   `type` tinyint(2) unsigned NOT NULL,
-  `conqured` int(10) unsigned NOT NULL,
-  `wood` int(10) unsigned NOT NULL,
-  `iron` int(10) unsigned NOT NULL,
-  `clay` int(10) unsigned NOT NULL,
-  `maxstore` int(10) unsigned NOT NULL,
-  `crop` int(10) unsigned NOT NULL,
-  `maxcrop` int(10) unsigned NOT NULL,
-  `lastupdated` int(10) unsigned NOT NULL,
-  `loyalty` int(10) NOT NULL DEFAULT '100',
-  `owner` int(10) unsigned NOT NULL DEFAULT '2',
+  `conqured` int(11) unsigned NOT NULL,
+  `wood` int(11) unsigned NOT NULL,
+  `iron` int(11) unsigned NOT NULL,
+  `clay` int(11) unsigned NOT NULL,
+  `maxstore` int(11) unsigned NOT NULL,
+  `crop` int(11) unsigned NOT NULL,
+  `maxcrop` int(11) unsigned NOT NULL,
+  `lastupdated` int(11) unsigned NOT NULL,
+  `loyalty` int(11) NOT NULL DEFAULT '100',
+  `owner` int(11) unsigned NOT NULL DEFAULT '2',
   `name` varchar(32) NOT NULL DEFAULT 'Unoccupied Oasis',
   PRIMARY KEY (`wref`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
@@ -1220,10 +1232,10 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%online` (
 --
 
 CREATE TABLE IF NOT EXISTS `%PREFIX%research` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `vref` int(10) unsigned NOT NULL,
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `vref` int(11) unsigned NOT NULL,
   `tech` varchar(3) NOT NULL,
-  `timestamp` int(10) unsigned NOT NULL,
+  `timestamp` int(11) unsigned NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
@@ -1239,7 +1251,7 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%research` (
 --
 
 CREATE TABLE IF NOT EXISTS `%PREFIX%send` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `wood` int(11) unsigned NOT NULL,
   `clay` int(11) unsigned NOT NULL,
   `iron` int(11) unsigned NOT NULL,
@@ -1260,7 +1272,7 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%send` (
 --
 
 CREATE TABLE IF NOT EXISTS `%PREFIX%tdata` (
-  `vref` int(10) unsigned NOT NULL,
+  `vref` int(11) unsigned NOT NULL,
   `t2` tinyint(1) unsigned NOT NULL DEFAULT '0',
   `t3` tinyint(1) unsigned NOT NULL DEFAULT '0',
   `t4` tinyint(1) unsigned NOT NULL DEFAULT '0',
@@ -1316,8 +1328,8 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%tdata` (
 --
 
 CREATE TABLE IF NOT EXISTS `%PREFIX%tech_log` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `wid` int(10) unsigned NOT NULL,
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `wid` int(11) unsigned NOT NULL,
   `log` text NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
@@ -1357,7 +1369,7 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%training` (
 --
 
 CREATE TABLE IF NOT EXISTS `%PREFIX%units` (
-  `vref` int(10) unsigned NOT NULL,
+  `vref` int(11) unsigned NOT NULL,
   `hero` int(11) unsigned NOT NULL DEFAULT '0',
   `u1` int(11) unsigned NOT NULL DEFAULT '0',
   `u2` int(11) unsigned NOT NULL DEFAULT '0',
@@ -1424,7 +1436,7 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%units` (
 --
 
 CREATE TABLE IF NOT EXISTS `%PREFIX%users` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `username` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL,
   `email` text NOT NULL,
@@ -1437,34 +1449,76 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%users` (
   `location` text NOT NULL DEFAULT '',
   `desc1` text NOT NULL,
   `desc2` text NOT NULL,
-  `plus` int(10) unsigned NOT NULL DEFAULT '0',
-  `goldclub` int(10) unsigned NOT NULL DEFAULT '0',
-  `b1` int(10) unsigned NOT NULL DEFAULT '0',
-  `b2` int(10) unsigned NOT NULL DEFAULT '0',
-  `b3` int(10) unsigned NOT NULL DEFAULT '0',
-  `b4` int(10) unsigned NOT NULL DEFAULT '0',
-  `sit1` int(10) unsigned NOT NULL DEFAULT '0',
-  `sit2` int(10) unsigned NOT NULL DEFAULT '0',
-  `alliance` int(10) unsigned NOT NULL DEFAULT '0',
+  `plus` int(11) unsigned NOT NULL DEFAULT '0',
+  `goldclub` int(11) unsigned NOT NULL DEFAULT '0',
+  `b1` int(11) unsigned NOT NULL DEFAULT '0',
+  `b2` int(11) unsigned NOT NULL DEFAULT '0',
+  `b3` int(11) unsigned NOT NULL DEFAULT '0',
+  `b4` int(11) unsigned NOT NULL DEFAULT '0',
+  `sit1` int(11) unsigned NOT NULL DEFAULT '0',
+  `sit2` int(11) unsigned NOT NULL DEFAULT '0',
+  `alliance` int(11) unsigned NOT NULL DEFAULT '0',
   `sessid` varchar(100) NOT NULL,
   `act` varchar(10) NOT NULL,
-  `timestamp` int(10) unsigned NOT NULL DEFAULT '0',
-  `ap` int(10) unsigned NOT NULL DEFAULT '0',
-  `apall` int(10) unsigned NOT NULL DEFAULT '0',
-  `dp` int(10) unsigned NOT NULL DEFAULT '0',
-  `dpall` int(10) unsigned NOT NULL DEFAULT '0',
-  `protect` int(10) unsigned NOT NULL,
+  `timestamp` int(11) unsigned NOT NULL DEFAULT '0',
+  `ap` int(11) unsigned NOT NULL DEFAULT '0',
+  `apall` int(11) unsigned NOT NULL DEFAULT '0',
+  `dp` int(11) unsigned NOT NULL DEFAULT '0',
+  `dpall` int(11) unsigned NOT NULL DEFAULT '0',
+  `protect` int(11) unsigned NOT NULL,
   `quest` tinyint(2) NOT NULL,
   `quest_choose` tinyint(1) NOT NULL,
   `fquest` tinyint(2) NOT NULL,
   `gpack` varchar(255) NOT NULL DEFAULT 'gpack/travian_default/',
-  `cp` int(10) unsigned NOT NULL DEFAULT '1',
+  `cp` int(11) unsigned NOT NULL DEFAULT '1',
   `lastupdate` int(11) unsigned NOT NULL,
   `RR` int(255) NOT NULL DEFAULT '0',
   `Rc` int(255) NOT NULL DEFAULT '0',
   `ok` tinyint(1) unsigned NOT NULL DEFAULT '0',
   `clp` bigint(255) NOT NULL DEFAULT '0',
   `oldrank` bigint(255) unsigned NOT NULL DEFAULT '0',
+  `regtime` int(11) unsigned NOT NULL DEFAULT '0',
+  `invited` int(11) unsigned NOT NULL DEFAULT '0',
+  `friend0` int(11) unsigned NOT NULL,
+  `friend1` int(11) unsigned NOT NULL,
+  `friend2` int(11) unsigned NOT NULL,
+  `friend3` int(11) unsigned NOT NULL,
+  `friend4` int(11) unsigned NOT NULL,
+  `friend5` int(11) unsigned NOT NULL,
+  `friend6` int(11) unsigned NOT NULL,
+  `friend7` int(11) unsigned NOT NULL,
+  `friend8` int(11) unsigned NOT NULL,
+  `friend9` int(11) unsigned NOT NULL,
+  `friend10` int(11) unsigned NOT NULL,
+  `friend11` int(11) unsigned NOT NULL,
+  `friend12` int(11) unsigned NOT NULL,
+  `friend13` int(11) unsigned NOT NULL,
+  `friend14` int(11) unsigned NOT NULL,
+  `friend15` int(11) unsigned NOT NULL,
+  `friend16` int(11) unsigned NOT NULL,
+  `friend17` int(11) unsigned NOT NULL,
+  `friend18` int(11) unsigned NOT NULL,
+  `friend19` int(11) unsigned NOT NULL,
+  `friend0wait` int(11) unsigned NOT NULL,
+  `friend1wait` int(11) unsigned NOT NULL,
+  `friend2wait` int(11) unsigned NOT NULL,
+  `friend3wait` int(11) unsigned NOT NULL,
+  `friend4wait` int(11) unsigned NOT NULL,
+  `friend5wait` int(11) unsigned NOT NULL,
+  `friend6wait` int(11) unsigned NOT NULL,
+  `friend7wait` int(11) unsigned NOT NULL,
+  `friend8wait` int(11) unsigned NOT NULL,
+  `friend9wait` int(11) unsigned NOT NULL,
+  `friend10wait` int(11) unsigned NOT NULL,
+  `friend11wait` int(11) unsigned NOT NULL,
+  `friend12wait` int(11) unsigned NOT NULL,
+  `friend13wait` int(11) unsigned NOT NULL,
+  `friend14wait` int(11) unsigned NOT NULL,
+  `friend15wait` int(11) unsigned NOT NULL,
+  `friend16wait` int(11) unsigned NOT NULL,
+  `friend17wait` int(11) unsigned NOT NULL,
+  `friend18wait` int(11) unsigned NOT NULL,
+  `friend19wait` int(11) unsigned NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
@@ -1484,29 +1538,30 @@ INSERT INTO `%PREFIX%users` (`id`, `username`, `password`, `email`, `tribe`, `ac
 --
 
 CREATE TABLE IF NOT EXISTS `%PREFIX%vdata` (
-  `wref` int(10) unsigned NOT NULL,
-  `owner` int(10) unsigned NOT NULL,
+  `wref` int(11) unsigned NOT NULL,
+  `owner` int(11) unsigned NOT NULL,
   `name` varchar(100) NOT NULL,
   `capital` tinyint(1) unsigned NOT NULL,
-  `pop` int(10) unsigned NOT NULL,
-  `cp` int(10) unsigned NOT NULL,
-  `celebration` int(10) NOT NULL DEFAULT '0',
-  `type` int(10) NOT NULL DEFAULT '0',
+  `pop` int(11) unsigned NOT NULL,
+  `cp` int(11) unsigned NOT NULL,
+  `celebration` int(11) NOT NULL DEFAULT '0',
+  `type` int(11) NOT NULL DEFAULT '0',
   `wood` float(12,2) NOT NULL,
   `clay` float(12,2) NOT NULL,
   `iron` float(12,2) NOT NULL,
-  `maxstore` int(10) unsigned NOT NULL,
+  `maxstore` int(11) unsigned NOT NULL,
   `crop` float(12,2) NOT NULL,
-  `maxcrop` int(10) unsigned NOT NULL,
+  `maxcrop` int(11) unsigned NOT NULL,
   `lastupdate` int(11) unsigned NOT NULL,
   `loyalty` int(3) NOT NULL DEFAULT '100',
-  `exp1` int(10) NOT NULL,
-  `exp2` int(10) NOT NULL,
-  `exp3` int(10) NOT NULL,
+  `exp1` int(11) NOT NULL,
+  `exp2` int(11) NOT NULL,
+  `exp3` int(11) NOT NULL,
   `created` int(11) NOT NULL,
   `natar` tinyint(1) unsigned NOT NULL,
-  `starv` int(10) unsigned NOT NULL,
-  `starvupdate` int(10) unsigned NOT NULL,
+  `starv` int(11) unsigned NOT NULL,
+  `starvupdate` int(11) unsigned NOT NULL,
+  `evasion` tinyint(1) unsigned NOT NULL,
   PRIMARY KEY (`wref`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
@@ -1522,7 +1577,7 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%vdata` (
 --
 
 CREATE TABLE IF NOT EXISTS `%PREFIX%wdata` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `fieldtype` tinyint(2) unsigned NOT NULL,
   `oasistype` tinyint(2) unsigned NOT NULL,
   `x` int(11) NOT NULL,

@@ -1,6 +1,6 @@
-﻿<?php
+<?php
 //////////////// made by TTMTT ////////////////
-
+if($session->access!=BANNED){
 $topic_id = $_GET['idt'];
 $show_topic = $database->ShowTopic($topic_id);
 foreach($show_topic as $topi) {
@@ -25,7 +25,7 @@ foreach($show_topic as $topi) {
 			<th>Transfer Thread </td>
 			<td><select class="dropdown" name="fid">
 <?php
-$show_cat = $database->ForumCat();
+$show_cat = $database->ForumCat($session->alliance);
 	foreach($show_cat as $cats) {
 		if($cats['id'] == $_GET['idf']){
 			echo '<option value="'.$cats['id'].'" selected>'.$cats['forum_name'].'</option>';
@@ -38,4 +38,11 @@ $show_cat = $database->ForumCat();
 		</tr>
 	</tbody></table>
 
-	<p class="btn"><input type="image" id="fbtn_ok" value="ok" name="s1" class="dynamic_img" src="img/x.gif" alt="OK" /></form></p>
+	<p><button type="submit" value="????? ????" class="build">
+<div class="button-container"><div class="button-position"><div class="btl"><div class="btr"><div class="btc"></div></div></div>
+<div class="bml"><div class="bmr"><div class="bmc"></div></div></div><div class="bbl"><div class="bbr"><div class="bbc"></div></div></div>
+</div><div class="button-contents">OK</div></div></button></form></p>
+<?php }else{
+header("Location: banned.php");
+}
+?>

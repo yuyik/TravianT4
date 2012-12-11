@@ -239,13 +239,13 @@ if($dataarray[1]){
 
     <div class="clear"></div>
 </div>
-<button name="del" type="submit" value="del" id="del" class="delete">
-<div class="button-container"><div class="button-position"><div class="btl"><div class="btr"><div class="btc"></div></div></div><div class="bml"><div class="bmr"><div class="bmc"></div></div></div><div class="bbl"><div class="bbr"><div class="bbc"></div></div></div></div><div class="button-contents">Törlés</div></div>
+<button name="delntc" type="submit" value="delntc" id="del" class="delete">
+<div class="button-container"><div class="button-position"><div class="btl"><div class="btr"><div class="btc"></div></div></div><div class="bml"><div class="bmr"><div class="bmc"></div></div></div><div class="bbl"><div class="bbr"><div class="bbc"></div></div></div></div><div class="button-contents">Delete</div></div>
 </button>
                     
 <?php if($session->plus) { ?>
 <button name="archive" type="submit" value="archive" id="archive" class="delete">
-<div class="button-container"><div class="button-position"><div class="btl"><div class="btr"><div class="btc"></div></div></div><div class="bml"><div class="bmr"><div class="bmc"></div></div></div><div class="bbl"><div class="bbr"><div class="bbc"></div></div></div></div><div class="button-contents">Archív</div></div>
+<div class="button-container"><div class="button-position"><div class="btl"><div class="btr"><div class="btc"></div></div></div><div class="bml"><div class="bmr"><div class="bmc"></div></div></div><div class="bbl"><div class="bbr"><div class="bbc"></div></div></div></div><div class="button-contents">Archive</div></div>
 </button>
 <?php } ?>
 </form>

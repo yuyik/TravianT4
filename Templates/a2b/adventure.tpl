@@ -55,14 +55,14 @@ if($herodetail['dead']==0){
 		<button type="submit" value="ok" name="s1" id="btn_ok"><div class="button-container"><div class="button-position"><div class="btl"><div class="btr"><div class="btc"></div></div></div><div class="bml"><div class="bmr"><div class="bmc"></div></div></div><div class="bbl"><div class="bbr"><div class="bbc"></div></div></div></div><div class="button-contents">Start Adventure</div></div></button>
 	</p>
 <?php }else{ ?>
-<button type="button" title="A hősöd nincs a faluban." value="Kalandra fel!" class="disabled"><div class="button-container"><div class="button-position"><div class="btl"><div class="btr"><div class="btc"></div></div></div><div class="bml"><div class="bmr"><div class="bmc"></div></div></div><div class="bbl"><div class="bbr"><div class="bbc"></div></div></div></div><div class="button-contents">Start Adventure</div></div></button>
+<button type="button" title="Your hero is not in this village yet." value="Kalandra fel!" class="disabled"><div class="button-container"><div class="button-position"><div class="btl"><div class="btr"><div class="btc"></div></div></div><div class="bml"><div class="bmr"><div class="bmc"></div></div></div><div class="bbl"><div class="bbr"><div class="bbc"></div></div></div></div><div class="button-contents">Start Adventure</div></div></button>
 <?php } ?>
 <?php }else{ ?>
-<button type="button" title="A hősöd halott." value="Kalandra fel" class="disabled"><div class="button-container"><div class="button-position"><div class="btl"><div class="btr"><div class="btc"></div></div></div><div class="bml"><div class="bmr"><div class="bmc"></div></div></div><div class="bbl"><div class="bbr"><div class="bbc"></div></div></div></div><div class="button-contents">Start Adventure</div></div></button>
+<button type="button" title="Your hero is dead." value="Kalandra fel" class="disabled"><div class="button-container"><div class="button-position"><div class="btl"><div class="btr"><div class="btc"></div></div></div><div class="bml"><div class="bmr"><div class="bmc"></div></div></div><div class="bbl"><div class="bbr"><div class="bbc"></div></div></div></div><div class="button-contents">Start Adventure</div></div></button>
 <?php 
 }
 }else{ 
 ?>
-<button type="button" title="Kiképzés" value="Kalandra fel" class="disabled"><div class="button-container"><div class="button-position"><div class="btl"><div class="btr"><div class="btc"></div></div></div><div class="bml"><div class="bmr"><div class="bmc"></div></div></div><div class="bbl"><div class="bbr"><div class="bbc"></div></div></div></div><div class="button-contents">Start Adventure</div></div></button>
+<button type="button" title="Build rally point" value="Kalandra fel" class="disabled"><div class="button-container"><div class="button-position"><div class="btl"><div class="btr"><div class="btc"></div></div></div><div class="bml"><div class="bmr"><div class="bmc"></div></div></div><div class="bbl"><div class="bbr"><div class="bbc"></div></div></div></div><div class="button-contents">Start Adventure</div></div></button>
 <?php } ?>
 </form>

@@ -118,7 +118,7 @@ Element.implement({
                 <tr class="account">
 					<td class="accountNameOrEmailAddress"><?php echo LOGIN_USERNAME; ?></td>
 					<td>
-						<input type="text" name="user" value="<?php echo $form->getDiff("user",$_COOKIE['COOKUSR']); ?>" class="text">
+						<input type="text" name="user" value="<?php echo stripslashes(stripslashes(stripslashes($form->getDiff("user",$_COOKIE['COOKUSR'])))); ?>" class="text">
 						<div class="error RTL"><?php echo $form->getError("user"); ?></div>
 					</td>
 					<td>

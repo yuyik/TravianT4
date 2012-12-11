@@ -2,8 +2,8 @@
 <?php
 $noticeClass = array("Scout Report","Won as attacker without losses","Won as attacker with losses","Lost as attacker with losses","Won as defender without losses","Won as defender with losses","Lost as defender with losses","Lost as defender without losses","Reinforcement arrived","","Wood Delivered","Clay Delivered","Iron Delivered","Crop Delivered","","Won as defender without losses","Won as defender with losses","Lost as defender with losses","Won scouting as attacker","Lost scouting as attacker","Won scouting as defender","Lost scouting as defender","Scout Report");
 $prefix = "".TB_PREFIX."ndata";
-$limit2 = "and ntype=10 or ntype=11 or ntype=12 or ntype=13";
-$sql = mysql_query("SELECT * FROM $prefix WHERE uid = $session->uid and archive=0 $limit2 ORDER BY time DESC");
+$limit2 = "and (ntype = 10 or ntype = 11 or ntype = 12 or ntype = 13)";
+$sql = mysql_query("SELECT * FROM $prefix WHERE uid = $session->uid and archive = 0 $limit2 and del = 0 ORDER BY time DESC");
 $query = mysql_num_rows($sql);
 
 if (isset($_GET['page'])) {
@@ -239,13 +239,13 @@ if($dataarray[1]){
 
     <div class="clear"></div>
 </div>
-<button name="del" type="submit" value="del" id="del" class="delete">
-<div class="button-container"><div class="button-position"><div class="btl"><div class="btr"><div class="btc"></div></div></div><div class="bml"><div class="bmr"><div class="bmc"></div></div></div><div class="bbl"><div class="bbr"><div class="bbc"></div></div></div></div><div class="button-contents">Törlés</div></div>
+<button name="delntc" type="submit" value="delntc" id="del" class="delete">
+<div class="button-container"><div class="button-position"><div class="btl"><div class="btr"><div class="btc"></div></div></div><div class="bml"><div class="bmr"><div class="bmc"></div></div></div><div class="bbl"><div class="bbr"><div class="bbc"></div></div></div></div><div class="button-contents">Delete</div></div>
 </button>
                     
 <?php if($session->plus) { ?>
 <button name="archive" type="submit" value="archive" id="archive" class="delete">
-<div class="button-container"><div class="button-position"><div class="btl"><div class="btr"><div class="btc"></div></div></div><div class="bml"><div class="bmr"><div class="bmc"></div></div></div><div class="bbl"><div class="bbr"><div class="bbc"></div></div></div></div><div class="button-contents">Archív</div></div>
+<div class="button-container"><div class="button-position"><div class="btl"><div class="btr"><div class="btc"></div></div></div><div class="bml"><div class="bmr"><div class="bmc"></div></div></div><div class="bbl"><div class="bbr"><div class="bbc"></div></div></div></div><div class="button-contents">Archive</div></div>
 </button>
 <?php } ?>
 </form>

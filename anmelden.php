@@ -51,7 +51,7 @@ include "Templates/html.tpl";
 				<tr class="top">
 					<th><label for="userName"><?php echo REGISTER_USERNAME; ?></label></th>
 					<td>
-						<input id="userName" class="text" type="text" name="name" value="<?php echo $form->getValue('name'); ?>" maxlength="15" />
+						<input id="userName" class="text" type="text" name="name" value="<?php echo stripslashes(stripslashes(stripslashes($form->getValue('name')))); ?>" maxlength="15" />
 						<span class="error"><?php echo $form->getError('name'); ?></span>
 					</td>
 				</tr>

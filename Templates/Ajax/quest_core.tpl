@@ -435,9 +435,9 @@ if ($rallypoint == 0){
 $temp['uid']=$session->userinfo['id'];
 //$ranking->procRankReq($temp);
 $displayarray = $database->getUserArray($temp['uid'],1);
-//$rRes = $ranking->searchRank($displayarray['username'],"username");
+$rRes=$ranking->getUserRank($displayarray['username']);
 if ($rRes!=$rSubmited){?>
-{"markup":"\n\t\t<div id=\"popup3\"><div id=\"qstd\"><h4>Task 5: Other Players<\/h4><div class=\"spoken\">&rdquo;In Travian, you play with a lot of other players. Click 'statistics' in the top menu to look up your rank and enter it here.&rdquo;<\/div><div class=\"rew\"><p class=\"ta_aw\">Order:<\/p>Look for your rank in the statistics and enter it here.<\/div><input id=\"qst_val\" class=\"text\" type=\"text\" name=\"qstin\" \/><button type=\"button\" value=\"Task completion\" onclick=\"qst_next('','5',document.getElementById('qst_val').value)\">complete task<\/button><span id=\"qst_accpt\"><\/span><\/div><\/div>\n\t\t<div id=\"qstbg\" class=\"rank1\"><\/div>\n\t\t","number":5,"reward":false,"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>","msrc":"<?php echo $messagelol; ?>","altstep":0}
+{"markup":"\n\t\t<div id=\"popup3\"><div id=\"qstd\"><h4>Task 5: Other Players<\/h4><div class=\"spoken\">&rdquo;In Travian, you play with a lot of other players. Click 'statistics' in the top menu to look up your rank and enter it here.&rdquo;<\/div><div class=\"rew\"><p class=\"ta_aw\">Order:<\/p>Look for your rank in the statistics and enter it here.<\/div><input id=\"qst_val\" class=\"text\" type=\"text\" name=\"qstin\" \/><button type=\"button\" value=\"Task completion\" /> <input onclick=\"qst_next('','rank',document.getElementById('qst_val').value)\" type=\"button\" value=\"complete task\"\/><\/button><span id=\"qst_accpt\"><\/span><\/div><\/div>\n\t\t<div id=\"qstbg\" class=\"rank1\"><\/div>\n\t\t","number":5,"reward":false,"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>","msrc":"<?php echo $messagelol; ?>","altstep":0}
 
 <?php $_SESSION['qstnew']='0'; }else{ $_SESSION['qstnew']='1'; ?>
 {"markup":"\n\t\t<div id=\"popup3\"><div id=\"qstd\"><h4>Task 5: Other Players<\/h4><div class=\"spoken\">&rdquo;Exactly! That's your rank.&rdquo;<\/div><div class=\"rew\"><p class=\"ta_aw\"><input type=\"hidden\" id=\"qst_val\" value=\"2\" \/>Task reward:<\/p><span class=\"resources r1\"><img class=\"r1\" title=\"Lumber\" src=\"img\/x.gif\" alt=\"Lumber\">80<\/span><span class=\"resources r2\"><img class=\"r2\" title=\"Clay\" src=\"img\/x.gif\" alt=\"Clay\">110<\/span><span class=\"resources r3\"><img class=\"r3\" title=\"Iron\" src=\"img\/x.gif\" alt=\"Iron\">60<\/span><span class=\"resources r4\"><img class=\"r4\" title=\"Crop\" src=\"img/x.gif\" alt=\"Crop\">40<\/span><\/div><br><span id=\"qst_accpt\"><a class=\"arrow\" href=\"javascript: qst_next('','6');\">Continue with the next task.<\/a><\/span><\/div>\n\t\t<div id=\"qstbg\" class=\"rank1\"><\/div>\n\t\t","number":5,"reward":{"wood":80,"clay":110,"iron":60,"crop":40},"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>","msrc":"<?php echo $messagelol; ?>","altstep":0}
@@ -498,7 +498,7 @@ if ($ironL<2 || $clayL<2 || $woodL<2 || $cropL<2){?>
 <?php } elseif($_SESSION['qst']== 9){
 
 $getvID = $database->getVillageID($session->uid);
-$nvillage = $database->getfieldDistance($getvID);
+$nvillage = $database->getFieldDistance($getvID);
 $ncoor = $database->getCoor($nvillage);
 $nvillagename = $database->getVillageField($nvillage,"name");
 if ($x!=$ncoor['x'] or $y!=$ncoor['y']){

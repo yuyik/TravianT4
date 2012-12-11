@@ -1,6 +1,6 @@
 ﻿<?php
 $prefix = "".TB_PREFIX."mdata";
-$sql = mysql_query("SELECT * FROM $prefix WHERE target = $session->uid AND archived = 0 ORDER BY time DESC");
+$sql = mysql_query("SELECT * FROM $prefix WHERE target = $session->uid AND archived = 0 AND deltarget = 0 ORDER BY time DESC");
 $query = mysql_num_rows($sql); // دریافت تعداد کوئری ها از دیتابیس
 
 if (isset($_GET['page'])) { // دریافت شماره صفحه
