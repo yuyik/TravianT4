@@ -1,5 +1,6 @@
 ﻿<?php 
-if ($_SESSION['qst']!=25 && $_SESSION['fqst']!=35 && QUEST==true){
+$displayarray = $database->getUserArray($session->uid,1);
+if ($displayarray['fquest'] != "1,1,1,1,1,1,1,1,1,1,1" && QUEST==true){
 ?>
 
 <div class="questMaster">
@@ -29,7 +30,6 @@ if ($_SESSION['qst']!=25 && $_SESSION['fqst']!=35 && QUEST==true){
 </script>
 <?php
 $timestamp = $database->isDeleting($session->uid);
-$displayarray = $database->getUserArray($session->uid,1);
 if($displayarray['protect'] > time()){
 echo "<div id=\"sideInfoCountdown\"><div class=\"head\"></div>";
 echo "<div class=\"content\">";

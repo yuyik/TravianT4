@@ -870,7 +870,7 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%hero` (
   `points` int(3) unsigned NOT NULL,
   `experience` int(11) NOT NULL,
   `dead` tinyint(1) NOT NULL,
-  `health` float(4,1) unsigned NOT NULL,
+  `health` float(12,9) unsigned NOT NULL,
   `power` int(11) unsigned NOT NULL,
   `itempower` int(11) unsigned NOT NULL,
   `offBonus` tinyint(3) unsigned NOT NULL,
@@ -1468,7 +1468,7 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%users` (
   `protect` int(11) unsigned NOT NULL,
   `quest` tinyint(2) NOT NULL,
   `quest_choose` tinyint(1) NOT NULL,
-  `fquest` tinyint(2) NOT NULL,
+  `fquest` text NOT NULL,
   `gpack` varchar(255) NOT NULL DEFAULT 'gpack/travian_default/',
   `cp` int(11) unsigned NOT NULL DEFAULT '1',
   `lastupdate` int(11) unsigned NOT NULL,
@@ -1527,9 +1527,9 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%users` (
 --
 
 INSERT INTO `%PREFIX%users` (`id`, `username`, `password`, `email`, `tribe`, `access`, `gold`, `gender`, `birthday`, `location`, `desc1`, `desc2`, `plus`, `b1`, `b2`, `b3`, `b4`, `sit1`, `sit2`, `alliance`, `sessid`, `act`, `timestamp`, `ap`, `apall`, `dp`, `dpall`, `protect`, `quest`, `fquest`, `gpack`, `cp`, `lastupdate`, `RR`, `Rc`, `ok`) VALUES
-(4, 'Multihunter', '', 'multihunter@travianx.mail', 0, 9, 0, 0, '0000-00-00', '', '', '', 0, 0, 0, 0, 0, 0, 0, 0, '', '', 0, 0, 0, 0, 0, 0, 25, 35, 'gpack/travian_default/', 1, 0, 0, 0, 0),
-(1, 'Support', '', 'support@travianx.mail', 1, 8, 0, 0, '0000-00-00', '', '', '', 0, 0, 0, 0, 0, 0, 0, 0, '', '', 0, 0, 0, 0, 0, 0, 25, 35, 'gpack/travian_default/', 1, 0, 0, 0, 0),
-(3, 'Nature', '', 'support@travianx.mail', 4, 8, 0, 0, '0000-00-00', '', '', '', 0, 0, 0, 0, 0, 0, 0, 0, '', '', 0, 0, 0, 0, 0, 0, 25, 35, 'gpack/travian_default/', 1, 0, 0, 0, 0);
+(4, 'Multihunter', '', 'multihunter@travianx.mail', 0, 9, 0, 0, '0000-00-00', '', '', '', 0, 0, 0, 0, 0, 0, 0, 0, '', '', 0, 0, 0, 0, 0, 0, 25, '1,1,1,1,1,1,1,1,1,1,1', 'gpack/travian_default/', 1, 0, 0, 0, 0),
+(1, 'Support', '', 'support@travianx.mail', 1, 8, 0, 0, '0000-00-00', '', '', '', 0, 0, 0, 0, 0, 0, 0, 0, '', '', 0, 0, 0, 0, 0, 0, 25, '1,1,1,1,1,1,1,1,1,1,1', 'gpack/travian_default/', 1, 0, 0, 0, 0),
+(3, 'Nature', '', 'support@travianx.mail', 4, 8, 0, 0, '0000-00-00', '', '', '', 0, 0, 0, 0, 0, 0, 0, 0, '', '', 0, 0, 0, 0, 0, 0, 25, '1,1,1,1,1,1,1,1,1,1,1', 'gpack/travian_default/', 1, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 

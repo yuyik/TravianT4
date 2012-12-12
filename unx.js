@@ -301,13 +301,28 @@ return bi;}
 function fi(qact,qact2){
 if(qact===undefined){
 qact=false;
-} 
+}
 
 if(qact2===undefined){
 qact2=false;
-} 
+}
 
 var gi='ajax.php?f=qst';var ci=(Math.abs(quest.number)+1)/(Math.abs(quest.last)+1);return gi+'&cr='+bi(4,ci)+'&qact='+qact+'&qact2='+qact2;}
+
+function fi2(qact,qact2,qact3){
+if(qact===undefined){
+qact=false;
+}
+
+if(qact2===undefined){
+qact2=false;
+}
+
+if(qact3===undefined){
+qact3=false;
+}
+
+var gi='ajax.php?f=qst';var ci=(Math.abs(quest.number)+1)/(Math.abs(quest.last)+1);return gi+'&cr='+bi(4,ci)+'&qact='+qact+'&qact2='+qact2+'&qact3='+qact3;}
 
 function qst_next(jf,act,act2){
 
@@ -324,6 +339,20 @@ fd(fi(act,act2),function(mf){for(var qd in mf){quest[qd]=mf[qd];}},'POST',id);
 qst_wfm();
 }
 
+function qst_next2(jf,act,act2,act3){
+
+var id;
+
+if(jf){id={'x':document.getElementById('qst_val_x').value,'y':document.getElementById('qst_val_y').value};}
+
+else{id={'val':document.getElementById('qst_val').value};}
+
+pi();
+
+fd(fi2(act,act2,act3),function(mf){for(var qd in mf){quest[qd]=mf[qd];}},'POST',id);
+
+qst_wfm();
+}
 
 
 function hi(){document.getElementById('ce').innerHTML='';var step;if(quest.anmstep===false){step={'step':{}

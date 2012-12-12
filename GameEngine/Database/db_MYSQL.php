@@ -11,7 +11,7 @@
         		$time = time();
         		$timep = ($time + PROTECTION);
 				$rand = rand(8900, 9000);
-        		$q = "INSERT INTO " . TB_PREFIX . "users (username,password,access,email,timestamp,tribe,location,act,protect,clp,cp) VALUES ('$username', '$password', " . USER . ", '$email', $time, $tribe, $locate, '$act', $timep, '$rand', 1)";
+        		$q = "INSERT INTO " . TB_PREFIX . "users (username,password,access,email,timestamp,tribe,location,act,protect,fquest,clp,cp) VALUES ('$username', '$password', " . USER . ", '$email', $time, $tribe, $locate, '$act', $timep, '0,0,0,0,0,0,0,0,0,0,0', '$rand', 1)";
         		if(mysql_query($q, $this->connection)) {
         			return mysql_insert_id($this->connection);
         		} else {
@@ -3482,6 +3482,8 @@ break;
 		$q = "SELECT * FROM " . TB_PREFIX . "vdata where owner > 4 and wref != $wid";
 		$array = $this->query_return($q);
 		$coor = $this->getCoor($wid);
+		$x1 = intval($coor['x']);
+		$y1 = intval($coor['y']);
 		$prevdist = 0;
 		$q2 = "SELECT * FROM " . TB_PREFIX . "vdata where owner = 4";
 		$array2 = mysql_fetch_array(mysql_query($q2));
@@ -3490,8 +3492,6 @@ break;
 		foreach($array as $village){
 		$coor2 = $this->getCoor($village['wref']);
 				$max = 2 * WORLD_MAX + 1;
-				$x1 = intval($coor['x']);
-				$y1 = intval($coor['y']);
 				$x2 = intval($coor2['x']);
 				$y2 = intval($coor2['y']);
 				$distanceX = min(abs($x2 - $x1), abs($max - abs($x2 - $x1)));

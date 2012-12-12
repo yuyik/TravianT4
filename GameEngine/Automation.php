@@ -3241,11 +3241,12 @@ $info_cata=" از سطح <b>".$tblevel."</b> به سطح <b>".$totallvl."</b> آ
 		if(!empty($harray)) {
 	        foreach($harray as $hdata) {
 				if($hdata['health']<100) {
-					if(($time-$hdata['lastupdate'])>=3600) {
-						$health = round(($hdata['autoregen']/24),1);
-						$database->modifyHero("health",$health,$hdata['heroid'],1);
+						$health = $hdata['health']+$hdata['autoregen']*SPEED/86400*(time()-$hdata['lastupdate']);
+						if($health > 100){
+						$health = 100;
+						}
+						$database->modifyHero("health",$health,$hdata['heroid'],0);
 						$database->modifyHero("lastupdate",time(),$hdata['heroid'],0);
-					}
 				}
 				$hero_levels = $GLOBALS["hero_levels"];
 				if($hdata['experience']>=$hero_levels[$hdata['level']+1]){

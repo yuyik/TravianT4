@@ -1,8 +1,10 @@
 <?php
 
 include("GameEngine/Village.php");
+include("GameEngine/Data/cp.php");
 
 $uArray = $database->getUserArray($_SESSION['username'],0);
+$dataarray = explode(",",$database->getUserField($_SESSION['username'],'fquest','username'));
 
 if($message->unread && !$message->nunread) { $messagelol = "i2"; }
 else if(!$message->unread && $message->nunread) { $messagelol = "i3"; }
@@ -70,7 +72,7 @@ if (isset($qact)){
 	$_SESSION['qst']= 7;
 	$Subject="Message From The Taskmaster";
 	$Message="You are to be informed that a nice reward is waiting for you at the taskmaster.<br /><br />Hint: The message has been generated automatically. An answer is not necessary.";
-	$database->sendMessage($session->userinfo['id'],0,$Subject,$Message,0);
+	$database->sendMessage($session->userinfo['id'],0,$Subject,$Message,0,0,0,0,0);
 	$RB=true;
 		
 	//Give Reward
@@ -90,14 +92,13 @@ if (isset($qact)){
 	case '9':
 	$database->updateUserField($_SESSION['username'],'quest','9',0);
 	$_SESSION['qst']= 9;	
-		
 	//Give Reward
 	$database->modifyUnit($session->villages[0],100,120,40,40,1);
 	break;
-    
-    case 'coor':
+	
+	case 'coor':
 	$x=$qact2;
-	$y=$qact2;
+	$y=$qact3;
 	break;
 	
 	case '10':
@@ -257,7 +258,9 @@ if (isset($qact)){
 	break;
     
 	case '25':
-	$database->updateUserField($_SESSION['username'],'fquest','25',0);
+	$dataarray[0] = 1;
+	$database->updateUserField($_SESSION['username'],'fquest',''.$dataarray[0].','.$dataarray[1].','.$dataarray[2].','.$dataarray[3].','.$dataarray[4].','.$dataarray[5].','.$dataarray[6].','.$dataarray[7].','.$dataarray[8].','.$dataarray[9].','.$dataarray[10].'',0);
+
 	$_SESSION['qst']= 24;
 	
 	//Give Reward
@@ -267,7 +270,9 @@ if (isset($qact)){
 	break;
     
     case '26':
-	$database->updateUserField($_SESSION['username'],'fquest','26',0);
+	$dataarray[1] = 1;
+	$database->updateUserField($_SESSION['username'],'fquest',''.$dataarray[0].','.$dataarray[1].','.$dataarray[2].','.$dataarray[3].','.$dataarray[4].','.$dataarray[5].','.$dataarray[6].','.$dataarray[7].','.$dataarray[8].','.$dataarray[9].','.$dataarray[10].'',0);
+
 	$_SESSION['qst']= 24;
 	
 	//Give Reward
@@ -275,7 +280,9 @@ if (isset($qact)){
 	break;
     
     case '27':
-	$database->updateUserField($_SESSION['username'],'fquest','27',0);
+	$dataarray[2] = 1;
+	$database->updateUserField($_SESSION['username'],'fquest',''.$dataarray[0].','.$dataarray[1].','.$dataarray[2].','.$dataarray[3].','.$dataarray[4].','.$dataarray[5].','.$dataarray[6].','.$dataarray[7].','.$dataarray[8].','.$dataarray[9].','.$dataarray[10].'',0);
+
 	$_SESSION['qst']= 24;
 	
 	//Give Reward
@@ -283,7 +290,9 @@ if (isset($qact)){
 	break;
     
     case '28':
-	$database->updateUserField($_SESSION['username'],'fquest','28',0);
+	$dataarray[3] = 1;
+	$database->updateUserField($_SESSION['username'],'fquest',''.$dataarray[0].','.$dataarray[1].','.$dataarray[2].','.$dataarray[3].','.$dataarray[4].','.$dataarray[5].','.$dataarray[6].','.$dataarray[7].','.$dataarray[8].','.$dataarray[9].','.$dataarray[10].'',0);
+
 	$_SESSION['qst']= 24;
 	
 	//Give Reward
@@ -291,7 +300,9 @@ if (isset($qact)){
 	break;
     
     case '29':
-	$database->updateUserField($_SESSION['username'],'fquest','29',0);
+	$dataarray[4] = 1;
+	$database->updateUserField($_SESSION['username'],'fquest',''.$dataarray[0].','.$dataarray[1].','.$dataarray[2].','.$dataarray[3].','.$dataarray[4].','.$dataarray[5].','.$dataarray[6].','.$dataarray[7].','.$dataarray[8].','.$dataarray[9].','.$dataarray[10].'',0);
+
 	$_SESSION['qst']= 24;
 	
 	//Give Reward
@@ -299,7 +310,9 @@ if (isset($qact)){
 	break;
     
     case '30':
-	$database->updateUserField($_SESSION['username'],'fquest','30',0);
+	$dataarray[5] = 1;
+	$database->updateUserField($_SESSION['username'],'fquest',''.$dataarray[0].','.$dataarray[1].','.$dataarray[2].','.$dataarray[3].','.$dataarray[4].','.$dataarray[5].','.$dataarray[6].','.$dataarray[7].','.$dataarray[8].','.$dataarray[9].','.$dataarray[10].'',0);
+
 	$_SESSION['qst']= 24;
 	
 	//Give Reward
@@ -307,7 +320,9 @@ if (isset($qact)){
 	break;
     
     case '31':
-	$database->updateUserField($_SESSION['username'],'fquest','31',0);
+	$dataarray[6] = 1;
+	$database->updateUserField($_SESSION['username'],'fquest',''.$dataarray[0].','.$dataarray[1].','.$dataarray[2].','.$dataarray[3].','.$dataarray[4].','.$dataarray[5].','.$dataarray[6].','.$dataarray[7].','.$dataarray[8].','.$dataarray[9].','.$dataarray[10].'',0);
+
 	$_SESSION['qst']= 24;
 	
 	//Give Reward
@@ -315,7 +330,9 @@ if (isset($qact)){
 	break;
     
     case '32':
-	$database->updateUserField($_SESSION['username'],'fquest','32',0);
+	$dataarray[7] = 1;
+	$database->updateUserField($_SESSION['username'],'fquest',''.$dataarray[0].','.$dataarray[1].','.$dataarray[2].','.$dataarray[3].','.$dataarray[4].','.$dataarray[5].','.$dataarray[6].','.$dataarray[7].','.$dataarray[8].','.$dataarray[9].','.$dataarray[10].'',0);
+
 	$_SESSION['qst']= 24;
 	
 	//Give Reward
@@ -323,7 +340,9 @@ if (isset($qact)){
 	break;
     
     case '33':
-	$database->updateUserField($_SESSION['username'],'fquest','33',0);
+	$dataarray[8] = 1;
+	$database->updateUserField($_SESSION['username'],'fquest',''.$dataarray[0].','.$dataarray[1].','.$dataarray[2].','.$dataarray[3].','.$dataarray[4].','.$dataarray[5].','.$dataarray[6].','.$dataarray[7].','.$dataarray[8].','.$dataarray[9].','.$dataarray[10].'',0);
+
 	$_SESSION['qst']= 24;
 	
 	//Give Reward
@@ -331,7 +350,9 @@ if (isset($qact)){
 	break;
     
     case '34':
-	$database->updateUserField($_SESSION['username'],'fquest','34',0);
+	$dataarray[9] = 1;
+	$database->updateUserField($_SESSION['username'],'fquest',''.$dataarray[0].','.$dataarray[1].','.$dataarray[2].','.$dataarray[3].','.$dataarray[4].','.$dataarray[5].','.$dataarray[6].','.$dataarray[7].','.$dataarray[8].','.$dataarray[9].','.$dataarray[10].'',0);
+
 	$_SESSION['qst']= 24;
 	
 	//Give Reward
@@ -339,8 +360,10 @@ if (isset($qact)){
 	break;
     
     case '35':
-	$database->updateUserField($_SESSION['username'],'fquest','35',0);
-    $database->updateUserField($_SESSION['username'],'quest','25',0);
+	$dataarray[10] = 1;
+	$database->updateUserField($_SESSION['username'],'fquest',''.$dataarray[0].','.$dataarray[1].','.$dataarray[2].','.$dataarray[3].','.$dataarray[4].','.$dataarray[5].','.$dataarray[6].','.$dataarray[7].','.$dataarray[8].','.$dataarray[9].','.$dataarray[10].'',0);
+
+    $database->updateUserField($_SESSION['username'],'quest','',0);
 	$_SESSION['qst']= 24;
 	
 	//Give Reward
@@ -433,7 +456,6 @@ if ($rallypoint == 0){
 
 // Compare real player rank with submited rank
 $temp['uid']=$session->userinfo['id'];
-//$ranking->procRankReq($temp);
 $displayarray = $database->getUserArray($temp['uid'],1);
 $rRes=$ranking->getUserRank($displayarray['username']);
 if ($rRes!=$rSubmited){?>
@@ -501,11 +523,11 @@ $getvID = $database->getVillageID($session->uid);
 $nvillage = $database->getFieldDistance($getvID);
 $ncoor = $database->getCoor($nvillage);
 $nvillagename = $database->getVillageField($nvillage,"name");
-if ($x!=$ncoor['x'] or $y!=$ncoor['y']){
+if ($x!=$ncoor['y'] or $y!=$ncoor['x']){
 
 ?>
 
-{"markup":"\n\t\t<div id=\"popup3\"><div id=\"qstd\"><h4>Task 9: Neighbours!<\/h4><div class=\"spoken\">&rdquo;Around you, there are many different villages. One of them is named <b><?php echo $nvillagename; ?><\/b>. Click on 'map' in the header menu and look for that village. The name of your neighbours' villages can be seen when hovering your mouse over any of them.&rdquo;<\/div><div class=\"rew\"><p class=\"ta_aw\">Order:<\/p>Look for the coordinates of <b><?php echo $nvillagename; ?><\/b> and enter them here.<\/div><div class=\"coordinatesInput\"><div class=\"xCoord\"><label for=\"xCoordInputQuest\">X:<\/label><input maxlength=\"4\" value=\"\" id=\"qst_val\" name=\"x\" id=\"xCoordInputQuest\" class=\"text coordinates x \"><\/div><div class=\"yCoord\"><label for=\"yCoordInputQuest\">Y:<\/label><input maxlength=\"4\" value=\"\" name=\"y\" id=\"yCoordInputQuest\" class=\"text coordinates y \"><\/div><div class=\"clear\"><\/div><\/div><button type=\"button\" value=\"complete task\" class=\"coordinatesButton\" onclick=\"qst_next('','coor',document.getElementById('qst_val').value)\"><div class=\"button-container\"><div class=\"button-position\"><div class=\"btl\"><div class=\"btr\"><div class=\"btc\"><\/div><\/div><\/div><div class=\"bml\"><div class=\"bmr\"><div class=\"bmc\"><\/div><\/div><\/div><div class=\"bbl\"><div class=\"bbr\"><div class=\"bbc\"><\/div><\/div><\/div><\/div><div class=\"button-contents\">complete task<\/div><\/div><\/button><span id=\"qst_accpt\"><\/span><\/div><\/div>\n\t\t<div id=\"qstbg\" class=\"neighbour\"><\/div>\n\t\t","number":-9,"reward":false,"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>","msrc":"<?php echo $messagelol; ?>","altstep":0}
+{"markup":"\n\t\t<div id=\"popup3\"><div id=\"qstd\"><h4>Task 9: Neighbours!<\/h4><div class=\"spoken\">&rdquo;Around you, there are many different villages. One of them is named <b><?php echo $nvillagename; ?><\/b>. Click on 'map' in the header menu and look for that village. The name of your neighbours' villages can be seen when hovering your mouse over any of them.&rdquo;<\/div><div class=\"rew\"><p class=\"ta_aw\">Order:<\/p>Look for the coordinates of <b><?php echo $nvillagename; ?><\/b> and enter them here.<\/div><div class=\"coordinatesInput\"><div class=\"xCoord\"><label for=\"xCoordInputQuest\">X:<\/label><input maxlength=\"4\" value=\"\" id=\"qst_val\" name=\"qstin\" id=\"xCoordInputQuest\" class=\"text coordinates x \"><\/div><div class=\"yCoord\"><label for=\"yCoordInputQuest\">Y:<\/label><input maxlength=\"4\" value=\"\" name=\"qstin\" id=\"yCoordInputQuest\" class=\"text coordinates y \"><\/div><div class=\"clear\"><\/div><\/div><button type=\"button\" value=\"complete task\" class=\"coordinatesButton\" onclick=\"qst_next2('','coor',document.getElementById('qst_val').value,document.getElementById('yCoordInputQuest').value)\"><div class=\"button-container\"><div class=\"button-position\"><div class=\"btl\"><div class=\"btr\"><div class=\"btc\"><\/div><\/div><\/div><div class=\"bml\"><div class=\"bmr\"><div class=\"bmc\"><\/div><\/div><\/div><div class=\"bbl\"><div class=\"bbr\"><div class=\"bbc\"><\/div><\/div><\/div><\/div><div class=\"button-contents\">complete task<\/div><\/div><\/button><span id=\"qst_accpt\"><\/span><\/div><\/div>\n\t\t<div id=\"qstbg\" class=\"neighbour\"><\/div>\n\t\t","number":-9,"reward":false,"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>","msrc":"<?php echo $messagelol; ?>","altstep":0}
 <?php $_SESSION['qstnew']='0'; }else{ $_SESSION['qstnew']='1'; ?>
 {"markup":"\n\t\t<div id=\"popup3\"><div id=\"qstd\"><h4>Task 9: Neighbours!<\/h4><div class=\"spoken\">&rdquo;Exactly, there <b> <?php echo $nvillagename;?> <\/b> Village! As many resources as you reach this village. Well, almost as much ...”&rdquo;<\/div><div class=\"rew\"><p class=\"ta_aw\"><input type=\"hidden\" id=\"qst_val\" value=\"2\" \/>Task reward:<\/p><span class=\"resources r1\"><img class=\"r1\" title=\"Lumber\" src=\"img\/x.gif\" alt=\"Lumber\">60<\/span><span class=\"resources r2\"><img class=\"r2\" title=\"Clay\" src=\"img\/x.gif\" alt=\"Clay\">30<\/span><span class=\"resources r3\"><img class=\"r3\" title=\"Iron\" src=\"img\/x.gif\" alt=\"Iron\">40<\/span><span class=\"resources r4\"><img class=\"r4\" title=\"Crop\" src=\"img/x.gif\" alt=\"Crop\">90<\/span><\/div><br><span id=\"qst_accpt\"><a class=\"arrow\" href=\"javascript: qst_next('','10');\">Continue with the next task.<\/a><\/span><\/div>\n\t\t<div id=\"qstbg\" class=\"neighbour\"><\/div>\n\t\t","number":9,"reward":{"wood":60,"clay":30,"iron":40,"crop":90},"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>g","msrc":"<?php echo $messagelol; ?>","altstep":0}
 <?php }?>
@@ -584,9 +606,8 @@ if ($mainbuilding<3){?>
 
 // Compare real player rank with submited rank
 $temp['uid']=$session->userinfo['id'];
-//$ranking->procRankReq($temp);
-//$displayarray = $database->getUserArray($temp['uid'],1);
-//$rRes=$ranking->searchRank($displayarray['username'],"username");
+$displayarray = $database->getUserArray($temp['uid'],1);
+$rRes=$ranking->getUserRank($displayarray['username']);
 if ($rRes!=$rSubmited){ ?>
 {"markup":"\n\t\t<div id=\"popup3\"><div id=\"qstd\"><h4>Task 16: Advanced!<\/h4><div class=\"spoken\">&rdquo;Look up your rank in the player statistics again and enjoy your progress.&rdquo;</div><div class=\"rew\"><p class=\"ta_aw\">Order:<\/p>Look for your rank in the statistics and enter it here.<\/div><input id=\"qst_val\" class=\"text\" type=\"text\" name=\"qstin\" onkeypress=\"if (event.keyCode==13) {qst_next('','rank',document.getElementById('qst_val').value);}\"> <button type=\"button\" value=\"complete task\" onclick=\"qst_next('','rank',document.getElementById('qst_val').value)\"><div class=\"button-container\"><div class=\"button-position\"><div class=\"btl\"><div class=\"btr\"><div class=\"btc\"><\/div><\/div><\/div><div class=\"bml\"><div class=\"bmr\"><div class=\"bmc\"><\/div><\/div><\/div><div class=\"bbl\"><div class=\"bbr\"><div class=\"bbc\"><\/div><\/div><\/div><\/div><div class=\"button-contents\">complete task<\/div><\/div><\/button><span id=\"qst_accpt\"><\/span><\/div><\/div>\n\t\t<div id=\"qstbg\" class=\"rank2\"><\/div>\n\t\t","number":"-16","reward":false,"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>","msrc":"<?php echo $messagelol; ?>","altstep":0}
 <?php $_SESSION['qstnew']='0'; }else{ $_SESSION['qstnew']='1'; ?>
@@ -596,7 +617,7 @@ if ($rRes!=$rSubmited){ ?>
 <?php } elseif($_SESSION['qst']== 17){
 
 // Ask from plyer ?>
-{"markup":"\n\t\t<div id=\"popup3\"><div id=\"qstd\"><h4>Task 17: Weapons or Dough<\/h4><div class=\"spoken\">&rdquo;Now you have to make a decision: either trade peacefully or become a dreaded warrior. <br><br> or the marketplace you need a granary, for troops you need a barracks.&rdquo;<\/div><input type=\"hidden\" id=\"qst_val\" value=\"\"><button type=\"button\" value=\"Gazdaság\" class=\"qb1 granary_barracks\" onclick=\"javascript: qst_next('','20');\"><div class=\"button-container\"><div class=\"button-position\"><div class=\"btl\"><div class=\"btr\"><div class=\"btc\"><\/div><\/div><\/div><div class=\"bml\"><div class=\"bmr\"><div class=\"bmc\"><\/div><\/div><\/div><div class=\"bbl\"><div class=\"bbr\"><div class=\"bbc\"><\/div><\/div><\/div><\/div><div class=\"button-contents\">Economy<\/div><\/div><\/button><button type=\"button\" value=\"Katonaság\" class=\"qb2 granary_barracks\" onclick=\"javascript: qst_next('','18');\"><div class=\"button-container\"><div class=\"button-position\"><div class=\"btl\"><div class=\"btr\"><div class=\"btc\"><\/div><\/div><\/div><div class=\"bml\"><div class=\"bmr\"><div class=\"bmc\"><\/div><\/div><\/div><div class=\"bbl\"><div class=\"bbr\"><div class=\"bbc\"><\/div><\/div><\/div><\/div><div class=\"button-contents\">Military<\/div><\/div><\/button><div class=\"clear\"><\/div><span id=\"qst_accpt\"><\/span><\/div><\/div>\n\t\t<div id=\"qstbg\" class=\"granary_barracks\"><\/div>\n\t\t","number":"-17","reward":false,"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>","msrc":"<?php echo $messagelol; ?>","altstep":0}
+{"markup":"\n\t\t<div id=\"popup3\"><div id=\"qstd\"><h4>Task 17: Weapons or Dough<\/h4><div class=\"spoken\">&rdquo;Now you have to make a decision: either trade peacefully or become a dreaded warrior. <br><br> or the marketplace you need a granary, for troops you need a barracks.&rdquo;<\/div><input type=\"hidden\" id=\"qst_val\" value=\"\"><button type=\"button\" value=\"Gazdaság\" class=\"qb1 granary_barracks\" onclick=\"javascript: qst_next('','21');\"><div class=\"button-container\"><div class=\"button-position\"><div class=\"btl\"><div class=\"btr\"><div class=\"btc\"><\/div><\/div><\/div><div class=\"bml\"><div class=\"bmr\"><div class=\"bmc\"><\/div><\/div><\/div><div class=\"bbl\"><div class=\"bbr\"><div class=\"bbc\"><\/div><\/div><\/div><\/div><div class=\"button-contents\">Economy<\/div><\/div><\/button><button type=\"button\" value=\"Katonaság\" class=\"qb2 granary_barracks\" onclick=\"javascript: qst_next('','18');\"><div class=\"button-container\"><div class=\"button-position\"><div class=\"btl\"><div class=\"btr\"><div class=\"btc\"><\/div><\/div><\/div><div class=\"bml\"><div class=\"bmr\"><div class=\"bmc\"><\/div><\/div><\/div><div class=\"bbl\"><div class=\"bbr\"><div class=\"bbc\"><\/div><\/div><\/div><\/div><div class=\"button-contents\">Military<\/div><\/div><\/button><div class=\"clear\"><\/div><span id=\"qst_accpt\"><\/span><\/div><\/div>\n\t\t<div id=\"qstbg\" class=\"granary_barracks\"><\/div>\n\t\t","number":"-17","reward":false,"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>","msrc":"<?php echo $messagelol; ?>","altstep":0}
 
 <?php } elseif($_SESSION['qst']== 18){
 $database->updateUserField($_SESSION['username'],'quest_choose','1',0);
@@ -618,7 +639,7 @@ if ($units[$unarray2[$session->userinfo['tribe']]]<2){ ?>
 
 {"markup":"\n\t\t<div id=\"popup3\"><div id=\"qstd\"><h4>Task 19: Train!<\/h4><div class=\"spoken\">&rdquo;Now that you have barracks you can start training troops. Train two <?php echo $unarray[$session->userinfo['tribe']];?>.&rdquo;<\/div><div class=\"rew\"><p class=\"ta_aw\">Order:<\/p>Please train 2 <?php echo $unarray[$session->userinfo['tribe']];?>..<\/div><span id=\"qst_accpt\"><\/span><\/div><\/div>\n\t\t<div id=\"qstbg\" class=\"units\"><\/div>\n\t\t","number":"-19","reward":false,"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>","msrc":"<?php echo $messagelol; ?>","altstep":0}
 <?php $_SESSION['qstnew']='0'; }else{ $_SESSION['qstnew']='1'; ?>
-{"markup":"\n\t\t<div id=\"popup3\"><div id=\"qstd\"><h4>Task 19: Train!<\/h4><div class=\"spoken\">&rdquo;The foundation for your glorious army has been laid.<br \/><br \/>\r\nBefore sending your army off to plunder you should check with the <a href=\"warsim.php\">Combat-Simulator<\/a> to see how many troops you need to successfully fight one rat without losses.&rdquo;<\/div><div class=\"rew\"><p class=\"ta_aw\"><input type=\"hidden\" id=\"qst_val\" value=\"2\" \/>Task reward:<\/p><span class=\"resources r1\"><img class=\"r1\" title=\"Lumber\" src=\"img\/x.gif\" alt=\"Lumber\">300<\/span><span class=\"resources r2\"><img class=\"r2\" title=\"Clay\" src=\"img\/x.gif\" alt=\"Clay\">320<\/span><span class=\"resources r3\"><img class=\"r3\" title=\"Iron\" src=\"img\/x.gif\" alt=\"Iron\">360<\/span><span class=\"resources r4\"><img class=\"r4\" title=\"Crop\" src=\"img\/x.gif\" alt=\"Crop\">570<\/span><\/div><div class=\"clear\"><\/div><br><span id=\"qst_accpt\"><a class=\"arrow\" href=\"javascript: qst_next('','23');\">Continue with the next task.<\/a><\/span><\/div>\n\t\t<div id=\"qstbg\" class=\"units\"><\/div>\n\t\t","number":19,"reward":{"wood":300,"clay":320,"iron":360,"crop":570},"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>g","msrc":"<?php echo $messagelol; ?>","altstep":0}
+{"markup":"\n\t\t<div id=\"popup3\"><div id=\"qstd\"><h4>Task 19: Train!<\/h4><div class=\"spoken\">&rdquo;The foundation for your glorious army has been laid.<br \/><br \/>\r\nBefore sending your army off to plunder you should check with the <a href=\"warsim.php\">Combat-Simulator<\/a> to see how many troops you need to successfully fight one rat without losses.&rdquo;<\/div><div class=\"rew\"><p class=\"ta_aw\"><input type=\"hidden\" id=\"qst_val\" value=\"2\" \/>Task reward:<\/p><span class=\"resources r1\"><img class=\"r1\" title=\"Lumber\" src=\"img\/x.gif\" alt=\"Lumber\">300<\/span><span class=\"resources r2\"><img class=\"r2\" title=\"Clay\" src=\"img\/x.gif\" alt=\"Clay\">320<\/span><span class=\"resources r3\"><img class=\"r3\" title=\"Iron\" src=\"img\/x.gif\" alt=\"Iron\">360<\/span><span class=\"resources r4\"><img class=\"r4\" title=\"Crop\" src=\"img\/x.gif\" alt=\"Crop\">570<\/span><\/div><div class=\"clear\"><\/div><br><span id=\"qst_accpt\"><a class=\"arrow\" href=\"javascript: qst_next('','20');\">Continue with the next task.<\/a><\/span><\/div>\n\t\t<div id=\"qstbg\" class=\"units\"><\/div>\n\t\t","number":19,"reward":{"wood":300,"clay":320,"iron":360,"crop":570},"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>g","msrc":"<?php echo $messagelol; ?>","altstep":0}
 <?php } ?>
 
 <?php } elseif($_SESSION['qst']== 20){
@@ -641,7 +662,7 @@ $granary = $building->getTypeLevel(11);
 if ($granary ==0){ ?>
 {"markup":"\n\t\t<div id=\"popup3\"><div id=\"qstd\"><h4>Task 18: Trade & economy<\/h4><div class=\"spoken\">&rdquo;Trade & economy was your choice. Golden times await you for sure!&rdquo;<\/div><div class=\"rew\"><p class=\"ta_aw\">Order:<\/p>Construct a granary.<\/div><span id=\"qst_accpt\"><\/span><\/div><\/div>\n\t\t<div id=\"qstbg\" class=\"granary_barracks1\"><\/div>\n\t\t","number":"-20","reward":false,"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>","msrc":"<?php echo $messagelol; ?>","altstep":0}
 <?php $_SESSION['qstnew']='0'; }else{ $_SESSION['qstnew']='1'; ?>
-{"markup":"\n\t\t<div id=\"popup3\"><div id=\"qstd\"><h4>Task 18: Trade & economy<\/h4><div class=\"spoken\">&rdquo;Well done! With the Granary you can store more wheat.&rdquo;<\/div><div class=\"rew\"><p class=\"ta_aw\"><input type=\"hidden\" id=\"qst_val\" value=\"2\" \/>Task reward:<\/p><span class=\"resources r1\"><img class=\"r1\" title=\"Lumber\" src=\"img\/x.gif\" alt=\"Lumber\">80<\/span><span class=\"resources r2\"><img class=\"r2\" title=\"Clay\" src=\"img\/x.gif\" alt=\"Clay\">90<\/span><span class=\"resources r3\"><img class=\"r3\" title=\"Iron\" src=\"img\/x.gif\" alt=\"Iron\">60<\/span><span class=\"resources r4\"><img class=\"r4\" title=\"Crop\" src=\"img\/x.gif\" alt=\"Crop\">40<\/span><\/div><div class=\"clear\"><\/div><br><span id=\"qst_accpt\"><a class=\"arrow\" href=\"javascript: qst_next('','21');\">Continue with the next task<\/a><\/span><\/div>\n\t\t<div id=\"qstbg\" class=\"granary_barracks1\"><\/div>\n\t\t","number":20,"reward":{"wood":80,"clay":90,"iron":60,"crop":40},"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>g","msrc":"<?php echo $messagelol; ?>","altstep":0}
+{"markup":"\n\t\t<div id=\"popup3\"><div id=\"qstd\"><h4>Task 18: Trade & economy<\/h4><div class=\"spoken\">&rdquo;Well done! With the Granary you can store more wheat.&rdquo;<\/div><div class=\"rew\"><p class=\"ta_aw\"><input type=\"hidden\" id=\"qst_val\" value=\"2\" \/>Task reward:<\/p><span class=\"resources r1\"><img class=\"r1\" title=\"Lumber\" src=\"img\/x.gif\" alt=\"Lumber\">80<\/span><span class=\"resources r2\"><img class=\"r2\" title=\"Clay\" src=\"img\/x.gif\" alt=\"Clay\">90<\/span><span class=\"resources r3\"><img class=\"r3\" title=\"Iron\" src=\"img\/x.gif\" alt=\"Iron\">60<\/span><span class=\"resources r4\"><img class=\"r4\" title=\"Crop\" src=\"img\/x.gif\" alt=\"Crop\">40<\/span><\/div><div class=\"clear\"><\/div><br><span id=\"qst_accpt\"><a class=\"arrow\" href=\"javascript: qst_next('','22');\">Continue with the next task<\/a><\/span><\/div>\n\t\t<div id=\"qstbg\" class=\"granary_barracks1\"><\/div>\n\t\t","number":20,"reward":{"wood":80,"clay":90,"iron":60,"crop":40},"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>g","msrc":"<?php echo $messagelol; ?>","altstep":0}
 <?php } ?>
 
 <?php } elseif($_SESSION['qst']== 22){
@@ -651,7 +672,7 @@ $warehouse = $building->getTypeLevel(10);
 if ($warehouse==0){ ?>
 {"markup":"\n\t\t<div id=\"popup3\"><div id=\"qstd\"><h4>Task 19: Warehouse<\/h4><div class=\"spoken\">&rdquo;Crop isn't the only resource which must be saved; other resources can go to waste as well if they are not stored correctly. Construct a warehouse!&rdquo;<\/div><div class=\"rew\"><p class=\"ta_aw\">Order:<\/p>Build a warehouse.<\/div><span id=\"qst_accpt\"><\/span><\/div><\/div>\n\t\t<div id=\"qstbg\" class=\"warehouse\"><\/div>\n\t\t","number":"-21","reward":false,"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>","msrc":"<?php echo $messagelol; ?>","altstep":0}
 <?php $_SESSION['qstnew']='0'; }else{ $_SESSION['qstnew']='1'; ?>
-{"markup":"\n\t\t<div id=\"popup3\"><div id=\"qstd\"><h4>Task 19: Warehouse<\/h4><div class=\"spoken\">&rdquo;Well done, your Warehouse is complete...&rdquo;<\/i><br \/>Now you have fulfilled all prerequisites required to construct a Marketplace.&rdquo;<\/div><div class=\"rew\"><p class=\"ta_aw\"><input type=\"hidden\" id=\"qst_val\" value=\"2\" \/>Task reward:<\/p><span class=\"resources r1\"><img class=\"r1\" title=\"Lumber\" src=\"img\/x.gif\" alt=\"Lumber\">70<\/span><span class=\"resources r2\"><img class=\"r2\" title=\"Clay\" src=\"img\/x.gif\" alt=\"Clay\">120<\/span><span class=\"resources r3\"><img class=\"r3\" title=\"Iron\" src=\"img\/x.gif\" alt=\"Iron\">90<\/span><span class=\"resources r4\"><img class=\"r4\" title=\"Crop\" src=\"img\/x.gif\" alt=\"Crop\">50<\/span><\/div><div class=\"clear\"><\/div><br><span id=\"qst_accpt\"><a class=\"arrow\" href=\"javascript: qst_next('','22');\">Continue with the next task.<\/a><\/span><\/div>\n\t\t<div id=\"qstbg\" class=\"warehouse\"><\/div>\n\t\t","number":21,"reward":{"wood":70,"clay":120,"iron":90,"crop":50},"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>g","msrc":"<?php echo $messagelol; ?>","altstep":0}
+{"markup":"\n\t\t<div id=\"popup3\"><div id=\"qstd\"><h4>Task 19: Warehouse<\/h4><div class=\"spoken\">&rdquo;Well done, your Warehouse is complete...&rdquo;<\/i><br \/>Now you have fulfilled all prerequisites required to construct a Marketplace.&rdquo;<\/div><div class=\"rew\"><p class=\"ta_aw\"><input type=\"hidden\" id=\"qst_val\" value=\"2\" \/>Task reward:<\/p><span class=\"resources r1\"><img class=\"r1\" title=\"Lumber\" src=\"img\/x.gif\" alt=\"Lumber\">70<\/span><span class=\"resources r2\"><img class=\"r2\" title=\"Clay\" src=\"img\/x.gif\" alt=\"Clay\">120<\/span><span class=\"resources r3\"><img class=\"r3\" title=\"Iron\" src=\"img\/x.gif\" alt=\"Iron\">90<\/span><span class=\"resources r4\"><img class=\"r4\" title=\"Crop\" src=\"img\/x.gif\" alt=\"Crop\">50<\/span><\/div><div class=\"clear\"><\/div><br><span id=\"qst_accpt\"><a class=\"arrow\" href=\"javascript: qst_next('','23');\">Continue with the next task.<\/a><\/span><\/div>\n\t\t<div id=\"qstbg\" class=\"warehouse\"><\/div>\n\t\t","number":21,"reward":{"wood":70,"clay":120,"iron":90,"crop":50},"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>g","msrc":"<?php echo $messagelol; ?>","altstep":0}
 <?php } ?>
 
 <?php } elseif($_SESSION['qst']== 23){
@@ -661,66 +682,65 @@ $market = $building->getTypeLevel(17);
 if ($market==0){ ?>
 {"markup":"\n\t\t<div id=\"popup3\"><div id=\"qstd\"><h4>Task 20: Marketplace<\/h4><div class=\"spoken\">&rdquo;Build a marketplace so you can trade with other players.&rdquo;<\/div><div class=\"rew\"><p class=\"ta_aw\">Order:<\/p>Build a marketplace.<\/div><span id=\"qst_accpt\"><\/span><\/div><\/div>\n\t\t<div id=\"qstbg\" class=\"market\"><\/div>\n\t\t","number":"-22","reward":false,"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>","msrc":"<?php echo $messagelol; ?>","altstep":0}
 <?php $_SESSION['qstnew']='0'; }else{ $_SESSION['qstnew']='1'; ?>
-{"markup":"\n\t\t<div id=\"popup3\"><div id=\"qstd\"><h4>Task 20: Marketplace<\/h4><div class=\"spoken\">&rdquo;The Marketplace has been completed. Now you can make offers of your own and accept foreign offers! When creating your own offers, you should think about offering what other players need most to get more profit.&rdquo;<\/div><div class=\"rew\"><p class=\"ta_aw\"><input type=\"hidden\" id=\"qst_val\" value=\"2\" \/>Task reward:<\/p><span class=\"resources r1\"><img class=\"r1\" title=\"Lumber\" src=\"img\/x.gif\" alt=\"Lumber\">1200<\/span><span class=\"resources r2\"><img class=\"r2\" title=\"Clay\" src=\"img\/x.gif\" alt=\"Clay\">200<\/span><span class=\"resources r3\"><img class=\"r3\" title=\"Iron\" src=\"img\/x.gif\" alt=\"Iron\">200<\/span><span class=\"resources r4\"><img class=\"r4\" title=\"Crop\" src=\"img\/x.gif\" alt=\"Crop\">450<\/span><\/div><div class=\"clear\"><\/div><br><span id=\"qst_accpt\"><a class=\"arrow\" href=\"javascript: qst_next('','23');\">Continue with the next task.<\/a><\/span><\/div>\n\t\t<div id=\"qstbg\" class=\"market\"><\/div>\n\t\t","number":22,"reward":{"wood":1200,"clay":200,"iron":200,"crop":450},"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>g","msrc":"<?php echo $messagelol; ?>","altstep":0}
+{"markup":"\n\t\t<div id=\"popup3\"><div id=\"qstd\"><h4>Task 20: Marketplace<\/h4><div class=\"spoken\">&rdquo;The Marketplace has been completed. Now you can make offers of your own and accept foreign offers! When creating your own offers, you should think about offering what other players need most to get more profit.&rdquo;<\/div><div class=\"rew\"><p class=\"ta_aw\"><input type=\"hidden\" id=\"qst_val\" value=\"2\" \/>Task reward:<\/p><span class=\"resources r1\"><img class=\"r1\" title=\"Lumber\" src=\"img\/x.gif\" alt=\"Lumber\">1200<\/span><span class=\"resources r2\"><img class=\"r2\" title=\"Clay\" src=\"img\/x.gif\" alt=\"Clay\">200<\/span><span class=\"resources r3\"><img class=\"r3\" title=\"Iron\" src=\"img\/x.gif\" alt=\"Iron\">200<\/span><span class=\"resources r4\"><img class=\"r4\" title=\"Crop\" src=\"img\/x.gif\" alt=\"Crop\">450<\/span><\/div><div class=\"clear\"><\/div><br><span id=\"qst_accpt\"><a class=\"arrow\" href=\"javascript: qst_next('','24');\">Continue with the next task.<\/a><\/span><\/div>\n\t\t<div id=\"qstbg\" class=\"market\"><\/div>\n\t\t","number":22,"reward":{"wood":1200,"clay":200,"iron":200,"crop":450},"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>g","msrc":"<?php echo $messagelol; ?>","altstep":0}
 <?php } ?>
 
 <?php } ?>
 
 <?php
-
-if ($database->getUserField($_SESSION['username'],'fquest','username')>=25){
+if ($dataarray[0]==1){
 $ff25 = "<div class=none><b>Everything to 2!<\/b><\/div>";
 } else { $ff25 = "<a onclick=qst_next('','225')>Everything to 2!<\/a>"; }
 
-if($uArray['quest_choose'] == 1){
-if ($database->getUserField($_SESSION['username'],'fquest','username')>=26){
-$ff26 = "<div class=none><b>Build a ".$unarray[$session->userinfo['tribe']].".<\/b><\/div>";
-} else { $ff26 = "<a onclick=qst_next('','226')Wall to level 1.<\/a>"; }
+if($uArray['quest_choose'] == 2){
+if ($dataarray[1]==1){
+$ff26 = "<div class=none><b>Wall to level 1.<\/b><\/div>";
+} else { $ff26 = "<a onclick=qst_next('','226')>Wall to level 1.<\/a>"; }
 }else{
-if ($database->getUserField($_SESSION['username'],'fquest','username')>=26){
+if ($dataarray[1]==1){
 $ff26 = "<div class=none><b>Marketplace to level 1.<\/b><\/div>";
 } else { $ff26 = "<a onclick=qst_next('','226')>Marketplace to level 1.<\/a>"; }
 }
-if ($database->getUserField($_SESSION['username'],'fquest','username')>=27){
-$ff27 = "<div class=none><b>Követség<\/b><\/div>";
-} else { $ff27 = "<a onclick=qst_next('','227')>Követség<\/a>"; }
+if ($dataarray[2]==1){
+$ff27 = "<div class=none><b>Embassy<\/b><\/div>";
+} else { $ff27 = "<a onclick=qst_next('','227')>Embassy<\/a>"; }
 
-if ($database->getUserField($_SESSION['username'],'fquest','username')>=28 && $database->getUserField($_SESSION['username'],'alliance','username')>0){
-$ff28 = "<div class=none><b>Klán<\/b><\/div>";
-} else { $ff28 = "<a onclick=qst_next('','228')>Klán<\/a>"; }
+if ($dataarray[3]==1){
+$ff28 = "<div class=none><b>Alliance<\/b><\/div>";
+} else { $ff28 = "<a onclick=qst_next('','228')>Alliance<\/a>"; }
 
-if ($database->getUserField($_SESSION['username'],'fquest','username')>=29){
-$ff29 = "<div class=none><b>Főépület 5<\/b><\/div>";
-} else { $ff29 = "<a onclick=qst_next('','229')>Főépület 5<\/a>"; }
+if ($dataarray[4]==1){
+$ff29 = "<div class=none><b>Main Building to Level 5<\/b><\/div>";
+} else { $ff29 = "<a onclick=qst_next('','229')>Main Building to Level 5<\/a>"; }
 
-if ($database->getUserField($_SESSION['username'],'fquest','username')>=30){
-$ff30 = "<div class=none><b>Magtár 3<\/b><\/div>";
-} else { $ff30 = "<a onclick=qst_next('','330')>Magtár 3<\/a>"; }
+if ($dataarray[5]==1){
+$ff30 = "<div class=none><b>Granary to Level 3<\/b><\/div>";
+} else { $ff30 = "<a onclick=qst_next('','330')>Granary to Level 3<\/a>"; }
 
-if ($database->getUserField($_SESSION['username'],'fquest','username')>=31){
-$ff31 = "<div class=none><b>Raktár 7<\/b><\/div>";
-} else { $ff31 = "<a onclick=qst_next('','331')>Raktár 7<\/a>"; }
+if ($dataarray[6]==1){
+$ff31 = "<div class=none><b>Warehouse to Level 7<\/b><\/div>";
+} else { $ff31 = "<a onclick=qst_next('','331')>Warehouse to Level 7<\/a>"; }
 
-if ($database->getUserField($_SESSION['username'],'fquest','username')>=32){
-$ff32 = "<div class=none><b>Mindent ötödikre!<\/b><\/div>";
-} else { $ff32 = "<a onclick=qst_next('','332')>Mindent ötödikre!<\/a>"; }
+if ($dataarray[7]==1){
+$ff32 = "<div class=none><b>All to five!<\/b><\/div>";
+} else { $ff32 = "<a onclick=qst_next('','332')>All to five!<\/a>"; }
 
-if ($database->getUserField($_SESSION['username'],'fquest','username')>=33){
-$ff33 = "<div class=none><b>Palota vagy rezidencia<\/b><\/div>";
-} else { $ff33 = "<a onclick=qst_next('','333')>Palota vagy rezidencia<\/a>"; }
+if ($dataarray[8]==1){
+$ff33 = "<div class=none><b>Palace or Residence?<\/b><\/div>";
+} else { $ff33 = "<a onclick=qst_next('','333')>Palace or Residence?<\/a>"; }
 
-if ($database->getUserField($_SESSION['username'],'fquest','username')>=34){
-$ff34 = "<div class=none><b>3 telepes<\/b><\/div>";
-} else { $ff34 = "<a onclick=qst_next('','334')>3 telepes<\/a>"; }
+if ($dataarray[9]==1){
+$ff34 = "<div class=none><b>3 settlers<\/b><\/div>";
+} else { $ff34 = "<a onclick=qst_next('','334')>3 settlers<\/a>"; }
 
-if ($database->getUserField($_SESSION['username'],'fquest','username')>=35){
-$ff35 = "<div class=none><b>Új falu<\/b><\/div>";
-} else { $ff35 = "<a onclick=qst_next('','335')>Új falu<\/a>"; }
+if ($dataarray[10]==1){
+$ff35 = "<div class=none><b>New Village<\/b><\/div>";
+} else { $ff35 = "<a onclick=qst_next('','335')>New Village<\/a>"; }
 
 
 if($_SESSION['qst']== 24){ ?>
 
-{"markup":"\n\t\t<div id=\"popup3\"><div><h4>Ezt a sok mindent kell még elvégezni<\/h4><ul><input type=\"hidden\" id=\"qst_val\" value=\"\"><li><?php echo $ff25;?><\/li><li><?php echo $ff26;?><\/li><li><?php echo $ff27;?><\/li><li><?php echo $ff28;?><\/li><li><?php echo $ff29;?><\/li><li><?php echo $ff30;?><\/li><li><?php echo $ff31;?><\/li><li><?php echo $ff32;?><\/li><li><?php echo $ff33;?><\/li><li><?php echo $ff34;?><\/li><li><?php echo $ff35;?><\/li><\/ul><\/div><\/div>\n\t\t\n\t\t","number":"-24","reward":false,"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>","msrc":"<?php echo $messagelol; ?>","altstep":0}
+{"markup":"\n\t\t<div id=\"popup3\"><div><b>From here on you can decide yourselves in which order you want to finish your tasks. You will get a list with open tasks and can choose one to work on:</b><ul><input type=\"hidden\" id=\"qst_val\" value=\"\"><li><?php echo $ff25;?><\/li><li><?php echo $ff26;?><\/li><li><?php echo $ff27;?><\/li><li><?php echo $ff28;?><\/li><li><?php echo $ff29;?><\/li><li><?php echo $ff30;?><\/li><li><?php echo $ff31;?><\/li><li><?php echo $ff32;?><\/li><li><?php echo $ff33;?><\/li><li><?php echo $ff34;?><\/li><li><?php echo $ff35;?><\/li><\/ul><\/div><\/div>\n\t\t\n\t\t","number":"-24","reward":false,"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>","msrc":"<?php echo $messagelol; ?>","altstep":0}
 
 
 <?php } elseif($_SESSION['qst']== 25){
@@ -732,14 +752,14 @@ if($tRes['f5']>1){$clayL++;};if($tRes['f6']>1){$clayL++;};if($tRes['f16']>1){$cl
 if($tRes['f1']>1){$woodL++;};if($tRes['f3']>1){$woodL++;};if($tRes['f14']>1){$woodL++;};if($tRes['f17']>1){$woodL++;}
 if($tRes['f2']>1){$cropL++;};if($tRes['f8']>1){$cropL++;};if($tRes['f9']>1){$cropL++;};if($tRes['f12']>1){$cropL++;};if($tRes['f13']>1){$cropL++;};if($tRes['f15']>1){$cropL++;}
 if ($ironL<4 || $clayL<4 || $woodL<4 || $cropL<6){?>
-{"markup":"\n\t\t<div id=\"popup3\"><div id=\"qstd\"><h4>Everything to 2!<\/h4><div class=\"spoken\">&rdquo;Ismételten eljött az idő, hogy tovább építsd a hatalom és gazdagság alapjait! Most már nem elég az 1. szint... Eltart ugyan egy darabig, de meglátod, megéri. Építs fel minden nyersanyagmezőt 2. szintre..&rdquo;<\/div><div class=\"rew\"><p class=\"ta_aw\">Order:<\/p>Építs fel minden nyersanyagtermelőt 2. szintre.<\/div><div class=\"rew\"><p class=\"ta_aw\">Task reward:<\/p><span class=\"resources gold\" alt=\"سکۀ طلای تراوین\"><img alt=\"سکۀ طلای تراوین\" class=\"gold\" src=\"img/x.gif\">15<\/span><div class=\"clear\"><\/div><\/div><input type=\"hidden\" id=\"qst_val\" value=\"\"><a href=\"javascript: qst_next('','24');\" class=\"qle arrow\">vissza az áttekintő nézethez.<\/a><div class=\"clear\"><\/div><\/div><\/div>\n\t\t<div class=\"quest_res_all_two\" id=\"qstbg\"><\/div>\n\t\t","number":"-25","reward":false,"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>","msrc":"<?php echo $messagelol; ?>","altstep":0}
+{"markup":"\n\t\t<div id=\"popup3\"><div id=\"qstd\"><h4>Everything to 2!<\/h4><div class=\"spoken\">&rdquo;Now it's time again to extend the cornerstones of might and wealth! This time level 1 is not enough... it will take a while but in the end it will be worth it. Expand all your resource tiles to level 2...&rdquo;<\/div><div class=\"rew\"><p class=\"ta_aw\">Order:<\/p>Expand all resource tiles to level 2.<\/div><div class=\"clear\"><\/div><\/div><input type=\"hidden\" id=\"qst_val\" value=\"\"><div class=\"clear\"><\/div><\/div><\/div>\n\t\t<div class=\"quest_res_all_two\" id=\"qstbg\"><\/div>\n\t\t","number":"-25","reward":false,"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>","msrc":"<?php echo $messagelol; ?>","altstep":0}
 <?php $_SESSION['qstnew']='0'; }else{ $_SESSION['qstnew']='1'; ?>
-{"markup":"\n\t\t<div id=\"popup3\"><div id=\"qstd\"><h4>Everything to 2!<\/h4><div class=\"spoken\">&rdquo;عالی است! همۀ منابع به سطح 2 رسید...&rdquo;<\/div><div class=\"rew\"><p class=\"ta_aw\">Task reward:<\/p><span class=\"resources gold\" alt=\"سکۀ طلای تراوین\"><img alt=\"سکۀ طلای تراوین\" class=\"gold\" src=\"img/x.gif\">15<\/span><div class=\"clear\"><\/div><\/div><input type=\"hidden\" id=\"qst_val\" value=\"\"><a href=\"#\" onclick=\"qst_next('','24')\" class=\"qle arrow\">vissza az áttekintő nézethez.<\/a><a href=\"javascript: qst_next('','25');\" class=\"qri arrow\">Befejezés<\/a><div class=\"clear\"><\/div><\/div>\n\t\t<div id=\"qstbg\" class=\"quest_res_all_two\"><\/div>\n\t\t","number":25,"reward":{"gold":15},"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>g","msrc":"<?php echo $messagelol; ?>","altstep":0}
-<?php }?>
+{"markup":"\n\t\t<div id=\"popup3\"><div id=\"qstd\"><h4>Everything to 2!<\/h4><div class=\"spoken\">&rdquo;Congratulations! Your village grows and thrives...&rdquo;<\/div><div class=\"rew\"><p class=\"ta_aw\">Task reward:<\/p><span class=\"resources gold\" alt=\"سکۀ طلای تراوین\"><img alt=\"سکۀ طلای تراوین\" class=\"gold\" src=\"img/x.gif\">15<\/span><div class=\"clear\"><\/div><\/div><input type=\"hidden\" id=\"qst_val\" value=\"\"><a href=\"#\" onclick=\"qst_next('','24')\" class=\"qle arrow\">Go back to the quests menu<\/a><a href=\"javascript: qst_next('','25');\" class=\"qri arrow\">Take Reward<\/a><div class=\"clear\"><\/div><\/div>\n\t\t<div id=\"qstbg\" class=\"quest_res_all_two\"><\/div>\n\t\t","number":25,"reward":{"gold":15},"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>g","msrc":"<?php echo $messagelol; ?>","altstep":0}
+<?php } ?>
 
 <?php } elseif($_SESSION['qst']== 26){
 
-if($uArray['quest_choose'] == 1){
+if($uArray['quest_choose'] == 2){
 
 $unarray=array("","city wall", "earth wall","palisade");
 
@@ -747,65 +767,65 @@ $unarray=array("","city wall", "earth wall","palisade");
 $wall = $village->resarray['f40'];
 if ($wall==0){?>
 
-{"markup":"\n\t\t<div id=\"popup3\"><div id=\"qstd\"><h4>Build a <?php echo $unarray[$session->userinfo['tribe']];?><\/h4><div class=\"spoken\">&rdquo;Now that you have trained some soldiers, you should build a <?php echo $unarray[$session->userinfo['tribe']];?> too. It increases the base defence and your soldiers will receive a defensive bonus.&rdquo;<\/div><div class=\"rew\"><p class=\"ta_aw\">Order:<\/p>Build a <?php echo $unarray[$session->userinfo['tribe']];?> .<\/div><span id=\"qst_accpt\"><\/span><\/div><\/div>\n\t\t<div id=\"qstbg\" class=\"wall<?php echo $session->userinfo['tribe'];?>\"><\/div>\n\t\t","number":"-23","reward":false,"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>","msrc":"<?php echo $messagelol; ?>","altstep":0}
+{"markup":"\n\t\t<div id=\"popup3\"><div id=\"qstd\"><h4>Build a <?php echo $unarray[$session->userinfo['tribe']];?><\/h4><div class=\"spoken\">&rdquo;Now that you have trained some soldiers, you should build a <?php echo $unarray[$session->userinfo['tribe']];?> too. It increases the base defence and your soldiers will receive a defensive bonus.&rdquo;<\/div><div class=\"rew\"><p class=\"ta_aw\">Order:<\/p>Build a <?php echo $unarray[$session->userinfo['tribe']];?> .<\/div><span id=\"qst_accpt\"><\/span><a href=\"javascript: qst_next('','24');\" class=\"qle arrow\">Go back to the quests menu<\/a></br><\/div><\/div>\n\t\t<div id=\"qstbg\" class=\"wall<?php echo $session->userinfo['tribe'];?>\"><\/div>\n\t\t","number":"-23","reward":false,"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>","msrc":"<?php echo $messagelol; ?>","altstep":0}
 <?php $_SESSION['qstnew']='0'; }else{ $_SESSION['qstnew']='1'; ?>
-{"markup":"\n\t\<div id=\"popup3\"><div id=\"qstd\"><h4>Build a <?php echo $unarray[$session->userinfo['tribe']];?><\/h4><div class=\"spoken\">&rdquo;That's what I'm talking about. A <?php echo $unarray[$session->userinfo['tribe']];?> Very useful. It increases the defence of the troops in the village.&rdquo;<\/div><div class=\"rew\"><p class=\"ta_aw\"><input type=\"hidden\" id=\"qst_val\" value=\"2\" \/>Task reward:<\/p><span class=\"resources r1\"><img class=\"r1\" title=\"Lumber\" src=\"img\/x.gif\" alt=\"Lumber\">140<\/span><span class=\"resources r2\"><img class=\"r2\" title=\"Clay\" src=\"img\/x.gif\" alt=\"Clay\">200<\/span><span class=\"resources r3\"><img class=\"r3\" title=\"Iron\" src=\"img\/x.gif\" alt=\"Iron\">180<\/span><span class=\"resources r4\"><img class=\"r4\" title=\"Crop\" src=\"img\/x.gif\" alt=\"Crop\">200<\/span><\/div><div class=\"clear\"><\/div><br><span id=\"qst_accpt\"><a class=\"arrow\" href=\"javascript: qst_next('','24');\">Continue with the next task.<\/a><\/span><\/div>\n\t\t<div id=\"qstbg\" class=\"wall<?php echo $session->userinfo['tribe'];?>\"><\/div>\n\t\t","number":23,"reward":{"wood":80,"clay":90,"iron":60,"crop":40},"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>g","msrc":"<?php echo $messagelol; ?>","altstep":0}
+{"markup":"\n\t\<div id=\"popup3\"><div id=\"qstd\"><h4>Build a <?php echo $unarray[$session->userinfo['tribe']];?><\/h4><div class=\"spoken\">&rdquo;That's what I'm talking about. A <?php echo $unarray[$session->userinfo['tribe']];?> Very useful. It increases the defence of the troops in the village.&rdquo;<\/div><div class=\"rew\"><p class=\"ta_aw\"><input type=\"hidden\" id=\"qst_val\" value=\"2\" \/>Task reward:<\/p><span class=\"resources r1\"><img class=\"r1\" title=\"Lumber\" src=\"img\/x.gif\" alt=\"Lumber\">140<\/span><span class=\"resources r2\"><img class=\"r2\" title=\"Clay\" src=\"img\/x.gif\" alt=\"Clay\">200<\/span><span class=\"resources r3\"><img class=\"r3\" title=\"Iron\" src=\"img\/x.gif\" alt=\"Iron\">180<\/span><span class=\"resources r4\"><img class=\"r4\" title=\"Crop\" src=\"img\/x.gif\" alt=\"Crop\">200<\/span><\/div><div class=\"clear\"><\/div><br><span id=\"qst_accpt\"><a href=\"#\" onclick=\"qst_next('','24')\" class=\"qle arrow\">Go back to the quests menu<\/a><a href=\"javascript: qst_next('','26');\" class=\"qri arrow\">Take Reward<\/a></br><\/span><\/div>\n\t\t<div id=\"qstbg\" class=\"wall<?php echo $session->userinfo['tribe'];?>\"><\/div>\n\t\t","number":23,"reward":{"wood":80,"clay":90,"iron":60,"crop":40},"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>g","msrc":"<?php echo $messagelol; ?>","altstep":0}
 <?php }
 
 }else{
 
 $market = $building->getTypeLevel(17);
 if ($market == 0){?>
-{"markup":"\n\t\t<div id=\"popup3\"><div id=\"qstd\"><h4>Marketplace to level 1.<\/h4><div class=\"spoken\">&rdquo;Itt az ideje, hogy a gazdaságodat felélénkítsd egy kicsit. Építsd fel a piacot első szintre.&rdquo;<\/div><div class=\"rew\"><p class=\"ta_aw\">Order:<\/p>یک بازار بساز.<\/div><div class=\"rew\"><p class=\"ta_aw\">Task reward:<\/p><span class=\"resources r1\"><img class=\"r1\" title=\"Lumber\" src=\"img\/x.gif\" alt=\"Lumber\">140<\/span><span class=\"resources r2\"><img class=\"r2\" title=\"Clay\" src=\"img\/x.gif\" alt=\"Clay\">200<\/span><span class=\"resources r3\"><img class=\"r3\" title=\"Iron\" src=\"img\/x.gif\" alt=\"Iron\">180<\/span><span class=\"resources r4\"><img class=\"r4\" title=\"Crop\" src=\"img\/x.gif\" alt=\"Crop\">200<\/span><div class=\"clear\"><\/div><\/div><input type=\"hidden\" id=\"qst_val\" value=\"\"><a href=\"javascript: qst_next('','24');\" class=\"qle arrow\">vissza az áttekintő nézethez.<\/a><div class=\"clear\"><\/div><\/div><\/div>\n\t\t<div class=\"quest_market_barracks1\" id=\"qstbg\"><\/div>\n\t\t","number":"-26","reward":false,"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>","msrc":"<?php echo $messagelol; ?>","altstep":0}
+{"markup":"\n\t\t<div id=\"popup3\"><div id=\"qstd\"><h4>Marketplace to level 1.<\/h4><div class=\"spoken\">&rdquo;Now its time to get your economy up. Build a level 1 marketplace.&rdquo;<\/div><div class=\"rew\"><p class=\"ta_aw\">Order:<\/p>Build a marketplace.<\/div><div class=\"rew\"><p class=\"ta_aw\">Task reward:<\/p><span class=\"resources r1\"><img class=\"r1\" title=\"Lumber\" src=\"img\/x.gif\" alt=\"Lumber\">140<\/span><span class=\"resources r2\"><img class=\"r2\" title=\"Clay\" src=\"img\/x.gif\" alt=\"Clay\">200<\/span><span class=\"resources r3\"><img class=\"r3\" title=\"Iron\" src=\"img\/x.gif\" alt=\"Iron\">180<\/span><span class=\"resources r4\"><img class=\"r4\" title=\"Crop\" src=\"img\/x.gif\" alt=\"Crop\">200<\/span><div class=\"clear\"><\/div><\/div><input type=\"hidden\" id=\"qst_val\" value=\"\"><a href=\"javascript: qst_next('','24');\" class=\"qle arrow\">Go back to the quests menu<\/a><div class=\"clear\"><\/div><\/div><\/div>\n\t\t<div class=\"quest_market_barracks1\" id=\"qstbg\"><\/div>\n\t\t","number":"-26","reward":false,"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>","msrc":"<?php echo $messagelol; ?>","altstep":0}
 <?php $_SESSION['qstnew']='0'; }else{ $_SESSION['qstnew']='1'; ?>
-{"markup":"\n\t\t<div id=\"popup3\"><div id=\"qstd\"><h4>Marketplace to level 1.<\/h4><div class=\"spoken\">&rdquo;خوب است! حال اقتصاد دهکدۀ تو پیشرفت کرده است، از طریق بازار میتوانی با بازیکنان دیگر منابع مبادله کنی...&rdquo;<\/div><div class=\"rew\"><p class=\"ta_aw\">Task reward:<\/p><span class=\"resources r1\"><img class=\"r1\" title=\"Lumber\" src=\"img\/x.gif\" alt=\"Lumber\">140<\/span><span class=\"resources r2\"><img class=\"r2\" title=\"Clay\" src=\"img\/x.gif\" alt=\"Clay\">200<\/span><span class=\"resources r3\"><img class=\"r3\" title=\"Iron\" src=\"img\/x.gif\" alt=\"Iron\">180<\/span><span class=\"resources r4\"><img class=\"r4\" title=\"Crop\" src=\"img\/x.gif\" alt=\"Crop\">200<\/span><div class=\"clear\"><\/div><\/div><input type=\"hidden\" id=\"qst_val\" value=\"\"><a href=\"#\" onclick=\"qst_next('','24')\" class=\"qle arrow\">vissza az áttekintő nézethez.<\/a><a href=\"javascript: qst_next('','26');\" class=\"qri arrow\">Befejezés<\/a><div class=\"clear\"><\/div><\/div>\n\t\t<div id=\"qstbg\" class=\"quest_market_barracks1\"><\/div>\n\t\t","number":26,"reward":{"wood":140,"clay":200,"iron":180,"crop":200},"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>g","msrc":"<?php echo $messagelol; ?>","altstep":0}
-<?php }}?>
+{"markup":"\n\t\t<div id=\"popup3\"><div id=\"qstd\"><h4>Marketplace to level 1.<\/h4><div class=\"spoken\">&rdquo;The Marketplace has been completed. Now you can make offers of your own and accept foreign offers! When creating your own offers, you should think about offering what other players need most to get more profit.&rdquo;<\/div><div class=\"rew\"><p class=\"ta_aw\">Task reward:<\/p><span class=\"resources r1\"><img class=\"r1\" title=\"Lumber\" src=\"img\/x.gif\" alt=\"Lumber\">140<\/span><span class=\"resources r2\"><img class=\"r2\" title=\"Clay\" src=\"img\/x.gif\" alt=\"Clay\">200<\/span><span class=\"resources r3\"><img class=\"r3\" title=\"Iron\" src=\"img\/x.gif\" alt=\"Iron\">180<\/span><span class=\"resources r4\"><img class=\"r4\" title=\"Crop\" src=\"img\/x.gif\" alt=\"Crop\">200<\/span><div class=\"clear\"><\/div><\/div><input type=\"hidden\" id=\"qst_val\" value=\"\"><a href=\"#\" onclick=\"qst_next('','24')\" class=\"qle arrow\">Go back to the quests menu<\/a><a href=\"javascript: qst_next('','26');\" class=\"qri arrow\">Take Reward<\/a><div class=\"clear\"><\/div><\/div>\n\t\t<div id=\"qstbg\" class=\"quest_market_barracks1\"><\/div>\n\t\t","number":26,"reward":{"wood":140,"clay":200,"iron":180,"crop":200},"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>g","msrc":"<?php echo $messagelol; ?>","altstep":0}
+<?php }} ?>
 
 <?php } elseif($_SESSION['qst']== 27){
 
 $embassy = $building->getTypeLevel(18);
 if ($embassy == 0){?>
-{"markup":"\n\t\t<div id=\"popup3\"><div id=\"qstd\"><h4>Követség<\/h4><div class=\"spoken\">&rdquo;A Travian világa veszélyes. Már építettél egy rejtekhelyet, amely megvédi nyersanyagaidat a fosztogatóktól. Egy klán még több védelmet tud nyújtani.<br>Építs követséget, hogy a klánok meghívóit elfogadni tudd.&rdquo;<\/div><div class=\"rew\"><p class=\"ta_aw\">Order:<\/p>Építs követséget.<\/div><div class=\"rew\"><p class=\"ta_aw\">Task reward:<\/p><span class=\"resources r1\"><img class=\"r1\" title=\"Lumber\" src=\"img\/x.gif\" alt=\"Lumber\">200<\/span><span class=\"resources r2\"><img class=\"r2\" title=\"Clay\" src=\"img\/x.gif\" alt=\"Clay\">120<\/span><span class=\"resources r3\"><img class=\"r3\" title=\"Iron\" src=\"img\/x.gif\" alt=\"Iron\">180<\/span><span class=\"resources r4\"><img class=\"r4\" title=\"Crop\" src=\"img\/x.gif\" alt=\"Crop\">80<\/span><div class=\"clear\"><\/div><\/div><input type=\"hidden\" id=\"qst_val\" value=\"\"><a href=\"javascript: qst_next('','24');\" class=\"qle arrow\">vissza az áttekintő nézethez.<\/a><div class=\"clear\"><\/div><\/div><\/div>\n\t\t<div class=\"quest_dispatch\" id=\"qstbg\"><\/div>\n\t\t","number":"-27","reward":false,"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>","msrc":"<?php echo $messagelol; ?>","altstep":0}
+{"markup":"\n\t\t<div id=\"popup3\"><div id=\"qstd\"><h4>Embassy<\/h4><div class=\"spoken\">&rdquo;The world of Travian is dangerous. You already built a Cranny to protect your resources against attackers. A good alliance will give you even better protection. To accept invitations from alliances, build an embassy.&rdquo;<\/div><div class=\"rew\"><p class=\"ta_aw\">Order:<\/p>Build an embassy.<\/div><div class=\"rew\"><p class=\"ta_aw\">Task reward:<\/p><span class=\"resources r1\"><img class=\"r1\" title=\"Lumber\" src=\"img\/x.gif\" alt=\"Lumber\">200<\/span><span class=\"resources r2\"><img class=\"r2\" title=\"Clay\" src=\"img\/x.gif\" alt=\"Clay\">120<\/span><span class=\"resources r3\"><img class=\"r3\" title=\"Iron\" src=\"img\/x.gif\" alt=\"Iron\">180<\/span><span class=\"resources r4\"><img class=\"r4\" title=\"Crop\" src=\"img\/x.gif\" alt=\"Crop\">80<\/span><div class=\"clear\"><\/div><\/div><input type=\"hidden\" id=\"qst_val\" value=\"\"><a href=\"javascript: qst_next('','24');\" class=\"qle arrow\">Go back to the quests menu<\/a><div class=\"clear\"><\/div><\/div><\/div>\n\t\t<div class=\"quest_dispatch\" id=\"qstbg\"><\/div>\n\t\t","number":"-27","reward":false,"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>","msrc":"<?php echo $messagelol; ?>","altstep":0}
 <?php $_SESSION['qstnew']='0'; }else{ $_SESSION['qstnew']='1'; ?>
-{"markup":"\n\t\t<div id=\"popup3\"><div id=\"qstd\"><h4>Követség<\/h4><div class=\"spoken\">&rdquo;بسیار عالی! اکنون تو سفارت داری، به یک اتحادی برو و سعی کن عضو یک اتحاد بشوی...&rdquo;<\/div><div class=\"rew\"><p class=\"ta_aw\">Task reward:<\/p><span class=\"resources r1\"><img class=\"r1\" title=\"Lumber\" src=\"img\/x.gif\" alt=\"Lumber\">200<\/span><span class=\"resources r2\"><img class=\"r2\" title=\"Clay\" src=\"img\/x.gif\" alt=\"Clay\">120<\/span><span class=\"resources r3\"><img class=\"r3\" title=\"Iron\" src=\"img\/x.gif\" alt=\"Iron\">180<\/span><span class=\"resources r4\"><img class=\"r4\" title=\"Crop\" src=\"img\/x.gif\" alt=\"Crop\">80<\/span><div class=\"clear\"><\/div><\/div><input type=\"hidden\" id=\"qst_val\" value=\"\"><a href=\"#\" onclick=\"qst_next('','24')\" class=\"qle arrow\">vissza az áttekintő nézethez.<\/a><a href=\"javascript: qst_next('','27');\" class=\"qri arrow\">Befejezés<\/a><div class=\"clear\"><\/div><\/div>\n\t\t<div id=\"qstbg\" class=\"quest_dispatch\"><\/div>\n\t\t","number":27,"reward":{"wood":200,"clay":120,"iron":180,"crop":80},"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>g","msrc":"<?php echo $messagelol; ?>","altstep":0}
-<?php }?>
+{"markup":"\n\t\t<div id=\"popup3\"><div id=\"qstd\"><h4>Embassy<\/h4><div class=\"spoken\">&rdquo;Excellent! With Embassy you can be an alliance member of a union, go and try...&rdquo;<\/div><div class=\"rew\"><p class=\"ta_aw\">Task reward:<\/p><span class=\"resources r1\"><img class=\"r1\" title=\"Lumber\" src=\"img\/x.gif\" alt=\"Lumber\">200<\/span><span class=\"resources r2\"><img class=\"r2\" title=\"Clay\" src=\"img\/x.gif\" alt=\"Clay\">120<\/span><span class=\"resources r3\"><img class=\"r3\" title=\"Iron\" src=\"img\/x.gif\" alt=\"Iron\">180<\/span><span class=\"resources r4\"><img class=\"r4\" title=\"Crop\" src=\"img\/x.gif\" alt=\"Crop\">80<\/span><div class=\"clear\"><\/div><\/div><input type=\"hidden\" id=\"qst_val\" value=\"\"><a href=\"#\" onclick=\"qst_next('','24')\" class=\"qle arrow\">Go back to the quests menu<\/a><a href=\"javascript: qst_next('','27');\" class=\"qri arrow\">Take Reward<\/a><div class=\"clear\"><\/div><\/div>\n\t\t<div id=\"qstbg\" class=\"quest_dispatch\"><\/div>\n\t\t","number":27,"reward":{"wood":200,"clay":120,"iron":180,"crop":80},"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>g","msrc":"<?php echo $messagelol; ?>","altstep":0}
+<?php } ?>
 
 <?php } elseif($_SESSION['qst']== 28){
 
 $aid = $session->alliance;
 $allianceinfo = $database->getAlliance($aid);
 if ($aid['alliance'] == 0){?>
-{"markup":"\n\t\t<div id=\"popup3\"><div id=\"qstd\"><h4>Klán<\/h4><div class=\"spoken\">&rdquo;Együttműködés fontos a Travian világában. Azon játékosok akik együttműködnek, klánokba szerveződnek<br>Szerezz be egy környékbeli klántól meghívót és lépj be a klánba.<br>A másik lehetőség, hogy te magad alapítasz klánt. A klánalapításhoz azonban szükség van 3. szintű követségre.&rdquo;<\/div><div class=\"rew\"><p class=\"ta_aw\">Order:<\/p>Lépj be egy klánba, vagy alapíts egy saját klánt.<\/div><div class=\"rew\"><p class=\"ta_aw\">Task reward:<\/p><span class=\"resources r1\"><img class=\"r1\" title=\"Lumber\" src=\"img\/x.gif\" alt=\"Lumber\">240<\/span><span class=\"resources r2\"><img class=\"r2\" title=\"Clay\" src=\"img\/x.gif\" alt=\"Clay\">280<\/span><span class=\"resources r3\"><img class=\"r3\" title=\"Iron\" src=\"img\/x.gif\" alt=\"Iron\">180<\/span><span class=\"resources r4\"><img class=\"r4\" title=\"Crop\" src=\"img\/x.gif\" alt=\"Crop\">100<\/span><div class=\"clear\"><\/div><\/div><input type=\"hidden\" id=\"qst_val\" value=\"\"><a href=\"javascript: qst_next('','24');\" class=\"qle arrow\">vissza az áttekintő nézethez.<\/a><div class=\"clear\"><\/div><\/div><\/div>\n\t\t<div class=\"quest_alliance\" id=\"qstbg\"><\/div>\n\t\t","number":"-28","reward":false,"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>","msrc":"<?php echo $messagelol; ?>","altstep":0}
+{"markup":"\n\t\t<div id=\"popup3\"><div id=\"qstd\"><h4>Alliance<\/h4><div class=\"spoken\">&rdquo;Teamwork is important in Travian. Players who work together organise themselves in alliances. Get an invitation from an alliance in your region and join this alliance. Alternatively, you can found your own alliance. To do this, you need a level 3 embassy.&rdquo;<\/div><div class=\"rew\"><p class=\"ta_aw\">Order:<\/p>Join an alliance or found one on your own.<\/div><div class=\"rew\"><p class=\"ta_aw\">Task reward:<\/p><span class=\"resources r1\"><img class=\"r1\" title=\"Lumber\" src=\"img\/x.gif\" alt=\"Lumber\">240<\/span><span class=\"resources r2\"><img class=\"r2\" title=\"Clay\" src=\"img\/x.gif\" alt=\"Clay\">280<\/span><span class=\"resources r3\"><img class=\"r3\" title=\"Iron\" src=\"img\/x.gif\" alt=\"Iron\">180<\/span><span class=\"resources r4\"><img class=\"r4\" title=\"Crop\" src=\"img\/x.gif\" alt=\"Crop\">100<\/span><div class=\"clear\"><\/div><\/div><input type=\"hidden\" id=\"qst_val\" value=\"\"><a href=\"javascript: qst_next('','24');\" class=\"qle arrow\">Go back to the quests menu<\/a><div class=\"clear\"><\/div><\/div><\/div>\n\t\t<div class=\"quest_alliance\" id=\"qstbg\"><\/div>\n\t\t","number":"-28","reward":false,"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>","msrc":"<?php echo $messagelol; ?>","altstep":0}
 <?php $_SESSION['qstnew']='0'; }else{ $_SESSION['qstnew']='1'; ?>
-{"markup":"\n\t\t<div id=\"popup3\"><div id=\"qstd\"><h4>Klán<\/h4><div class=\"spoken\">&rdquo;خوب است! حالا تو در اتحادی به نام <b><?php echo $allianceinfo['tag']; ?><\/b> عضو هستی و میتوانی با کمک هم اتحادی های خود سریعتر پیشرفت کنی...&rdquo;<\/div><div class=\"rew\"><p class=\"ta_aw\">Task reward:<\/p><span class=\"resources r1\"><img class=\"r1\" title=\"Lumber\" src=\"img\/x.gif\" alt=\"Lumber\">240<\/span><span class=\"resources r2\"><img class=\"r2\" title=\"Clay\" src=\"img\/x.gif\" alt=\"Clay\">280<\/span><span class=\"resources r3\"><img class=\"r3\" title=\"Iron\" src=\"img\/x.gif\" alt=\"Iron\">180<\/span><span class=\"resources r4\"><img class=\"r4\" title=\"Crop\" src=\"img\/x.gif\" alt=\"Crop\">100<\/span><div class=\"clear\"><\/div><\/div><input type=\"hidden\" id=\"qst_val\" value=\"\"><a href=\"#\" onclick=\"qst_next('','24')\" class=\"qle arrow\">vissza az áttekintő nézethez.<\/a><a href=\"javascript: qst_next('','28');\" class=\"qri arrow\">Befejezés<\/a><div class=\"clear\"><\/div><\/div>\n\t\t<div id=\"qstbg\" class=\"quest_alliance\"><\/div>\n\t\t","number":28,"reward":{"wood":240,"clay":280,"iron":180,"crop":100},"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>g","msrc":"<?php echo $messagelol; ?>","altstep":0}
-<?php }?>
+{"markup":"\n\t\t<div id=\"popup3\"><div id=\"qstd\"><h4>Alliance<\/h4><div class=\"spoken\">&rdquo;Is good! Now you're in a union called <b><?php echo $allianceinfo['tag'];?><\/b>, and you're a member of their alliance with the faster you'll progress...&rdquo;<\/div><div class=\"rew\"><p class=\"ta_aw\">Task reward:<\/p><span class=\"resources r1\"><img class=\"r1\" title=\"Lumber\" src=\"img\/x.gif\" alt=\"Lumber\">240<\/span><span class=\"resources r2\"><img class=\"r2\" title=\"Clay\" src=\"img\/x.gif\" alt=\"Clay\">280<\/span><span class=\"resources r3\"><img class=\"r3\" title=\"Iron\" src=\"img\/x.gif\" alt=\"Iron\">180<\/span><span class=\"resources r4\"><img class=\"r4\" title=\"Crop\" src=\"img\/x.gif\" alt=\"Crop\">100<\/span><div class=\"clear\"><\/div><\/div><input type=\"hidden\" id=\"qst_val\" value=\"\"><a href=\"#\" onclick=\"qst_next('','24')\" class=\"qle arrow\">Go back to the quests menu<\/a><a href=\"javascript: qst_next('','28');\" class=\"qri arrow\">Take Reward<\/a><div class=\"clear\"><\/div><\/div>\n\t\t<div id=\"qstbg\" class=\"quest_alliance\"><\/div>\n\t\t","number":28,"reward":{"wood":240,"clay":280,"iron":180,"crop":100},"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>g","msrc":"<?php echo $messagelol; ?>","altstep":0}
+<?php } ?>
 
 <?php } elseif($_SESSION['qst']== 29){
 
 $mainbuilding = $building->getTypeLevel(15);
 if ($mainbuilding < 5){?>
-{"markup":"\n\t\t<div id=\"popup3\"><div id=\"qstd\"><h4>Főépület 5<\/h4><div class=\"spoken\">&rdquo;Egy palota vagy rezidencia építéséhez szükség van egy 5. szintű főépületre.&rdquo;<\/div><div class=\"rew\"><p class=\"ta_aw\">Order:<\/p>Építsd a főépületed 5. szintre.<\/div><div class=\"rew\"><p class=\"ta_aw\">Task reward:<\/p><span class=\"resources r1\"><img class=\"r1\" title=\"Lumber\" src=\"img\/x.gif\" alt=\"Lumber\">600<\/span><span class=\"resources r2\"><img class=\"r2\" title=\"Clay\" src=\"img\/x.gif\" alt=\"Clay\">750<\/span><span class=\"resources r3\"><img class=\"r3\" title=\"Iron\" src=\"img\/x.gif\" alt=\"Iron\">600<\/span><span class=\"resources r4\"><img class=\"r4\" title=\"Crop\" src=\"img\/x.gif\" alt=\"Crop\">300<\/span><div class=\"clear\"><\/div><\/div><input type=\"hidden\" id=\"qst_val\" value=\"\"><a href=\"javascript: qst_next('','24');\" class=\"qle arrow\">vissza az áttekintő nézethez.<\/a><div class=\"clear\"><\/div><\/div><\/div>\n\t\t<div class=\"quest_main_on_five\" id=\"qstbg\"><\/div>\n\t\t","number":"-29","reward":false,"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>","msrc":"<?php echo $messagelol; ?>","altstep":0}
+{"markup":"\n\t\t<div id=\"popup3\"><div id=\"qstd\"><h4>Main Building to Level 5<\/h4><div class=\"spoken\">&rdquo;To be able to build a palace or residence, you´ll need a main building at level 5.&rdquo;<\/div><div class=\"rew\"><p class=\"ta_aw\">Order:<\/p>Upgrade your main building to level 5.<\/div><div class=\"rew\"><p class=\"ta_aw\">Task reward:<\/p><span class=\"resources r1\"><img class=\"r1\" title=\"Lumber\" src=\"img\/x.gif\" alt=\"Lumber\">600<\/span><span class=\"resources r2\"><img class=\"r2\" title=\"Clay\" src=\"img\/x.gif\" alt=\"Clay\">750<\/span><span class=\"resources r3\"><img class=\"r3\" title=\"Iron\" src=\"img\/x.gif\" alt=\"Iron\">600<\/span><span class=\"resources r4\"><img class=\"r4\" title=\"Crop\" src=\"img\/x.gif\" alt=\"Crop\">300<\/span><div class=\"clear\"><\/div><\/div><input type=\"hidden\" id=\"qst_val\" value=\"\"><a href=\"javascript: qst_next('','24');\" class=\"qle arrow\">Go back to the quests menu<\/a><div class=\"clear\"><\/div><\/div><\/div>\n\t\t<div class=\"quest_main_on_five\" id=\"qstbg\"><\/div>\n\t\t","number":"-29","reward":false,"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>","msrc":"<?php echo $messagelol; ?>","altstep":0}
 <?php $_SESSION['qstnew']='0'; }else{ $_SESSION['qstnew']='1'; ?>
-{"markup":"\n\t\t<div id=\"popup3\"><div id=\"qstd\"><h4>Főépület 5<\/h4><div class=\"spoken\">&rdquo;ساختمان اصلی به سطح 5 رسید، حال می توانی اقامتگاه یا قصر بنا کنی...&rdquo;<\/div><div class=\"rew\"><p class=\"ta_aw\">Task reward:<\/p><span class=\"resources r1\"><img class=\"r1\" title=\"Lumber\" src=\"img\/x.gif\" alt=\"Lumber\">600<\/span><span class=\"resources r2\"><img class=\"r2\" title=\"Clay\" src=\"img\/x.gif\" alt=\"Clay\">750<\/span><span class=\"resources r3\"><img class=\"r3\" title=\"Iron\" src=\"img\/x.gif\" alt=\"Iron\">600<\/span><span class=\"resources r4\"><img class=\"r4\" title=\"Crop\" src=\"img\/x.gif\" alt=\"Crop\">300<\/span><div class=\"clear\"><\/div><\/div><input type=\"hidden\" id=\"qst_val\" value=\"\"><a href=\"#\" onclick=\"qst_next('','24')\" class=\"qle arrow\">vissza az áttekintő nézethez.<\/a><a href=\"javascript: qst_next('','29');\" class=\"qri arrow\">Befejezés<\/a><div class=\"clear\"><\/div><\/div>\n\t\t<div id=\"qstbg\" class=\"quest_main_on_five\"><\/div>\n\t\t","number":29,"reward":{"wood":600,"clay":750,"iron":600,"crop":300},"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>g","msrc":"<?php echo $messagelol; ?>","altstep":0}
-<?php }?>
+{"markup":"\n\t\t<div id=\"popup3\"><div id=\"qstd\"><h4>Main Building to Level 5<\/h4><div class=\"spoken\">&rdquo;The main building is level 5 now and you can build palace or residence...&rdquo;<\/div><div class=\"rew\"><p class=\"ta_aw\">Task reward:<\/p><span class=\"resources r1\"><img class=\"r1\" title=\"Lumber\" src=\"img\/x.gif\" alt=\"Lumber\">600<\/span><span class=\"resources r2\"><img class=\"r2\" title=\"Clay\" src=\"img\/x.gif\" alt=\"Clay\">750<\/span><span class=\"resources r3\"><img class=\"r3\" title=\"Iron\" src=\"img\/x.gif\" alt=\"Iron\">600<\/span><span class=\"resources r4\"><img class=\"r4\" title=\"Crop\" src=\"img\/x.gif\" alt=\"Crop\">300<\/span><div class=\"clear\"><\/div><\/div><input type=\"hidden\" id=\"qst_val\" value=\"\"><a href=\"#\" onclick=\"qst_next('','24')\" class=\"qle arrow\">Go back to the quests menu<\/a><a href=\"javascript: qst_next('','29');\" class=\"qri arrow\">Take Reward<\/a><div class=\"clear\"><\/div><\/div>\n\t\t<div id=\"qstbg\" class=\"quest_main_on_five\"><\/div>\n\t\t","number":29,"reward":{"wood":600,"clay":750,"iron":600,"crop":300},"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>g","msrc":"<?php echo $messagelol; ?>","altstep":0}
+<?php } ?>
 
 <?php } elseif($_SESSION['qst']== 30){
 
 $granary = $building->getTypeLevel(11);
 if ($granary < 3){?>
-{"markup":"\n\t\t<div id=\"popup3\"><div id=\"qstd\"><h4>Magtár 3<\/h4><div class=\"spoken\">&rdquo;A magtárak gyors túlcsordulását megakadályozandó, építs ki a magtáradat magasabb szintre.&rdquo;<\/div><div class=\"rew\"><p class=\"ta_aw\">Order:<\/p>Építsd egy magtárad 3. szintre.<\/div><div class=\"rew\"><p class=\"ta_aw\">Task reward:<\/p><span class=\"resources r1\"><img class=\"r1\" title=\"Lumber\" src=\"img\/x.gif\" alt=\"Lumber\">900<\/span><span class=\"resources r2\"><img class=\"r2\" title=\"Clay\" src=\"img\/x.gif\" alt=\"Clay\">850<\/span><span class=\"resources r3\"><img class=\"r3\" title=\"Iron\" src=\"img\/x.gif\" alt=\"Iron\">600<\/span><span class=\"resources r4\"><img class=\"r4\" title=\"Crop\" src=\"img\/x.gif\" alt=\"Crop\">300<\/span><div class=\"clear\"><\/div><\/div><input type=\"hidden\" id=\"qst_val\" value=\"\"><a href=\"javascript: qst_next('','24');\" class=\"qle arrow\">vissza az áttekintő nézethez.<\/a><div class=\"clear\"><\/div><\/div><\/div>\n\t\t<div class=\"quest_granary_on_three\" id=\"qstbg\"><\/div>\n\t\t","number":"-30","reward":false,"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>","msrc":"<?php echo $messagelol; ?>","altstep":0}
+{"markup":"\n\t\t<div id=\"popup3\"><div id=\"qstd\"><h4>Granary to Level 3<\/h4><div class=\"spoken\">&rdquo;That you don´t lose crop, you should upgrade your granary.&rdquo;<\/div><div class=\"rew\"><p class=\"ta_aw\">Order:<\/p>Upgrade your granary to level 3.<\/div><div class=\"rew\"><p class=\"ta_aw\">Task reward:<\/p><span class=\"resources r1\"><img class=\"r1\" title=\"Lumber\" src=\"img\/x.gif\" alt=\"Lumber\">900<\/span><span class=\"resources r2\"><img class=\"r2\" title=\"Clay\" src=\"img\/x.gif\" alt=\"Clay\">850<\/span><span class=\"resources r3\"><img class=\"r3\" title=\"Iron\" src=\"img\/x.gif\" alt=\"Iron\">600<\/span><span class=\"resources r4\"><img class=\"r4\" title=\"Crop\" src=\"img\/x.gif\" alt=\"Crop\">300<\/span><div class=\"clear\"><\/div><\/div><input type=\"hidden\" id=\"qst_val\" value=\"\"><a href=\"javascript: qst_next('','24');\" class=\"qle arrow\">Go back to the quests menu<\/a><div class=\"clear\"><\/div><\/div><\/div>\n\t\t<div class=\"quest_granary_on_three\" id=\"qstbg\"><\/div>\n\t\t","number":"-30","reward":false,"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>","msrc":"<?php echo $messagelol; ?>","altstep":0}
 <?php $_SESSION['qstnew']='0'; }else{ $_SESSION['qstnew']='1'; ?>
-{"markup":"\n\t\t<div id=\"popup3\"><div id=\"qstd\"><h4>Magtár 3<\/h4><div class=\"spoken\">&rdquo;انبار غذا به سطح 3 ارتقاء داده شد...&rdquo;<\/div><div class=\"rew\"><p class=\"ta_aw\">Task reward:<\/p><span class=\"resources r1\"><img class=\"r1\" title=\"Lumber\" src=\"img\/x.gif\" alt=\"Lumber\">900<\/span><span class=\"resources r2\"><img class=\"r2\" title=\"Clay\" src=\"img\/x.gif\" alt=\"Clay\">850<\/span><span class=\"resources r3\"><img class=\"r3\" title=\"Iron\" src=\"img\/x.gif\" alt=\"Iron\">600<\/span><span class=\"resources r4\"><img class=\"r4\" title=\"Crop\" src=\"img\/x.gif\" alt=\"Crop\">300<\/span><div class=\"clear\"><\/div><\/div><input type=\"hidden\" id=\"qst_val\" value=\"\"><a href=\"#\" onclick=\"qst_next('','24')\" class=\"qle arrow\">vissza az áttekintő nézethez.<\/a><a href=\"javascript: qst_next('','30');\" class=\"qri arrow\">Befejezés<\/a><div class=\"clear\"><\/div><\/div>\n\t\t<div id=\"qstbg\" class=\"quest_granary_on_three\"><\/div>\n\t\t","number":30,"reward":{"wood":900,"clay":850,"iron":600,"crop":300},"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>g","msrc":"<?php echo $messagelol; ?>","altstep":0}
-<?php }?>
+{"markup":"\n\t\t<div id=\"popup3\"><div id=\"qstd\"><h4>Granary to Level 3<\/h4><div class=\"spoken\">&rdquo;Granary is level 3 now...&rdquo;<\/div><div class=\"rew\"><p class=\"ta_aw\">Task reward:<\/p><span class=\"resources r1\"><img class=\"r1\" title=\"Lumber\" src=\"img\/x.gif\" alt=\"Lumber\">900<\/span><span class=\"resources r2\"><img class=\"r2\" title=\"Clay\" src=\"img\/x.gif\" alt=\"Clay\">850<\/span><span class=\"resources r3\"><img class=\"r3\" title=\"Iron\" src=\"img\/x.gif\" alt=\"Iron\">600<\/span><span class=\"resources r4\"><img class=\"r4\" title=\"Crop\" src=\"img\/x.gif\" alt=\"Crop\">300<\/span><div class=\"clear\"><\/div><\/div><input type=\"hidden\" id=\"qst_val\" value=\"\"><a href=\"#\" onclick=\"qst_next('','24')\" class=\"qle arrow\">Go back to the quests menu<\/a><a href=\"javascript: qst_next('','30');\" class=\"qri arrow\">Take Reward<\/a><div class=\"clear\"><\/div><\/div>\n\t\t<div id=\"qstbg\" class=\"quest_granary_on_three\"><\/div>\n\t\t","number":30,"reward":{"wood":900,"clay":850,"iron":600,"crop":300},"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>g","msrc":"<?php echo $messagelol; ?>","altstep":0}
+<?php } ?>
 
 <?php } elseif($_SESSION['qst']== 31){
 
 $warehouse = $building->getTypeLevel(10);
 if ($warehouse < 7){?>
-{"markup":"\n\t\t<div id=\"popup3\"><div id=\"qstd\"><h4>Raktár 7<\/h4><div class=\"spoken\">&rdquo;A raktárak gyors túlcsordulását megakadályozandó, építs ki a raktáradat magasabb szintre.&rdquo;<\/div><div class=\"rew\"><p class=\"ta_aw\">Order:<\/p>Építs egy raktárat a 7. szintre.<\/div><div class=\"rew\"><p class=\"ta_aw\">Task reward:<\/p><span class=\"resources r1\"><img class=\"r1\" title=\"Lumber\" src=\"img\/x.gif\" alt=\"Lumber\">1800<\/span><span class=\"resources r2\"><img class=\"r2\" title=\"Clay\" src=\"img\/x.gif\" alt=\"Clay\">2000<\/span><span class=\"resources r3\"><img class=\"r3\" title=\"Iron\" src=\"img\/x.gif\" alt=\"Iron\">1650<\/span><span class=\"resources r4\"><img class=\"r4\" title=\"Crop\" src=\"img\/x.gif\" alt=\"Crop\">800<\/span><div class=\"clear\"><\/div><\/div><input type=\"hidden\" id=\"qst_val\" value=\"\"><a href=\"javascript: qst_next('','24');\" class=\"qle arrow\">vissza az áttekintő nézethez.<\/a><div class=\"clear\"><\/div><\/div><\/div>\n\t\t<div class=\"quest_warehouse_on_seven\" id=\"qstbg\"><\/div>\n\t\t","number":"-31","reward":false,"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>","msrc":"<?php echo $messagelol; ?>","altstep":0}
+{"markup":"\n\t\t<div id=\"popup3\"><div id=\"qstd\"><h4>Warehouse to Level 7<\/h4><div class=\"spoken\">&rdquo;To make sure your resources won't overflow, you should upgrade your warehouse.&rdquo;<\/div><div class=\"rew\"><p class=\"ta_aw\">Order:<\/p>Upgrade your warehouse to level 7.<\/div><div class=\"rew\"><p class=\"ta_aw\">Task reward:<\/p><span class=\"resources r1\"><img class=\"r1\" title=\"Lumber\" src=\"img\/x.gif\" alt=\"Lumber\">1800<\/span><span class=\"resources r2\"><img class=\"r2\" title=\"Clay\" src=\"img\/x.gif\" alt=\"Clay\">2000<\/span><span class=\"resources r3\"><img class=\"r3\" title=\"Iron\" src=\"img\/x.gif\" alt=\"Iron\">1650<\/span><span class=\"resources r4\"><img class=\"r4\" title=\"Crop\" src=\"img\/x.gif\" alt=\"Crop\">800<\/span><div class=\"clear\"><\/div><\/div><input type=\"hidden\" id=\"qst_val\" value=\"\"><a href=\"javascript: qst_next('','24');\" class=\"qle arrow\">Go back to the quests menu<\/a><div class=\"clear\"><\/div><\/div><\/div>\n\t\t<div class=\"quest_warehouse_on_seven\" id=\"qstbg\"><\/div>\n\t\t","number":"-31","reward":false,"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>","msrc":"<?php echo $messagelol; ?>","altstep":0}
 <?php $_SESSION['qstnew']='0'; }else{ $_SESSION['qstnew']='1'; ?>
-{"markup":"\n\t\t<div id=\"popup3\"><div id=\"qstd\"><h4>Raktár 7<\/h4><div class=\"spoken\">&rdquo;انبار به سطح 7 ارتقاء داده شد...&rdquo;<\/div><div class=\"rew\"><p class=\"ta_aw\">Task reward:<\/p><span class=\"resources r1\"><img class=\"r1\" title=\"Lumber\" src=\"img\/x.gif\" alt=\"Lumber\">1800<\/span><span class=\"resources r2\"><img class=\"r2\" title=\"Clay\" src=\"img\/x.gif\" alt=\"Clay\">2000<\/span><span class=\"resources r3\"><img class=\"r3\" title=\"Iron\" src=\"img\/x.gif\" alt=\"Iron\">1650<\/span><span class=\"resources r4\"><img class=\"r4\" title=\"Crop\" src=\"img\/x.gif\" alt=\"Crop\">800<\/span><div class=\"clear\"><\/div><\/div><input type=\"hidden\" id=\"qst_val\" value=\"\"><a href=\"#\" onclick=\"qst_next('','24')\" class=\"qle arrow\">vissza az áttekintő nézethez.<\/a><a href=\"javascript: qst_next('','31');\" class=\"qri arrow\">Befejezés<\/a><div class=\"clear\"><\/div><\/div>\n\t\t<div id=\"qstbg\" class=\"quest_warehouse_on_seven\"><\/div>\n\t\t","number":31,"reward":{"wood":1800,"clay":2000,"iron":1650,"crop":800},"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>g","msrc":"<?php echo $messagelol; ?>","altstep":0}
-<?php }?>
+{"markup":"\n\t\t<div id=\"popup3\"><div id=\"qstd\"><h4>Warehouse to Level 7<\/h4><div class=\"spoken\">&rdquo;Warehouse has upgraded to level 7...&rdquo;<\/div><div class=\"rew\"><p class=\"ta_aw\">Task reward:<\/p><span class=\"resources r1\"><img class=\"r1\" title=\"Lumber\" src=\"img\/x.gif\" alt=\"Lumber\">1800<\/span><span class=\"resources r2\"><img class=\"r2\" title=\"Clay\" src=\"img\/x.gif\" alt=\"Clay\">2000<\/span><span class=\"resources r3\"><img class=\"r3\" title=\"Iron\" src=\"img\/x.gif\" alt=\"Iron\">1650<\/span><span class=\"resources r4\"><img class=\"r4\" title=\"Crop\" src=\"img\/x.gif\" alt=\"Crop\">800<\/span><div class=\"clear\"><\/div><\/div><input type=\"hidden\" id=\"qst_val\" value=\"\"><a href=\"#\" onclick=\"qst_next('','24')\" class=\"qle arrow\">Go back to the quests menu<\/a><a href=\"javascript: qst_next('','31');\" class=\"qri arrow\">Take Reward<\/a><div class=\"clear\"><\/div><\/div>\n\t\t<div id=\"qstbg\" class=\"quest_warehouse_on_seven\"><\/div>\n\t\t","number":31,"reward":{"wood":1800,"clay":2000,"iron":1650,"crop":800},"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>g","msrc":"<?php echo $messagelol; ?>","altstep":0}
+<?php } ?>
 
 <?php } elseif($_SESSION['qst']== 32){
 
@@ -817,41 +837,47 @@ if($tRes['f5']>4){$clayL++;};if($tRes['f6']>4){$clayL++;};if($tRes['f16']>4){$cl
 if($tRes['f1']>4){$woodL++;};if($tRes['f3']>4){$woodL++;};if($tRes['f14']>4){$woodL++;};if($tRes['f17']>4){$woodL++;}
 if($tRes['f2']>4){$cropL++;};if($tRes['f8']>4){$cropL++;};if($tRes['f9']>4){$cropL++;};if($tRes['f12']>4){$cropL++;};if($tRes['f13']>4){$cropL++;};if($tRes['f15']>4){$cropL++;}
 if ($ironL<4 || $clayL<4 || $woodL<4 || $cropL<6){?>
-{"markup":"\n\t\t<div id=\"popup3\"><div id=\"qstd\"><h4>Mindent ötödikre!<\/h4><div class=\"spoken\">&rdquo;Nyersanyagból soha nem elég. Rövid távon a nyersanyagmezők fejlesztése igen drága, de hosszú távon bőven behozza az árát.&rdquo;<\/div><div class=\"rew\"><p class=\"ta_aw\">Order:<\/p>Építs ki minden nyersanyagmezőt 5. szintre.<\/div><div class=\"rew\"><p class=\"ta_aw\">Task reward:<\/p><span class=\"resources r1\"><img class=\"r1\" title=\"Lumber\" src=\"img\/x.gif\" alt=\"Lumber\">1600<\/span><span class=\"resources r2\"><img class=\"r2\" title=\"Clay\" src=\"img\/x.gif\" alt=\"Clay\">1800<\/span><span class=\"resources r3\"><img class=\"r3\" title=\"Iron\" src=\"img\/x.gif\" alt=\"Iron\">1950<\/span><span class=\"resources r4\"><img class=\"r4\" title=\"Crop\" src=\"img\/x.gif\" alt=\"Crop\">1200<\/span><div class=\"clear\"><\/div><\/div><input type=\"hidden\" id=\"qst_val\" value=\"\"><a href=\"javascript: qst_next('','24');\" class=\"qle arrow\">vissza az áttekintő nézethez.<\/a><div class=\"clear\"><\/div><\/div><\/div>\n\t\t<div class=\"quest_res_all_five\" id=\"qstbg\"><\/div>\n\t\t","number":"-32","reward":false,"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>","msrc":"<?php echo $messagelol; ?>","altstep":0}
+{"markup":"\n\t\t<div id=\"popup3\"><div id=\"qstd\"><h4>All to five!<\/h4><div class=\"spoken\">&rdquo;You will always need more resources. Resource tiles are quite expensive but will always pay out in the long term.&rdquo;<\/div><div class=\"rew\"><p class=\"ta_aw\">Order:<\/p>Upgrade all resources tiles to level 5.<\/div><div class=\"rew\"><p class=\"ta_aw\">Task reward:<\/p><span class=\"resources r1\"><img class=\"r1\" title=\"Lumber\" src=\"img\/x.gif\" alt=\"Lumber\">1600<\/span><span class=\"resources r2\"><img class=\"r2\" title=\"Clay\" src=\"img\/x.gif\" alt=\"Clay\">1800<\/span><span class=\"resources r3\"><img class=\"r3\" title=\"Iron\" src=\"img\/x.gif\" alt=\"Iron\">1950<\/span><span class=\"resources r4\"><img class=\"r4\" title=\"Crop\" src=\"img\/x.gif\" alt=\"Crop\">1200<\/span><div class=\"clear\"><\/div><\/div><input type=\"hidden\" id=\"qst_val\" value=\"\"><a href=\"javascript: qst_next('','24');\" class=\"qle arrow\">Go back to the quests menu<\/a><div class=\"clear\"><\/div><\/div><\/div>\n\t\t<div class=\"quest_res_all_five\" id=\"qstbg\"><\/div>\n\t\t","number":"-32","reward":false,"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>","msrc":"<?php echo $messagelol; ?>","altstep":0}
 <?php $_SESSION['qstnew']='0'; }else{ $_SESSION['qstnew']='1'; ?>
-{"markup":"\n\t\t<div id=\"popup3\"><div id=\"qstd\"><h4>Mindent ötödikre!<\/h4><div class=\"spoken\">&rdquo;همۀ منابع به سطح 5 شدند، اکنون تولیدات دهکده بالا رفته و یک قدم پیشرفت کردید...&rdquo;<\/div><div class=\"rew\"><p class=\"ta_aw\">Task reward:<\/p><span class=\"resources r1\"><img class=\"r1\" title=\"Lumber\" src=\"img\/x.gif\" alt=\"Lumber\">1600<\/span><span class=\"resources r2\"><img class=\"r2\" title=\"Clay\" src=\"img\/x.gif\" alt=\"Clay\">1800<\/span><span class=\"resources r3\"><img class=\"r3\" title=\"Iron\" src=\"img\/x.gif\" alt=\"Iron\">1950<\/span><span class=\"resources r4\"><img class=\"r4\" title=\"Crop\" src=\"img\/x.gif\" alt=\"Crop\">1200<\/span><div class=\"clear\"><\/div><\/div><input type=\"hidden\" id=\"qst_val\" value=\"\"><a href=\"#\" onclick=\"qst_next('','24')\" class=\"qle arrow\">vissza az áttekintő nézethez.<\/a><a href=\"javascript: qst_next('','32');\" class=\"qri arrow\">Befejezés<\/a><div class=\"clear\"><\/div><\/div>\n\t\t<div id=\"qstbg\" class=\"quest_res_all_five\"><\/div>\n\t\t","number":32,"reward":{"wood":1600,"clay":1800,"iron":1950,"crop":1200},"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>g","msrc":"<?php echo $messagelol; ?>","altstep":0}
-<?php }?>
+{"markup":"\n\t\t<div id=\"popup3\"><div id=\"qstd\"><h4>All to five!<\/h4><div class=\"spoken\">&rdquo;All resources were to level 5, the village's products have gone up and take a step forward...&rdquo;<\/div><div class=\"rew\"><p class=\"ta_aw\">Task reward:<\/p><span class=\"resources r1\"><img class=\"r1\" title=\"Lumber\" src=\"img\/x.gif\" alt=\"Lumber\">1600<\/span><span class=\"resources r2\"><img class=\"r2\" title=\"Clay\" src=\"img\/x.gif\" alt=\"Clay\">1800<\/span><span class=\"resources r3\"><img class=\"r3\" title=\"Iron\" src=\"img\/x.gif\" alt=\"Iron\">1950<\/span><span class=\"resources r4\"><img class=\"r4\" title=\"Crop\" src=\"img\/x.gif\" alt=\"Crop\">1200<\/span><div class=\"clear\"><\/div><\/div><input type=\"hidden\" id=\"qst_val\" value=\"\"><a href=\"#\" onclick=\"qst_next('','24')\" class=\"qle arrow\">Go back to the quests menu<\/a><a href=\"javascript: qst_next('','32');\" class=\"qri arrow\">Take Reward<\/a><div class=\"clear\"><\/div><\/div>\n\t\t<div id=\"qstbg\" class=\"quest_res_all_five\"><\/div>\n\t\t","number":32,"reward":{"wood":1600,"clay":1800,"iron":1950,"crop":1200},"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>g","msrc":"<?php echo $messagelol; ?>","altstep":0}
+<?php } ?>
 
 <?php } elseif($_SESSION['qst']== 33){
 
 $residence = $building->getTypeLevel(25);
-if ($residence<10){?>
-{"markup":"\n\t\t<div id=\"popup3\"><div id=\"qstd\"><h4>Palota vagy rezidencia<\/h4><div class=\"spoken\">&rdquo;Egy új település alapításához szükség van telepesekre. Ezeket a rezidencián avagy a palotában tudod kiképezni.&rdquo;<\/div><div class=\"rew\"><p class=\"ta_aw\">Order:<\/p>Építs fel palotát vagy rezidenciát a 10. szintre<\/div><div class=\"rew\"><p class=\"ta_aw\">Task reward:<\/p><span class=\"resources r1\"><img class=\"r1\" title=\"Lumber\" src=\"img\/x.gif\" alt=\"Lumber\">3400<\/span><span class=\"resources r2\"><img class=\"r2\" title=\"Clay\" src=\"img\/x.gif\" alt=\"Clay\">2800<\/span><span class=\"resources r3\"><img class=\"r3\" title=\"Iron\" src=\"img\/x.gif\" alt=\"Iron\">3600<\/span><span class=\"resources r4\"><img class=\"r4\" title=\"Crop\" src=\"img\/x.gif\" alt=\"Crop\">2200<\/span><div class=\"clear\"><\/div><\/div><input type=\"hidden\" id=\"qst_val\" value=\"\"><a href=\"javascript: qst_next('','24');\" class=\"qle arrow\">vissza az áttekintő nézethez.<\/a><div class=\"clear\"><\/div><\/div><\/div>\n\t\t<div class=\"quest_palace_or_residence\" id=\"qstbg\"><\/div>\n\t\t","number":"-33","reward":false,"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>","msrc":"<?php echo $messagelol; ?>","altstep":0}
+$palace = $building->getTypeLevel(26);
+if($palace >= 10){
+$text = "Palace ";
+}else if($residence >= 10){
+$text = "Residence ";
+}
+if ($residence<10 && $palace<10){?>
+{"markup":"\n\t\t<div id=\"popup3\"><div id=\"qstd\"><h4>Palace or Residence?<\/h4><div class=\"spoken\">&rdquo;To found a new village, you´ll need settlers. Those you can train in either a palace or a residence.&rdquo;<\/div><div class=\"rew\"><p class=\"ta_aw\">Order:<\/p>Build a palace or residence to level 10.<\/div><div class=\"rew\"><p class=\"ta_aw\">Task reward:<\/p><span class=\"resources r1\"><img class=\"r1\" title=\"Lumber\" src=\"img\/x.gif\" alt=\"Lumber\">3400<\/span><span class=\"resources r2\"><img class=\"r2\" title=\"Clay\" src=\"img\/x.gif\" alt=\"Clay\">2800<\/span><span class=\"resources r3\"><img class=\"r3\" title=\"Iron\" src=\"img\/x.gif\" alt=\"Iron\">3600<\/span><span class=\"resources r4\"><img class=\"r4\" title=\"Crop\" src=\"img\/x.gif\" alt=\"Crop\">2200<\/span><div class=\"clear\"><\/div><\/div><input type=\"hidden\" id=\"qst_val\" value=\"\"><a href=\"javascript: qst_next('','24');\" class=\"qle arrow\">Go back to the quests menu<\/a><div class=\"clear\"><\/div><\/div><\/div>\n\t\t<div class=\"quest_palace_or_residence\" id=\"qstbg\"><\/div>\n\t\t","number":"-33","reward":false,"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>","msrc":"<?php echo $messagelol; ?>","altstep":0}
 <?php $_SESSION['qstnew']='0'; }else{ $_SESSION['qstnew']='1'; ?>
-{"markup":"\n\t\t<div id=\"popup3\"><div id=\"qstd\"><h4>Palota vagy rezidencia<\/h4><div class=\"spoken\">&rdquo;اقامتگاه به سطح 10 رسید، حالا میتوانید مهاجر بسازید و دهکدۀ دوم خود را بنا کنید.<br><br>به امتیاز فرهنگی خود دقت کنید...&rdquo;<\/div><div class=\"rew\"><p class=\"ta_aw\">Task reward:<\/p><span class=\"resources r1\"><img class=\"r1\" title=\"Lumber\" src=\"img\/x.gif\" alt=\"Lumber\">3400<\/span><span class=\"resources r2\"><img class=\"r2\" title=\"Clay\" src=\"img\/x.gif\" alt=\"Clay\">2800<\/span><span class=\"resources r3\"><img class=\"r3\" title=\"Iron\" src=\"img\/x.gif\" alt=\"Iron\">3600<\/span><span class=\"resources r4\"><img class=\"r4\" title=\"Crop\" src=\"img\/x.gif\" alt=\"Crop\">2200<\/span><div class=\"clear\"><\/div><\/div><input type=\"hidden\" id=\"qst_val\" value=\"\"><a href=\"#\" onclick=\"qst_next('','24')\" class=\"qle arrow\">vissza az áttekintő nézethez.<\/a><a href=\"javascript: qst_next('','33');\" class=\"qri arrow\">Befejezés<\/a><div class=\"clear\"><\/div><\/div>\n\t\t<div id=\"qstbg\" class=\"quest_palace_or_residence\"><\/div>\n\t\t","number":33,"reward":{"wood":3400,"clay":2800,"iron":3600,"crop":2200},"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>g","msrc":"<?php echo $messagelol; ?>","altstep":0}
-<?php }?>
+{"markup":"\n\t\t<div id=\"popup3\"><div id=\"qstd\"><h4>Palace or Residence?<\/h4><div class=\"spoken\">&rdquo;<?php echo $text; ?> had reached to level 10, you can now train settlers and found your second village. Notice the cultural points...&rdquo;<\/div><div class=\"rew\"><p class=\"ta_aw\">Task reward:<\/p><span class=\"resources r1\"><img class=\"r1\" title=\"Lumber\" src=\"img\/x.gif\" alt=\"Lumber\">3400<\/span><span class=\"resources r2\"><img class=\"r2\" title=\"Clay\" src=\"img\/x.gif\" alt=\"Clay\">2800<\/span><span class=\"resources r3\"><img class=\"r3\" title=\"Iron\" src=\"img\/x.gif\" alt=\"Iron\">3600<\/span><span class=\"resources r4\"><img class=\"r4\" title=\"Crop\" src=\"img\/x.gif\" alt=\"Crop\">2200<\/span><div class=\"clear\"><\/div><\/div><input type=\"hidden\" id=\"qst_val\" value=\"\"><a href=\"#\" onclick=\"qst_next('','24')\" class=\"qle arrow\">Go back to the quests menu<\/a><a href=\"javascript: qst_next('','33');\" class=\"qri arrow\">Take Reward<\/a><div class=\"clear\"><\/div><\/div>\n\t\t<div id=\"qstbg\" class=\"quest_palace_or_residence\"><\/div>\n\t\t","number":33,"reward":{"wood":3400,"clay":2800,"iron":3600,"crop":2200},"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>g","msrc":"<?php echo $messagelol; ?>","altstep":0}
+<?php } ?>
 
 <?php } elseif($_SESSION['qst']== 34){
 
 // Checking 3 settlers trained or no
 $units = $village->unitall;
 $unarray2=array("","u10", "u20","u30");
-if ($units[$unarray2[$session->userinfo['tribe']]]<3){ ?>
+if ($units[$unarray2[$session->userinfo['tribe']]]<3){ $cp = CP;?>
 
-{"markup":"\n\t\t<div id=\"popup3\"><div id=\"qstd\"><h4>3 telepes<\/h4><div class=\"spoken\">&rdquo;Egy új település alapításához szükség van 3 telepesre. Ezeket a rezidencián avagy a palotában tudod kiképezni.&rdquo;<\/div><div class=\"rew\"><p class=\"ta_aw\">Order:<\/p>Képezz 3 telepest<\/div><div class=\"rew\"><p class=\"ta_aw\">Task reward:<\/p><span class=\"resources r1\"><img class=\"r1\" title=\"Lumber\" src=\"img\/x.gif\" alt=\"Lumber\">1050<\/span><span class=\"resources r2\"><img class=\"r2\" title=\"Clay\" src=\"img\/x.gif\" alt=\"Clay\">800<\/span><span class=\"resources r3\"><img class=\"r3\" title=\"Iron\" src=\"img\/x.gif\" alt=\"Iron\">900<\/span><span class=\"resources r4\"><img class=\"r4\" title=\"Crop\" src=\"img\/x.gif\" alt=\"Crop\">750<\/span><div class=\"clear\"><\/div><\/div><input type=\"hidden\" id=\"qst_val\" value=\"\"><a href=\"javascript: qst_next('','24');\" class=\"qle arrow\">vissza az áttekintő nézethez.<\/a><div class=\"clear\"><\/div><\/div><\/div>\n\t\t<div class=\"quest_three_settlers\" id=\"qstbg\"><\/div>\n\t\t","number":"-34","reward":false,"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>","msrc":"<?php echo $messagelol; ?>","altstep":0}
+{"markup":"\n\t\t<div id=\"popup3\"><div id=\"qstd\"><h4>3 settlers<\/h4><div class=\"spoken\">&rdquo;To found a new village, you´ll need settlers. You can train them in the palace or residence.&rdquo;<\/div><div class=\"rew\"><p class=\"ta_aw\">Order:<\/p>Train 3 settlers.<\/div><div class=\"rew\"><p class=\"ta_aw\">Task reward:<\/p><span class=\"resources r1\"><img class=\"r1\" title=\"Lumber\" src=\"img\/x.gif\" alt=\"Lumber\">1050<\/span><span class=\"resources r2\"><img class=\"r2\" title=\"Clay\" src=\"img\/x.gif\" alt=\"Clay\">800<\/span><span class=\"resources r3\"><img class=\"r3\" title=\"Iron\" src=\"img\/x.gif\" alt=\"Iron\">900<\/span><span class=\"resources r4\"><img class=\"r4\" title=\"Crop\" src=\"img\/x.gif\" alt=\"Crop\">750<\/span><div class=\"clear\"><\/div><\/div><input type=\"hidden\" id=\"qst_val\" value=\"\"><a href=\"javascript: qst_next('','24');\" class=\"qle arrow\">Go back to the quests menu<\/a><div class=\"clear\"><\/div><\/div><\/div>\n\t\t<div class=\"quest_three_settlers\" id=\"qstbg\"><\/div>\n\t\t","number":"-34","reward":false,"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>","msrc":"<?php echo $messagelol; ?>","altstep":0}
 <?php $_SESSION['qstnew']='0'; }else{ $_SESSION['qstnew']='1'; ?>
-{"markup":"\n\t\t<div id=\"popup3\"><div id=\"qstd\"><h4>3 telepes<\/h4><div class=\"spoken\">&rdquo;3 مهاجر ساخته شد.<br><br>برای بنا کردن دهکدۀ جدید شما به 2000 امتیاز فرهنگی نیاز دارید...&rdquo;<\/div><div class=\"rew\"><p class=\"ta_aw\">Task reward:<\/p><span class=\"resources r1\"><img class=\"r1\" title=\"Lumber\" src=\"img\/x.gif\" alt=\"Lumber\">1050<\/span><span class=\"resources r2\"><img class=\"r2\" title=\"Clay\" src=\"img\/x.gif\" alt=\"Clay\">800<\/span><span class=\"resources r3\"><img class=\"r3\" title=\"Iron\" src=\"img\/x.gif\" alt=\"Iron\">900<\/span><span class=\"resources r4\"><img class=\"r4\" title=\"Crop\" src=\"img\/x.gif\" alt=\"Crop\">750<\/span><div class=\"clear\"><\/div><\/div><input type=\"hidden\" id=\"qst_val\" value=\"\"><a href=\"#\" onclick=\"qst_next('','24')\" class=\"qle arrow\">vissza az áttekintő nézethez.<\/a><a href=\"javascript: qst_next('','34');\" class=\"qri arrow\">Befejezés<\/a><div class=\"clear\"><\/div><\/div>\n\t\t<div id=\"qstbg\" class=\"quest_three_settlers\"><\/div>\n\t\t","number":34,"reward":{"wood":1050,"clay":800,"iron":900,"crop":750},"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>g","msrc":"<?php echo $messagelol; ?>","altstep":0}
-<?php }?>
+{"markup":"\n\t\t<div id=\"popup3\"><div id=\"qstd\"><h4>3 settlers<\/h4><div class=\"spoken\">&rdquo;3 settlers were trained. To found new village you need at least <?php echo ${cp.$cp}[2];?>culture points...&rdquo;<\/div><div class=\"rew\"><p class=\"ta_aw\">Task reward:<\/p><span class=\"resources r1\"><img class=\"r1\" title=\"Lumber\" src=\"img\/x.gif\" alt=\"Lumber\">1050<\/span><span class=\"resources r2\"><img class=\"r2\" title=\"Clay\" src=\"img\/x.gif\" alt=\"Clay\">800<\/span><span class=\"resources r3\"><img class=\"r3\" title=\"Iron\" src=\"img\/x.gif\" alt=\"Iron\">900<\/span><span class=\"resources r4\"><img class=\"r4\" title=\"Crop\" src=\"img\/x.gif\" alt=\"Crop\">750<\/span><div class=\"clear\"><\/div><\/div><input type=\"hidden\" id=\"qst_val\" value=\"\"><a href=\"#\" onclick=\"qst_next('','24')\" class=\"qle arrow\">Go back to the quests menu<\/a><a href=\"javascript: qst_next('','34');\" class=\"qri arrow\">Take Reward<\/a><div class=\"clear\"><\/div><\/div>\n\t\t<div id=\"qstbg\" class=\"quest_three_settlers\"><\/div>\n\t\t","number":34,"reward":{"wood":1050,"clay":800,"iron":900,"crop":750},"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>g","msrc":"<?php echo $messagelol; ?>","altstep":0}
+<?php } ?>
 
 <?php } elseif($_SESSION['qst']== 35){
 
 $vil = $database->getProfileVillages($session->uid);
 if (count($vil)<2){ ?>
 
-{"markup":"\n\t\t<div id=\"popup3\"><div id=\"qstd\"><h4>Új falu<\/h4><div class=\"spoken\">&rdquo;A térképen találsz sok üres területet. Válassz ki egyet és alapíts ott egy új falut.&rdquo;<\/div><div class=\"rew\"><p class=\"ta_aw\">Order:<\/p>Alapíts egy új falut.<\/div><div class=\"rew\"><p class=\"ta_aw\">Task reward:<\/p><span class=\"resources r1\"><img class=\"r1\" title=\"Lumber\" src=\"img\/x.gif\" alt=\"Lumber\">1600<\/span><span class=\"resources r2\"><img class=\"r2\" title=\"Clay\" src=\"img\/x.gif\" alt=\"Clay\">2000<\/span><span class=\"resources r3\"><img class=\"r3\" title=\"Iron\" src=\"img\/x.gif\" alt=\"Iron\">1800<\/span><span class=\"resources r4\"><img class=\"r4\" title=\"Crop\" src=\"img\/x.gif\" alt=\"Crop\">1300<\/span><div class=\"clear\"><\/div><\/div><input type=\"hidden\" id=\"qst_val\" value=\"\"><a href=\"javascript: qst_next('','24');\" class=\"qle arrow\">vissza az áttekintő nézethez.<\/a><div class=\"clear\"><\/div><\/div><\/div>\n\t\t<div class=\"quest_new_village\" id=\"qstbg\"><\/div>\n\t\t","number":"-35","reward":false,"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>","msrc":"<?php echo $messagelol; ?>","altstep":0}
+{"markup":"\n\t\t<div id=\"popup3\"><div id=\"qstd\"><h4>New Village<\/h4><div class=\"spoken\">&rdquo;There are a lot of empty tiles on the map. Find one that suits you and found a new village.&rdquo;<\/div><div class=\"rew\"><p class=\"ta_aw\">Order:<\/p>Found a new village.<\/div><div class=\"rew\"><p class=\"ta_aw\">Task reward:<\/p><span class=\"resources r1\"><img class=\"r1\" title=\"Lumber\" src=\"img\/x.gif\" alt=\"Lumber\">1600<\/span><span class=\"resources r2\"><img class=\"r2\" title=\"Clay\" src=\"img\/x.gif\" alt=\"Clay\">2000<\/span><span class=\"resources r3\"><img class=\"r3\" title=\"Iron\" src=\"img\/x.gif\" alt=\"Iron\">1800<\/span><span class=\"resources r4\"><img class=\"r4\" title=\"Crop\" src=\"img\/x.gif\" alt=\"Crop\">1300<\/span><div class=\"clear\"><\/div><\/div><input type=\"hidden\" id=\"qst_val\" value=\"\"><a href=\"javascript: qst_next('','24');\" class=\"qle arrow\">Go back to the quests menu<\/a><div class=\"clear\"><\/div><\/div><\/div>\n\t\t<div class=\"quest_new_village\" id=\"qstbg\"><\/div>\n\t\t","number":"-35","reward":false,"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>","msrc":"<?php echo $messagelol; ?>","altstep":0}
 <?php $_SESSION['qstnew']='0'; }else{ $_SESSION['qstnew']='1'; ?>
-{"markup":"\n\t\t<div id=\"popup3\"><div id=\"qstd\"><h4>Új falu<\/h4><div class=\"spoken\">&rdquo;تبریک میگویم<br><br>شما همۀ وظایف را پشت سر گذاشتید، اکنون باید به تنهایی ادامه دهید.<br><br>خداحافظ...&rdquo;<\/div><div class=\"rew\"><p class=\"ta_aw\">Task reward:<\/p><span class=\"resources r1\"><img class=\"r1\" title=\"Lumber\" src=\"img\/x.gif\" alt=\"Lumber\">1600<\/span><span class=\"resources r2\"><img class=\"r2\" title=\"Clay\" src=\"img\/x.gif\" alt=\"Clay\">2000<\/span><span class=\"resources r3\"><img class=\"r3\" title=\"Iron\" src=\"img\/x.gif\" alt=\"Iron\">1800<\/span><span class=\"resources r4\"><img class=\"r4\" title=\"Crop\" src=\"img\/x.gif\" alt=\"Crop\">1300<\/span><div class=\"clear\"><\/div><\/div><input type=\"hidden\" id=\"qst_val\" value=\"\"><a href=\"#\" onclick=\"qst_next('','24')\" class=\"qle arrow\">vissza az áttekintő nézethez.<\/a><a href=\"javascript: qst_next('','35');\" class=\"qri arrow\">Befejezés<\/a><div class=\"clear\"><\/div><\/div>\n\t\t<div id=\"qstbg\" class=\"quest_new_village\"><\/div>\n\t\t","number":35,"reward":{"wood":1600,"clay":2000,"iron":1800,"crop":1300},"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>g","msrc":"<?php echo $messagelol; ?>","altstep":0}
-<?php }?>
+{"markup":"\n\t\t<div id=\"popup3\"><div id=\"qstd\"><h4>New Village<\/h4><div class=\"spoken\">&rdquo;Congratulations, you have done all the quests, and now you have to proceed alone. Goodbye...&rdquo;<\/div><div class=\"rew\"><p class=\"ta_aw\">Task reward:<\/p><span class=\"resources r1\"><img class=\"r1\" title=\"Lumber\" src=\"img\/x.gif\" alt=\"Lumber\">1600<\/span><span class=\"resources r2\"><img class=\"r2\" title=\"Clay\" src=\"img\/x.gif\" alt=\"Clay\">2000<\/span><span class=\"resources r3\"><img class=\"r3\" title=\"Iron\" src=\"img\/x.gif\" alt=\"Iron\">1800<\/span><span class=\"resources r4\"><img class=\"r4\" title=\"Crop\" src=\"img\/x.gif\" alt=\"Crop\">1300<\/span><div class=\"clear\"><\/div><\/div><input type=\"hidden\" id=\"qst_val\" value=\"\"><a href=\"#\" onclick=\"qst_next('','24')\" class=\"qle arrow\">Go back to the quests menu<\/a><a href=\"javascript: qst_next('','35');\" class=\"qri arrow\">Take Reward<\/a><div class=\"clear\"><\/div><\/div>\n\t\t<div id=\"qstbg\" class=\"quest_new_village\"><\/div>\n\t\t","number":35,"reward":{"wood":1600,"clay":2000,"iron":1800,"crop":1300},"qgsrc":"q_l<?php echo $session->userinfo['tribe'];?>g","msrc":"<?php echo $messagelol; ?>","altstep":0}
+<?php } ?>
 
 
 

@@ -16,6 +16,11 @@ if($_GET){
 			}else {
 				$qact2=null;
 			}
+			if (isset($_GET['qact3'])){
+				$qact3=$_GET['qact3'];
+			}else {
+				$qact3=null;
+			}
 			include("Templates/Ajax/quest_core.tpl");		
 		break;
 	}
