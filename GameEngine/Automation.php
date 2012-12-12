@@ -775,11 +775,11 @@ class Automation {
 
 		// wave 1
 		$ref = $database->addAttack($row['wref'], 0, $units[0][0], $units[0][1], 0, $units[0][2], $units[0][3], $units[0][4], $units[0][5], 0, 0, 0, 3, 0, 0, 0, 0, 20, 20, 0, 20, 20, 20, 20);
-		$database->addMovement(3, $row['wref'], $vid, $ref, time(), $endtime);
+		$database->addMovement(3, $row['wref'], $vid, $ref, 0, $endtime);
 
 		// wave 2
 		$ref2 = $database->addAttack($row['wref'], 0, $units[1][0], $units[1][1], 0, $units[1][2], $units[1][3], $units[1][4], $units[1][5], 0, 0, 0, 3, 40, 0, 0, 0, 20, 20, 0, 20, 20, 20, 20, array('vid' => $vid, 'endtime' => ($endtime + 1)));
-		$database->addMovement(3, $row['wref'], $vid, $ref2, time(), $endtime + 1);
+		$database->addMovement(3, $row['wref'], $vid, $ref2, 0, $endtime + 1);
 	}
 	
 	private function checkWWAttacks() {
@@ -867,24 +867,37 @@ class Automation {
             $toF = $database->getVillage($data['to']);
             $fromF = $database->getVillage($data['from']);
             
+						$DefenderUnit = array();
+						$DefenderUnit = $database->getUnit($data['to']);
+						$evasion = $database->getUserField($DefenderID,"evasion",0);
+						$capital = $database->getVillageField($data['to'],"capital");
+						$playerunit = ($targettribe-1)*10;
+						$cannotsend = 0;
+						$movements = $database->getMovement("34",$data['to'],1);
+						for($y=0;$y < count($movements);$y++){
+						$returntime = $units[$y]['endtime']-time();
+						if($units[$y]['sort_type'] == 4 && $units[$y]['from'] != 0 && $returntime <= 10){
+						$cannotsend = 1;
+						}
+						}
+						if($evasion == 1 && $capital == 1 && $cannotsend == 0){
+						$totaltroops = 0;
+						for($i=1;$i<=10;$i++){
+						$playerunit += $i;
+						$data['u'.$i] = $DefenderUnit['u'.$playerunit];
+						$database->modifyUnit($data['to'],array($playerunit),array($DefenderUnit['u'.$playerunit]),array(0));
+						$playerunit -= $i;
+						$totaltroops += $data['u'.$i];
+						}
+						$data['u11'] = $DefenderUnit['hero'];
+						$totaltroops += $data['u11'];
+						if($totaltroops > 0){
+						$database->modifyUnit($data['to'],array("hero"),array($DefenderUnit['hero']),array(0));
+						$attackid = $database->addAttack($data['to'],$data['u1'],$data['u2'],$data['u3'],$data['u4'],$data['u5'],$data['u6'],$data['u7'],$data['u8'],$data['u9'],$data['u10'],$data['u11'],4,0,0,0,0,0,0,0,0,0,0,0);
+						$database->addMovement(4,0,$data['to'],$attackid,'0,0,0,0,0',time()+(180/EVASION_SPEED));
+						}
+						}
            
-            /*--------------------------------
-            // Battle part
-            --------------------------------*/
-
-                                //get defence units
-                                /*    $q = "SELECT * FROM ".TB_PREFIX."units WHERE vref='".$data['to']."'";
-                                    $unitlist = $database->query_return($q);
-
-                                    $Defender = array();
-                                                $start = ($targettribe == 1)? 1 : (($targettribe == 2)? 11: 21);
-                                                $end = ($targettribe == 1)? 10 : (($targettribe == 2)? 20: 30);
-                                        for($i=$start;$i<=$end;$i++) {
-                                                if($unitlist)
-                                                    $Defender['u'.$i] = $unitlist[0]['u'.$i];
-                                                else
-                                                    $Defender['u'.$i] = '';
-                                                }*/
                         //get defence units 
                         $Defender = array();    $rom = $ger = $gal = $nat = $natar = 0;
                         $Defender = $database->getUnit($data['to']);

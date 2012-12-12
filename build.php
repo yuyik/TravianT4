@@ -1,5 +1,5 @@
 ﻿<?php
-
+ob_start();
 include("GameEngine/Village.php");
 include("GameEngine/Units.php");
 
@@ -7,6 +7,24 @@ if(isset($_GET['newdid'])) {
 	$_SESSION['wid'] = $_GET['newdid'];
 	header("Location: ".$_SERVER['PHP_SELF'].(isset($_GET['id'])?'?id='.$_GET['id']:(isset($_GET['gid'])?'?gid='.$_GET['gid']:'')));
 }
+if($_GET['id'] == 99 && $village->natar == 0){
+header("Location: dorf2.php");
+}
+		if(isset($_GET['t'])==99 && $session->goldclub == 1) {
+
+			if($_GET['slid']) {
+			$FLData = $database->getFLData($_GET['slid']);
+			if($FLData['owner'] == $session->uid){
+			$checked[$_GET['slid']] = 1;
+			}
+			}
+			if(isset($_GET['slid']) && is_numeric($_GET['slid'])) {
+			$FLData = $database->getFLData($_GET['slid']);
+			if($FLData['owner'] == $session->uid){
+			$checked[$_GET['slid']] = 1;
+			}
+			}
+		}
 $start = $generator->pageLoadTimeStart();
 $alliance->procAlliForm($_POST);
 $technology->procTech($_POST);
@@ -66,16 +84,16 @@ include "Templates/html.tpl";
 							<a class="" href="statistiken.php" accesskey="4" title="<?php echo HEADER_STATS; ?>"></a>
 						</li>
 <?php
-    	if(count($database->getMessage($session->uid,7)) >= 1000) {
+    	if(count($database->getMessage($session->uid,9)) >= 1000) {
 			$unmsg = "+1000";
-		} else { $unmsg = count($database->getMessage($session->uid,7)); }
+		} else { $unmsg = count($database->getMessage($session->uid,9)); }
 		
-    	if(count($database->getMessage($session->uid,8)) >= 1000) {
+    	if(count($database->getNotice5($session->uid)) >= 1000) {
 			$unnotice = "+1000";
-		} else { $unnotice = count($database->getMessage($session->uid,8)); }
+		} else { $unnotice = count($database->getNotice5($session->uid)); }
 ?>
 <li id="n5" class="reports"> 
-<a href="berichte.php" accesskey="5" title="<?php echo HEADER_NOTICES; ?><?php if($message->nunread){ echo' ('.count($database->getMessage($session->uid,8)).')'; } ?>"></a>
+<a href="berichte.php" accesskey="5" title="<?php echo HEADER_NOTICES; ?><?php if($message->nunread){ echo' ('.count($database->getNotice5($session->uid)).')'; } ?>"></a>
 <?php
 if($message->nunread){
 	echo "<div class=\"ltr bubble\" title=\"".$unnotice." ".HEADER_NOTICES_NEW."\" style=\"display:block\">
@@ -86,7 +104,7 @@ if($message->nunread){
 ?>
 </li>
 <li id="n6" class="messages"> 
-<a href="nachrichten.php" accesskey="6" title="<?php echo HEADER_MESSAGES; ?><?php if($message->unread){ echo' ('.count($database->getMessage($session->uid,7)).')'; } ?>"></a> 
+<a href="nachrichten.php" accesskey="6" title="<?php echo HEADER_MESSAGES; ?><?php if($message->unread){ echo' ('.count($database->getMessage($session->uid,9)).')'; } ?>"></a> 
 <?php
 if($message->unread) {
 	echo "<div class=\"ltr bubble\" title=\"".$unmsg." ".HEADER_MESSAGES_NEW."\" style=\"display:block\">
@@ -147,8 +165,8 @@ if(isset($_GET['id'])) {
 		else {
 			include("Templates/Build/".$village->resarray['f'.$_GET['id'].'t'].".tpl");
 		}
-		if(isset($_GET['t'])==99) {
-			
+		if(isset($_GET['t'])==99 && $session->goldclub == 1) {
+
 			if($_GET['action'] == 'addList') {
 				include("Templates/goldClub/farmlist_add.tpl");
 			}
@@ -164,6 +182,22 @@ if(isset($_GET['id'])) {
 				$database->delSlotFarm($_GET['eid']);
    				header("Location: build.php?id=39&t=99");
     		}
+			if($_POST['action'] == 'startRaid'){
+			if($session->access != BANNED){
+			include ("Templates/a2b/startRaid.tpl");
+			}else{
+			header("Location: banned.php");
+			}
+			}
+		}
+		if(isset($_GET['t'])==100 && $session->goldclub == 1) {
+			if(isset($_GET['enable'])) {
+			$database->updateUserField($session->uid, "evasion", 1, 1);
+			header("Location: build.php?id=39&t=100");
+			}else if(isset($_GET['disable'])){
+			$database->updateUserField($session->uid, "evasion", 0, 1);
+			header("Location: build.php?id=39&t=100");
+			}
 		}
 	}
 }

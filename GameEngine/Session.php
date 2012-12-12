@@ -145,6 +145,7 @@
 				$this->silver = $this->userarray['silver'];
 				$this->cp = $this->userarray['cp'];
         		$this->oldrank = $this->userarray['oldrank'];
+				$this->evasion = $this->userarray['evasion'];
         		$_SESSION['ok'] = $this->userarray['ok'];
         		if($this->userarray['b1'] > $this->time) {
         			$this->bonus1 = 1;

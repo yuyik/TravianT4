@@ -96,7 +96,7 @@ if ($page <= 1 && $lastPage <= 1) {
 
 $limit = 'LIMIT ' .($page - 1) * $itemsPerPage .',' .$itemsPerPage;
 
-$sql2 = mysql_query("SELECT * FROM $prefix WHERE uid = $session->uid and archive=1 ORDER BY time DESC $limit");
+$sql2 = mysql_query("SELECT * FROM $prefix WHERE uid = $session->uid and archive=1 and del = 0 ORDER BY time DESC $limit");
 $paginationDisplay = "";
 $nextPage = $_GET['page'] + 1;
 $previous = $_GET['page'] - 1;
@@ -238,7 +238,7 @@ if($dataarray[1]){
 
     <div class="clear"></div>
 </div>
-<button name="delntc" type="submit" value="delntcntc" id="del" class="delete">
+<button name="delntc" type="submit" value="del" id="del" class="delete">
 <div class="button-container"><div class="button-position"><div class="btl"><div class="btr"><div class="btc"></div></div></div><div class="bml"><div class="bmr"><div class="bmc"></div></div></div><div class="bbl"><div class="bbr"><div class="bbc"></div></div></div></div><div class="button-contents">Delete</div></div>
 </button>
                     

@@ -36,16 +36,16 @@ include "Templates/html.tpl";
 							<a class="" href="statistiken.php" accesskey="4" title="<?php echo HEADER_STATS; ?>"></a>
 						</li>
 <?php
-    	if(count($database->getMessage($session->uid,7)) >= 1000) {
+    	if(count($database->getMessage($session->uid,9)) >= 1000) {
 			$unmsg = "+1000";
-		} else { $unmsg = count($database->getMessage($session->uid,7)); }
+		} else { $unmsg = count($database->getMessage($session->uid,9)); }
 		
-    	if(count($database->getMessage($session->uid,8)) >= 1000) {
+    	if(count($database->getNotice5($session->uid)) >= 1000) {
 			$unnotice = "+1000";
-		} else { $unnotice = count($database->getMessage($session->uid,8)); }
+		} else { $unnotice = count($database->getNotice5($session->uid)); }
 ?>
 <li id="n5" class="reports"> 
-<a href="berichte.php" accesskey="5" title="<?php echo HEADER_NOTICES; ?><?php if($message->nunread){ echo' ('.count($database->getMessage($session->uid,8)).')'; } ?>"></a>
+<a href="berichte.php" accesskey="5" title="<?php echo HEADER_NOTICES; ?><?php if($message->nunread){ echo' ('.count($database->getNotice5($session->uid)).')'; } ?>"></a>
 <?php
 if($message->nunread){
 	echo "<div class=\"ltr bubble\" title=\"".$unnotice." ".HEADER_NOTICES_NEW."\" style=\"display:block\">
@@ -56,7 +56,7 @@ if($message->nunread){
 ?>
 </li>
 <li id="n6" class="messages"> 
-<a href="nachrichten.php" accesskey="6" title="<?php echo HEADER_MESSAGES; ?><?php if($message->unread){ echo' ('.count($database->getMessage($session->uid,7)).')'; } ?>"></a> 
+<a href="nachrichten.php" accesskey="6" title="<?php echo HEADER_MESSAGES; ?><?php if($message->unread){ echo' ('.count($database->getMessage($session->uid,9)).')'; } ?>"></a> 
 <?php
 if($message->unread) {
 	echo "<div class=\"ltr bubble\" title=\"".$unmsg." ".HEADER_MESSAGES_NEW."\" style=\"display:block\">

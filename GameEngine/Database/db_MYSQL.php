@@ -978,7 +978,7 @@
         	References: 
         	*****************************************/
         	function createAlliance($tag, $name, $uid, $max) {
-        		$q = "INSERT into " . TB_PREFIX . "alidata values (0,'$name','$tag',$uid,0,0,0,'','',$max,'','','','','','','','')";
+        		$q = "INSERT into " . TB_PREFIX . "alidata values (0,'$name','$tag',$uid,0,0,0,'','',$max,'','','','','','','','','')";
         		mysql_query($q, $this->connection);
         		return mysql_insert_id($this->connection);
         	}
@@ -1258,11 +1258,6 @@
         		return mysql_query($q, $this->connection);
         	}
 			
-			function delMessage($id) {
-        		$q = "DELETE FROM " . TB_PREFIX . "mdata WHERE id = $id";
-        		return mysql_query($q, $this->connection);
-        	}
-			
 			function delNotice($id, $uid) {
         		$q = "DELETE FROM " . TB_PREFIX . "ndata WHERE id = $id AND uid = $uid";
         		return mysql_query($q, $this->connection);
@@ -1310,7 +1305,7 @@
 						$q = "UPDATE " . TB_PREFIX . "mdata set viewed = 1 where id = $id AND target = $session->uid";
 						break;
 					case 5:
-						$q = "UPDATE " . TB_PREFIX . "mdata set deltarget = 1,viewed = 1 where id = $id";
+						$q = "UPDATE " . TB_PREFIX . "mdata set deltarget = 1 ,viewed = 1 where id = $id";
 						break;
 					case 6:
 						$q = "SELECT * FROM " . TB_PREFIX . "mdata where target = $id and send = 0 and archived = 1";
@@ -1406,6 +1401,12 @@
 
 			function getNotice4($id) {
 				$q = "SELECT * FROM " . TB_PREFIX . "ndata where id = $id ORDER BY time DESC";
+				$result = mysql_query($q, $this->connection);
+				return $this->mysql_fetch_all($result);
+			}
+			
+			function getNotice5($uid) {
+				$q = "SELECT * FROM " . TB_PREFIX . "ndata where uid = $uid and viewed = 0 ORDER BY time DESC";
 				$result = mysql_query($q, $this->connection);
 				return $this->mysql_fetch_all($result);
 			}
@@ -2690,27 +2691,58 @@ break;
         		return mysql_query($q, $this->connection);
         	}
 
-        	function getOwnArtefactInfo($vref) {
-        		$q = "SELECT * FROM " . TB_PREFIX . "artefacts WHERE vref = $vref";
-        		$result = mysql_query($q, $this->connection);
-        		return mysql_fetch_array($result);
-        	}
-        	function getOwnArtefactInfoByType($vref, $type) {
-        		$q = "SELECT * FROM " . TB_PREFIX . "artefacts WHERE vref = $vref AND type = $type";
-        		$result = mysql_query($q, $this->connection);
-        		return mysql_fetch_array($result);
-        	}
-        	function getOwnUniqueArtefactInfo($id, $type, $size) {
-        		$q = "SELECT * FROM " . TB_PREFIX . "artefacts WHERE owner = $id AND type = $type AND size=$size";
-        		$result = mysql_query($q, $this->connection);
-        		return mysql_fetch_array($result);
-        	}
+			function getOwnArtefactInfo($vref) {
+				$q = "SELECT * FROM " . TB_PREFIX . "artefacts WHERE vref = $vref";
+				$result = mysql_query($q, $this->connection);
+				return mysql_fetch_array($result);
+			}
+			
+			function getOwnArtefactInfo2($vref) {
+				$q = "SELECT * FROM " . TB_PREFIX . "artefacts WHERE vref = $vref";
+				$result = mysql_query($q, $this->connection);
+				return $this->mysql_fetch_all($result);
+			}
+			
+			function getOwnArtefactInfo3($uid) {
+				$q = "SELECT * FROM " . TB_PREFIX . "artefacts WHERE owner = $uid";
+				$result = mysql_query($q, $this->connection);
+				return $this->mysql_fetch_all($result);
+			}
 
-        	function getArtefactInfo() {
-        		$q = "SELECT * FROM " . TB_PREFIX . "artefacts WHERE id > 0";
-        		$result = mysql_query($q, $this->connection);
-        		return mysql_fetch_array($result);
-        	}
+			function getOwnArtefactInfoByType($vref, $type) {
+				$q = "SELECT * FROM " . TB_PREFIX . "artefacts WHERE vref = $vref AND type = $type order by size";
+				$result = mysql_query($q, $this->connection);
+				return mysql_fetch_array($result);
+			}
+
+			function getOwnArtefactInfoByType2($vref, $type) {
+				$q = "SELECT * FROM " . TB_PREFIX . "artefacts WHERE vref = $vref AND type = $type";
+				$result = mysql_query($q, $this->connection);
+				return $this->mysql_fetch_all($result);
+			}
+
+			function getOwnUniqueArtefactInfo($id, $type, $size) {
+				$q = "SELECT * FROM " . TB_PREFIX . "artefacts WHERE owner = $id AND type = $type AND size=$size";
+				$result = mysql_query($q, $this->connection);
+				return mysql_fetch_array($result);
+			}
+
+			function getOwnUniqueArtefactInfo2($id, $type, $size, $mode) {
+			if(!$mode){
+				$q = "SELECT * FROM " . TB_PREFIX . "artefacts WHERE owner = $id AND active = 1 AND type = $type AND size=$size";
+			}else{
+				$q = "SELECT * FROM " . TB_PREFIX . "artefacts WHERE vref = $id AND active = 1 AND type = $type AND size=$size";
+			}
+				$result = mysql_query($q, $this->connection);
+				return $this->mysql_fetch_all($result);
+			}
+
+			function getFoolArtefactInfo($type,$vid,$uid) {
+				$q = "SELECT * FROM " . TB_PREFIX . "artefacts WHERE vref = $vid AND type = 8 AND kind = $type OR owner = $uid AND size > 1 AND active = 1 AND type = 8 AND kind = $type";
+				$result = mysql_query($q, $this->connection);
+				return $this->mysql_fetch_all($result);
+			}
+
         	function claimArtefact($vref, $ovref, $id) {
         		$time = time();
         		$q = "UPDATE " . TB_PREFIX . "artefacts SET vref = $vref, owner = $id WHERE vref = $ovref";

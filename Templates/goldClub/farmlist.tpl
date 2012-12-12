@@ -17,7 +17,7 @@ while($row = mysql_fetch_array($sql)){
     if($lwref == $village->wid){
 ?>
 <div id="list<?php echo $lid; ?>" class="listEntry">
-				<form action="startRaid.php?id=39&t=99&action=startRaid" method="post">
+				<form action="build.php?id=39&t=99&action=startRaid" method="post">
 					<input type="hidden" name="action" value="startRaid">
 					<input type="hidden" name="a" value="c35">
 					<input type="hidden" name="sort" value="distance">
@@ -80,8 +80,11 @@ $vdata = $database->getVillage($towref);
 ?>
 <tr class="slotRow">
 <td class="checkbox">
-
-				<input id="slot<?php echo $id; ?>" name="slot[<?php echo $id; ?>]" type="checkbox" class="markSlot" onclick="Travian.Game.RaidList.markSlotForRaid(<?php echo $lid; ?>, <?php echo $id; ?>, this.checked);">
+				<?php if($checked[$lid] == 0){ ?>
+                <input id="slot<?php echo $id; ?>" name="slot<?php echo $id; ?>" type="checkbox" class="markSlot" onclick="Travian.Game.RaidList.markSlotForRaid(<?php echo $lid; ?>, <?php echo $id; ?>, this.checked);">
+				<?php }else{ ?>
+                <input id="slot<?php echo $id; ?>" name="slot<?php echo $id; ?>" type="checkbox" class="markSlot" checked>
+				<?php } ?>
 			</td>
 			<td class="village">
             <?php
@@ -237,10 +240,14 @@ while($row2 = mysql_fetch_array($getnotice)){
 	
 </tbody>
 	</table>
-	<div class="markAll">
-		<input type="checkbox" id="raidListMarkAll<?php echo $lid; ?>" class="markAll" onclick="Travian.Game.RaidList.markAllSlotsOfAListForRaid(<?php echo $lid; ?>, this.checked);">
-		<label for="raidListMarkAll<?php echo $lid; ?>">Select All</label>
-	</div>
+    <div class="markAll">
+		<?php if($checked[$lid] == 0){ ?>
+		<input type="checkbox" id="raidListMarkAll<?php echo $lid; ?>" class="markAll" onclick="window.location.href = '?gid=16&t=99&slid=<?php echo $lid; ?>';">
+		<?php }else{ ?>
+        <input type="checkbox" id="raidListMarkAll<?php echo $lid; ?>" class="markAll" onclick="window.location.href = '?gid=16&t=99';" checked>
+		<?php } ?>
+        <label for="raidListMarkAll<?php echo $lid; ?>">Select All</label>
+    </div>
 
 	<div class="addSlot">
 		<button type="button" value="افزودن" onclick="Travian.Game.RaidList.addSlot(<?php echo $lid; ?>);"><div class="button-container"><div class="button-position"><div class="btl"><div class="btr"><div class="btc"></div></div></div><div class="bml"><div class="bmr"><div class="bmc"></div></div></div><div class="bbl"><div class="bbr"><div class="bbc"></div></div></div></div><div class="button-contents">Add Raid</div></div></button>	</div>

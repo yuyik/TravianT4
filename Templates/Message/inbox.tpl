@@ -93,7 +93,7 @@ if ($page <= 1 && $lastPage <= 1) {
 
 
 $limit = 'LIMIT ' .($page - 1) * $itemsPerPage .',' .$itemsPerPage; 
-$sql2 = mysql_query("SELECT * FROM $prefix WHERE target = $session->uid AND archived = 0 ORDER BY time DESC $limit");
+$sql2 = mysql_query("SELECT * FROM $prefix WHERE target = $session->uid AND archived = 0 AND deltarget = 0 ORDER BY time DESC $limit");
 $paginationDisplay = "";
 $nextPage = $_GET['page'] + 1;
 $previous = $_GET['page'] - 1;
@@ -226,7 +226,8 @@ while($row = mysql_fetch_array($sql2)){
 <?php if($session->plus) { ?>
 <button name="archive" type="submit" value="archive" id="archive" class="delete">
 <div class="button-container"><div class="button-position"><div class="btl"><div class="btr"><div class="btc"></div></div></div><div class="bml"><div class="bmr"><div class="bmc"></div></div></div><div class="bbl"><div class="bbr"><div class="bbc"></div></div></div></div><div class="button-contents">Archive</div></div>
-</button><input name="ft" value="m3" type="hidden" />
+</button>
 <?php }  } ?>
+<input name="ft" value="m3" type="hidden" />
 
 </form>

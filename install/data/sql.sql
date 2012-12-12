@@ -1519,6 +1519,7 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%users` (
   `friend17wait` int(11) unsigned NOT NULL,
   `friend18wait` int(11) unsigned NOT NULL,
   `friend19wait` int(11) unsigned NOT NULL,
+  `evasion` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
@@ -1561,7 +1562,6 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%vdata` (
   `natar` tinyint(1) unsigned NOT NULL,
   `starv` int(11) unsigned NOT NULL,
   `starvupdate` int(11) unsigned NOT NULL,
-  `evasion` tinyint(1) unsigned NOT NULL,
   PRIMARY KEY (`wref`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 

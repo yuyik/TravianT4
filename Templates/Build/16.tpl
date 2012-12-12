@@ -29,6 +29,13 @@ Your village's troops meet here. From here you can send them out to conquer, rai
 					<div class="background-end">&nbsp;</div>
 					<div class="content"><a href="build.php?id=39&amp;t=99"><span class="tabItem">Farm list</span></a></div>
 				</div>
+				<?php if($session->goldclub==1){ ?>
+                <div class="container noraml">
+					<div class="background-start">&nbsp;</div>
+					<div class="background-end">&nbsp;</div>
+					<div class="content"><a href="build.php?id=39&amp;t=100"><span class="tabItem">Gold Club</span></a></div>
+				</div>
+				<?php } ?>
 </div>
 
 <?php
