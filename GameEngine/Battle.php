@@ -167,14 +167,23 @@ class Battle {
         
         //exit($type);
 
-        if ($Attacker['hero'] != 0) $atkhero = $database->getHeroData($Attacker['id']);
-		if ($Defender['hero'] != 0) $defhero = $database->getHeroData($Defender['id']);
+        if ($Attacker['hero'] != 0) $atkhero = $database->getHeroData2($Attacker['id']);
+		if ($Defender['hero'] != 0) $defenderhero = $database->getHeroData3($Defender['id']);
+		$DefendersAll = $database->getEnforceVillage($DefenderWref,0);
+		if(!empty($DefendersAll)){
+		foreach($DefendersAll as $defenders) {
+		$fromvillage = $defenders['from'];
+		$reinfowner = $database->getVillageField($fromvillage,"owner");
+		$defhero[$fromvillage] = $database->getHeroData2($reinfowner);
+		}
+		}
         //
         // Berekenen het totaal aantal punten van Aanvaller
         //
         $start = ($att_tribe-1)*10+1;
         $end = ($att_tribe*10);
-
+		if($att_tribe == 1){$atp == 100;}else{$atp ==80;}
+		if($def_tribe == 1){$dtp == 100;}else{$dtp ==80;}
 		$abcount = 1;
 
 		if($type == 1){
@@ -190,7 +199,7 @@ class Battle {
 			}
 			
 			if($Attacker['hero']){
-				$ap += $atkhero['power'] + $atkhero['offBonus'];
+				$ap += (100+$atp*$atkhero['power']+$atkhero['itempower']) + $atkhero['offBonus'];
 				$units['Att_unit']['hero'] = $Attacker['hero'];
 			}
 			
@@ -226,8 +235,8 @@ class Battle {
             }
 			
 			if($Attacker['hero']) {
-				$cap += $atkhero['power'] + ($atkhero['power'] + 300 * 6 / 7) * (pow(1.007, $atkhero['offBonus']) - 1);
-				$ap += $atkhero['power'] + ($atkhero['power'] + 300 * 6 / 7) * (pow(1.007, $atkhero['offBonus']) - 1);
+				$cap += (100+$atp*$atkhero['power']+$atkhero['itempower']) + ((100+$atp*$atkhero['power']+$atkhero['itempower']) + 300 * 6 / 7) * (pow(1.007, $atkhero['offBonus']) - 1);
+				$ap += (100+$atp*$atkhero['power']+$atkhero['itempower']) + ((100+$atp*$atkhero['power']+$atkhero['itempower']) + 300 * 6 / 7) * (pow(1.007, $atkhero['offBonus']) - 1);
 			}
 			$involve += $Attacker['hero']; 
             $units['Att_unit']['hero'] = $Attacker['hero'];
@@ -253,8 +262,15 @@ class Battle {
 				}
 			}
 			if($Defender['hero']){
-				$dp +=  ($defhero['power'] + ($defhero['power'] + 300 * 6 / 7) * (pow(1.007, $defhero['defBonus']) - 1));
+				$dp +=  ((100+$dtp*(100+$dtp*(100+$dtp*$defenderhero['power']+$defenderhero['itempower'])+$defenderhero['itempower'])+$defenderhero['itempower']) + ((100+$dtp*(100+$dtp*$defenderhero['power']+$defenderhero['itempower'])+$defenderhero['itempower']) + 300 * 6 / 7) * (pow(1.007, $defenderhero['defBonus']) - 1));
 			}
+				$DefendersAll = $database->getEnforceVillage($DefenderWref,0);
+				if(!empty($DefendersAll)){
+				foreach($DefendersAll as $defenders) {
+				$fromvillage = $defenders['from'];
+				$dp +=  ((100+$dtp*(100+$dtp*(100+$dtp*$defhero[$fromvillage]['power']+$defhero[$fromvillage]['itempower'])+$defhero[$fromvillage]['itempower'])+$defhero[$fromvillage]['itempower']) + ((100+$dtp*(100+$dtp*$defhero[$fromvillage]['power']+$defhero[$fromvillage]['itempower'])+$defhero[$fromvillage]['itempower']) + 300 * 6 / 7) * (pow(1.007, $defhero[$fromvillage]['defBonus']) - 1));
+				}
+				}
 			$units['Def_unit']['hero'] = $Defender['hero'];
 		}else{
 			for($y=1;$y<=50;$y++) {
@@ -271,9 +287,17 @@ class Battle {
 				$units['Def_unit'][$y] = $Defender['u'.$y];
 			}
 			if($Defender['hero']){
-				$dp +=  ($defhero['power'] + ($defhero['power'] + 300 * 6 / 7) * (pow(1.007, $defhero['defBonus']) - 1));
-				$cdp += ($defhero['power'] + ($defhero['power'] + 300 * 6 / 7) * (pow(1.007, $defhero['defBonus']) - 1));
+				$dp +=  ((100+$dtp*(100+$dtp*$defenderhero['power']+$defenderhero['itempower'])+$defenderhero['itempower']) + ((100+$dtp*(100+$dtp*$defenderhero['power']+$defenderhero['itempower'])+$defenderhero['itempower']) + 300 * 6 / 7) * (pow(1.007, $defenderhero['defBonus']) - 1));
+				$cdp += ((100+$dtp*(100+$dtp*$defenderhero['power']+$defenderhero['itempower'])+$defenderhero['itempower']) + ((100+$dtp*(100+$dtp*$defenderhero['power']+$defenderhero['itempower'])+$defenderhero['itempower']) + 300 * 6 / 7) * (pow(1.007, $defenderhero['defBonus']) - 1));
 			}
+				$DefendersAll = $database->getEnforceVillage($DefenderWref,0);
+				if(!empty($DefendersAll)){
+				foreach($DefendersAll as $defenders) {
+				$fromvillage = $defenders['from'];
+				$dp +=  ((100+$dtp*(100+$dtp*$defhero[$fromvillage]['power']+$defhero[$fromvillage]['itempower'])+$defhero[$fromvillage]['itempower']) + ((100+$dtp*(100+$dtp*$defhero[$fromvillage]['power']+$defhero[$fromvillage]['itempower'])+$defhero[$fromvillage]['itempower']) + 300 * 6 / 7) * (pow(1.007, $defhero[$fromvillage]['defBonus']) - 1));
+				$cdp += ((100+$dtp*(100+$dtp*$defhero[$fromvillage]['power']+$defhero[$fromvillage]['itempower'])+$defhero[$fromvillage]['itempower']) + ((100+$dtp*(100+$dtp*$defhero[$fromvillage]['power']+$defhero[$fromvillage]['itempower'])+$defhero[$fromvillage]['itempower']) + 300 * 6 / 7) * (pow(1.007, $defhero[$fromvillage]['defBonus']) - 1));
+				}
+				}
 			$involve += $Defender['hero']; 
 			$units['Def_unit']['hero'] = $Defender['hero'];
 		}
@@ -458,20 +482,46 @@ class Battle {
         }
 		
 		if ($units['Def_unit']['hero']>0){
-            $hero_id=$defhero['uid'];
-            $hero_health=$defhero['health'];
+            $hero_id=$defenderhero['uid'];
+            $hero_health=$defenderhero['health'];
             $damage_health=round(100*$result[2]);
             if ($hero_health<=$damage_health){
                 //hero die
+				$result['deadherodef'] = 1;
 				$database->modifyHero2('dead', 1, $hero_id, 0);
 				$database->modifyHero2('health', 0, $hero_id, 0);
 				$database->modifyHero2('experience', $result[2], $hero_id, 1);
-				mysql_query("UPDATE " . TB_PREFIX . "units SET `hero` = 0 WHERE `vref`='".$defhero['wref']."'");
+				mysql_query("UPDATE " . TB_PREFIX . "units SET `hero` = 0 WHERE `vref`='".$defenderhero['wref']."'");
             }else{
+				$result['deadherodef'] = 0;
 				$database->modifyHero2('health', $damage_health, $hero_id, 2);
 				$database->modifyHero2('experience', $result[1], $hero_id, 1);
             }
         }
+
+		$DefendersAll = $database->getEnforceVillage($DefenderWref,0);
+		if(!empty($DefendersAll)){
+			foreach($DefendersAll as $defenders) {
+				if($defenders['hero']>0) {
+					$fromvillage = $defenders['from'];
+					$hero_id = $defhero[$fromvillage]['uid'];
+					$hero_health = $defhero[$fromvillage]['health'];
+					$damage_health = round(100*$result[2]);
+					if ($hero_health<=$damage_health){
+						//hero die
+						$result['deadheroref'][$defenders['id']] = 1;
+						$database->modifyHero2('dead', 1, $hero_id, 0);
+						$database->modifyHero2('health', 0, $hero_id, 0);
+						$database->modifyHero2('experience', $result[2], $hero_id, 1);
+						mysql_query("UPDATE " . TB_PREFIX . "units SET `hero` = 0 WHERE `vref`='".$defhero[$fromvillage]['wref']."'");
+					}else{
+						$result['deadheroref'][$defenders['id']] = 0;
+						$database->modifyHero2('health', $damage_health, $hero_id, 2);
+						$database->modifyHero2('experience', $result[1], $hero_id, 1);
+					}
+				}
+			}
+		}
         //exit($result['casualties_attacker']['11']);
         
 

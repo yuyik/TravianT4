@@ -3205,6 +3205,18 @@ break;
 				return mysql_fetch_array($result);
         	}
 			
+			function getHeroData2($uid) {
+        		$q = "SELECT * FROM " . TB_PREFIX . "hero WHERE dead = 0 and uid = $uid";
+        		$result = mysql_query($q, $this->connection);
+				return mysql_fetch_array($result);
+        	}
+			
+			function getHeroData3($uid) {
+        		$q = "SELECT * FROM " . TB_PREFIX . "hero WHERE dead = 0 and hide = 0 and uid = $uid";
+        		$result = mysql_query($q, $this->connection);
+				return mysql_fetch_array($result);
+        	}
+			
 			function getFLData($id) {
         		$q = "SELECT * FROM " . TB_PREFIX . "farmlist where id = $id";
         		$result = mysql_query($q, $this->connection);

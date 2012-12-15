@@ -907,7 +907,7 @@ class Automation {
                                 for($i=1;$i<=50;$i++) {
                                     $Defender['u'.$i] += $enforce['u'.$i];
                                 }
-									$Defender['hero'] += $enforce['hero'];
+									$DefenderHeroRef += $enforce['hero'];
                             }
                         }
                             for($i=1;$i<=50;$i++){
@@ -1070,7 +1070,7 @@ class Automation {
                                 for($i=1;$i<=50;$i++) {
                                     $Defender['u'.$i] += $enforce['u'.$i];
                                 }
-									$Defender['hero'] += $enforce['hero'];
+									$DefenderHeroRef += $enforce['hero'];
                             }
                         }
                             for($i=1;$i<=50;$i++){
@@ -1179,24 +1179,24 @@ class Automation {
                                         $stonemason = "1";
    
         }
-            $battlepart = $battle->calculateBattle($Attacker,$Defender,$def_wall,$att_tribe,$def_tribe,$residence,$attpop,$defpop,$type,$def_ab,$att_ab,$tblevel,$stonemason,$walllevel,$AttackerID,$DefenderID);
-            $hidehero = $database->getHeroData($DefenderID);
+		    $hidehero = $database->getHeroData($DefenderID);
 			if($hidehero['hide'] == 1){
 			$Defender['hero'] = 0;
 			}
+            $battlepart = $battle->calculateBattle($Attacker,$Defender,$def_wall,$att_tribe,$def_tribe,$residence,$attpop,$defpop,$type,$def_ab,$att_ab,$tblevel,$stonemason,$walllevel,$AttackerID,$DefenderID);
             //units attack string for battleraport
             $unitssend_att = ''.$data['t1'].','.$data['t2'].','.$data['t3'].','.$data['t4'].','.$data['t5'].','.$data['t6'].','.$data['t7'].','.$data['t8'].','.$data['t9'].','.$data['t10'].','.$data['t11'].'';
             
             //units defence string for battleraport 
-                $unitssend_def[1] = ''.$Defender['u1'].','.$Defender['u2'].','.$Defender['u3'].','.$Defender['u4'].','.$Defender['u5'].','.$Defender['u6'].','.$Defender['u7'].','.$Defender['u8'].','.$Defender['u9'].','.$Defender['u10'].','.$Defender['hero'].'';
+                $unitssend_def[1] = ''.$Defender['u1'].','.$Defender['u2'].','.$Defender['u3'].','.$Defender['u4'].','.$Defender['u5'].','.$Defender['u6'].','.$Defender['u7'].','.$Defender['u8'].','.$Defender['u9'].','.$Defender['u10'].','.($Defender['hero']+$DefenderHeroRef).'';
 				
-                $unitssend_def[2] = ''.$Defender['u11'].','.$Defender['u12'].','.$Defender['u13'].','.$Defender['u14'].','.$Defender['u15'].','.$Defender['u16'].','.$Defender['u17'].','.$Defender['u18'].','.$Defender['u19'].','.$Defender['u20'].','.$Defender['hero'].'';
+                $unitssend_def[2] = ''.$Defender['u11'].','.$Defender['u12'].','.$Defender['u13'].','.$Defender['u14'].','.$Defender['u15'].','.$Defender['u16'].','.$Defender['u17'].','.$Defender['u18'].','.$Defender['u19'].','.$Defender['u20'].','.($Defender['hero']+$DefenderHeroRef).'';
 				
-                $unitssend_def[3] = ''.$Defender['u21'].','.$Defender['u22'].','.$Defender['u23'].','.$Defender['u24'].','.$Defender['u25'].','.$Defender['u26'].','.$Defender['u27'].','.$Defender['u28'].','.$Defender['u29'].','.$Defender['u30'].','.$Defender['hero'].'';
+                $unitssend_def[3] = ''.$Defender['u21'].','.$Defender['u22'].','.$Defender['u23'].','.$Defender['u24'].','.$Defender['u25'].','.$Defender['u26'].','.$Defender['u27'].','.$Defender['u28'].','.$Defender['u29'].','.$Defender['u30'].','.($Defender['hero']+$DefenderHeroRef).'';
 				
-                $unitssend_def[4] = ''.$Defender['u31'].','.$Defender['u32'].','.$Defender['u33'].','.$Defender['u34'].','.$Defender['u35'].','.$Defender['u36'].','.$Defender['u37'].','.$Defender['u38'].','.$Defender['u39'].','.$Defender['u40'].','.$Defender['hero'].'';
+                $unitssend_def[4] = ''.$Defender['u31'].','.$Defender['u32'].','.$Defender['u33'].','.$Defender['u34'].','.$Defender['u35'].','.$Defender['u36'].','.$Defender['u37'].','.$Defender['u38'].','.$Defender['u39'].','.$Defender['u40'].','.($Defender['hero']+$DefenderHeroRef).'';
 				
-                $unitssend_def[5] = ''.$Defender['u41'].','.$Defender['u42'].','.$Defender['u43'].','.$Defender['u44'].','.$Defender['u45'].','.$Defender['u46'].','.$Defender['u47'].','.$Defender['u48'].','.$Defender['u49'].','.$Defender['u50'].','.$Defender['hero'].'';
+                $unitssend_def[5] = ''.$Defender['u41'].','.$Defender['u42'].','.$Defender['u43'].','.$Defender['u44'].','.$Defender['u45'].','.$Defender['u46'].','.$Defender['u47'].','.$Defender['u48'].','.$Defender['u49'].','.$Defender['u50'].','.($Defender['hero']+$DefenderHeroRef).'';
                 $unitssend_deff[1] = '?,?,?,?,?,?,?,?,?,?,?,'; 
                 $unitssend_deff[2] = '?,?,?,?,?,?,?,?,?,?,?,'; 
                 $unitssend_deff[3] = '?,?,?,?,?,?,?,?,?,?,?,'; 
@@ -1228,9 +1228,10 @@ class Automation {
 					$database->modifyUnit($data['to'],$i,round($battlepart[2]*$unitlist[0]['u'.$i]),0);
 				}
 			}
-			if($unitlist['hero']){
-				$dead['hero'] += round($battlepart[2] * $unitlist[0]['hero']);
-				$database->modifyUnit($data['to'],'hero',round($battlepart[2]*$unitlist[0]['hero']),0);
+			$dead['hero'] = 0;
+			if($unitlist){
+				$dead['hero'] += $battlepart['deadherodef'];
+				$database->modifyUnit($data['to'],'hero',$battlepart['deadherodef'],0);
 			}
 			
 			
@@ -1329,9 +1330,17 @@ class Automation {
             
             //top 10 attack and defence update
             $totaldead_att = $dead1+$dead2+$dead3+$dead4+$dead5+$dead6+$dead7+$dead8+$dead9+$dead10+$dead11;
+			
+			for($i=1;$i<=50;$i++) {
+            	$totalsend_def += $Defender[''.$i.''];
+            }
+				$totalsend_def += $Defender['hero'];
+
             for($i=1;$i<=50;$i++) {
             	$totaldead_def += $dead[''.$i.''];
             }
+				$totaldead_def += $dead['hero'];
+
             $database->modifyPoints($toF['owner'],'dpall',$totaldead_att );
             $database->modifyPoints($from['owner'],'apall',$totaldead_def);
             $database->modifyPoints($toF['owner'],'dp',$totaldead_att );
@@ -2193,7 +2202,7 @@ $info_cata=" از سطح <b>".$tblevel."</b> به سطح <b>".$totallvl."</b> آ
                 for($i=1;$i<=11;$i++){
                     if($battlepart['casualties_attacker'][$i]){
 						$toAlly = $database->getUserField($to['owner'],'alliance',0);
-                        $database->addNotice($to['owner'],$to['wref'],$toAlly,0,''.addslashes($from['name']).' از '.addslashes($to['name']).' جاسوسی ﻣﻰﻛﻨﺪ',$data2,$AttackArrivalTime);
+                        $database->addNotice($to['owner'],$to['wref'],$toAlly,0,''.addslashes($from['name']).' scouts '.addslashes($to['name']).'',$data2,$AttackArrivalTime);
                         break;
                     }
                 }
@@ -2203,15 +2212,19 @@ $info_cata=" از سطح <b>".$tblevel."</b> به سطح <b>".$totallvl."</b> آ
 					$toAlly = $database->getUserField($to['owner'],'alliance',0);
 					for($i=1;$i<=50;$i++){ if($getu['u'.$i]!=0){ $eee = $getu['u'.$i]; } }
 					if($eee==0){
-						$database->addNotice($to['owner'],$to['wref'],$toAlly,7,''.addslashes($from['name']).' به '.addslashes($to['name']).' حمله ﻣﻰﻛﻨﺪ',$data2,$AttackArrivalTime);
+						$database->addNotice($to['owner'],$to['wref'],$toAlly,7,''.addslashes($from['name']).' attacks '.addslashes($to['name']).'',$data2,$AttackArrivalTime);
 					}else{
-						$database->addNotice($to['owner'],$to['wref'],$toAlly,4,''.addslashes($from['name']).' به '.addslashes($to['name']).' حمله ﻣﻰﻛﻨﺪ',$data2,$AttackArrivalTime);
+						$database->addNotice($to['owner'],$to['wref'],$toAlly,4,''.addslashes($from['name']).' attacks '.addslashes($to['name']).'',$data2,$AttackArrivalTime);
 					}
 					
             	} else {
 					$toAlly = $database->getUserField($to['owner'],'alliance',0);
-            		$database->addNotice($to['owner'],$to['wref'],$toAlly,5,''.addslashes($from['name']).' به '.addslashes($to['name']).' حمله ﻣﻰﻛﻨﺪ',$data2,$AttackArrivalTime);
-                }
+					if($totalsend_def > $totaldead_def){
+            		$database->addNotice($to['owner'],$to['wref'],$toAlly,5,''.addslashes($from['name']).' attacks '.addslashes($to['name']).'',$data2,$AttackArrivalTime);
+					}else{
+					$database->addNotice($to['owner'],$to['wref'],$toAlly,6,''.addslashes($from['name']).' attacks '.addslashes($to['name']).'',$data2,$AttackArrivalTime);
+					}
+				}
             }    
             //to here
             
@@ -2222,14 +2235,14 @@ $info_cata=" از سطح <b>".$tblevel."</b> به سطح <b>".$totallvl."</b> آ
                 //$endtime = $this->procDistanceTime($from,$to,min($speeds),1) + time();
                 if($type == 1) {
 					$fromAlly = $database->getUserField($from['owner'],'alliance',0);
-                    $database->addNotice($from['owner'],$to['wref'],$fromAlly,0,''.addslashes($from['name']).' از '.addslashes($to['name']).' جاسوسی ﻣﻰﻛﻨﺪ',$data2,$AttackArrivalTime);
+                    $database->addNotice($from['owner'],$to['wref'],$fromAlly,0,''.addslashes($from['name']).' scouts '.addslashes($to['name']).'',$data2,$AttackArrivalTime);
                 }else {
                     if ($totaldead_att == 0){
 					$fromAlly = $database->getUserField($from['owner'],'alliance',0);
-                    $database->addNotice($from['owner'],$to['wref'],$fromAlly,1,''.addslashes($from['name']).' به '.addslashes($to['name']).' حمله ﻣﻰﻛﻨﺪ',$data2,$AttackArrivalTime);
+                    $database->addNotice($from['owner'],$to['wref'],$fromAlly,1,''.addslashes($from['name']).' attacks '.addslashes($to['name']).'',$data2,$AttackArrivalTime);
                     }else{ 
 					$fromAlly = $database->getUserField($from['owner'],'alliance',0);
-                    $database->addNotice($from['owner'],$to['wref'],$fromAlly,2,''.addslashes($from['name']).' به '.addslashes($to['name']).' حمله ﻣﻰﻛﻨﺪ',$data2,$AttackArrivalTime);
+                    $database->addNotice($from['owner'],$to['wref'],$fromAlly,2,''.addslashes($from['name']).' attacks '.addslashes($to['name']).'',$data2,$AttackArrivalTime);
                     }       
                 }
                 
@@ -2260,10 +2273,10 @@ $info_cata=" از سطح <b>".$tblevel."</b> به سطح <b>".$totallvl."</b> آ
                 $database->setMovementProc($data['moveid']);
                 if($type == 1){
 					$fromAlly = $database->getUserField($from['owner'],'alliance',0);
-                    $database->addNotice($from['owner'],$to['wref'],$fromAlly,0,''.addslashes($from['name']).' از '.addslashes($to['name']).' جاسوسی ﻣﻰﻛﻨﺪ',$data_fail,$AttackArrivalTime);
+                    $database->addNotice($from['owner'],$to['wref'],$fromAlly,0,''.addslashes($from['name']).' scouts '.addslashes($to['name']).'',$data_fail,$AttackArrivalTime);
                 }else{
 					$fromAlly = $database->getUserField($from['owner'],'alliance',0);
-                    $database->addNotice($from['owner'],$to['wref'],$fromAlly,3,''.addslashes($from['name']).' به '.addslashes($to['name']).' حمله ﻣﻰﻛﻨﺪ  ',$data_fail,$AttackArrivalTime); 
+                    $database->addNotice($from['owner'],$to['wref'],$fromAlly,3,''.addslashes($from['name']).' attacks '.addslashes($to['name']).'',$data_fail,$AttackArrivalTime); 
                     }
             }
 
@@ -2343,10 +2356,10 @@ $info_cata=" از سطح <b>".$tblevel."</b> به سطح <b>".$totallvl."</b> آ
             $unitssend_att = ''.$data['t1'].','.$data['t2'].','.$data['t3'].','.$data['t4'].','.$data['t5'].','.$data['t6'].','.$data['t7'].','.$data['t8'].','.$data['t9'].','.$data['t10'].','.$data['t11'].'';
             $data_fail = ''.$from['wref'].','.$from['owner'].','.$owntribe.','.$unitssend_att.','.$to['wref'].','.$to['owner'].'';
 			$fromAlly = $database->getUserField($from['owner'],'alliance',0);
-            $database->addNotice($from['owner'],$to['wref'],$fromAlly,8,''.addslashes($from['name']).' به دهکده‌ی '.addslashes($to['name']).' نیرو می فرستد',$data_fail,$AttackArrivalTime);
+            $database->addNotice($from['owner'],$to['wref'],$fromAlly,8,''.addslashes($from['name']).' reinforcement '.addslashes($to['name']).'',$data_fail,$AttackArrivalTime);
 			if($from['owner'] != $to['owner']) {
 				$toAlly = $database->getUserField($from['owner'],'alliance',0);
-				$database->addNotice($to['owner'],$to['wref'],$toAlly,8,''.addslashes($from['name']).' به دهکده‌ی '.addslashes($to['name']).' نیرو می فرستد',$data_fail,$AttackArrivalTime);
+				$database->addNotice($to['owner'],$to['wref'],$toAlly,8,''.addslashes($from['name']).' reinforcement '.addslashes($to['name']).'',$data_fail,$AttackArrivalTime);
 			}
             //update status
             $database->setMovementProc($data['moveid']); 
