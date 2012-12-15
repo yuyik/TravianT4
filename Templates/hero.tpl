@@ -165,13 +165,14 @@ $checkT = $database->getHeroTrain($hero['wref']);
 
 if(!$checkT){
     if($village->awood < $tt2[$hero['level']]['wood'] || $village->aclay < $tt2[$hero['level']]['clay'] || $village->airon < $tt2[$hero['level']]['iron'] || $village->acrop < $tt2[$hero['level']]['crop']){
-    	echo '<span class="none">Nincs elég nyersanyag a hős Reviveéhez</span>';
+    	echo '<span class="none">Not enought resources for hero revive</span>';
     }else{
-        echo "<span class=\"regeneratebtn\"><button type=\"submit\" value=\"Revive\" onclick=\"window.location.href = 'hero_inventory.php?r=1'; return false;\" name=\"save\" id=\"save\"><div class=\"button-container\"><div class=\"button-position\"><div class=\"btl\"><div class=\"btr\"><div class=\"btc\"></div></div></div><div class=\"bml\"><div class=\"bmr\"><div class=\"bmc\"></div></div></div><div class=\"bbl\"><div class=\"bbr\"><div class=\"bbc\"></div></div></div></div><div class=\"button-contents\">Revive</div></div></button></span>";
+        echo "<span class=\"regeneratebtn\"><button type=\"submit\" value=\"Revive\" onclick=\"window.location.href = 'hero_inventory.php?revive=1'; return false;\" name=\"save\" id=\"save\"><div class=\"button-container\"><div class=\"button-position\"><div class=\"btl\"><div class=\"btr\"><div class=\"btc\"></div></div></div><div class=\"bml\"><div class=\"bmr\"><div class=\"bmc\"></div></div></div><div class=\"bbl\"><div class=\"bbr\"><div class=\"bbc\"></div></div></div></div><div class=\"button-contents\">Revive</div></div></button></span>";
     }
 }else{
-	echo "Hero will be ready in <span id='timer1'>".$generator->getTimeFormat($checkT['eachtime']-time())."</span>";
+	echo "Hero will be ready in <span id='timer1'>".$generator->getTimeFormat($checkT['eachtime']-time())."</span></br>";
 }
+if(!$checkT){
     ?>
         <div class="regenerateCosts">
         	<div class="showCosts">
@@ -205,7 +206,7 @@ if(!$checkT){
             </div>
         </div>
         <div class="clear"></div>
-<?php } ?>
+<?php }} ?>
 		</div>
 
 		<div class="clear"></div>
@@ -251,7 +252,7 @@ if(!$checkT){
 
 <?php
 $heroid = $hero['heroid'];
-if(isset($_GET['r'])==1){
+if(isset($_GET['revive'])==1){
 	if($tribe==1){
 		$each = (time() + ($hero_t1[$hero['level']]['time']/SPEED*1.5));
 	}elseif($tribe==2){
@@ -260,7 +261,7 @@ if(isset($_GET['r'])==1){
 		$each = (time() + ($hero_t3[$hero['level']]['time']/SPEED*1.5));
 	}
 	$database->trainHero($village->wid, $each, 0);
-	$database->modifyResource($village->wid,$hwood,$hclay,$hiron,$hcrop,0);
+	$database->modifyResource($village->wid,$hero_t[$hero['level']]['wood'],$hero_t[$hero['level']]['clay'],$hero_t[$hero['level']]['iron'],$hero_t[$hero['level']]['crop'],0);
     $database->modifyHero2('wref', $village->wid, $session->uid, 0);
     header("Location: hero_inventory.php");
 }

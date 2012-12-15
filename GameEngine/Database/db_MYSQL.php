@@ -2174,7 +2174,7 @@
 			function trainHero($vid, $each, $mode) {
         		if(!$mode) {
         			$time = time();
-        			$q = "INSERT INTO " . TB_PREFIX . "training values (0,$vid,0,1,6,$time,$each,$time)";
+        			$q = "INSERT INTO " . TB_PREFIX . "training values (0,$vid,0,1,6,$time,$each,$each)";
         		} else {
         			$q = "DELETE FROM " . TB_PREFIX . "training where id = $vid";
         		}
