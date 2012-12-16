@@ -101,15 +101,12 @@ class Generator {
 			break;
 		}*/
 		$today = date('d',time())-1;
-		$todayy = date('d',time())-2;
 		
 		if (date('Y/m/d',time()) == date('Y/m/d',$time)) {
 		//if ((time()-$time) < 24*60*60 && (time()-$time) > 0) {
-			$day = "Ma";
+			$day = "today";
 		}elseif($today == date('d',$time)){
-			$day = "Tegnap";
-		}elseif($todayy == date('d',$time)){
-			$day = "Tegnapelőtt";
+			$day = "yesterday";
 		}
 		else {
 			$pref = 3;
