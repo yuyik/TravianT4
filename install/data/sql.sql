@@ -1116,6 +1116,7 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%movement` (
   `from` int(11) unsigned NOT NULL DEFAULT '0',
   `to` int(11) unsigned NOT NULL DEFAULT '0',
   `ref` int(11) unsigned NOT NULL DEFAULT '0',
+  `ref2` int(11) unsigned NOT NULL DEFAULT '0',
   `data` text NOT NULL,
   `endtime` int(11) unsigned NOT NULL DEFAULT '0',
   `proc` tinyint(1) unsigned NOT NULL DEFAULT '0',
