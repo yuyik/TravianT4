@@ -78,13 +78,13 @@ if($village->resarray['f39'] >= 5){
 	} 
 }elseif ($units[$y]['sort_type']==4){
 	if ($units[$y]['attack_type']==1){
-		$actionType = "Visszatérés ";
+		$actionType = "Return to ";
 	} else if ($units[$y]['attack_type']==2){
-		$actionType = "Visszatérés ";
+		$actionType = "Return to ";
 	} else if ($units[$y]['attack_type']==3){
-		$actionType = "Visszatérés ";
+		$actionType = "Return to ";
 	} else if ($units[$y]['attack_type']==4){
-		$actionType = "Visszatérés ";
+		$actionType = "Return to ";
 	}
 
 $to = $database->getMInfo($units[$y]['vref']);
@@ -94,7 +94,7 @@ $to = $database->getMInfo($units[$y]['vref']);
 		<tr>
 			<td class="role"><a href="karte.php?d=<?php echo $village->wid."&c=".$generator->getMapCheck($village->wid); ?>"><?php echo $village->vname; ?></a></td>
             <?php if($units[$y]['t11']!=0){ $colspan = '11'; }else{ $colspan = '10'; } ?>
-			<td colspan="<?php echo $colspan; ?>" class="troopHeadline"><a href="karte.php?d=<?php echo $to['wref']."&c=".$generator->getMapCheck($to['wref']); ?>"><?php echo $actionType ." ". $to['name']; ?> village</a></td>
+			<td colspan="<?php echo $colspan; ?>" class="troopHeadline"><a href="karte.php?d=<?php echo $to['wref']."&c=".$generator->getMapCheck($to['wref']); ?>"><?php echo $actionType ." ". $to['name']; ?></a></td>
 		</tr>
 	</thead>
 	<tbody class="units">

@@ -36,6 +36,6 @@ for($i=4;$i<=6;$i++) {
     }
     }
 if($success == 0) {
-	echo "<tr><td colspan=\"3\"><div class=\"none\"><center>Először képezz ki lovas egységeket az Akadémiában.</center></div></td></tr>";
+	echo "<tr><td colspan=\"3\"><div class=\"none\"><center>No units avaliable. Research at academy</center></div></td></tr>";
 }
 ?>

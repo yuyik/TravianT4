@@ -64,7 +64,7 @@ echo "&nbsp;&nbsp;<button ".$disable." type=\"button\" value=\"npc\" class=\"ico
     }
     else if($bindicate == 7) {
     	$neededtime = $building->calculateAvaliable($id,$village->resarray['f'.$id.'t'],($loopsame > 0 ? 2:1));
-    	echo "<span class=\"none\">Elegendő nyersanyag: ".$neededtime[0]."  ".$neededtime[1]."</span></div>";
+    	echo "<span class=\"none\">Enough resources: ".$neededtime[0]." at ".$neededtime[1]."</span></div>";
     }
     else if($bindicate == 8) {
     	if($id <= 18) {

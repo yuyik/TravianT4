@@ -36,6 +36,6 @@ for($i=15;$i<=16;$i++) {
     }
     }
 if($success == 0) {
-	echo "<tr><td colspan=\"3\"><div class=\"none\"><center>Units need to be researched in Academy.</center></div></td></tr>";
+	echo "<tr><td colspan=\"3\"><div class=\"none\"><center>No units avaliable. Research at academy</center></div></td></tr>";
 }
 ?>
