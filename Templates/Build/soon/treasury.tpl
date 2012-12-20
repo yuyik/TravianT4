@@ -3,16 +3,14 @@ $_GET['bid'] = 27;
 $bid = $_GET['bid'];
 $uprequire = $building->resourceRequired($id,$bid);
 ?>
-<h2>خزانه</h2>
+<h2>Treasury</h2>
 <div class="build_desc">
 	<a href="#" onclick="return Travian.Game.iPopup(27,4);" class="build_logo">
 		<img class="building big white g27" src="img/x.gif" alt="خزانه">
 	</a>
-	دارایی‌های امپراطوری شما در خزانه نگهداری می‌شوند. خزانه‌ی شما 
-
-تنها قادر به نگهداری یک گنج می‌باشد. بعد از اینکه شما کتیبه‌ای تسخیر کردید، در سرورهای معمولی فعال شدن آن 24 ساعت طول خواهد کشید و در سرورهای اسپید (با سرعت 3 برابر) این مدت 12 ساعت خواهد بود.</div>
+	The riches of your empire are kept in the treasury. A treasury can only store one artefact. In order to capture a treasure you need to destroy the treasury holding the current treasure and then launch a normal attack from the village where your level 10 treasury is placed. This attack has to be successful (at least one attacking unit has to survive). Your hero has to be part of the attack and needs to survive it in order to claim any construction plans and artefacts.</div>
 <div id="contract" class="contract contractNew contractWrapper">
-	<div class="contractText">هزینه:</div>
+	<div class="contractText">Cost:</div>
 	<div class="contractCosts">
     <div class="showCosts">
     <span class="resources r1 little_res"><img class="r1" src="img/x.gif" alt="چوب"><?php echo $uprequire['wood']; ?></span>
@@ -27,8 +25,8 @@ $uprequire = $building->resourceRequired($id,$bid);
     <div class="clear"></div>
     </div></div>
 	<div class="contractLink">
-    <div class="contractText">پیش نیازها:</div>
-    <span class="buildingCondition"><a href="#" onclick="return Travian.Game.iPopup(15,4, 'gid');">ساختمان اصلی</a> <span>سطح 10</span></span>,<span class="buildingCondition"><a href="#" onClick="return Popup(40,4);"><strike>شگفتی های جهان</strike></a></span>
+    <div class="contractText">Required:</div>
+    <span class="buildingCondition"><a href="#" onclick="return Travian.Game.iPopup(15,4, 'gid');">Main Building</a> <span>Level 10</span></span>,<span class="buildingCondition"><a href="#" onClick="return Popup(40,4);"><strike>Wonder of the World</strike></a></span>
     </div>
 	<div class="clear"></div>
 </div>

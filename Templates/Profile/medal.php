@@ -10,11 +10,11 @@
 //de bird
 if($displayarray['protect'] > time()){
 $uurover=date('H:i:s', ($displayarray['protect'] - time()));
-$profiel = preg_replace("/\[#0]/is",'<img src="'.$gpack.'img/t/tn.gif" border="0" title="این بازیکن تا '.$uurover.' ساعت دیگر تحت حمایت است." >', $profiel, 1);
+$profiel = preg_replace("/\[#0]/is",'<img src="'.$gpack.'img/t/tn.gif" border="0" title="Player '.$uurover.' Time is no longer supported." >', $profiel, 1);
 } else {
 $geregistreerd=date('Y/m/d', ($displayarray['timestamp']));
 $tregistreerd=date('H:i', ($displayarray['timestamp']));
-$profiel = preg_replace("/\[#0]/is",'<img src="'.$gpack.'img/t/tnd.gif" border="0" title="این بازیکن در تاریخ '.$geregistreerd.' '.$tregistreerd.' ثبت نام کرده است.">', $profiel, 1);
+$profiel = preg_replace("/\[#0]/is",'<img src="'.$gpack.'img/t/tnd.gif" border="0" title="Players on '.$geregistreerd.' '.$tregistreerd.' is enrolled">', $profiel, 1);
 }
 
 //natar image
@@ -42,67 +42,67 @@ foreach($varmedal as $medal) {
 
 switch ($medal['categorie']) {
     case "1":
-        $titel="مهاجمین هفته";
-		$woord="امتیاز";
+        $titel="Attackers of the Week";
+		$woord="Score";
         break;
     case "2":
-        $titel="مدافعین هفته";
- 		$woord="امتیاز";
+        $titel="Defenders of the Week";
+ 		$woord="Score";
        break;
     case "3":
-        $titel="پیشرفت کننده های هفته";
- 		$woord="جمعیت";
+        $titel="Climbers of the Week";
+ 		$woord="Score";
        break;
     case "4":
-        $titel="دزدان هفته";
-		$woord="منابع";
+        $titel="Raiders of the Week";
+		$woord="Score";
         break;
 	 case "5":
-        $titel="دريافت اين مدال نشان می‌دهد كه شما براي یک هفته، هم در ميان مهاجمين و هم در ميان مدافعين هفته بين 10 نفر اول بوده‌ايد.";
+        $titel="Top 10 both attackers and defenders.";
         $bonus[$medal['id']]=1;
 		break;
 	 case "6":
-        $titel="دریافت این مدال نشان میدهد که شما در تاپ مهاجمین هفته با ".$medal['points']." امتیاز بین 3 نفر اول بوده اید.";
+        $titel="Top Attackers of the Week ".$medal['points']." top 3.";
         $bonus[$medal['id']]=1;
 		break;
 	 case "7":
-        $titel="دریافت این مدال نشان میدهد که شما در تاپ مدافعین هفته با ".$medal['points']." امتیاز بین 3 نفر اول بوده اید.";
+        $titel="Top Defenders of the Week ".$medal['points']." top 3.";
         $bonus[$medal['id']]=1;
 		break;
 	 case "8":
-        $titel="دریافت این مدال نشان میدهد که شما در تاپ پیشرفت کننده های هفته با ".$medal['points']." امتیاز بین 3 نفر اول بوده اید.";
+        $titel="Top Climbers of the Week ".$medal['points']." top 3.";
         $bonus[$medal['id']]=1;
 		break;
 	 case "9":
-        $titel="دریافت این مدال نشان میدهد که شما در تاپ دزدان هفته با ".$medal['points']." امتیاز بین 3 نفر اول بوده اید.";
+        $titel="Top Raiders of the Week  ".$medal['points']." top 3.";
         $bonus[$medal['id']]=1;
 		break;
      case "10":
-        $titel="پیشرفت کننده های هفته";
-        $woord="رتبه"; 
+        $titel="Climebrs of the Week";
+        $woord="Score"; 
         break;
          case "11":
-        $titel="دریافت این مدال نشان میدهد که شما در تاپ پیشرفت کننده های هفته با ".$medal['points']." امتیاز بین 3 نفر اول بوده اید.";
+        $titel="Climbers of the Week".$medal['points']." top 3.";
         $bonus[$medal['id']]=1;
         break;
          case "12":
-        $titel="دریافت این مدال نشان میدهد که شما در تاپ مهاجمین هفته با ".$medal['points']." امتیاز بین 10 نفر اول بوده اید.";
+        $titel="Attackers of the Week ".$medal['points']." top 10.";
         $bonus[$medal['id']]=1;
         break;
         case "13":
-        $titel="دریافت این مدال نشان میدهد که شما در تاپ مدافعین هفته با ".$medal['points']." امتیاز بین 10 نفر اول بوده اید.";
+        $titel="Defenders of the Week ".$medal['points']." top 10.";
         $bonus[$medal['id']]=1;
         break;
         case "14":
-        $titel="دریافت این مدال نشان میدهد که شما در تاپ پیشرفت کننده های هفته با ".$medal['points']." امتیاز بین 10 نفر اول بوده اید.";
+        $titel="Climbers of the Week ".$medal['points']." top 10.";
         $bonus[$medal['id']]=1;
         break;
         case "15":
-        $titel="دریافت این مدال نشان میدهد که شما در تاپ دزدان هفته با ".$medal['points']." امتیاز بین 10 نفر اول بوده اید.";
+        $titel="Raiders of the Week ".$medal['points']." top 10.";
         $bonus[$medal['id']]=1;
         break;
         case "16":
-        $titel="دریافت این مدال نشان میدهد که شما در تاپ پیشرفت کننده های هفته با ".$medal['points']." امتیاز بین 10 نفر اول بوده اید.";
+        $titel="Climbers of the Week ".$medal['points']." top 10.";
         $bonus[$medal['id']]=1;
         break;
         
@@ -112,9 +112,9 @@ switch ($medal['categorie']) {
 if(isset($bonus[$medal['id']])){
 
 	$profiel = preg_replace("/\[#".$medal['id']."]/is",'<img class="medal '.$medal['img'].'" src="img/x.gif" title="'.$titel.'
-<br />دريافت در هفته‌ی '.$medal['week'].'">', $profiel, 1);
+<br />Week: '.$medal['week'].'">', $profiel, 1);
 } else {
-	$profiel = preg_replace("/\[#".$medal['id']."]/is",'<img class="medal '.$medal['img'].'" src="img/x.gif" title="دسته: '.$titel.'<br />هفته: '.$medal['week'].'<br />رتبه: '.$medal['plaats'].'<br />'.$woord.': '.$medal['points'].'<br />">', $profiel, 1);
+	$profiel = preg_replace("/\[#".$medal['id']."]/is",'<img class="medal '.$medal['img'].'" src="img/x.gif" title="Category: '.$titel.'<br />Week: '.$medal['week'].'<br />Rank: '.$medal['plaats'].'<br />'.$woord.': '.$medal['points'].'<br />">', $profiel, 1);
 }
 }
 

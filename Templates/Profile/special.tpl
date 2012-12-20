@@ -25,18 +25,18 @@
 <table cellpadding="1" cellspacing="1" id="support_mh">
 	<thead>
 	<tr>
-	<th>پشتیبانی و مولتی هانتر</th>
+	<th>Support Multihunter</th>
 	</tr>
 	</thead>
 	<tbody>
 	<tr align="center">
-	<td align="center"><b>پشتیبانی:</b><br>گروهی از بازیکنان مجرب هستند که به سؤالات شما پاسخ خواهند داد.<br />
-	 <a href="nachrichten.php?t=1&amp;id=1">&raquo; نوشتن پیام</a>
+	<td align="center"><b>Support:</b><br>A group of experienced players who will answer your questions.<br />
+	 <a href="nachrichten.php?t=1&amp;id=1">&raquo; Write Message</a>
 	</td>
 	</tr>
 	<tr align="center">
-	<td align="center"><b>قوانین بازی:</b><br>Multihunter وظیفه دارد که صحت اجرای <a href="#" target="_blank">قوانین بازی</a> را کنترل کند. اگر سؤالی در مورد قوانین بازی دارید و یا می خواهید کسی را به علت تخلف و نقض قوانین گزارش کنید، می توانید به Multihunter پیام بفرستید.<br />
-	 <a href="nachrichten.php?t=1&amp;id=0">&raquo; نوشتن پیام</a>
+	<td align="center"><b>If you have any questions about the rules of the game or want someone to report the abuse or violation of the rules, you can send a message Multihunter.<br />
+	 <a href="nachrichten.php?t=1&amp;id=0">&raquo; Write Message</a>
 	</td>
 	</tr>
 	</tbody>

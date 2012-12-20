@@ -3,14 +3,14 @@ $_GET['bid'] = 19;
 $bid = $_GET['bid'];
 $uprequire = $building->resourceRequired($id,$bid);
 ?>
-<h2>سربازخانه</h2>
+<h2>Barracks</h2>
 <div class="build_desc">
 	<a href="#" onclick="return Travian.Game.iPopup(19,4);" class="build_logo">
-		<img class="building big white g19" src="img/x.gif" alt="سربازخانه">
+		<img class="building big white g19" src="img/x.gif" alt="Barracks">
 	</a>
-	در سربازخانه شما می توانید سربازان پیاده نظام تربیت کنید. هر قدر سطح سربازخانه بالاتر باشد، تربیت سربازها سریعتر خواهد گشت.</div>
+	Infantry can be trained in the barracks. The higher its level the faster the troops are trained. If you want to build more advanced troops than the first troops, you'll need to research them using the academy.</div>
 <div id="contract" class="contract contractNew contractWrapper">
-	<div class="contractText">هزینه:</div>
+	<div class="contractText">Cost:</div>
 	<div class="contractCosts">
     <div class="showCosts">
     <span class="resources r1 little_res"><img class="r1" src="img/x.gif" alt="چوب"><?php echo $uprequire['wood']; ?></span>
@@ -25,9 +25,9 @@ $uprequire = $building->resourceRequired($id,$bid);
     <div class="clear"></div>
     </div></div>
 	<div class="contractLink">
-    <div class="contractText">پیش نیازها:</div>
+    <div class="contractText">Required:</div>
     <span class="buildingCondition">
-    <a href="#" onclick="return Travian.Game.iPopup(14,4, 'gid');">اردوگاه</a> <span>سطح 1</span></span>, <span class="buildingCondition"><a href="#" onclick="return Travian.Game.iPopup(15,4, 'gid');">ساختمان اصلی</a> <span>سطح 3</span></span>
+    <a href="#" onclick="return Travian.Game.iPopup(14,4, 'gid');">Rally Point</a> <span>Level 1</span></span>, <span class="buildingCondition"><a href="#" onclick="return Travian.Game.iPopup(15,4, 'gid');">Main Building</a> <span>Level 3</span></span>
     </div>
 	<div class="clear"></div>
 </div>

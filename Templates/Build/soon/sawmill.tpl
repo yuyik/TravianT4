@@ -3,18 +3,14 @@ $_GET['bid'] = 5;
 $bid = $_GET['bid'];
 $uprequire = $building->resourceRequired($id,$bid);
 ?>
-<h2>چوب بری</h2>
+<h2>Sawmill</h2>
 <div class="build_desc">
 	<a href="#" onclick="return Travian.Game.iPopup(5,4);" class="build_logo">
 		<img class="building big white g5" src="img/x.gif" alt="چوب بری">
 	</a>
-	برش و نجاری چوب‌هایی که هیزم شکن فراهم می‌سازد، در این 
-
-ساختمان انجام می‌گیرد. بسته به سطح چوب بری شما می‌توانید سطح 
-
-تولید چوب را تا 25% بالا ببرید.</div>
+	Here wood delivered by your lumberjacks is processed. Based on its level your sawmill can increase your wood production by up to 25 percent.</div>
 <div id="contract" class="contract contractNew contractWrapper">
-	<div class="contractText">هزینه:</div>
+	<div class="contractText">Cost:</div>
 	<div class="contractCosts">
     <div class="showCosts">
     <span class="resources r1 little_res"><img class="r1" src="img/x.gif" alt="چوب"><?php echo $uprequire['wood']; ?></span>
@@ -29,9 +25,9 @@ $uprequire = $building->resourceRequired($id,$bid);
     <div class="clear"></div>
     </div></div>
 	<div class="contractLink">
-    <div class="contractText">پیش نیازها:</div>
+    <div class="contractText">Required:</div>
     <span class="buildingCondition">
-    <a href="#" onclick="return Travian.Game.iPopup(1,4, 'gid');">هیزم شکن</a> <span>سطح 10</span></span>, <span class="buildingCondition"><a href="#" onclick="return Travian.Game.iPopup(15,4, 'gid');">ساختمان اصلی</a> <span>سطح 5</span></span>
+    <a href="#" onclick="return Travian.Game.iPopup(1,4, 'gid');">Woodcutter</a> <span>Level 10</span></span>, <span class="buildingCondition"><a href="#" onclick="return Travian.Game.iPopup(15,4, 'gid');">Main Building</a> <span>Level 5</span></span>
     </div>
 	<div class="clear"></div>
 </div>

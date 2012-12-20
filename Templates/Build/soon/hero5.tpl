@@ -3,13 +3,13 @@ $_GET['bid'] = 37;
 $bid = $_GET['bid'];
 $uprequire = $building->resourceRequired($id,$bid);
 ?>
-<h2>Dimora dell'Eroe</h2>
+<h2>Hero's Mansion</h2>
 <div class="build_desc">
 	<a href="#" onclick="return Travian.Game.iPopup(37,4);" class="build_logo">
 		<img class="building big white g37" src="img/x.gif" alt="Dimora dell'Eroe">
 	</a>
-Nella dimora dell'Eroe puoi avere una panoramica delle oasi circostanti. A partire dal livello 10 della struttura potrai occupare oasi con il tuo eroe e aumentare la produzione delle risorse di questo villaggio<div id="contract" class="contract contractNew contractWrapper">
-	<div class="contractText">Costo:</div>
+In the home of the Hero can get an overview of the surrounding oasis. From level 10 of the structure can occupy oasis with your hero and increase production of the resources of this village<div id="contract" class="contract contractNew contractWrapper">
+	<div class="contractText">Cost:</div>
 	<div class="contractCosts">
     <div class="showCosts">
     <span class="resources r1 little_res"><img class="r1" src="img/x.gif" alt="چوب"><?php echo $uprequire['wood']; ?></span>
@@ -24,9 +24,9 @@ Nella dimora dell'Eroe puoi avere una panoramica delle oasi circostanti. A parti
     <div class="clear"></div>
     </div></div>
 	<div class="contractLink">
-    <div class="contractText">Prerequisiti:</div>
+    <div class="contractText">Required:</div>
     <span class="buildingCondition">
-    <a href="#" onclick="return Travian.Game.iPopup(14,4, 'gid');">Base militare</a> <span>Livello 1</span></span>, <span class="buildingCondition"><a href="#" onclick="return Travian.Game.iPopup(15,4, 'gid');">Palazzo Pubbico</a> <span>Livello 3</span></span>
+    <a href="#" onclick="return Travian.Game.iPopup(14,4, 'gid');">Rally Point</a> <span>Level 1</span></span>, <span class="buildingCondition"><a href="#" onclick="return Travian.Game.iPopup(15,4, 'gid');">Main Building</a> <span>Level 3</span></span>
     </div>
 	<div class="clear"></div>
 </div>

@@ -3,14 +3,14 @@ $_GET['bid'] = 26;
 $bid = $_GET['bid'];
 $uprequire = $building->resourceRequired($id,$bid);
 ?>
-<h2>قصر</h2>
+<h2>Palace</h2>
 <div class="build_desc">
 	<a href="#" onclick="return Travian.Game.iPopup(26,4);" class="build_logo">
 		<img class="building big white g26" src="img/x.gif" alt="قصر">
 	</a>
-	در قصر شاه و ملکه امپراطوری زندگی می کنند. شما در کل امپراطوری فقط یک قصر می توانید داشته باشید. فقط دهکده ای که قصر شما در آن است را می توانید به پایتخت خود تبدیل کنید (شما نمی توانید در یک دهکده قصر و اقامتگاه را با هم داشته باشید).</div>
+	The King or Queen of the kingdom lives in the palace. Only one palace can exist in your realm at a time. Also the palace is the only building where you can proclaim a village to be your capital.</div>
 <div id="contract" class="contract contractNew contractWrapper">
-	<div class="contractText">هزینه:</div>
+	<div class="contractText">Cost:</div>
 	<div class="contractCosts">
     <div class="showCosts">
     <span class="resources r1 little_res"><img class="r1" src="img/x.gif" alt="چوب"><?php echo $uprequire['wood']; ?></span>
@@ -25,9 +25,9 @@ $uprequire = $building->resourceRequired($id,$bid);
     <div class="clear"></div>
     </div></div>
 	<div class="contractLink">
-    <div class="contractText">پیش نیازها:</div>
+    <div class="contractText">Required:</div>
     <span class="buildingCondition">
-    <a href="#" onclick="return Travian.Game.iPopup(18,4, 'gid');">سفارت</a> <span>سطح 1</span></span>, <span class="buildingCondition"><a href="#" onclick="return Travian.Game.iPopup(15,4, 'gid');">ساختمان اصلی</a> <span>سطح 3</span></span>, <span class="buildingCondition"><a href="#" onclick="return Travian.Game.iPopup(25,4, 'gid');"><strike>اقامتگاه</strike></a></span>
+    <a href="#" onclick="return Travian.Game.iPopup(18,4, 'gid');">Embassy</a> <span>Level 1</span></span>, <span class="buildingCondition"><a href="#" onclick="return Travian.Game.iPopup(15,4, 'gid');">Main Building</a> <span>Level 3</span></span>, <span class="buildingCondition"><a href="#" onclick="return Travian.Game.iPopup(25,4, 'gid');"><strike>Residence</strike></a></span>
     </div>
 	<div class="clear"></div>
 </div>

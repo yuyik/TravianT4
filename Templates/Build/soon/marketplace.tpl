@@ -3,14 +3,14 @@ $_GET['bid'] = 17;
 $bid = $_GET['bid'];
 $uprequire = $building->resourceRequired($id,$bid);
 ?>
-<h2>بازار</h2>
+<h2>Marketplace</h2>
 <div class="build_desc">
 	<a href="#" onclick="return Travian.Game.iPopup(17,4);" class="build_logo">
 		<img class="building big white g17" src="img/x.gif" alt="دارالفنون">
 	</a>
-	در بازار می‌توانید منابع را با بازیکنان دیگر معامله کنید. هر قدر سطح بازارتان بالاتر باشد، تعداد تاجر بيشتری خواهيد داشت و منابع بیشتری را می توانید ارسال كنيد.</div>
+	At the marketplace you can trade resources with other players. The higher its level, the more resources can be transported at the same time.</div>
 <div id="contract" class="contract contractNew contractWrapper">
-	<div class="contractText">هزینه:</div>
+	<div class="contractText">Cost:</div>
 	<div class="contractCosts">
     <div class="showCosts">
     <span class="resources r1 little_res"><img class="r1" src="img/x.gif" alt="چوب"><?php echo $uprequire['wood']; ?></span>
@@ -25,9 +25,9 @@ $uprequire = $building->resourceRequired($id,$bid);
     <div class="clear"></div>
     </div></div>
 	<div class="contractLink">
-    <div class="contractText">پیش نیازها:</div>
+    <div class="contractText">Required:</div>
     <span class="buildingCondition">
-    <a href="#" onclick="return Travian.Game.iPopup(9,4, 'gid');">انبار</a> <span>سطح 1</span></span>, <span class="buildingCondition"><a href="#" onclick="return Travian.Game.iPopup(10,4, 'gid');">انبار غذا</a> <span>سطح 1</span></span>, <span class="buildingCondition"><a href="#" onclick="return Travian.Game.iPopup(15,4, 'gid');">ساختمان اصلی</a> <span>سطح 3</span></span>
+    <a href="#" onclick="return Travian.Game.iPopup(9,4, 'gid');">Warehouse</a> <span>Level 1</span></span>, <span class="buildingCondition"><a href="#" onclick="return Travian.Game.iPopup(10,4, 'gid');">Granary</a> <span>Level 1</span></span>, <span class="buildingCondition"><a href="#" onclick="return Travian.Game.iPopup(15,4, 'gid');">Main Building</a> <span>Level 3</span></span>
     </div>
 	<div class="clear"></div>
 </div>

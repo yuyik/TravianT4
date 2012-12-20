@@ -3,18 +3,13 @@ $_GET['bid'] = 22;
 $bid = $_GET['bid'];
 $uprequire = $building->resourceRequired($id,$bid);
 ?>
-<h2>دارالفنون</h2>
+<h2>Academy</h2>
 <div class="build_desc">
 	<a href="#" onclick="return Travian.Game.iPopup(22,4);" class="build_logo">
-		<img class="building big white g22" src="img/x.gif" alt="دارالفنون">
-	</a>
-	در دارالفنون، نیروهای جدیدی می‌توانید تحقیق کنید. هر قدر سطح آن بالا باشد قادر به تحقیق نیروهای بهتری خواهید بود.
-
-<br /><br />
-
-بعد از تحقیق نیرو در دارالفنون می‌توانید آن نیرو را در این دهکده بسازید.</div>
+		<img class="building big white g22" src="img/x.gif" alt="Academy"> </a>
+	In the academy new unit types can be developed. By increasing its level you can order the research of better units. </div>
 <div id="contract" class="contract contractNew contractWrapper">
-	<div class="contractText">هزینه:</div>
+	<div class="contractText">	Cost:</div>
 	<div class="contractCosts">
     <div class="showCosts">
     <span class="resources r1 little_res"><img class="r1" src="img/x.gif" alt="چوب"><?php echo $uprequire['wood']; ?></span>
@@ -29,9 +24,9 @@ $uprequire = $building->resourceRequired($id,$bid);
     <div class="clear"></div>
     </div></div>
 	<div class="contractLink">
-    <div class="contractText">پیش نیازها:</div>
+    <div class="contractText">Required:</div>
     <span class="buildingCondition">
-    <a href="#" onclick="return Travian.Game.iPopup(19,4, 'gid');">سربازخانه</a> <span>سطح 3</span></span>, <span class="buildingCondition"><a href="#" onclick="return Travian.Game.iPopup(15,4, 'gid');">ساختمان اصلی</a> <span>سطح 3</span></span>
+    <a href="#" onclick="return Travian.Game.iPopup(19,4, 'gid');">Barracks</a> <span>Level 3</span></span>, <span class="buildingCondition"><a href="#" onclick="return Travian.Game.iPopup(15,4, 'gid');">Main Building</a> <span>Level 3</span></span>
     </div>
 	<div class="clear"></div>
 </div>

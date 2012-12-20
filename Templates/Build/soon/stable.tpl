@@ -3,16 +3,14 @@ $_GET['bid'] = 20;
 $bid = $_GET['bid'];
 $uprequire = $building->resourceRequired($id,$bid);
 ?>
-<h2>اصطبل</h2>
+<h2>Stable</h2>
 <div class="build_desc">
 	<a href="#" onclick="return Travian.Game.iPopup(20,4);" class="build_logo">
 		<img class="building big white g20" src="img/x.gif" alt="اصطبل">
 	</a>
-	در اصطبل سواره نظام ها تربیت می‌شوند. هر قدر سطح آن بالا 
-
-باشد، زمان مورد نیاز برای تربیت آنها نیز کمتر خواهد بود.</div>
+	Cavalry can be trained in the stable. The higher its level the faster troops are trained. Also, at higher levels you can build other kinds of troops once you have researched them in the academy.</div>
 <div id="contract" class="contract contractNew contractWrapper">
-	<div class="contractText">هزینه:</div>
+	<div class="contractText">Cost:</div>
 	<div class="contractCosts">
     <div class="showCosts">
     <span class="resources r1 little_res"><img class="r1" src="img/x.gif" alt="چوب"><?php echo $uprequire['wood']; ?></span>
@@ -27,9 +25,9 @@ $uprequire = $building->resourceRequired($id,$bid);
     <div class="clear"></div>
     </div></div>
 	<div class="contractLink">
-    <div class="contractText">پیش نیازها:</div>
+    <div class="contractText">Required:</div>
     <span class="buildingCondition">
-    <a href="#" onclick="return Travian.Game.iPopup(12,4, 'gid');">آهنگری</a> <span>سطح 3</span></span>, <span class="buildingCondition"><a href="#" onclick="return Travian.Game.iPopup(22,4, 'gid');">دارالفنون</a> <span>سطح 5</span></span>
+    <a href="#" onclick="return Travian.Game.iPopup(12,4, 'gid');">Blacksmith</a> <span>Level 3</span></span>, <span class="buildingCondition"><a href="#" onclick="return Travian.Game.iPopup(22,4, 'gid');">Academy</a> <span>Level 5</span></span>
     </div>
 	<div class="clear"></div>
 </div>

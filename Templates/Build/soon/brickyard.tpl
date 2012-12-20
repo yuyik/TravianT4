@@ -3,16 +3,14 @@ $_GET['bid'] = 6;
 $bid = $_GET['bid'];
 $uprequire = $building->resourceRequired($id,$bid);
 ?>
-<h2>آجرپزی</h2>
+<h2>Brickyard</h2>
 <div class="build_desc">
 	<a href="#" onclick="return Travian.Game.iPopup(6,4);" class="build_logo">
 		<img class="building big white g6" src="img/x.gif" alt="آجرپزی">
 	</a>
-	در آجرپزی از خشت خام، آجر ساخته می‌شود که می‌تواند تولید را 
-
-تا سقف 25% افزایش دهد.</div>
+	Here clay is processed into bricks. Based on its level, your brickyard can increase a villages' clay production by up to 25 percent.</div>
 <div id="contract" class="contract contractNew contractWrapper">
-	<div class="contractText">هزینه:</div>
+	<div class="contractText">Cost:</div>
 	<div class="contractCosts">
     <div class="showCosts">
     <span class="resources r1 little_res"><img class="r1" src="img/x.gif" alt="چوب"><?php echo $uprequire['wood']; ?></span>
@@ -27,9 +25,9 @@ $uprequire = $building->resourceRequired($id,$bid);
     <div class="clear"></div>
     </div></div>
 	<div class="contractLink">
-    <div class="contractText">پیش نیازها:</div>
+    <div class="contractText">Required:</div>
     <span class="buildingCondition">
-    <a href="#" onclick="return Travian.Game.iPopup(3,4, 'gid');">آجر سازی</a> <span>سطح 10</span></span>, <span class="buildingCondition"><a href="#" onclick="return Travian.Game.iPopup(15,4, 'gid');">ساختمان اصلی</a> <span>سطح 5</span></span>
+    <a href="#" onclick="return Travian.Game.iPopup(3,4, 'gid');">Clay Pit</a> <span>Level 10</span></span>, <span class="buildingCondition"><a href="#" onclick="return Travian.Game.iPopup(15,4, 'gid');">Main Building</a> <span>Level 5</span></span>
     </div>
 	<div class="clear"></div>
 </div>

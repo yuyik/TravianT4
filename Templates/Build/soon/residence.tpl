@@ -3,14 +3,14 @@ $_GET['bid'] = 25;
 $bid = $_GET['bid'];
 $uprequire = $building->resourceRequired($id,$bid);
 ?>
-<h2>اقامتگاه</h2>
+<h2>Residence</h2>
 <div class="build_desc">
 	<a href="#" onclick="return Travian.Game.iPopup(25,4);" class="build_logo">
 		<img class="building big white g25" src="img/x.gif" alt="دارالفنون">
 	</a>
-	اقامتگاه قصر کوچکی است و هنگامی که پادشاه و یا ملکه از دهکده دیدن می‌کنند در آن می‌مانند. اقامتگاه از دهکده در مقابل افرادی که قصد تسخیر آن را دارند محافظت می کند.</div>
+	The residence is a small palace where the king or queen lives when he or she visits the village. The residence protects the village against enemies who want to conquer it. .</div>
 <div id="contract" class="contract contractNew contractWrapper">
-	<div class="contractText">هزینه:</div>
+	<div class="contractText">Cost:</div>
 	<div class="contractCosts">
     <div class="showCosts">
     <span class="resources r1 little_res"><img class="r1" src="img/x.gif" alt="چوب"><?php echo $uprequire['wood']; ?></span>
@@ -25,8 +25,8 @@ $uprequire = $building->resourceRequired($id,$bid);
     <div class="clear"></div>
     </div></div>
 	<div class="contractLink">
-    <div class="contractText">پیش نیازها:</div>
-    <span class="buildingCondition"><a href="#" onclick="return Travian.Game.iPopup(15,4, 'gid');">ساختمان اصلی</a> <span>سطح 3</span></span>,<span class="buildingCondition"><a href="#" onClick="return Popup(26,4);"><strike>قصر</strike></a></span>
+    <div class="contractText">Required:</div>
+    <span class="buildingCondition"><a href="#" onclick="return Travian.Game.iPopup(15,4, 'gid');">Main Building</a> <span>Level 3</span></span>,<span class="buildingCondition"><a href="#" onClick="return Popup(26,4);"><strike>Palace</strike></a></span>
     </div>
 	<div class="clear"></div>
 </div>

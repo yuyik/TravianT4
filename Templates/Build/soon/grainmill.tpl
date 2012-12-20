@@ -3,18 +3,14 @@ $_GET['bid'] = 8;
 $bid = $_GET['bid'];
 $uprequire = $building->resourceRequired($id,$bid);
 ?>
-<h2>آسیاب</h2>
+<h2>Grain Mill</h2>
 <div class="build_desc">
 	<a href="#" onclick="return Travian.Game.iPopup(8,4);" class="build_logo">
 		<img class="building big white g8" src="img/x.gif" alt="آسیاب">
 	</a>
-	در آسیاب از گندم تولیدی در گندم زارها آرد تولید می‌شود. 
-
-بسته به سطح آن این ساختمان قادر به افزایش تولید گندم تا 25% 
-
-می‌باشد.</div>
+	Here your grain is milled in order to produce flour. Based on its level your grain mill can increase your crop production by up to 25 percent.</div>
 <div id="contract" class="contract contractNew contractWrapper">
-	<div class="contractText">هزینه:</div>
+	<div class="contractText">Cost:</div>
 	<div class="contractCosts">
     <div class="showCosts">
     <span class="resources r1 little_res"><img class="r1" src="img/x.gif" alt="چوب"><?php echo $uprequire['wood']; ?></span>
@@ -29,9 +25,9 @@ $uprequire = $building->resourceRequired($id,$bid);
     <div class="clear"></div>
     </div></div>
 	<div class="contractLink">
-    <div class="contractText">پیش نیازها:</div>
+    <div class="contractText">Required:</div>
     <span class="buildingCondition">
-    <a href="#" onclick="return Travian.Game.iPopup(4,4, 'gid');">گندم زار</a> <span>سطح 5</span></span>
+    <a href="#" onclick="return Travian.Game.iPopup(4,4, 'gid');">Cropland</a> <span>Level 5</span></span>
     </div>
 	<div class="clear"></div>
 </div>

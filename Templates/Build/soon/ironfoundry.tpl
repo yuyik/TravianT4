@@ -3,16 +3,14 @@ $_GET['bid'] = 7;
 $bid = $_GET['bid'];
 $uprequire = $building->resourceRequired($id,$bid);
 ?>
-<h2>ذوب آهن</h2>
+<h2>Iron Foundry</h2>
 <div class="build_desc">
 	<a href="#" onclick="return Travian.Game.iPopup(7,4);" class="build_logo">
 		<img class="building big white g7" src="img/x.gif" alt="ذوب آهن">
 	</a>
-	در ذوب آهن، آهن تولید شده در معدن‌های آهن شما ذوب شده و راحت‌تر قابل استفاده در دهکده خواهد بود. بسته به سطح آن این 
-
-ساختمان قادر به افزایش تولید آهن تا 25% می‌باشد.</div>
+	Iron is melted here. Based on its level your iron foundry can increase your iron production by up to 25 percent.</div>
 <div id="contract" class="contract contractNew contractWrapper">
-	<div class="contractText">هزینه:</div>
+	<div class="contractText">Cost:</div>
 	<div class="contractCosts">
     <div class="showCosts">
     <span class="resources r1 little_res"><img class="r1" src="img/x.gif" alt="چوب"><?php echo $uprequire['wood']; ?></span>
@@ -27,9 +25,9 @@ $uprequire = $building->resourceRequired($id,$bid);
     <div class="clear"></div>
     </div></div>
 	<div class="contractLink">
-    <div class="contractText">پیش نیازها:</div>
+    <div class="contractText">Required:</div>
     <span class="buildingCondition">
-    <a href="#" onclick="return Travian.Game.iPopup(3,4, 'gid');">معدن آهن</a> <span>سطح 10</span></span>, <span class="buildingCondition"><a href="#" onclick="return Travian.Game.iPopup(15,4, 'gid');">ساختمان اصلی</a> <span>سطح 5</span></span>
+    <a href="#" onclick="return Travian.Game.iPopup(3,4, 'gid');">Iron Mine</a> <span>Level 10</span></span>, <span class="buildingCondition"><a href="#" onclick="return Travian.Game.iPopup(15,4, 'gid');">Main Building</a> <span>Level 5</span></span>
     </div>
 	<div class="clear"></div>
 </div>

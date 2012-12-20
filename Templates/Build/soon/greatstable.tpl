@@ -3,14 +3,14 @@ $_GET['bid'] = 30;
 $bid = $_GET['bid'];
 $uprequire = $building->resourceRequired($id,$bid);
 ?>
-<h2>اصطبل بزرگ</h2>
+<h2>Great Stable</h2>
 <div class="build_desc">
 	<a href="#" onclick="return Travian.Game.iPopup(30,4);" class="build_logo">
 		<img class="building big white g30" src="img/x.gif" alt="اصطبل بزرگ">
 	</a>
-	اصطبل بزرگ به شما اجازه می‌دهد که واحدهای نظامی خود را همزمان با اصطبل و به سه برابر قیمت تربیت کنید.</div>
+	The great stable allows you to build a second stable in the same village, but the troops cost thrice the original amount.</div>
 <div id="contract" class="contract contractNew contractWrapper">
-	<div class="contractText">هزینه:</div>
+	<div class="contractText">Cost:</div>
 	<div class="contractCosts">
     <div class="showCosts">
     <span class="resources r1 little_res"><img class="r1" src="img/x.gif" alt="چوب"><?php echo $uprequire['wood']; ?></span>
@@ -25,9 +25,9 @@ $uprequire = $building->resourceRequired($id,$bid);
     <div class="clear"></div>
     </div></div>
 	<div class="contractLink">
-    <div class="contractText">پیش نیازها:</div>
+    <div class="contractText">Required:</div>
     <span class="buildingCondition">
-    <a href="#" onclick="return Travian.Game.iPopup(21,4, 'gid');">کارگاه</a> <span>سطح 20</span></span>
+    <a href="#" onclick="return Travian.Game.iPopup(21,4, 'gid');">Stable</a> <span>Level 20</span></span>
     </div>
 	<div class="clear"></div>
 </div>

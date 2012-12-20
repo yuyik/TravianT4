@@ -3,14 +3,16 @@ $_GET['bid'] = 36;
 $bid = $_GET['bid'];
 $uprequire = $building->resourceRequired($id,$bid);
 ?>
-<h2>تله ساز</h2>
+<h2>Trapper</h2>
 <div class="build_desc">
 	<a href="#" onclick="return Travian.Game.iPopup(36,4);" class="build_logo">
 		<img class="building big white g36" src="img/x.gif" alt="تله ساز">
 	</a>
-	تله ساز از دهکدۀ شما با استفاده از تله های مخفی شده محافظت می کند. نیروهای دشمن در آنها اسیر شده و قادر به ضرر رساندن به دهکدۀ شما نخواهند بود.</div>
+	The trapper protects your village with well hidden traps. Enemies can be imprisoned and won't be able to harm your village any more. Troops imprisoned in traps eat crop from the village they originally belong to. 
+
+One trapper can give you a maximum of 400 traps. </div>
 <div id="contract" class="contract contractNew contractWrapper">
-	<div class="contractText">هزینه:</div>
+	<div class="contractText">Cost:</div>
 	<div class="contractCosts">
     <div class="showCosts">
     <span class="resources r1 little_res"><img class="r1" src="img/x.gif" alt="چوب"><?php echo $uprequire['wood']; ?></span>
@@ -25,9 +27,9 @@ $uprequire = $building->resourceRequired($id,$bid);
     <div class="clear"></div>
     </div></div>
 	<div class="contractLink">
-    <div class="contractText">پیش نیازها:</div>
+    <div class="contractText">Required:</div>
     <span class="buildingCondition">
-    <a href="#" onclick="return Travian.Game.iPopup(16,4, 'gid');">اردوگاه</a> <span>سطح 1</span></span>
+    <a href="#" onclick="return Travian.Game.iPopup(16,4, 'gid');">Rally Point</a> <span>Level 1</span></span>
     </div>
 	<div class="clear"></div>
 </div>

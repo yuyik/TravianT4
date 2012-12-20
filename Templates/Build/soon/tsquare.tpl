@@ -3,14 +3,14 @@ $_GET['bid'] = 14;
 $bid = $_GET['bid'];
 $uprequire = $building->resourceRequired($id,$bid);
 ?>
-<h2>میدان تمرین</h2>
+<h2>Tournament Square</h2>
 <div class="build_desc">
 	<a href="#" onclick="return Travian.Game.iPopup(14,4);" class="build_logo">
 		<img class="building big white g14" src="img/x.gif" alt="میدان تمرین">
 	</a>
-	در میدان تمرین لشکریان شما تربیت شده و استقامت آنها افزایش می‌یابد. هر قدر سطح آن بیشتر باشد به همان اندازه سرعت حرکت لشکریان شما بعد از 20 خانه بیشتر خواهد شد.</div>
+	At the tournament square your troops can train their stamina. The further the building is upgraded the faster your troops will travel over longer distances (minimum distance of 20 squares).</div>
 <div id="contract" class="contract contractNew contractWrapper">
-	<div class="contractText">هزینه:</div>
+	<div class="contractText">Cost:</div>
 	<div class="contractCosts">
     <div class="showCosts">
     <span class="resources r1 little_res"><img class="r1" src="img/x.gif" alt="چوب"><?php echo $uprequire['wood']; ?></span>
@@ -25,9 +25,9 @@ $uprequire = $building->resourceRequired($id,$bid);
     <div class="clear"></div>
     </div></div>
 	<div class="contractLink">
-    <div class="contractText">پیش نیازها:</div>
+    <div class="contractText">Required:</div>
     <span class="buildingCondition">
-    <a href="#" onclick="return Travian.Game.iPopup(15,4, 'gid');">اردوگاه</a> <span>سطح 15</span></span>
+    <a href="#" onclick="return Travian.Game.iPopup(15,4, 'gid');">Rally Point</a> <span>Level 15</span></span>
     </div>
 	<div class="clear"></div>
 </div>

@@ -3,16 +3,14 @@ $_GET['bid'] = 9;
 $bid = $_GET['bid'];
 $uprequire = $building->resourceRequired($id,$bid);
 ?>
-<h2>نانوایی</h2>
+<h2>Bakery</h2>
 <div class="build_desc">
 	<a href="#" onclick="return Travian.Game.iPopup(9,4);" class="build_logo">
-		<img class="building big white g9" src="img/x.gif" alt="نانوایی">
+		<img class="building big white g9" src="img/x.gif" alt="Bakery">
 	</a>
-	در نانوایی از آرد تولید شده در آسیاب نان تولید می‌شود. بسته 
-
-به سطح آن این ساختمان قادر به افزایش تولید گندم تا 50% می‌باشد.</div>
+	Here the flour produced in your mill is used to bake bread. Combined with the grain mill an increase in crop production of up to 50% can be achieved.</div>
 <div id="contract" class="contract contractNew contractWrapper">
-	<div class="contractText">هزینه:</div>
+	<div class="contractText">Cost:</div>
 	<div class="contractCosts">
     <div class="showCosts">
     <span class="resources r1 little_res"><img class="r1" src="img/x.gif" alt="چوب"><?php echo $uprequire['wood']; ?></span>
@@ -27,9 +25,9 @@ $uprequire = $building->resourceRequired($id,$bid);
     <div class="clear"></div>
     </div></div>
 	<div class="contractLink">
-    <div class="contractText">پیش نیازها:</div>
+    <div class="contractText">Required:</div>
     <span class="buildingCondition">
-    <a href="#" onclick="return Travian.Game.iPopup(4,4, 'gid');">گندم زار</a> <span>سطح 10</span></span>, <span class="buildingCondition"><a href="#" onclick="return Travian.Game.iPopup(15,4, 'gid');">ساختمان اصلی</a> <span>سطح 5</span></span>, <span class="buildingCondition"><a href="#" onclick="return Travian.Game.iPopup(8,4, 'gid');">آسیاب</a> <span>سطح 5</span></span>
+    <a href="#" onclick="return Travian.Game.iPopup(4,4, 'gid');">Crop Land</a> <span>Level 10</span></span>, <span class="buildingCondition"><a href="#" onclick="return Travian.Game.iPopup(15,4, 'gid');">Main Building</a> <span>Level 5</span></span>, <span class="buildingCondition"><a href="#" onclick="return Travian.Game.iPopup(8,4, 'gid');">Mill</a> <span>Level 5</span></span>
     </div>
 	<div class="clear"></div>
 </div>
