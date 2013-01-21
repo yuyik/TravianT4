@@ -92,6 +92,10 @@ echo "<div class=\"headline\"><span class=\"f10 c5\">Error creating constant.php
 	  <option value="86400">24 hours</option>
       </select></td>
 		</tr>
+		<tr class="hover">
+			<td>Storage Multipler:</td>
+			<td><input type="text" dir="ltr" class="text" name="storage_multiplier" id="storage_multiplier" value="1"></td>
+		</tr>
     	<tr class="hover">
 			<td>Turn Threshold:</td>
 			<td><input type="text" dir="ltr" class="text" name="ts_threshold" id="ts_threshold" value="30"></td>

@@ -75,6 +75,10 @@ define("CP", %VILLAGE_EXPAND%);
 // Default: 10
 define("DEMOLISH_LEVEL_REQ", $result['demolish_lvl']);
 
+// ***** Change storage capacity
+define("STORAGE_MULTIPLIER","%STORAGE_MULTIPLIER%");
+define("STORAGE_BASE",800*STORAGE_MULTIPLIER);
+
 // ***** Quest
 // Ingame quest enabled/disabled.
 if($result['taskmaster']==1){ $quest = true; }else{ $quest = false; }
