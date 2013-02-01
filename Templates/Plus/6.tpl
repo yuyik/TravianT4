@@ -22,12 +22,11 @@ $uid = $session->uid;
 
 <div id="silverExchange">
 	
-	<h3>صرافی</h3>
-	<p>مقدار سکۀ طلای تراوین و یا سکۀ نقرۀ تراوین که میخواهید مبادله 
-کنید را وارد کنید.</p>
+	<h3>Exchange Office</h3>
+	<p>Enter the amount of Gold or Silver you want to exchange.</p>
 
-	<h4>نسبت مبادله</h4>
-	<p>1 سکۀ طلای تراوین : 100 سکۀ نقرۀ تراوین<br>200 سکۀ نقرۀ تراوین : 1 سکۀ طلای تراوین	</p>
+	<h4>Exchange rates</h4>
+	<p>1 Gold : 100 Silver<br>200 Silver : 1 Gold</p>
 <?php $id = $_SESSION['id']; ?>
 <form action="plus.php?id=6" method="post">
 <input type="hidden" name="id" id="id" value="<?php echo $id; ?>">
@@ -60,7 +59,7 @@ $uid = $session->uid;
 			<input type="hidden" name="a" value="84">
 			<input type="hidden" name="c" value="18a">
 
-			<button type="submit" value="انجام مبادله"><div class="button-container"><div class="button-position"><div class="btl"><div class="btr"><div class="btc"></div></div></div><div class="bml"><div class="bmr"><div class="bmc"></div></div></div><div class="bbl"><div class="bbr"><div class="bbc"></div></div></div></div><div class="button-contents">انجام مبادله</div></div></button>
+			<button type="submit" value="exchange"><div class="button-container"><div class="button-position"><div class="btl"><div class="btr"><div class="btc"></div></div></div><div class="bml"><div class="bmr"><div class="bmc"></div></div></div><div class="bbl"><div class="bbr"><div class="bbc"></div></div></div></div><div class="button-contents">exchange</div></div></button>
             
             </p>
 
