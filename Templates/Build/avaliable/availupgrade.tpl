@@ -72,7 +72,7 @@ if($bindicate == 1) {
      	echo "<button type=\"button\" value=\"Upgrade level\" class=\"build\" onclick=\"window.location.href = 'dorf2.php?a=$bid&id=$id&c=".$session->checker."'; return false;\">
 <div class=\"button-container\"><div class=\"button-position\"><div class=\"btl\"><div class=\"btr\"><div class=\"btc\"></div></div></div>
 <div class=\"bml\"><div class=\"bmr\"><div class=\"bmc\"></div></div></div><div class=\"bbl\"><div class=\"bbr\"><div class=\"bbc\"></div></div></div>
-</div><div class=\"button-contents\">Build</div></div></button> <span class=\"none\">(Que)</span>";
+</div><div class=\"button-contents\">Build</div></div></button> <span class=\"none\">(Queue)</span>";
      } }
             ?>
 
