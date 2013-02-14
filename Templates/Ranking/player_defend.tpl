@@ -23,7 +23,7 @@
 <h4 class="round">Top Defenders</h4>
 <table cellpadding="1" cellspacing="1" id="player_def" class="row_table_data">
 	<thead>
-		<tr><td></td><td>Playerk</td><td>Population</td><td>Villages</td><td>Points</td></tr>
+		<tr><td></td><td>Player</td><td>Population</td><td>Villages</td><td>Points</td></tr>
 	</thead>
     <tbody>
 <?php
