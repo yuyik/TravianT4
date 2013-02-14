@@ -86,32 +86,32 @@ if($message->unread) {
 					});
 				</script>
 
-<h1 class="titleInHeader">Statistiche<?php if($session->access == ADMIN) { echo " (<a href=\"medals.php\">Aggiorna Top 10</a>)"; } ?></h1>
+<h1 class="titleInHeader">Statistics<?php if($session->access == ADMIN) { echo " (<a href=\"medals.php\">Aggiorna Top 10</a>)"; } ?></h1>
 <div class="contentNavi subNavi">
 				<div title="" <?php if(!isset($_GET['tid']) || (isset($_GET['tid']) && ($_GET['tid'] == 1 || $_GET['tid'] == 31 || $_GET['tid'] == 32 || $_GET['tid'] == 7))) { echo "class=\"container active\""; } else { echo "class=\"container normal\""; } ?>> 
 					<div class="background-start">&nbsp;</div> 
 					<div class="background-end">&nbsp;</div>
-					<div class="content"><a href="statistiken.php"><span class="tabItem">Giocatore(i)</span></a></div> 
+					<div class="content"><a href="statistiken.php"><span class="tabItem">Players</span></a></div> 
 				</div> 
 				<div title="" <?php if(isset($_GET['tid']) && ($_GET['tid'] == 4 || $_GET['tid'] == 41 || $_GET['tid'] == 42 || $_GET['tid'] == 43)) { echo "class=\"container active\""; } else { echo "class=\"container normal\""; } ?>> 
 					<div class="background-start">&nbsp;</div> 
 					<div class="background-end">&nbsp;</div> 
-					<div class="content"><a href="statistiken.php?tid=4"><span class="tabItem">Alleanze</span></a></div> 
+					<div class="content"><a href="statistiken.php?tid=4"><span class="tabItem">Alliances</span></a></div> 
 				</div> 
 				<div title="" <?php if(isset($_GET['tid']) && $_GET['tid'] == 2) { echo "class=\"container active\""; } else { echo "class=\"container normal\""; } ?>> 
 					<div class="background-start">&nbsp;</div> 
 					<div class="background-end">&nbsp;</div> 
-					<div class="content"><a href="statistiken.php?tid=2"><span class="tabItem">Villaggio</span></a></div> 
+					<div class="content"><a href="statistiken.php?tid=2"><span class="tabItem">Villages</span></a></div> 
 				</div> 
 				<div title="" <?php if(isset($_GET['tid']) && $_GET['tid'] == 8) { echo "class=\"container active\""; } else { echo "class=\"container normal\""; } ?>> 
 					<div class="background-start">&nbsp;</div> 
 					<div class="background-end">&nbsp;</div> 
-					<div class="content"><a href="statistiken.php?tid=8"><span class="tabItem">Eroe</span></a></div> 
+					<div class="content"><a href="statistiken.php?tid=8"><span class="tabItem">Heroes</span></a></div> 
 				</div> 
 				<div title="" <?php if(isset($_GET['tid']) && $_GET['tid'] == 0) { echo "class=\"container active\""; } else { echo "class=\"container normal\""; } ?>> 
 					<div class="background-start">&nbsp;</div> 
 					<div class="background-end">&nbsp;</div> 
-					<div class="content"><a href="statistiken.php?tid=0"><span class="tabItem">Altro</span></a></div> 
+					<div class="content"><a href="statistiken.php?tid=0"><span class="tabItem">More</span></a></div> 
 				</div> 
 				<?php if(WW == true){ include "Templates/Ranking/ww2.tpl"; }?>
 				<div class="clear"></div>
