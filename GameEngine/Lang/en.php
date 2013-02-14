@@ -52,7 +52,7 @@ define("SIDEINFO_ADVENTURES","Adventure");
 define("SIDEINFO_AUCTIONS","Auction");
 define("SIDEINFO_PROFILE","Profile");
 define("SIDEINFO_ALLIANCE","Alliance");
-define("SIDEINFO_CHANGE_TITLE","These double-click to rename the village");
+define("SIDEINFO_CHANGE_TITLE","Double-click to rename the village");
 define("SIDEINFO_CHANGEVIL_TITLE","Village name change");
 define("SIDEINFO_CHANGEVIL_LABEL","New village name");
 define("SIDEINFO_CHANGEVIL_BTN","Accept");
