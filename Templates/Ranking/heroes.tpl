@@ -1,4 +1,4 @@
-﻿<h4 class="round">The Top Heros</h4>
+﻿<h4 class="round">The Top Heroes</h4>
 		<table cellpadding="1" cellspacing="1" id="heroes" class="row_table_data">
 			<thead>
 		<tr><td></td><td>Name</td><td>Level</td><td>Experience</td></tr>

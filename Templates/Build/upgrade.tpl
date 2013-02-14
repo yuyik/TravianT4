@@ -96,7 +96,7 @@ echo "&nbsp;&nbsp;<button ".$disable." type=\"button\" value=\"npc\" class=\"ico
 </div><div class=\"button-contents\">Build to level ";
         }
 		echo $village->resarray['f'.$id]+($loopsame > 0 ? 2:1);
-		echo "</div></div></button> <span class=\"none\">(que)</span></div>";
+		echo "</div></div></button> <span class=\"none\">(queue)</span></div>";
     }
 }
 
