@@ -29,13 +29,19 @@ $tribes = Array(mysql_num_rows($tribe1),mysql_num_rows($tribe2),mysql_num_rows($
 <table id="profile">
 	<thead>
 		<tr>
-            <th colspan="2">Players Stadistics</th>
+            <th colspan="2">Player Statistics</th>
         </tr>
 	</thead>
 	<tbody>
 		<tr>
 			<td>Registered players</td>
-			<td><?php echo $users; ?></td>
+			<td>
+            	<?php
+                    $result = mysql_query("SELECT SQL_CACHE * FROM ".TB_PREFIX."users");
+                    $users = mysql_num_rows($result);
+                    echo $users;
+                ?>
+			</td>
 		</tr>
 		<tr>
 			<td>Active players</td>
