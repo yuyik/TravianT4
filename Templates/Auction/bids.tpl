@@ -121,11 +121,11 @@ include "Templates/Auction/alt.tpl";
 <table class="currentBid" cellspacing="1" cellpadding="1">
 	<thead>
 		<tr>
-			<th class="name" colspan="3">Description</th>
-			<th class="bids"><img alt="پیشنهاد‌ها" class="bids" src="img/x.gif"></th>
-			<th class="silver"><img alt="سکۀ نقرۀ تراوین" class="silver" src="img/x.gif"></th>
-			<th class="time"><img alt="زمان" class="clock" src="img/x.gif"></th>
-			<th class="bid">Auction</th>
+            <th class="name" colspan="3">Description</th>
+            <th class="bids"><img title="Bids" alt="Bids" class="bids" src="img/x.gif"></th>
+            <th class="silver"><img title="Silver" alt="Silver" class="silver" src="img/x.gif"></th>
+            <th class="time"><img title="Time" alt="Time" class="clock" src="img/x.gif"></th>
+            <th class="bid">Auctions</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -298,13 +298,13 @@ include "Templates/Auction/alt.tpl";
 	<h4 class="auctionEnded">Finished auctions</h4>
 	<table cellspacing="1" cellpadding="1">
 		<thead>
-			<tr>
-				<th class="name" colspan="3">Description</th>
-				<th class="bids"><img alt="پیشنهاد‌ها" class="bids" src="img/x.gif"></th>
-				<th class="silver"><img alt="سکۀ نقرۀ تراوین" class="silver" src="img/x.gif"></th>
-				<th class="time"><img alt="زمان" class="clock" src="img/x.gif"></th>
-				<th class="bid">Auctions</th>
-			</tr>
+            <tr>
+                <th class="name" colspan="3">Description</th>
+                <th class="bids"><img title="Bids" alt="Bids" class="bids" src="img/x.gif"></th>
+                <th class="silver"><img title="Silver" alt="Silver" class="silver" src="img/x.gif"></th>
+                <th class="time"><img title="Time" alt="Time" class="clock" src="img/x.gif"></th>
+                <th class="bid">Auctions</th>
+            </tr>
 		</thead>
 		<tbody>
 			
