@@ -978,7 +978,7 @@
         	References: 
         	*****************************************/
         	function createAlliance($tag, $name, $uid, $max) {
-        		$q = "INSERT into " . TB_PREFIX . "alidata values (0,'$name','$tag',$uid,0,0,0,'','',$max,'','','','','','','','','')";
+        		$q = "INSERT into " . TB_PREFIX . "alidata values (0,'$name','$tag',$uid,0,0,0,'','',$max,'','','','','','','','')";
         		mysql_query($q, $this->connection);
         		return mysql_insert_id($this->connection);
         	}
