@@ -80,7 +80,7 @@ echo "<div class=\"clear\">&nbsp;</div></div></div>";
     }
 }
 if($success == 0) {
-echo "<div class=\"buildActionOverview trainUnits\"><td colspan=\"2\"><div class=\"none\" align=\"center\">No units developed</div></td></div>";
+echo "<div class=\"buildActionOverview trainUnits\"><td colspan=\"2\"><div class=\"none\" align=\"center\">No research available</div></td></div>";
 }
 ?>
 
@@ -137,8 +137,8 @@ if($fail > 0) {
 
 				$("researchFutureLink").set("text",
 					this.hasClass("hide")
-					?	"Továbbiak"
-					:	"Close More"
+					?	"More"
+					:	"Less"
 				);
 
 				return false;
