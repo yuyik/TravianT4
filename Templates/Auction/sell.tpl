@@ -50,9 +50,9 @@ include "Templates/Auction/alt.tpl";
 	<thead>
 		<tr>
 			<th class="name" colspan="3">Description</th>
-			<th class="bids"><img title="پیشنهاد‌ها" class="bids" src="img/x.gif"></th>
-			<th class="silver"><img title="سکۀ نقرۀ تراوین" class="silver" src="img/x.gif"></th>
-			<th class="time"><img title="زمان" class="clock" src="img/x.gif"></th>
+			<th class="bids"><img title="Bids" class="bids" src="img/x.gif"></th>
+			<th class="silver"><img title="Silver" class="silver" src="img/x.gif"></th>
+			<th class="time"><img title="Time" class="clock" src="img/x.gif"></th>
 		</tr>
 	</thead>
 	
@@ -268,9 +268,9 @@ include "Templates/Auction/alt.tpl";
 	<thead>
 		<tr>
 			<th class="name" colspan="2">Description</th>
-			<th class="bids"><img title="پیشنهاد‌ها" class="bids" src="img/x.gif"></th>
-			<th class="silver"><img title="سکۀ نقرۀ تراوین" class="silver" src="img/x.gif"></th>
-			<th class="time"><img title="زمان" class="clock" src="img/x.gif"></th>
+			<th class="bids"><img title="Bids" class="bids" src="img/x.gif"></th>
+			<th class="silver"><img title="Silver" class="silver" src="img/x.gif"></th>
+			<th class="time"><img title="Time" class="clock" src="img/x.gif"></th>
 		</tr>
 	</thead>
 	<tbody>
