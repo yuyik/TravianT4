@@ -5,7 +5,7 @@ $query = count($links);
 if($query>0){
 echo '<div id="linkList" class="listing">
 	<div class="head">
-	<a href="spieler.php?s=2" accesskey="L">Linkek</a>
+	<a href="spieler.php?s=2" accesskey="L">Links</a>
 </div><div class="list none">';
 foreach($links as $link) {
    echo '<ul><li class="entry">'; 
