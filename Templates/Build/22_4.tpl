@@ -34,7 +34,7 @@ for($i=32;$i<=39;$i++) {
                 }
                    else if(${'r'.$i}['wood'] > $village->awood || ${'r'.$i}['clay'] > $village->aclay || ${'r'.$i}['iron'] > $village->airon || ${'r'.$i}['crop'] > $village->acrop) {
                    	$time = $technology->calculateAvaliable($i);
-                    echo "<br><span class=\"none\">Elegendő nyersanyag ".$time[0]." at ".$time[1]."</span></div></td>";
+                    echo "<br><span class=\"none\">Enough Resources ".$time[0]." at ".$time[1]."</span></div></td>";
                     echo "<td class=\"none\">
 					<div class=\"none\">Kevés<br>a nyersanyag</div>
 				</td></tr>";

@@ -85,7 +85,7 @@ echo "<div class=\"contractLink\"><span class=\"none\">The Great Celebration in 
                   else if($cel[$i]['wood'] > $village->awood || $cel[$i]['clay'] > $village->aclay || $cel[$i]['iron'] > $village->airon || $cel[$i]['crop'] > $village->acrop) {
 					if($village->getProd("crop")>0){
 	                   	$time = $technology->calculateAvaliable(24,$cel[$i]);
-		                echo "<div class=\"contractLink\"><span class=\"none\">Elegendő nyersanyag ".$time[0]." -> ".$time[1]."</span></div>";
+		                echo "<div class=\"contractLink\"><span class=\"none\">Enough Resources ".$time[0]." -> ".$time[1]."</span></div>";
 					} else {
 						echo "<div class=\"contractLink\"><span class=\"none\">Negatív a búzatermelés, soha nem lesz elég nyersanyag</span></div>";
 					}
