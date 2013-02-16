@@ -347,7 +347,7 @@ window.addEvent('domready', function()
 				{
 					if (link == soon_link)
 					{
-						link.innerHTML = 'عدم نمایش ساختمانهایی که بزودی قابل احداث خواهند بود';
+						link.innerHTML = 'Hide constructions available soon';
 						if (all_link !== null)
 						{
 							all_link.removeClass('hide');
@@ -355,24 +355,24 @@ window.addEvent('domready', function()
 					}
 					else
 					{
-						link.innerHTML = 'عدم نمایش جزئیات';
+						link.innerHTML = 'Less';
 					}
 				}
 				else
 				{
 					if (link == soon_link)
 					{
-						link.innerHTML = 'نمایش ساختمانهایی که بزودی قابل احداث خواهند بود';
+						link.innerHTML = 'View constructions available soon';
 						if (all_link !== null)
 						{
-							all_link.innerHTML = 'جزئیات بیشتر';
+							all_link.innerHTML = 'More';
 							all_link.addClass('hide');
 							build_list_all.addClass('hide');
 						}
 					}
 					else
 					{
-						link.innerHTML = 'جزئیات بیشتر';
+						link.innerHTML = 'More';
 					}
 				}
 			});
