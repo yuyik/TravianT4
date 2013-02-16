@@ -96,7 +96,7 @@ if(isset($_POST['result'])) {
             //$Katalife=round($_POST['result'][4]-($_POST['result'][4]*$_POST['result'][1]));
             //$totallvl = round($form->getValue('kata')-($form->getValue('kata') * $demolish));
             $totallvl = round(sqrt(pow(($form->getValue('kata')+0.5),2)-($_POST['result'][4]*8)));
-            echo "<p>Építése <b>".$form->getValue('kata')."</b> szint <b>".$totallvl."</b> Sérült.</p>";
+            echo "<p>Építése <b>".$form->getValue('kata')."</b> Level <b>".$totallvl."</b> Sérült.</p>";
         }
     }
 }

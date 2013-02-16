@@ -169,7 +169,7 @@
   </div>
 	<div class="boxes boxesColor gray"><div class="boxes-tl"></div><div class="boxes-tr"></div><div class="boxes-tc"></div><div class="boxes-ml"></div><div class="boxes-mr"></div><div class="boxes-mc"></div><div class="boxes-bl"></div><div class="boxes-br"></div><div class="boxes-bc"></div><div class="boxes-contents">
     
-<div class="attribute experience tooltip" title="<font color=white><b>تجربه <?php echo floor($hero_info['level']/2); ?>%</b></font><br>برای رسیدن به Szint <?php echo ($hero_info['experience']+1); ?> قهرمان شما به <?php echo (150-$hero_info['level']); ?> تجربه نیاز دارد.">
+<div class="attribute experience tooltip" title="<font color=white><b>تجربه <?php echo floor($hero_info['level']/2); ?>%</b></font><br>Level <?php echo ($hero_info['experience']+1); ?> قهرمان شما به <?php echo (150-$hero_info['level']); ?> تجربه نیاز دارد.">
 			<div class="element attribName">تجربه</div>
 			<div class="element current power"><?php echo $hero_info['level']; ?></div>
 			<div class="element progress">
@@ -186,8 +186,8 @@
 
 
 
-  <div class="attribute level tooltip" title="<font color=white><b>Szint قهرمان</b></font><br>Szint قهرمان شما<br><font color='#5dcbfb'>قدرت هجومی قهرمان شما برای هر امتیازی که به آن داده می‌شود به جای اینکه به میزان 80 افزایش یابد به میزان 100 افزایش خواهد یافت.</font>">
-			<div class="element attribName">Szint قهرمان</div>
+  <div class="attribute level tooltip" title="<font color=white><b>Level</b></font><br>Level<br><font color='#5dcbfb'>قدرت هجومی قهرمان شما برای هر امتیازی که به آن داده می‌شود به جای اینکه به میزان 80 افزایش یابد به میزان 100 افزایش خواهد یافت.</font>">
+			<div class="element attribName">Level</div>
 			<div class="element current power"><?php echo $hero_info['experience']; ?></div>
 			<div class="element progress">
 				<div class="bar-bg">

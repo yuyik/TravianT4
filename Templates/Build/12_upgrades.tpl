@@ -20,7 +20,7 @@
 <a href=\"#\" onclick=\"return Travian.Game.iPopup(".$i.",1);\">
 <img class=\"unit u".$i."\" src=\"img/x.gif\" alt=\"".$technology->getUnitName($i)."\"></a> 
 <a href=\"#\" onclick=\"return Travian.Game.iPopup(".$i.",1);\">".$technology->getUnitName($i)."</a>
-<span class=\"level\">szint ".$abdata['b'.$j]."</span>
+<span class=\"level\">Level ".$abdata['b'.$j]."</span>
 </div>";
 if($abdata['b'.$j] != 20) {
 echo "<div class=\"costs\">
