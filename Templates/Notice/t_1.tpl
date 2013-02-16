@@ -187,7 +187,7 @@ if($dataarray[1]){
     }
 }
     $outputList .= "<a href=\"berichte.php?id=".$id."\">".$topic." </a> ";
-    if($viewed == 0) { $outputList .= "(Új)"; }
+    if($viewed == 0) { $outputList .= "(New)"; }
     $date = $generator->procMtime($time);
     $outputList .= "</div><div class=\"clear\"></div></td>
 			<td class=\"dat\">".$date[0]." ".date('H:i',$time)."</td></tr>";
