@@ -20,7 +20,7 @@
 <a href=\"#\" onclick=\"return Travian.Game.iPopup(".$i.",1);\">
 <img class=\"unit u".$i."\" src=\"img/x.gif\" alt=\"".$technology->getUnitName($i)."\"></a> 
 <a href=\"#\" onclick=\"return Travian.Game.iPopup(".$i.",1);\">".$technology->getUnitName($i)."</a>
-<span class=\"level\">szint ".$abdata['b'.$j]."</span>
+<span class=\"level\">Level ".$abdata['b'.$j]."</span>
 </div>";
 if($abdata['b'.$j] != 20) {
 echo "<div class=\"costs\">
@@ -53,11 +53,11 @@ echo "<div class=\"clear\"></div>
 				else if (${'ab'.$i}[$abdata['b'.$j]+1]['wood'] > $village->awood || ${'ab'.$i}[$abdata['b'.$j]+1]['clay'] > $village->aclay || ${'ab'.$i}[$abdata['b'.$j]+1]['iron'] > $village->airon || ${'ab'.$i}[$abdata['b'.$j]+1]['crop'] > $village->acrop) {
 					if($village->getProd("crop")>0){
 						$time = $technology->calculateAvaliable(12,${'ab'.$i}[$abdata['b'.$j]+1]);
-			            echo "<div class=\"contractLink\"><span class=\"none\">Elegendő nyersanyag: ".$time[0]." ".$time[1]."</span></div>";
+			            echo "<div class=\"contractLink\"><span class=\"none\">Enough Resources: ".$time[0]." ".$time[1]."</span></div>";
 					} else {
 						echo "<div class=\"contractLink\"><span class=\"none\">Wheat production is negative, there will never be enough resources</span></div>";
 					}
-		            echo "<div class=\"contractLink\"><span class=\"none\">few resources</span></div>";
+		            //echo "<div class=\"contractLink\"><span class=\"none\">few resources</span></div>";
 				}
 				else if ($building->getTypeLevel(12) <= $abdata['b'.$j]) {
 					echo "<div class=\"contractLink\"><span class=\"none\">Improve the blacksmith</span></div>";

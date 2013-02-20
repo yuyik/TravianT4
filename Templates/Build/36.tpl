@@ -1,4 +1,4 @@
-﻿<h1 class="titleInHeader">Trapper<span class="level">Szint <?php echo $village->resarray['f'.$id]; ?></span></h1>
+﻿<h1 class="titleInHeader">Trapper<span class="level">Level <?php echo $village->resarray['f'.$id]; ?></span></h1>
 
     <div id="build" class="gid36">
     <div class="build_desc">

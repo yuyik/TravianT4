@@ -122,9 +122,9 @@ break;
 	if($query == 0){
     	echo '<div class="nextOases none">1. Next Oasis from Hero´s Mansion 10</div><div class="nextOases none">2. Next Oasis from Hero´s Mansion 15</div><div class="nextOases none">3. Next Oasis from Hero´s Mansion 20</div>';
 	}if($query == 1){
-    	echo '<div class="nextOases none">2. Next Oasis from Hero´s Mansion 20</div><div class="nextOases none">3. آبادی بعدی از Hősök háza Szint 20</div>';
+    	echo '<div class="nextOases none">2. Next Oasis from Hero´s Mansion 20</div><div class="nextOases none">3. آبادی بعدی از Hősök háza Level 20</div>';
 	}elseif($query == 2){
-    	echo '<div class="nextOases none">3. آبادی بعدی از Hősök háza Szint 20</div>';
+    	echo '<div class="nextOases none">3. آبادی بعدی از Hősök háza Level 20</div>';
     }else{
     	echo '';
     }

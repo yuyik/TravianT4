@@ -34,7 +34,7 @@ for($i=32;$i<=39;$i++) {
                 }
                    else if(${'r'.$i}['wood'] > $village->awood || ${'r'.$i}['clay'] > $village->aclay || ${'r'.$i}['iron'] > $village->airon || ${'r'.$i}['crop'] > $village->acrop) {
                    	$time = $technology->calculateAvaliable($i);
-                    echo "<br><span class=\"none\">Elegendő nyersanyag ".$time[0]." at ".$time[1]."</span></div></td>";
+                    echo "<br><span class=\"none\">Enough Resources ".$time[0]." at ".$time[1]."</span></div></td>";
                     echo "<td class=\"none\">
 					<div class=\"none\">Kevés<br>a nyersanyag</div>
 				</td></tr>";
@@ -68,43 +68,43 @@ echo "<td colspan=\"2\"><div class=\"none\" align=\"center\">Nincs fejleszthető
      if(!$technology->meetRRequirement(33) && !$technology->getTech(33)) {
      echo"<tr><td class=\"desc\"><div class=\"tit\"><img class=\"unit u33\" title=\"".U33."\" alt=\"".U33."\" src=\"img/x.gif\"/>
 			<a onclick=\"return Popup(33, 1);\" href=\"#\">".U33."</a></div></td><td class=\"cond\"><a href=\"#\" onclick=\"return Popup(22, 4);\">Akadémia </a>
-			<span title=\"+2\">Szint 3</span><br /><a href=\"#\" onclick=\"return Popup(12, 4);\">Kovács </a><span title=\"+1\">Szint 1</span>	</td></tr>";
+			<span title=\"+2\">Level 3</span><br /><a href=\"#\" onclick=\"return Popup(12, 4);\">Kovács </a><span title=\"+1\">Level 1</span>	</td></tr>";
      }
      if(!$technology->meetRRequirement(34) && !$technology->getTech(34)) {
      echo "<tr><td class=\"desc\"><div class=\"tit\"><img class=\"unit u34\" title=\"".U34."\" alt=\"".U34."\" src=\"img/x.gif\"/>
 		 	<a onclick=\"return Popup(34, 1);\" href=\"#\">".U34."</a></div></td><td class=\"cond\">
-            <a href=\"#\" onclick=\"return Popup(22, 4);\">Akadémia </a><span title=\"+2\">Szint 1</span><br /><a href=\"#\" onclick=\"return Popup(15, 4);\">Főépület</a>
-			<span title=\"+3\">Szint 5</span>	</td></tr>";
+            <a href=\"#\" onclick=\"return Popup(22, 4);\">Akadémia </a><span title=\"+2\">Level 1</span><br /><a href=\"#\" onclick=\"return Popup(15, 4);\">Főépület</a>
+			<span title=\"+3\">Level 5</span>	</td></tr>";
      }
      if(!$technology->meetRRequirement(35) && !$technology->getTech(35)) {
      echo "<tr><td class=\"desc\"><div class=\"tit\"><img class=\"unit u35\" title=\"".U35."\" alt=\"".U35."\" src=\"img/x.gif\"/>
 			<a onclick=\"return Popup(35, 1);\" href=\"#\">".U35."</a></div></td><td class=\"cond\">
-			<a href=\"#\" onclick=\"return Popup(22, 4);\">Akadémia </a><span title=\"+2\">Szint 5</span><br /><a href=\"#\" onclick=\"return Popup(20, 4);\">Istálló </a>
-			<span title=\"+5\">Szint 5</span>	</td></tr>";
+			<a href=\"#\" onclick=\"return Popup(22, 4);\">Akadémia </a><span title=\"+2\">Level 5</span><br /><a href=\"#\" onclick=\"return Popup(20, 4);\">Istálló </a>
+			<span title=\"+5\">Level 5</span>	</td></tr>";
      }
      if(!$technology->meetRRequirement(36) && !$technology->getTech(36)) {
      echo "<tr><td class=\"desc\"><div class=\"tit\"><img class=\"unit u36\" title=\"".U36."\" alt=\"".U36."\" src=\"img/x.gif\"/>
 			<a onclick=\"return Popup(36, 1);\" href=\"#\">".U36."</a></div></td><td class=\"cond\">
-			<a href=\"#\" onclick=\"return Popup(22, 4);\">Akadémia </a><span title=\"+2\">Szint 15</span><br /><a href=\"#\" onclick=\"return Popup(20, 4);\">
-            Istálló </a><span title=\"+3\">Szint 10</span>	</td></tr>";
+			<a href=\"#\" onclick=\"return Popup(22, 4);\">Akadémia </a><span title=\"+2\">Level 15</span><br /><a href=\"#\" onclick=\"return Popup(20, 4);\">
+            Istálló </a><span title=\"+3\">Level 10</span>	</td></tr>";
      }
      if(!$technology->meetRRequirement(17) && !$technology->getTech(17)) {
      echo "
 			<tr><td class=\"desc\"><div class=\"tit\"><img class=\"unit u37\" title=\"".U37."\" alt=\"".U37."\" src=\"img/x.gif\"/>
 			<a onclick=\"return Popup(37, 1);\" href=\"#\">".U37."</a></div></td><td class=\"cond\"><a href=\"#\" onclick=\"return Popup(22, 4);\">Akadémia </a>
-			<span title=\"+7\">Szint 10</span><br /><a href=\"#\" onclick=\"return Popup(21, 4);\">Műhely </a><span title=\"+1\">Szint 1</span></td></tr>";
+			<span title=\"+7\">Level 10</span><br /><a href=\"#\" onclick=\"return Popup(21, 4);\">Műhely </a><span title=\"+1\">Level 1</span></td></tr>";
      }
      if(!$technology->meetRRequirement(38) && !$technology->getTech(38)) {
      echo "<tr><td class=\"desc\"><div class=\"tit\"><img class=\"unit u38\" title=\"".U38."\" alt=\"".U38."\" src=\"img/x.gif\"/>
             <a onclick=\"return Popup(38, 1);\" href=\"#\">".U38."</a></div></td><td class=\"cond\"><a href=\"#\" onclick=\"return Popup(21, 4);\">Műhely</a>
-            <span title=\"+10\">Szint 10</span><br /><a href=\"#\" onclick=\"return Popup(22, 4);\">Akadémia </a><span title=\"+12\">Szint 15</span>	</td>
+            <span title=\"+10\">Level 10</span><br /><a href=\"#\" onclick=\"return Popup(22, 4);\">Akadémia </a><span title=\"+12\">Level 15</span>	</td>
 			</tr>";
      }
      if(!$technology->meetRRequirement(39) && !$technology->getTech(39)) {
      echo "	<tr><td class=\"desc\"><div class=\"tit\"><img class=\"unit u39\" title=\"".U33."\" alt=\"".U33."\" src=\"img/x.gif\"/>
 			<a onclick=\"return Popup(39, 1);\" href=\"#\">".U39."</a></div></td><td class=\"cond\">
-			<a href=\"#\" onclick=\"return Popup(16, 4);\">Gyülekezőtér </a><span title=\"+4\">Szint 5</span><br /><a href=\"#\" onclick=\"return Popup(22, 4);\">
-            Akadémia </a><span title=\"+17\">Szint 20</span></td></tr>";
+			<a href=\"#\" onclick=\"return Popup(16, 4);\">Gyülekezőtér </a><span title=\"+4\">Level 5</span><br /><a href=\"#\" onclick=\"return Popup(22, 4);\">
+            Akadémia </a><span title=\"+17\">Level 20</span></td></tr>";
      }
      echo " <script type=\"text/javascript\">
 		//<![CDATA[
