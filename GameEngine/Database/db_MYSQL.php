@@ -1041,9 +1041,9 @@
         	Function to update alliance permissions
         	References: 
         	*****************************************/
-        	function updateAlliPermissions($uid, $aid, $rank, $opt1, $opt2, $opt3, $opt4, $opt5, $opt6, $opt7) {
+        	function updateAlliPermissions($uid, $aid, $rank, $opt1, $opt2, $opt3, $opt4, $opt5, $opt6, $opt7, $opt8) {
 
-        		$q = "UPDATE " . TB_PREFIX . "ali_permission SET rank = '$rank', opt1 = '$opt1', opt2 = '$opt2', opt3 = '$opt3', opt4 = '$opt4', opt5 = '$opt5', opt6 = '$opt6', opt7 = '$opt7' where uid = $uid && alliance =$aid";
+        		$q = "UPDATE " . TB_PREFIX . "ali_permission SET rank = '$rank', opt1 = '$opt1', opt2 = '$opt2', opt3 = '$opt3', opt4 = '$opt4', opt5 = '$opt5', opt6 = '$opt6', opt7 = '$opt7', opt8 = $opt8 where uid = $uid && alliance =$aid";
         		return mysql_query($q, $this->connection);
         	}
 
@@ -1237,6 +1237,12 @@
 
         	function getInvitation($uid) {
         		$q = "SELECT * FROM " . TB_PREFIX . "ali_invite where uid = $uid";
+        		$result = mysql_query($q, $this->connection);
+        		return $this->mysql_fetch_all($result);
+        	}
+            
+        	function getInvitation2($uid, $aid) {
+        		$q = "SELECT * FROM " . TB_PREFIX . "ali_invite where uid = $uid AND alliance = $aid";
         		$result = mysql_query($q, $this->connection);
         		return $this->mysql_fetch_all($result);
         	}

@@ -12,20 +12,20 @@ $allianceinfo = $database->getAlliance($aid);
 echo "<h1>Alliance - ".$allianceinfo['tag']."</h1>";
 include("alli_menu.tpl"); 
 ?>
-<h4 class="round">Assign to Position</h4>
+<h4 class="round">Assign Position</h4>
 <p>You can set up different permissions for each alliance member and assign positions</p>
 <form method="post" action="allianz.php">
 			<table cellpadding="1" cellspacing="1" id="memberAdministration">
 				<thead>
 					<tr>
 						<th>Name</th>
-						<th><img src="img/x.gif" class="allyRight allyRightPosition" alt="اعطای مقام" title="Assign"></th>
-						<th><img src="img/x.gif" class="allyRight allyRightDisband" alt="اخراج بازیکن" title="Kick"></th>
-						<th><img src="img/x.gif" class="allyRight allyRightDescription" alt="تغییر توضیحات اتحاد" title="Change Descriptionد"></th>
-						<th><img src="img/x.gif" class="allyRight allyRightDiplomacy" alt="سیاست اتحاد" title="Allince Diplomacy"></th>
-						<th><img src="img/x.gif" class="allyRight allyRightMessage" alt="ارسال پیام (IGM) به تمامی اعضای اتحاد" title="(IGMs) to the whole alliance "></th>
-						<th><img src="img/x.gif" class="allyRight allyRightInvite" alt="دعوت یک بازیکن به اتحاد" title="Invite"></th>
-						<th><img src="img/x.gif" class="allyRight allyRightForum" alt="مدیریت فروم" title="Forum"></th>
+						<th><img src="img/x.gif" class="allyRight allyRightPosition" alt="Assign" title="Assign"></th>
+						<th><img src="img/x.gif" class="allyRight allyRightDisband" alt="Kick" title="Kick"></th>
+						<th><img src="img/x.gif" class="allyRight allyRightDescription" alt="Change Description" title="Change Description"></th>
+						<th><img src="img/x.gif" class="allyRight allyRightDiplomacy" alt="Alliance Diplomacy" title="Alliance Diplomacy"></th>
+						<th><img src="img/x.gif" class="allyRight allyRightMessage" alt="IGMs to the whole alliance" title="IGMs to the whole alliance"></th>
+						<th><img src="img/x.gif" class="allyRight allyRightInvite" alt="Invite" title="Invite"></th>
+						<th><img src="img/x.gif" class="allyRight allyRightForum" alt="Forum" title="Forum"></th>
 						<th>Position Name</th>
 					</tr>
 				</thead>
