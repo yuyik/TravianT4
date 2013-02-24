@@ -47,10 +47,10 @@ echo "&nbsp;&nbsp;<button ".$disable." type=\"button\" value=\"npc\" class=\"ico
 </div></div>
 <?php
     if($bindicate == 2) {
-   		echo "<span class=\"none\">Currently, we have managed to build.</span></div>";
+   		echo "<span class=\"none\">Our Builders are busy.</span></div>";
     }
     else if($bindicate == 3) {
-    	echo "<span class=\"none\">Currently, we have managed to build.</span></div>";
+    	echo "<span class=\"none\">Our Builders are busy.</span></div>";
     }
     else if($bindicate == 4) {
     	echo "<span class=\"none\">Food Shortage: Build a Wheat field</span></div>";
