@@ -2,7 +2,7 @@
 <div id="build" class="gid5">
 <div class="build_desc">
 <a href="#" onClick="return Travian.Game.iPopup(5,4);" class="build_logo">
-	<img class="building big white g5" src="img/x.gif" alt="Fűrészüzem" title="Fűrészüzem" />
+	<img class="building big white g5" src="img/x.gif" alt="Sawmill" title="Sawmill" />
 </a>
 The wood produced by the woodcutter is turned into boards in the sawmill. Depending on level, it can raise wood production by up to 25 percent.</div>
 
