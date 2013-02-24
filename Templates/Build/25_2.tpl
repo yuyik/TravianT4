@@ -2,7 +2,7 @@
 <div id="build" class="gid25">
 <div class="build_desc">
         <a href="#" onClick="return Travian.Game.iPopup(25,4, 'gid');" class="build_logo">
-        <img class="building big white g25" src="img/x.gif" alt="Rezidencia" title="Rezidencia" /> </a>
+        <img class="building big white g25" src="img/x.gif" alt="Residence" title="Residence" /> </a>
         The residence is a small palace, where the king or queen lives when (s)he visits the village. The residence protects the village against enemies who want to conquer it.
 .</div>
 

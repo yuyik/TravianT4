@@ -2,7 +2,7 @@
 <div id="build" class="gid25">
 <div class="build_desc">
         <a href="#" onClick="return Travian.Game.iPopup(25,4, 'gid');" class="build_logo">
-        <img class="building big white g25" src="img/x.gif" alt="Rezidencia" title="Rezidencia" /> </a>
+        <img class="building big white g25" src="img/x.gif" alt="Residence" title="Residence" /> </a>
         In order to expand your nation you need culture points. These accumulate over time from your buildings, and faster at higher levels.</div>
 
 <?php
