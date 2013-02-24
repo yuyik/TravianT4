@@ -6,7 +6,7 @@ $uprequire = $building->resourceRequired($id,$bid);
 <h2>Sawmill</h2>
 <div class="build_desc">
 	<a href="#" onclick="return Travian.Game.iPopup(5,4);" class="build_logo">
-		<img class="building big white g5" src="img/x.gif" alt="چوب بری">
+		<img class="building big white g5" src="img/x.gif" alt="Sawmill" title="Sawmill">
 	</a>
 	Here wood delivered by your lumberjacks is processed. Based on its level your sawmill can increase your wood production by up to 25 percent.</div>
 <div id="contract" class="contract contractNew contractWrapper">
