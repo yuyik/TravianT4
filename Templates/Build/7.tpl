@@ -1,10 +1,10 @@
-﻿<h1 class="titleInHeader">Iron Foundary <span class="level"> Level <?php echo $village->resarray['f'.$id]; ?></span></h1>
+﻿<h1 class="titleInHeader">Iron Foundry <span class="level"> Level <?php echo $village->resarray['f'.$id]; ?></span></h1>
 <div id="build" class="gid7">
 <div class="build_desc">
 <a href="#" onClick="return Travian.Game.iPopup(7,4);" class="build_logo">
-	<img class="building big white g7" src="img/x.gif" alt="Vasöntöde" title="Vasöntöde" />
+	<img class="building big white g7" src="img/x.gif" alt="Iron Foundry" title="Iron Foundry" />
 </a>
-Iron is melted here. Based on its level your Iron Foundry can increase your iron production up to 25 percent.</div>
+Iron is smelted in the iron foundry. Based on its level your Iron Foundry can increase your iron production up to 25 percent.</div>
 
 
 	<table cellpadding="1" cellspacing="1" id="build_value">

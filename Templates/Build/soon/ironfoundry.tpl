@@ -6,9 +6,9 @@ $uprequire = $building->resourceRequired($id,$bid);
 <h2>Iron Foundry</h2>
 <div class="build_desc">
 	<a href="#" onclick="return Travian.Game.iPopup(7,4);" class="build_logo">
-		<img class="building big white g7" src="img/x.gif" alt="ذوب آهن">
+		<img class="building big white g7" src="img/x.gif" alt="Iron Foundry" title="Iron Foundry">
 	</a>
-	Iron is melted here. Based on its level your iron foundry can increase your iron production by up to 25 percent.</div>
+	Iron is smelted in the iron foundry. Based on its level your iron foundry can increase your iron production by up to 25 percent.</div>
 <div id="contract" class="contract contractNew contractWrapper">
 	<div class="contractText">Cost:</div>
 	<div class="contractCosts">
