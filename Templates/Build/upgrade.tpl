@@ -1,9 +1,9 @@
 ﻿<?php
 $bindicate = $building->canBuild($id,$village->resarray['f'.$id.'t']);
 if($bindicate == 1) {
-	echo "<p><span class=\"none\"><b><!--".$building->procResType($village->resarray['f'.$id.'t'])."--> Teljesen kiépítve</b></span></p>";
+	echo "<p><span class=\"none\"><b><!--".$building->procResType($village->resarray['f'.$id.'t'])."--> Fully upgraded</b></span></p>";
 } else if($bindicate == 10) {
-	echo "<p><span class=\"none\"><b>".$building->procResType($village->resarray['f'.$id.'t'])." Teljesen kiépítve</b></span></p>";
+	echo "<p><span class=\"none\"><b>".$building->procResType($village->resarray['f'.$id.'t'])." Fully upgraded</b></span></p>";
 } else if($bindicate == 11) {
 	echo "<p><span class=\"none\"><b>".$building->procResType($village->resarray['f'.$id.'t'])." Le lett rombolva</b></span></p>";
 } else {
