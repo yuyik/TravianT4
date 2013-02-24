@@ -2,7 +2,7 @@
 <div id="build" class="gid6">
 <div class="build_desc">
 <a href="#" onClick="return Travian.Game.iPopup(6,4);" class="build_logo">
-	<img class="building big white g6" src="img/x.gif" alt="Agyagégető" title="Agyagégető" />
+	<img class="building big white g6" src="img/x.gif" alt="Brickworks" title="Brickworks" />
 </a>
 Here clay is processed into bricks. Based on its level your Brickyard can increase your clay production up to 25 percent.</div>
 
