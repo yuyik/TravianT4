@@ -63,7 +63,7 @@ for($i=0;$i<=8;$i++) {
     	}
 	}
 }
-echo "<h1 dir=\"rtl\">Térkép</h1>";
+echo "<h1 dir=\"rtl\">Map</h1>";
 $row = 0;
 $coorindex = 0;
 ?>
