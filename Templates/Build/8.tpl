@@ -2,11 +2,10 @@
 <div id="build" class="gid8">
 <div class="build_desc">
 <a href="#" onClick="return Travian.Game.iPopup(8,4);" class="build_logo">
-	<img class="building big white g8" src="img/x.gif" alt="Malom" title="Malom" />
+	<img class="building big white g8" src="img/x.gif" alt="Grain Mill" title="Grain Mill" />
 </a>
-A malomban a búzát lisztté őrlik. Minél magasabb szintre van kiépítve a búzamalom, annál nagyobb lesz a búzatermesztés növekedési százaléka.
-
-Maximálisan 25 százalékkal növekedhet a búzatermesztés.</div>
+The Grain Mill enhances your crop production by 5% for each level built, up to a max of 25%. Use in conjunction with the Bakery for an overall crop production increase of up to 50%
+</div>
 
 
 	<table cellpadding="1" cellspacing="1" id="build_value">
