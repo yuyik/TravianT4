@@ -215,7 +215,12 @@ class Building {
 			case 42: $build = "Great Workshop"; break;
 			default: $build = "Error"; break;
 		}
-		return addslashes($build);
+        /*
+         * Don't think we need to add slashes here?
+         * addslashes line left in but commented out for easy reversion if it breaks anything
+         */
+		//return addslashes($build);
+        return $build;
 	}
 	
 	private function loadBuilding() {
