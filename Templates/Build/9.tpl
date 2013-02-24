@@ -2,7 +2,7 @@
 <div id="build" class="gid9">
 <div class="build_desc">
 <a href="#" onClick="return Travian.Game.iPopup(9,4);" class="build_logo">
-	<img class="building big white g9" src="img/x.gif" alt="Pékség" title="Pékség" />
+	<img class="building big white g9" src="img/x.gif" alt="Bakery" title="Bakery" />
 </a>
 Here the flour produced in your mill is used to bake bread. In conjunction with the grain mill the increase in crop production can go up to 50 percent.</div>
 
