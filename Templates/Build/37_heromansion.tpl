@@ -6,10 +6,10 @@ if($_GET['gid']==37 && isset($_GET['del'])){
 
 ?>
 <div class="clear"></div>
-<h4>Elfoglalt oázisok <?php echo $village->vname; ?> faluval</h4>
+<h4>Oasis occupied by <?php echo $village->vname; ?> village</h4>
 
 <table id="oasesOwned" cellpadding="1" cellspacing="1">
-	<thead><tr><td>Type</td><td>lOYALTY</td><td>Conquered</td><td>Coordinates</td><td>Resources</td></tr></thead>
+	<thead><tr><td>Type</td><td>Loyalty</td><td>Conquered</td><td>Coordinates</td><td>Resources</td></tr></thead>
 	<tbody>
 <?php
 $prefix = "".TB_PREFIX."odata";
@@ -120,18 +120,18 @@ break;
                 </tbody></table>
 <?php
 	if($query == 0){
-    	echo '<div class="nextOases none">1. Next Oasis from Hero´s Mansion 10</div><div class="nextOases none">2. Next Oasis from Hero´s Mansion 15</div><div class="nextOases none">3. Next Oasis from Hero´s Mansion 20</div>';
+    	echo '<div class="nextOases none">1. Next Oasis from Hero´s Mansion Level 10</div><div class="nextOases none">2. Next Oasis from Hero´s Mansion Level 15</div><div class="nextOases none">3. Next Oasis from Hero´s Mansion Level 20</div>';
 	}if($query == 1){
-    	echo '<div class="nextOases none">2. Next Oasis from Hero´s Mansion 20</div><div class="nextOases none">3. آبادی بعدی از Hősök háza Level 20</div>';
+    	echo '<div class="nextOases none">2. Next Oasis from Hero´s Mansion Level 15</div><div class="nextOases none">3. Next Oasis from Hero´s Mansion Level 20</div>';
 	}elseif($query == 2){
-    	echo '<div class="nextOases none">3. آبادی بعدی از Hősök háza Level 20</div>';
+    	echo '<div class="nextOases none">3. Next Oasis from Hero´s Mansion Level 20</div>';
     }else{
     	echo '';
     }
 ?>
 
 
-<h4 class="spacer">Other oasis </h4>
+<h4 class="spacer">Other oases </h4>
 
 
 
@@ -200,9 +200,10 @@ break;
             if($basearray['conqured']==0){
                 $oVillage = "-";
             }else{
-                $oVillage = $database->getVillage($basearray['conqured']);
+                $tempVillage = $database->getVillage($basearray['conqured']);
+                $oVillage = $tempVillage['name'];
             }
-            echo "<td class=\"vil\">".$oVillage['name']."</td>";
+            echo "<td class=\"vil\">".$oVillage."</td>";
             echo "<td class=\"coords\">";
             echo "<a href=\"karte.php?z=".$row2['id']."\">
                   <span class=\"coordinates coordinatesAligned\"><span class=\"coordinatesWrapper\">
