@@ -50,7 +50,7 @@ if($village->resarray['f'.$t.'t'] != 0) {
 $title = "<div style=color:#FFF><b>".$building->procResType($village->resarray['f'.$t.'t'])."</b></div> Level ".$village->resarray['f'.$t];
 }
 else {
-    $title = "Rally Point";
+    $title = "Building Site";
     if(($t == 39) && ($village->resarray['f'.$t] == 0)) {
         $title = "Rally Point building site";
         }
