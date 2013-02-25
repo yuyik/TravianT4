@@ -81,7 +81,7 @@ $xcount +=1;
 }
 }
 }
-echo "<h1 dir=\"rtl\">Térkép (<span id=\"x\">".$x."</span>|<span id=\"y\">".$y."</span>)</h1>";
+echo "<h1 dir=\"rtl\">Map (<span id=\"x\">".$x."</span>|<span id=\"y\">".$y."</span>)</h1>";
 $row = 0;
 $coorindex = 0;
 ?>
@@ -164,13 +164,13 @@ case 6:
 $tt =  "<img class='r2' src='img/x.gif' /> Clay 25%<br><img class='r4' src='img/x.gif' /> Crop 25%";
 break;
 case 7:
-$tt =  "<img class='r3' src='img/x.gif' /> Vas 25%";
+$tt =  "<img class='r3' src='img/x.gif' /> Iron 25%";
 break;
 case 8:
-$tt =  "<img class='r3' src='img/x.gif' /> Vas 50%";
+$tt =  "<img class='r3' src='img/x.gif' /> Iron 50%";
 break;
 case 9:
-$tt =  "<img class='r3' src='img/x.gif' /> Vas 25%<br><img class='r4' src='img/x.gif' /> Crop 25%";
+$tt =  "<img class='r3' src='img/x.gif' /> Iron 25%<br><img class='r4' src='img/x.gif' /> Crop 25%";
 break;
 case 10:
 case 11:
@@ -277,7 +277,7 @@ break;
             <img src="img/x.gif" title="move up"></a>
 			<a href="karte2.php?z=<?php echo $generator->getBaseID($south1,$y);?>" id="navigationMoveDown" class="moveDown">
             <img src="img/x.gif" title="move down"></a>
-            <a href="karte.php?z=<?php echo $_GET['z']; ?>" id="navigationFullScreen" class="viewFullScreen normal"><img src="img/x.gif" alt="normál" title="normál térkép"></a>
+            <a href="karte.php?z=<?php echo $_GET['z']; ?>" id="navigationFullScreen" class="viewFullScreen normal"><img src="img/x.gif" alt="normál" title="Normal Map"></a>
                        
 		</div>
 		<form id="mapCoordEnter" name="map_coords" method="post" action="karte.php" class="toolbar" style="margin-bottom: -15px;">

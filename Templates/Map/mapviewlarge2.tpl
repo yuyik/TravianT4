@@ -65,7 +65,7 @@ $xcount +=1;
 }
 }
 ?>
-<div id="mbig"><div id="lightframe"><div id="darkframe"><a id="map_popclose" href="karte.php?z=<?php echo $_GET['z'];?>"><img src="img/x.gif" alt="Térkép bezárása" title="Térkép bezárása"></a><h1>Koordináta(<span id="x"><?php echo $x;?></span>|<span id="y"><?php echo $y;?></span>)</h1><div id="map"><script type="text/javascript">
+<div id="mbig"><div id="lightframe"><div id="darkframe"><a id="map_popclose" href="karte.php?z=<?php echo $_GET['z'];?>"><img src="img/x.gif" alt="Close Map" title="Close Map"></a><h1>Koordináta(<span id="x"><?php echo $x;?></span>|<span id="y"><?php echo $y;?></span>)</h1><div id="map"><script type="text/javascript">
 
 <!--
 var text_k = {}
@@ -79,7 +79,7 @@ text_k.freie_oase = 'Abandoned valley';
 var text_x = {}
 text_x.r1 = 'Lumber';
 text_x.r2 = 'Clay';
-text_x.r3 = 'Vas';
+text_x.r3 = 'Iron';
 text_x.r4 = 'Crop';
 
 // -->
