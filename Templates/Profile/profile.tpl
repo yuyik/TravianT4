@@ -86,7 +86,7 @@ INDELING CATEGORIEEN:
 				
 				
 	foreach($varmedal as $medal) {
-	$titel="Medál";
+	$titel="Medal";
 	switch ($medal['categorie']) {
     case "1":
         $titel="Top 10 Attackers of the week";
