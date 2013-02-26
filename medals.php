@@ -472,9 +472,11 @@ if (mysql_num_rows(mysql_query("SELECT id FROM ".TB_PREFIX."users WHERE access =
      mysql_query("UPDATE ".TB_PREFIX."alidata SET ap=0, dp=0, RR=0, clp=0 WHERE id = ".$row[0]."");
     }    
 	}
-
-include ("Templates/head.tpl");
-include ("Templates/body.tpl");
+/**
+ * @todo Find (or create) proper templates for this
+ */
+//include ("Templates/head.tpl");
+//include ("Templates/body.tpl");
 ?>
 <div id="content"  class="login">
 <?php
@@ -514,7 +516,14 @@ Click <a href="?giveout">here</a>, to give the medals away for <b>week <?php ech
     </div>
     <div class="footer-stopper outgame"></div>
     <div class="clear"></div>
-	<?php include("Templates/footer.tpl"); ?>
+	<?php 
+        /**
+         * @todo This will need a proper menu, we can't use Templates/footer.tpl
+         * Temporary link back to admin.php
+         */
+        //include("Templates/footer.tpl");
+        echo '<a href="/admin.php">Back To Admin Page</a>';
+    ?>
     <div id="ce"></div>
 </body>
 </html>
