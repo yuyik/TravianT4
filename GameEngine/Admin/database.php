@@ -6,10 +6,10 @@
 ## --------------------------------------------------------------------------- ##
 ##                                                                             ##
 ##  Project:       ZravianX                                                    ##
-##  Version:       2011.11.07                                                  ##
+##  Version:       2013.26.02                                                  ##
 ##  Filename:      GameEngine/Admin/database.php                               ##
 ##  Developed by:  Dzoki                                                       ##
-##  Edited by:     ZZJHONS                                                     ##
+##  Edited by:     ZZJHONS, KFCSpike                                           ##
 ##  License:       Creative Commons BY-NC-SA 3.0                               ##
 ##  Copyright:     ZravianX (c) 2011 - All rights reserved                     ##
 ##  URLs:          http://zravianx.zzjhons.com                                 ##
@@ -17,8 +17,8 @@
 ##                                                                             ##
 #################################################################################
 
-include("../GameEngine/config.php");
-include("../GameEngine/Data/buidata.php");
+include("GameEngine/config.php");
+include("GameEngine/Data/buidata.php");
 
 class adm_DB {
 	var $connection;
