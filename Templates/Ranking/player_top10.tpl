@@ -32,7 +32,7 @@
 				</div><div class="clear"></div>
 </div>
 <div id="statLeft" class="top10Wrapper">
-<h4 class="round small  top top10_offs">Top Attackers</h4>
+<h4 class="round small  top top10_offs">Top 10 Attackers</h4>
 <table cellpadding="1" cellspacing="1" id="top10_offs" class="top10 row_table_data">
 	<thead>
 		<tr>
@@ -84,7 +84,7 @@
     $result = mysql_query("SELECT * FROM ".TB_PREFIX."users WHERE id > 3 ORDER BY dp DESC, id ASC Limit 10");
     $result2 = mysql_query("SELECT * FROM ".TB_PREFIX."users WHERE username = '".$session->username."' ORDER BY dp DESC, id ASC Limit 1");
 ?>
-<h4 class="round small spacer top top10_defs">Defender</h4>
+<h4 class="round small spacer top top10_defs">Top 10 Defenders</h4>
 <table cellpadding="1" cellspacing="1" id="top10_defs" class="top10 row_table_data">
 	<thead>
 		<tr>
@@ -139,7 +139,7 @@
     $result = mysql_query("SELECT * FROM ".TB_PREFIX."users WHERE id>3 ORDER BY `clp` DESC, id ASC Limit 10");
     $result2 = mysql_query("SELECT * FROM ".TB_PREFIX."users WHERE username = '".$session->username."' ORDER BY `clp` DESC, id ASC Limit 1");
 ?>
-<h4 class="round small  top top10_climbers">climber</h4>
+<h4 class="round small  top top10_climbers">Top 10 Climbers</h4>
 <table cellpadding="1" cellspacing="1" id="top10_climbers" class="top10 row_table_data">
 	<thead>
 		<tr>
@@ -191,7 +191,7 @@
     $result = mysql_query("SELECT * FROM ".TB_PREFIX."users WHERE id>3 ORDER BY RR DESC, id ASC Limit 10");
     $result2 = mysql_query("SELECT * FROM ".TB_PREFIX."users WHERE username = '".$session->username."' ORDER BY RR DESC, id ASC Limit 1");
 ?>
-<h4 class="round small spacer top top10_raiders">Raiders</h4>
+<h4 class="round small spacer top top10_raiders">Top 10 Raiders</h4>
 <table cellpadding="1" cellspacing="1" id="top10_raiders" class="top10 row_table_data">
 	<thead>
 		<tr>

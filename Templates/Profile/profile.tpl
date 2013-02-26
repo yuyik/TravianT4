@@ -64,7 +64,7 @@ $varmedal = $database->getProfileMedal($session->uid);  ?>
 			</thead>
 			<tbody>
 									<tr>
-													<td class="typ">Kezdővédelem</td>
+													<td class="typ">Beginner's Protection</td>
 													<td class="ra"></td>
 													<td class="we"></td>
 													<td class="bb">[#0]</td>
@@ -72,16 +72,16 @@ $varmedal = $database->getProfileMedal($session->uid);  ?>
             <?php
 /******************************
 INDELING CATEGORIEEN:
-===============================
-== 1. Aanvallers top 10      ==
-== 2. Defence top 10         ==
-== 3. Klimmers top 10        ==
-== 4. Overvallers top 10     ==
-== 5. In att en def tegelijk ==
-== 6. in top 3 - aanval      ==
-== 7. in top 3 - verdediging ==
-== 8. in top 3 - klimmers    ==
-== 9. in top 3 - overval     ==
+=======================================
+== 1. Attackers top 10               ==
+== 2. Defenders top 10               ==
+== 3. Climbers top 10                ==
+== 4. Raiders top 10                 ==
+== 5. Defenders and Attackers top 10 ==
+== 6. in top 3 - Attackers           ==
+== 7. in top 3 - Defenders           ==
+== 8. in top 3 - Climbers            ==
+== 9. in top 3 - Raiders             ==
 ******************************/				
 				
 				
@@ -89,40 +89,40 @@ INDELING CATEGORIEEN:
 	$titel="Medál";
 	switch ($medal['categorie']) {
     case "1":
-        $titel="مهاجمین هفته";
+        $titel="Top 10 Attackers of the week";
         break;
     case "2":
-        $titel="مدافعین هفته";
+        $titel="Top 10 Defenders of the week";
         break;
     case "3":
-        $titel="پیشرفت کننده های هفته";
+            $titel="Top 10 Climbers of the week";
         break;
     case "4":
-        $titel="غارتگران هفته";
+        $titel="Top 10 Raiders of the week";
         break;
     case "5":
-        $titel="تاپ10 مهاجمین و مدافعین";
+        $titel="Top 10 in both Attackers and Defenders of the week";
         break;
     case "6":
-        $titel="مهاجمین هفته با ".$medal['points']." امتیاز بین 3 نفر اول.";
+        $titel="Top Attackers of the Week ".$medal['points']." top 3.";
         break;
     case "7":
-        $titel="مدافعین هفته با ".$medal['points']." امتیاز بین 3 نفر اول.";
+        $titel="Top Defenders of the Week ".$medal['points']." top 3.";
         break;
     case "8":
-        $titel="پیشرفت کننده های هفته با ".$medal['points']." امتیاز بین 3 نفر اول.";
+        $titel="Top Climbers of the Week ".$medal['points']." top 3.";
         break;
     case "9":
-        $titel="غارتگران هفته با ".$medal['points']." امتیاز بین 3 نفر اول.";
+        $titel="Top Raiders of the Week  ".$medal['points']." top 3.";
         break;
     case "10":
-        $titel="پیشرفت کننده های هفته";
+        $titel="Climbers of the Week";
         break;
     case "11":
-        $titel="پیشرفت کننده های هفته با ".$medal['points']." امتیاز بین 3 نفر اول.";
+        $titel="Climbers of the Week".$medal['points']." top 3.";
         break;
     case "12":
-        $titel="مهاجمین هفته با ".$medal['points']." امتیاز بین 10 نفر اول.";
+        $titel="Attackers of the Week ".$medal['points']." top 10.";
         break;
 	}			
 				 echo"<tr>
