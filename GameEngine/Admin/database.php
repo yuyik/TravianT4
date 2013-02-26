@@ -17,8 +17,11 @@
 ##                                                                             ##
 #################################################################################
 
-include("GameEngine/config.php");
-include("GameEngine/Data/buidata.php");
+/**
+ * Move these to the admin.php files so we can continue using both for now
+ */
+//include("GameEngine/config.php");
+//include("GameEngine/Data/buidata.php");
 
 class adm_DB {
 	var $connection;
