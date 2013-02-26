@@ -92,9 +92,9 @@ switch ($medal['categorie']) {
 }
 
 if(isset($bonus[$medal['id']])){
-$profiel = preg_replace("/\[#".$medal['id']."]/is",'<img src="'.$gpack.'img/t/'.$medal['img'].'.jpg" border="0" onmouseout="med_closeDescription()" onmousemove="med_mouseMoveHandler(arguments[0],\'<table><tr><td>'.$titel.'<br /><br />دریافت در هفته: '.$medal['week'].'</td></tr></table>\')">', $profiel, 1);
+$profiel = preg_replace("/\[#".$medal['id']."]/is",'<img src="'.$gpack.'img/t/'.$medal['img'].'.gif" border="0" onmouseout="med_closeDescription()" onmousemove="med_mouseMoveHandler(arguments[0],\'<table><tr><td>'.$titel.'<br /><br />دریافت در هفته: '.$medal['week'].'</td></tr></table>\')">', $profiel, 1);
 } else {
-$profiel = preg_replace("/\[#".$medal['id']."]/is",'<img src="'.$gpack.'img/t/'.$medal['img'].'.jpg" border="0" onmouseout="med_closeDescription()" onmousemove="med_mouseMoveHandler(arguments[0],\'<table><tr><td>دسته:</td><td>'.$titel.'</td></tr><tr><td>هفته:</td><td>'.$medal['week'].'</td></tr><tr><td>رتبه:</td><td>'.$medal['plaats'].'</td></tr><tr><td>'.$woord.':</td><td>'.$medal['points'].'</td></tr></table>\')">', $profiel, 1);
+$profiel = preg_replace("/\[#".$medal['id']."]/is",'<img src="'.$gpack.'img/t/'.$medal['img'].'.gif" border="0" onmouseout="med_closeDescription()" onmousemove="med_mouseMoveHandler(arguments[0],\'<table><tr><td>دسته:</td><td>'.$titel.'</td></tr><tr><td>هفته:</td><td>'.$medal['week'].'</td></tr><tr><td>رتبه:</td><td>'.$medal['plaats'].'</td></tr><tr><td>'.$woord.':</td><td>'.$medal['points'].'</td></tr></table>\')">', $profiel, 1);
 }
 }
 
