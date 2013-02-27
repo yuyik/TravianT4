@@ -72,40 +72,40 @@ INDELING CATEGORIEEN:
     $titel="Medal";
     switch ($medal['categorie']) {
     case "1":
-        $titel="Top 10 Attackers of the Week";
+        $titel="Attackers of the Week";
         break;
     case "2":
-        $titel="Top 10 Defenders of the Week";
+        $titel="Defenders of the Week";
         break;
     case "3":
-        $titel="Top 10 Climbers of the Week";
+        $titel="Climbers of the Week";
         break;
     case "4":
-        $titel="Top 10 Raiders of the Week";
+        $titel="Raiders of the Week";
         break;
     case "5":
-        $titel="Top 10 Raiders and Defenders of the Week";
+        $titel="Top 10 both attackers and defenders.";
         break;
     case "6":
-        $titel="بین 3 مهاجمین اول با ".$medal['points']." امتیاز";
+        $titel="Top Attackers of the Week ".$medal['points']." top 3.";
         break;
     case "7":
-        $titel="بین 3 مدافعین اول با ".$medal['points']." امتیاز";
+        $titel="Top Defenders of the Week ".$medal['points']." top 3.";
         break;
     case "8":
-        $titel="بین 3 پیشرفت کننده اول با ".$medal['points']." امتیاز";
+        $titel="Top Climbers of the Week ".$medal['points']." top 3.";
         break;
     case "9":
-        $titel="بین 3 غارتگر اول با ".$medal['points']." منابع";
+        $titel="Top Raiders of the Week  ".$medal['points']." top 3.";
         break;
     case "10":
-        $titel="پیشرفت کننده هفته";
+        $titel="Is this used anywhere?";
         break;
     case "11":
-        $titel="بین 3 پیشرفت کننده اول با ".$medal['points']." امتیاز";
+        $titel="Climbers of the Week".$medal['points']." top 3.";
         break;
     case "12":
-        $titel="بین 3 مهاجمین اول با ".$medal['points']." امتیاز";
+        $titel="Attackers of the Week ".$medal['points']." top 10.";
         break;
     }            
                  echo"<tr>

@@ -78,14 +78,14 @@ switch ($medal['categorie']) {
         $bonus[$medal['id']]=1;
 		break;
      case "10":
-        $titel="Climebrs of the Week";
+        $titel="Climbers of the Week";
         $woord="Score"; 
         break;
-         case "11":
+     case "11":
         $titel="Climbers of the Week".$medal['points']." top 3.";
         $bonus[$medal['id']]=1;
         break;
-         case "12":
+     case "12":
         $titel="Attackers of the Week ".$medal['points']." top 10.";
         $bonus[$medal['id']]=1;
         break;
