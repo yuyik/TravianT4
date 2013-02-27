@@ -34,7 +34,7 @@
             <?php
 
         if($result == 0) {
-        	echo '<td colspan="4" class="none">You own no artefacts</td>';
+        	echo '<td colspan="4" class="none">You don\'t own any Artefacts</td>';
         } else {
         	if($artefact['size'] == 1) {
         		$reqlvl = 10;
@@ -76,7 +76,7 @@
           <?php
 
         if(mysql_num_rows(mysql_query("SELECT * FROM " . TB_PREFIX . "artefacts")) == 0) {
-        	echo '<td colspan="4" class="none">Nincsenek ereklyék körülötted</td>';
+        	echo '<td colspan="4" class="none">There are no Artefacts nearby</td>';
         } else {
 
 
