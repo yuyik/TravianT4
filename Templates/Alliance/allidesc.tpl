@@ -56,35 +56,35 @@ include("alli_menu.tpl");
 /******************************
 INDELING CATEGORIEEN:
 ===============================
-== 1. Aanvallers top 10      ==
-== 2. Defence top 10         ==
-== 3. Klimmers top 10        ==
-== 4. Overvallers top 10     ==
-== 5. In att en def tegelijk ==
-== 6. in top 3 - aanval      ==
-== 7. in top 3 - verdediging ==
-== 8. in top 3 - klimmers    ==
-== 9. in top 3 - overval     ==
+== 1. Attackers top 10      ==
+== 2. Defenders top 10      ==
+== 3. Climbers top 10       ==
+== 4. Raiders top 10        ==
+== 5. Attack and Defence    ==
+== 6. in top 3 - Attackers  ==
+== 7. in top 3 - Defenders  ==
+== 8. in top 3 - Climbers   ==
+== 9. in top 3 - Raiders    ==
 ******************************/                
                 
                 
     foreach($varmedal as $medal) {
-    $titel="جایزه";
+    $titel="Medal";
     switch ($medal['categorie']) {
     case "1":
-        $titel="مهاجمین هفته";
+        $titel="Top 10 Attackers of the Week";
         break;
     case "2":
-        $titel="مدافعین هفته";
+        $titel="Top 10 Defenders of the Week";
         break;
     case "3":
-        $titel="پیشرفت کننده های هفته";
+        $titel="Top 10 Climbers of the Week";
         break;
     case "4":
-        $titel="غارتگران هفته";
+        $titel="Top 10 Raiders of the Week";
         break;
     case "5":
-        $titel="بین 10 نفر مهاجمین و مدافعین هفته";
+        $titel="Top 10 Raiders and Defenders of the Week";
         break;
     case "6":
         $titel="بین 3 مهاجمین اول با ".$medal['points']." امتیاز";

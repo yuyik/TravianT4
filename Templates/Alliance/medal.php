@@ -12,16 +12,16 @@
 /******************************
 INDELING CATEGORIEEN:
 ===============================
-== 1. Aanvallers top 10      ==
-== 2. Defence top 10         ==
-== 3. Klimmers top 10        ==
-== 4. Overvallers top 10     ==
-== 5. In att en def tegelijk ==
-== 6. in top 3 - aanval      ==
-== 7. in top 3 - verdediging ==
-== 8. in top 3 - klimmers    ==
-== 9. in top 3 - overval     ==
-******************************/
+== 1. Attackers top 10      ==
+== 2. Defenders top 10      ==
+== 3. Climbers top 10       ==
+== 4. Raiders top 10        ==
+== 5. Attack and Defence    ==
+== 6. in top 3 - Attackers  ==
+== 7. in top 3 - Defenders  ==
+== 8. in top 3 - Climbers   ==
+== 9. in top 3 - Raiders    ==
+******************************/    
 $geregistreerd=date('Y/m/d', ($allianceinfo['timestamp']));
 
 $profiel = preg_replace("/\[war]/s",'در جنگ با<br>'.$database->getAllianceDipProfile($aid,3), $profiel, 1); 
@@ -33,23 +33,23 @@ foreach($varmedal as $medal) {
 
 switch ($medal['categorie']) {
     case "1":
-        $titel="مهاجمین هفته";
-		$woord="امتیاز";
+        $titel="Top 10 Attackers of the Week";
+		$woord="Points";
         break;
     case "2":
-        $titel="مدافعین هفته";
- 		$woord="امتیاز";
+        $titel="Top 10 Defenders of the Week";
+ 		$woord="Points";
        break;
     case "3":
-        $titel="پیشرفت کننده های هفته";
- 		$woord="جمعیت";
+        $titel="Top 10 Climbers of the Week";
+ 		$woord="Population";
        break;
     case "4":
-        $titel="دزدان هفته";
-		$woord="منابع";
+        $titel="Top 10 Raiders of the Week";
+		$woord="Resources";
         break;
 	 case "5":
-        $titel="دریافت این مدال نشان میدهد که اتحاد شما هم در تاپ مهاجمین و هم در تاپ مدافعین هفته بین 3 نفر اول بوده.";
+        $titel="Top 10 Raiders and Defenders of the Week";
         $bonus[$medal['id']]=1;
 		break;
 	 case "6":
