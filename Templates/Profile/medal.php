@@ -42,23 +42,23 @@ foreach($varmedal as $medal) {
 
 switch ($medal['categorie']) {
     case "1":
-        $titel="Attackers of the Week";
+        $titel="Top 10 Attackers of the Week";
 		$woord="Score";
         break;
     case "2":
-        $titel="Defenders of the Week";
+        $titel="Top 10 Defenders of the Week";
  		$woord="Score";
        break;
     case "3":
-        $titel="Climbers of the Week";
+        $titel="Top 10 Climbers of the Week";
  		$woord="Score";
        break;
     case "4":
-        $titel="Raiders of the Week";
+        $titel="Top 10 Raiders of the Week";
 		$woord="Score";
         break;
 	 case "5":
-        $titel="Top 10 both attackers and defenders.";
+        $titel="Top 10 in both attackers and defenders of the week";
         $bonus[$medal['id']]=1;
 		break;
 	 case "6":
