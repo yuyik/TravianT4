@@ -56,56 +56,56 @@ include("alli_menu.tpl");
 /******************************
 INDELING CATEGORIEEN:
 ===============================
-== 1. Aanvallers top 10      ==
-== 2. Defence top 10         ==
-== 3. Klimmers top 10        ==
-== 4. Overvallers top 10     ==
-== 5. In att en def tegelijk ==
-== 6. in top 3 - aanval      ==
-== 7. in top 3 - verdediging ==
-== 8. in top 3 - klimmers    ==
-== 9. in top 3 - overval     ==
+== 1. Attackers top 10      ==
+== 2. Defenders top 10      ==
+== 3. Climbers top 10       ==
+== 4. Raiders top 10        ==
+== 5. Attack and Defence    ==
+== 6. in top 3 - Attackers  ==
+== 7. in top 3 - Defenders  ==
+== 8. in top 3 - Climbers   ==
+== 9. in top 3 - Raiders    ==
 ******************************/                
                 
                 
     foreach($varmedal as $medal) {
-    $titel="جایزه";
+    $titel="Medal";
     switch ($medal['categorie']) {
     case "1":
-        $titel="مهاجمین هفته";
+        $titel="Attackers of the Week";
         break;
     case "2":
-        $titel="مدافعین هفته";
+        $titel="Defenders of the Week";
         break;
     case "3":
-        $titel="پیشرفت کننده های هفته";
+        $titel="Climbers of the Week";
         break;
     case "4":
-        $titel="غارتگران هفته";
+        $titel="Raiders of the Week";
         break;
     case "5":
-        $titel="بین 10 نفر مهاجمین و مدافعین هفته";
+        $titel="Top 10 both attackers and defenders.";
         break;
     case "6":
-        $titel="بین 3 مهاجمین اول با ".$medal['points']." امتیاز";
+        $titel="Top Attackers of the Week ".$medal['points']." top 3.";
         break;
     case "7":
-        $titel="بین 3 مدافعین اول با ".$medal['points']." امتیاز";
+        $titel="Top Defenders of the Week ".$medal['points']." top 3.";
         break;
     case "8":
-        $titel="بین 3 پیشرفت کننده اول با ".$medal['points']." امتیاز";
+        $titel="Top Climbers of the Week ".$medal['points']." top 3.";
         break;
     case "9":
-        $titel="بین 3 غارتگر اول با ".$medal['points']." منابع";
+        $titel="Top Raiders of the Week  ".$medal['points']." top 3.";
         break;
     case "10":
-        $titel="پیشرفت کننده هفته";
+        $titel="Is this used anywhere?";
         break;
     case "11":
-        $titel="بین 3 پیشرفت کننده اول با ".$medal['points']." امتیاز";
+        $titel="Climbers of the Week".$medal['points']." top 3.";
         break;
     case "12":
-        $titel="بین 3 مهاجمین اول با ".$medal['points']." امتیاز";
+        $titel="Attackers of the Week ".$medal['points']." top 10.";
         break;
     }            
                  echo"<tr>
