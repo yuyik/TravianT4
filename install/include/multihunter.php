@@ -45,7 +45,7 @@ if($StartNatars){
         $status = $database->getVillageState($wid);
         if($status == 0) {
         	$database->setFieldTaken($wid);
-        	$database->addVillage($wid, $uid, 'ناتارها', '1');
+            $database->addVillage($wid, $uid, '1', 'Natars');
         	$database->addResourceFields($wid, $database->getVillageType($wid));
         	$database->addUnits($wid);
         	$database->addTech($wid);
