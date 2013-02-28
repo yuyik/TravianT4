@@ -1,20 +1,23 @@
 ﻿<?php
-
-        $artefact = $database->getOwnArtefactInfo($village->wid);
-        $result = mysql_num_rows(mysql_query("SELECT * FROM " . TB_PREFIX . "artefacts WHERE vref = " . $village->wid . ""));
-        $wref = $village->wid;
+    // @todo re-check this once artefacts are available
+    $artefact = $database->getOwnArtefactInfo($village->wid);
+    $result = mysql_num_rows(mysql_query("SELECT * FROM " . TB_PREFIX . "artefacts WHERE vref = " . $village->wid . ""));
+    if ($result)
+    {
+       $wref = $village->wid;
        $coor = $database->getCoor($wref); 
-       $coor2= $database->getCoor($artefact['vref']); 
-        function getDistance($coorx1, $coory1, $coorx2, $coory2) {
-   $max = 2 * WORLD_MAX + 1;
-   $x1 = intval($coorx1);
-   $y1 = intval($coory1);
-   $x2 = intval($coorx2);
-   $y2 = intval($coory2);
-   $distanceX = min(abs($x2 - $x1), abs($max - abs($x2 - $x1)));
-   $distanceY = min(abs($y2 - $y1), abs($max - abs($y2 - $y1)));
-   $dist = sqrt(pow($distanceX, 2) + pow($distanceY, 2));
-   return round($dist, 1);
+       $coor2= $database->getCoor($artefact['vref']);
+     }
+   function getDistance($coorx1, $coory1, $coorx2, $coory2) {
+    $max = 2 * WORLD_MAX + 1;
+    $x1 = intval($coorx1);
+    $y1 = intval($coory1);
+    $x2 = intval($coorx2);
+    $y2 = intval($coory2);
+    $distanceX = min(abs($x2 - $x1), abs($max - abs($x2 - $x1)));
+    $distanceY = min(abs($y2 - $y1), abs($max - abs($y2 - $y1)));
+    $dist = sqrt(pow($distanceX, 2) + pow($distanceY, 2));
+    return round($dist, 1);
    }
 ?>
 <div class="gid27">
@@ -34,7 +37,7 @@
             <?php
 
         if($result == 0) {
-        	echo '<td colspan="4" class="none">You own no artefacts</td>';
+        	echo '<td colspan="4" class="none">You don\'t own any Artefacts</td>';
         } else {
         	if($artefact['size'] == 1) {
         		$reqlvl = 10;
@@ -76,7 +79,7 @@
           <?php
 
         if(mysql_num_rows(mysql_query("SELECT * FROM " . TB_PREFIX . "artefacts")) == 0) {
-        	echo '<td colspan="4" class="none">Nincsenek ereklyék körülötted</td>';
+        	echo '<td colspan="4" class="none">There are no Artefacts nearby</td>';
         } else {
 
 

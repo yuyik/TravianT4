@@ -11,7 +11,7 @@ include("upgrade.tpl");
         include ("27_menu.tpl");
 
 ?>
-        <h4 class="round">Nagy ereklyék</h4>
+        <h4 class="round">Large Artefacts</h4>
         <table id="show_artefacts" cellpadding="1" cellspacing="1">
     		<thead>
     			<tr>
@@ -25,7 +25,7 @@ include("upgrade.tpl");
             <?php
 
         if(mysql_num_rows(mysql_query("SELECT * FROM " . TB_PREFIX . "artefacts")) == 0) {
-        	echo '<td colspan="4" class="none">Nincsenek nagyereklyéid.</td>';
+        	echo '<td colspan="4" class="none">No Large Artefacts</td>';
         } else {
         	unset($artefact);
         	unset($row);
