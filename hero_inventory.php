@@ -529,7 +529,7 @@ $('item_<?php echo $id; ?>').addEvent('click', function() { $this.sellItem(<?php
 				elementFoucs:		'inventoryAmount',
 				buttonTextOk:		'Ok',
 				buttonTextCancel:	'Cancel',
-				title:				'Felhasználás',
+				title:				'consumption',
 				onOpen: function(dialog, contentElement){
 					if ($('amount')){
 						$('amount').value = amount;

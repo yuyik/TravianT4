@@ -384,16 +384,19 @@ if($_POST && $_POST['a']=='inventory'){
 		}
 	}*/
 
-	/*elseif($data['btype']==9){
+	elseif($data['btype']==9){
+		if($data['amount'] <= $itemData['num']){
 		$database->editProcItem($data['id'], 1);
+		$database->setHeroInventory($uid, 'bag', $data['id']);
 		if($hero['bag']!=0){
-			$database->modifyHeroFace($uid, 'bag', $data['type']);
 			$id = $database->getHeroItemID2($uid, 9, $hero['bag']);
 			$database->editProcItem($id, 0);
+			$database->modifyHeroFace($uid, 'bag', $data['type']);
 		}else{
 			$database->modifyHeroFace($uid, 'bag', $data['type']);
 		}
-	}*/
+		}
+	}
 
 	elseif($data['btype']==10){
 		if($data['amount'] <= $itemData['num']){

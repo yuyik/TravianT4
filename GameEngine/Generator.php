@@ -41,7 +41,7 @@ class Generator {
 		if($xdistance > WORLD_MAX) {
 			$xdistance = (2 * WORLD_MAX + 1) - $xdistance;
 		}
-		$ydistance = ABS($thiscoor['x'] - $coor['y']);
+		$ydistance = ABS($thiscoor['y'] - $coor['y']);
 		if($ydistance > WORLD_MAX) {
 			$ydistance = (2 * WORLD_MAX + 1) - $ydistance;
 		}

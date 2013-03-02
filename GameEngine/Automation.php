@@ -2489,6 +2489,10 @@ $info_cata=" از سطح <b>".$tblevel."</b> به سطح <b>".$totallvl."</b> آ
 				$getHero = $database->getHeroData($ownerID);
 				$getAdv = $database->getAdventure($ownerID, $data['to']);
 				$heroface = $database->HeroFace($ownerID);
+				$helmetID = $database->getHeroItemID($ownerID, 1);
+				if($helmetID != 0){
+				$helmet = $database->getItemData($helmetID);
+				}
 				
 				$btype = rand(0,15);
 				
@@ -2594,6 +2598,7 @@ $info_cata=" از سطح <b>".$tblevel."</b> به سطح <b>".$totallvl."</b> آ
 				}
 				$health = round((3.007 / ((100+$tp*$getHero['power'])+$hero['itempower'])) * $sgh);
 				
+				if($helmet['proc'] == 1 && $helmet['type'] <= 3) $exp += $exp * (10 + $helmet['type'] * 5) / 100;
 				$database->modifyHero2('experience', $exp, $ownerID, 1);
 				$database->setMovementProc($data['moveid']);
 				$database->editTableField('adventure', 'end', 1, 'wref', $data['to']);
