@@ -917,8 +917,12 @@
         	function getAllianceName($id) {
         		$q = "SELECT tag from " . TB_PREFIX . "alidata where id = $id";
         		$result = mysql_query($q, $this->connection);
-        		$dbarray = mysql_fetch_array($result);
-        		return $dbarray['tag'];
+                if ($result)
+                {
+                    $dbarray = mysql_fetch_array($result);
+                    return $dbarray['tag'];
+                }
+                else return false;
         	}
 
         	function getAlliancePermission($ref, $field, $mode) {
