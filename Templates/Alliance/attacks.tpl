@@ -69,7 +69,7 @@ if($ntype==4 || $ntype==5 || $ntype==6 || $ntype==7){
     $outputList .= $database->getUserField($dataarray[0],username,0);
        
     $outputList .= $nn;
-    $outputList .= $database->getUserField($dataarray[28],username,0);
+    $outputList .= $database->getUserField($dataarray[30],username,0);
 	if($ntype==0){ 
 	$isoasis = $database->isVillageOases($toWref);
 	if($isoasis == 0){
@@ -86,8 +86,8 @@ if($ntype==4 || $ntype==5 || $ntype==6 || $ntype==7){
 		}
 	}
 	$getUserAlly = $database->getUserField($getUser,alliance,0);
-	}else if($ntype==1 or $ntype==2 or $ntype==3 or $ntype==18 or $ntype==19){ 
-    	$getUserAlly = $database->getUserField($dataarray[28],alliance,0);
+	}else if($ntype==1 or $ntype==2 or $ntype==3 or $ntype==18 or $ntype==19){
+    	$getUserAlly = $database->getUserField($dataarray[30],alliance,0);
     }else{
     	$getUserAlly = $database->getUserField($dataarray[0],alliance,0);
     }
