@@ -45,7 +45,7 @@ for($i=106;$i<=115;$i++) {
     }
 echo "</tr></tbody>";
 
-echo "<tbody class=\"units last\"><th>Veszteség</th>";
+echo "<tbody class=\"units last\"><th>Casualties</th>";
 for($i=117;$i<=126;$i++) {
 	if($i==126 && !$dataarray[116]){ $last2 = ' last'; }else{ $last2 = ''; }
 	if($dataarray[$i] == 0) {

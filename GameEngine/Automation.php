@@ -2149,13 +2149,30 @@ $info_cata=" از سطح <b>".$tblevel."</b> به سطح <b>".$totallvl."</b> آ
 					$crannylevel =0;
 					$rplevel = 0;
 					$walllevel = 0;
+                    $tribe = $database->getUserField($basearray['owner'],'tribe',0);
+                    
 					for($j=19;$j<=40;$j++) {
-						if($resarray['f'.$j.'t'] == 25 || $resarray['f'.$j.'t'] == 26 ) {
+						if($resarray['f'.$j.'t'] == 25) 
+                        {
 							$rplevel = $database->getFieldLevel($basearray['wref'],$j);
+                            $rptitle = 'Residence';
+                            $rpid = 25;
 						}
+						elseif($resarray['f'.$j.'t'] == 26)
+                        {
+							$rplevel = $database->getFieldLevel($basearray['wref'],$j);
+                            $rptitle = 'Palace';
+                            $rpid = 26;
+						}
+                        else
+                        {
+                            $rplevel = 0;
+                            $rptitle = 'Palace/Residence';
+                            $rpid = 25; //Use icon for Residence
+                        }
 					}
 					for($j=19;$j<=40;$j++) {
-						if($resarray['f'.$j.'t'] == 40) {
+						if($resarray['f'.$j.'t'] == 31) {
 							$walllevel = $database->getFieldLevel($basearray['wref'],$j);
 						}
 					}
@@ -2170,20 +2187,31 @@ $info_cata=" از سطح <b>".$tblevel."</b> به سطح <b>".$totallvl."</b> آ
 					$rplevel = 0;
 				}
                 if($tribe == 1){
-					$walltitle = "دیوار شهر";
+					$walltitle = 'City Wall';
+                    $iconClass = 'gebIcon g3' . $tribe . 'Icon';
 				}elseif($tribe == 2){
-					$walltitle = "دیوار گلی";
-				}else{
-					$walltitle = "پرچین";
+					$walltitle = 'Earth Wall';
+                    $iconClass = 'gebIcon g3' . $tribe . 'Icon';
+				}elseif($tribe == 3){
+					$walltitle = 'Palisade';
+                    $iconClass = 'gebIcon g3' . $tribe . 'Icon';
 				}
+                else
+                {
+                    /**
+                     * @todo Not sure what Natar Wall should be called, also using Earth Wall for the icon for now
+                     */
+                    $walltitle = "Natar Wall";
+                    $iconClass = 'gebIcon g32Icon';
+                }
                                         
                 $info_spy = "".$spy_pic.",
 <tbody><tr><td class=\"empty\" colspan=\"12\"></td></tr></tbody>
 <tbody class=\"goods\">
-	<tr><th>اطلاعات</th><td colspan=\"11\"><div class=\"res\">
+	<tr><th>Defences</th><td colspan=\"11\"><div class=\"res\">
 <div class=\"rArea\">
-<img class=\"gebIcon g".$rpid."Icon\" src=\"img/x.gif\" title=\"".$rptitle."\">قصر/اقامتگاه <b>سطح ".$rplevel."</b><Br>
-<img class=\"gebIcon g3".$tribe."Icon\" src=\"img/x.gif\" title=\"".$walltitle."\">".$walltitle." <b>سطح ".$walllevel."</b>
+<img class=\"gebIcon g".$rpid."Icon\" src=\"img/x.gif\" title=\"".$rptitle."\">" . $rptitle . " <b> Level ".$rplevel."</b><Br>
+<img class=\"" . $iconClass . "\" src=\"img/x.gif\" title=\"".$walltitle."\">".$walltitle." <b>Level ".$walllevel."</b>
 </div>
 </div></td></tr></tbody>";
             
