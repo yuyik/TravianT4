@@ -30,13 +30,6 @@ else if($_POST['dname']!=""){
 // Need to set the max allowed to send as maxcarry * available merchants
 $canSend = $market->maxcarry * $market->merchantAvail();
 
-//DEBUG
-//echo $_POST['ft'] . '<br>';
-//echo '$allres = ' . $allres . '<br>';
-//echo '$maxcarry = ' . $market->maxcarry . '<br>';
-//echo 'Merchants = ' . $market->merchantAvail() . '<br>';
-//echo 'Can Send = ' . $canSend . '<br>';
-
 if(isset($_POST['ft'])=='check' && $allres!=0 && $allres <= $canSend && ($_POST['x']!="" && $_POST['y']!="" or $_POST['dname']!="") && $checkexist){
 ?>
 <form method="POST" name="snd" action="build.php"> 
@@ -245,12 +238,6 @@ if(isset($_POST['ft'])=='check'){
     }elseif($allres >= $canSend){
 		$error = '<span class="error"><b>Too few merchants.</b></span>';
     }
-//DEBUG
-//echo $_POST['ft'] . '<br>';
-//echo '$allres = ' . $allres . '<br>';
-//echo '$maxcarry = ' . $market->maxcarry . '<br>';
-//echo 'Merchants = ' . $market->merchantAvail() . '<br>';
-//echo 'Can Send = ' . $canSend . '<br>';
     echo $error;
 }
 ?>
