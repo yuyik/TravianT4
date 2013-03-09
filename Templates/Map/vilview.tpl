@@ -296,7 +296,7 @@ echo $tt;
 	</table>
     <?php if($basearray['fieldtype'] == 0 && !$basearray['occupied']) {
 	?><br />
-	<h4>Egységek:</h4>
+	<h4>Troops:</h4>
     <table cellpadding="0" cellspacing="0" id="troop_info" class="transparent">
 		<tbody>
             <?php         
@@ -315,7 +315,7 @@ echo $tt;
           }
         }
         if($a == 10){
-        echo '<tr><td>nincsenek egységek</td></tr>';
+        echo '<tr><td>none</td></tr>';
         }
 
      

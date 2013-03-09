@@ -1059,6 +1059,12 @@ class Automation {
 				$from = $database->getMInfo($data['from']);
 				$toF = $database->getOasisV($data['to']);
 				$fromF = $database->getVillage($data['from']);
+				$cageID = $database->getHeroItemID($AttackerID, 9);
+				if($cageID != 0){
+				$cage = $database->getItemData($cageID);
+				}else{
+				$cage['type'] = 0;
+				}
             
             
                         //get defence units 
@@ -1183,6 +1189,7 @@ class Automation {
 			if($hidehero['hide'] == 1){
 			$Defender['hero'] = 0;
 			}
+			if($cage['type'] == 0 || $Attacker['hero'] == 0 || $isoasis == 0){
             $battlepart = $battle->calculateBattle($Attacker,$Defender,$def_wall,$att_tribe,$def_tribe,$residence,$attpop,$defpop,$type,$def_ab,$att_ab,$tblevel,$stonemason,$walllevel,$AttackerID,$DefenderID);
             //units attack string for battleraport
             $unitssend_att = ''.$data['t1'].','.$data['t2'].','.$data['t3'].','.$data['t4'].','.$data['t5'].','.$data['t6'].','.$data['t7'].','.$data['t8'].','.$data['t9'].','.$data['t10'].','.$data['t11'].'';
@@ -2140,7 +2147,7 @@ $info_cata=" از سطح <b>".$tblevel."</b> به سطح <b>".$totallvl."</b> آ
 <tbody><tr><td class=\"empty\" colspan=\"12\"></td></tr></tbody>
 <tbody class=\"goods\">
 	<tr><th>Resources</th><td colspan=\"11\"><div class=\"res\"><div class=\"rArea\"><img class=\"r1\" src=\"img/x.gif\" title=\"Lumber\">".round($totwood)."</div><div class=\"rArea\"><img class=\"r2\" src=\"img/x.gif\" title=\"Clay\">".round($totclay)."</div><div class=\"rArea\"><img class=\"r3\" src=\"img/x.gif\" title=\"Iron\">".round($totiron)."</div><div class=\"rArea\"><img class=\"r4\" src=\"img/x.gif\" title=\"Crop\">".round($totcrop)."</div></div></td></tr></tbody>
-<tbody class=\"goods\"><tr><th></th><td colspan=\"11\"><div class=\"res\"><div class=\"rArea\"><img class=\"gebIcon g23Icon\" src=\"img/x.gif\" title=\"Cranny\">". $cranny ."</div></div></td></tr></tbody>";
+<tbody class=\"goods\"><tr><th></th><td colspan=\"11\"><div class=\"res\"><div class=\"rArea\"><img class=\"gebIcon g23Icon\" src=\"img/x.gif\" title=\"Cranny\">". $cranny ."</div></div></td></tr></tbody>";				
 				
 			}else if($data['spy'] == 2){
 				if ($isoasis == 0){  
@@ -2149,8 +2156,8 @@ $info_cata=" از سطح <b>".$tblevel."</b> به سطح <b>".$totallvl."</b> آ
 					$crannylevel =0;
 					$rplevel = 0;
 					$walllevel = 0;
-                    $tribe = $database->getUserField($basearray['owner'],'tribe',0);
-                    
+					$tribe = $database->getUserField($basearray['owner'],'tribe',0);
+					
 					for($j=19;$j<=40;$j++) {
 						if($resarray['f'.$j.'t'] == 25) 
                         {
@@ -2199,10 +2206,10 @@ $info_cata=" از سطح <b>".$tblevel."</b> به سطح <b>".$totallvl."</b> آ
                 else
                 {
                     /**
-                     * @todo Not sure what Natar Wall should be called, also using Earth Wall for the icon for now
+                     * @todo Not sure what Natar Wall should be called, also using City Wall for the icon for now
                      */
                     $walltitle = "Natar Wall";
-                    $iconClass = 'gebIcon g32Icon';
+                    $iconClass = 'gebIcon g31Icon';
                 }
                                         
                 $info_spy = "".$spy_pic.",
@@ -2307,7 +2314,66 @@ $info_cata=" از سطح <b>".$tblevel."</b> به سطح <b>".$totallvl."</b> آ
                     $database->addNotice($from['owner'],$to['wref'],$fromAlly,3,''.addslashes($from['name']).' attacks '.addslashes($to['name']).'',$data_fail,$AttackArrivalTime); 
                     }
             }
+			}else{
+			$database->setMovementProc($data['moveid']);
+			$datar = "0,0,0,0,0";
+			$getHero = $database->getHeroData($AttackerID);
+			$speed = $getHero['speed'];
+			$AttackArrivalTime = $data['endtime']; 
+			$endtime = $this->procDistanceTime($from,$to,$speed,1) + $AttackArrivalTime;
+            $database->addMovement(4,$to['wref'],$from['wref'],$data['ref'],$datar,$endtime);
+			$animals = 0;
+				for($i=31; $i<=40; $i++){
+				$animals += $Defender['u'.$i];
+				$j = $i - 30;
+				${captured.$j} = 0;
+				}
+				while($cage['type'] > 0 && $animals > 0){
+				for($i=31; $i<=40; $i++){
+				if($Defender['u'.$i] > 0 && $cage['type'] > 0){
+				$Defender['u'.$i]--;
+				$animals--;
+				$cage['type']--;
+				$cage['num']--;
+				$j = $i - 30;
+				${captured.$j}++;
+				}
+				}
+				}
+				$database->editHeroType($cageID, $cage['type'], 2);
+				$database->editHeroNum2($cageID, $cage['num'], 2);
+				if($cage['type'] == 0){
+				$database->setHeroInventory($AttackerID,"bag",0);
+				$database->editProcItem($cageID, 0);
+				}
+				if($cage['num'] == 0){
+				$q = "DELETE FROM ".TB_PREFIX."heroitems where id = ".$cageID;
+				$database->query($q);
+				}
+				for($i=1; $i<=10; $i++){
+				$total_captured += ${captured.$i};
+				}
+				if($total_captured > 0){
 
+				$speeds = array();
+				
+				for($i=31; $i<=40; $i++){
+				$j = $i - 30;
+				$database->modifyUnit($to['wref'],$i,${captured.$j},0);
+				}
+				
+				//find slowest unit.
+				for($i=1;$i<=10;$i++){
+							if($unitarray) { reset($unitarray); }
+							$unitarray = $GLOBALS["u".(30+$i)];
+							$speeds[] = $unitarray['speed'];
+				}
+				$time = $this->procDistanceTime($from['wref'],$to['wref'],min($speeds),999);
+				$reference = $database->addAttack($to['wref'],$captured1,$captured2,$captured3,$captured4,$captured5,$captured6,$captured7,$captured8,$captured9,$captured10,0,2,0,0,0,0);
+				$database->addMovement(3,0,$from['wref'],$reference,$datar,($time+time()));
+
+				}
+			}
 				$crop = $database->getCropProdstarv($to['wref']);
 				$unitarrays = $this->getAllUnits($to['wref']);
 				$getvillage = $database->getVillage($to['wref']);
@@ -2335,6 +2401,31 @@ $info_cata=" از سطح <b>".$tblevel."</b> به سطح <b>".$totallvl."</b> آ
         $dataarray = $database->query_return($q);
         
         foreach($dataarray as $data) {
+		$AttackArrivalTime = $data['endtime'];
+			if($data['from']==0){
+			$to = $database->getMInfo($data['to']);
+				//check if there is defence from town in to town
+		        $check = $database->getEnforce($data['to'],$data['from']);
+			    if (!isset($check['id'])){
+				    //no: 
+					 $database->addEnforce($data);
+				} else {
+					//yes
+					 $start = 31;
+					 $end = 40;
+					//add unit.
+					 $j='1';
+					 for($i=$start;$i<=$end;$i++){
+				        $database->modifyEnforce($check['id'],$i,$data['t'.$j.''],1); $j++;
+					 }
+				}
+			$to = $database->getMInfo($data['to']);
+			$targetally = $database->getUserField($from['owner'],'alliance',0);
+			$unitssend_att = ''.$data['t1'].','.$data['t2'].','.$data['t3'].','.$data['t4'].','.$data['t5'].','.$data['t6'].','.$data['t7'].','.$data['t8'].','.$data['t9'].','.$data['t10'].','.$data['t11'].'';
+			$data_fail = '0,0,4,'.$unitssend_att.','.$to['wref'].','.$to['owner'];
+			$database->addNotice($to['owner'],$to['wref'],$targetally,8,'nature reinforcement '.addslashes($to['name']).'',$data_fail,$AttackArrivalTime);
+			$database->setMovementProc($data['moveid']);
+			}else{
             //set base things
             $owntribe = $database->getUserField($database->getVillageField($data['from'],"owner"),"tribe",0);
             $targettribe = $database->getUserField($database->getVillageField($data['to'],"owner"),"tribe",0);
@@ -2391,7 +2482,7 @@ $info_cata=" از سطح <b>".$tblevel."</b> به سطح <b>".$totallvl."</b> آ
 			}
             //update status
             $database->setMovementProc($data['moveid']); 
-
+			}
         }
 		if(file_exists("GameEngine/Prevention/sendreinfunits.txt")) {
                 unlink("GameEngine/Prevention/sendreinfunits.txt");
@@ -2834,6 +2925,7 @@ $info_cata=" از سطح <b>".$tblevel."</b> به سطح <b>".$totallvl."</b> آ
 		$buildarray = array();
 		if($vid!=0){ $buildarray = $database->getResourceLevel($vid); }
 		$upkeep = 0;
+		$nocrop = 0;
 		switch($type) {
 			case 0:
 			$start = 1;
@@ -2854,12 +2946,14 @@ $info_cata=" از سطح <b>".$tblevel."</b> به سطح <b>".$totallvl."</b> آ
 			case 4:
 			$start = 31;
 			$end = 40;
+			$nocrop = 1;
 			break;
 			case 5:
 			$start = 41;
 			$end = 50;
 			break;
 		}
+		if($nocrop == 0){
 		for($i=$start;$i<=$end;$i++) {
 			$k = $i-$start+1;
 			$unit = "u".$i;
@@ -2902,6 +2996,7 @@ $info_cata=" از سطح <b>".$tblevel."</b> به سطح <b>".$totallvl."</b> آ
 			$upkeep += $array['hero'] * 6;
 		 }else{
 			$upkeep += $array['t11'] * 6;
+		 }
 		 }
 		return $upkeep;
 	}
@@ -3182,9 +3277,11 @@ $info_cata=" از سطح <b>".$tblevel."</b> به سطح <b>".$totallvl."</b> آ
         }
         else {
             $speed = $ref;
+			if($mode != 999){
             if($this->getsort_typeLevel(14,$resarray) != 0) {
                 $speed = $distance <= TS_THRESHOLD ? $speed : $speed * ( ( TS_THRESHOLD + ( $distance - TS_THRESHOLD ) * $bid14[$this->getsort_typeLevel(14,$resarray)]['attri'] / 100 ) / $distance ) ;
             }
+			}
         }
         
         return round(($distance/$speed) * 3600 / INCREASE_SPEED);

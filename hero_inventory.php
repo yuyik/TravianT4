@@ -182,8 +182,10 @@ if(isset($_GET['inventory'])){
 	}elseif(isset($_GET['bag'])){
 		$database->setHeroInventory($uid, "bag", 0);
 		$database->editProcItem($_GET['bag'], 0);
-		$database->modifyHeroFace($uid, "bag", 0);
-		
+		$itemdata = $database->getItemData($_GET['bag']);
+		if($itemdata['btype']==9){
+		$database->editHeroType($itemdata['id'], 0, 2);
+		}
 	}
 }
 if(isset($_GET['showhero'])){
@@ -353,8 +355,14 @@ if($gi['horse']!=0){
 
 if($gi['bag']!=0){
 	$data = $database->getItemData($gi['bag']);
+	if($data['btype'] != 9){
 	$item = '<a href="?inventory&bag='.$gi['bag'].'"><div id="item_'.$gi['bag'].'" class="item item_'.$data['type'].' onHero" style="position: relative; left: 0px; top: 0px; "><div class="amount">'.$data['num'].'</div></div></a>';
 	echo '<div id="bag" class="draggable">'.$item.'</div>';
+	}else{
+	$data = $database->getItemData($gi['bag']);
+	$item = '<a href="?inventory&bag='.$gi['bag'].'"><div id="item_'.$gi['bag'].'" class="item item_114 onHero" style="position: relative; left: 0px; top: 0px; "><div class="amount">'.$data['type'].'</div></div></a>';
+	echo '<div id="bag" class="draggable">'.$item.'</div>';
+	}
 }else{
 	echo '<div id="bag" class="draggable"></div>';
 }
@@ -379,7 +387,7 @@ if($gi['bag']!=0){
     <div id="itemsToSale"><?php
 $prefix = "".TB_PREFIX."heroitems";
 
-$sql = mysql_query("SELECT * FROM ".TB_PREFIX."heroitems WHERE proc = 0 AND uid = $session->uid");
+$sql = mysql_query("SELECT * FROM ".TB_PREFIX."heroitems WHERE (proc = 0 OR (btype = 9 && num - type != 0)) AND uid = $session->uid");
 $query = mysql_num_rows($sql);
 
 $outputList = '';
@@ -401,6 +409,14 @@ include "Templates/Auction/alt.tpl";
 		$dis = '';
 		$deadTitle = '';
 	}
+	if($btype == 9){
+	$amount = '('.$num-$type.') ';
+	$outputList .= "<div id=\"inventory_".$inv."\" class=\"inventory draggable\">";
+	$outputList .= "<div id=\"item_".$id."\" title=\"".$amount."".$name."||".$deadTitle."".$title."\" class=\"item item_114".$dis."\" style=\"position:relative;left:0px;top:0px;\">";
+	$outputList .= "<div class=\"amount\">".($num-$type)."</div>";
+	$outputList .= "</div>";
+	$outputList .= '</div>';
+	}else{
 	if($num==1){$amount = '';}else{$amount = '('.$num.') ';}
 	$outputList .= "<div id=\"inventory_".$inv."\" class=\"inventory draggable\">";
 	$outputList .= "<div id=\"item_".$id."\" title=\"".$amount."".$name."||".$deadTitle."".$title."\" class=\"item item_".$item."".$dis."\" style=\"position:relative;left:0px;top:0px;\">";
@@ -408,6 +424,7 @@ include "Templates/Auction/alt.tpl";
 	$outputList .= "</div>";
 	$outputList .= '</div>';
 	$inv++;	
+	}
 }
 	echo $outputList;
 	

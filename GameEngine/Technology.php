@@ -330,6 +330,7 @@ class Technology {
 	public function getUpkeep($array,$type) {
 		global $building,$session;
 		$upkeep = 0;
+		$nocrop = 0;
 		switch($type) {
 			case 0:
 			$start = 1;
@@ -350,12 +351,14 @@ class Technology {
 			case 4:
 			$start = 31;
 			$end = 40;
+			$nocrop = 1;
 			break;
             case 5:
             $start = 41;
             $end = 50;
             break;
 		}	
+		if($nocrop == 0){
 		for($i=$start;$i<=$end;$i++) {
 			$hdt = 0;
 			if($session->tribe == 1 && $i>=4 && $i<=6) {
@@ -369,6 +372,7 @@ class Technology {
             if($array['hero']){
             	$upkeep += 6;
 			}
+		}
 		return $upkeep;
 	}
 

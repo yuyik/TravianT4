@@ -37,7 +37,7 @@ class Generator {
    
    public function procDistanceTime($coor,$thiscoor,$ref,$mode) {
 		global $bid28,$bid14,$building;
-		$xdistance = ABS($thiscoor['y'] - $coor['x']);
+		$xdistance = ABS($thiscoor['x'] - $coor['x']);
 		if($xdistance > WORLD_MAX) {
 			$xdistance = (2 * WORLD_MAX + 1) - $xdistance;
 		}

@@ -2243,7 +2243,11 @@
         		$q = "INSERT into " . TB_PREFIX . "enforcement (vref,`from`) values (" . $data['to'] . "," . $data['from'] . ")";
         		mysql_query($q, $this->connection);
         		$id = mysql_insert_id($this->connection);
+				if($data['from'] != 0){
         		$owntribe = $this->getUserField($this->getVillageField($data['from'], "owner"), "tribe", 0);
+				}else{
+				$owntribe = 4;
+				}
         		$start = ($owntribe - 1) * 10 + 1;
         		$end = ($owntribe * 10);
         		//add unit
@@ -3162,6 +3166,28 @@ break;
 					$q = "UPDATE " . TB_PREFIX . "heroitems set num = num + $num where id = $id and proc = 0";
 				}else{
 					$q = "UPDATE " . TB_PREFIX . "heroitems set num = $num where id = $id and proc = 0";
+				}
+        		return mysql_query($q, $this->connection);
+        	}
+			
+			function editHeroNum2($id, $num, $mode) {
+				if($mode==0){
+        			$q = "UPDATE " . TB_PREFIX . "heroitems set num = num - $num where id = $id";
+				}elseif($mode==1){
+					$q = "UPDATE " . TB_PREFIX . "heroitems set num = num + $num where id = $id";
+				}else{
+					$q = "UPDATE " . TB_PREFIX . "heroitems set num = $num where id = $id";
+				}
+        		return mysql_query($q, $this->connection);
+        	}
+			
+			function editHeroType($id, $type, $mode) {
+				if($mode==0){
+        			$q = "UPDATE " . TB_PREFIX . "heroitems set type = type - $type where id = $id";
+				}elseif($mode==1){
+					$q = "UPDATE " . TB_PREFIX . "heroitems set type = type + $type where id = $id";
+				}else{
+					$q = "UPDATE " . TB_PREFIX . "heroitems set type = $type where id = $id";
 				}
         		return mysql_query($q, $this->connection);
         	}

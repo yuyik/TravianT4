@@ -4,14 +4,14 @@ $start=31;
 <table cellpadding="0" cellspacing="0">
 	<thead>
 		<tr>
-			<td class="role"><div class="boxes boxesColor green"><div class="boxes-tl"></div><div class="boxes-tr"></div><div class="boxes-tc"></div><div class="boxes-ml"></div><div class="boxes-mr"></div><div class="boxes-mc"></div><div class="boxes-bl"></div><div class="boxes-br"></div><div class="boxes-bc"></div><div class="boxes-contents"><div class="role">مدافع</div>	</div></div></td>
+			<td class="role"><div class="boxes boxesColor green"><div class="boxes-tl"></div><div class="boxes-tr"></div><div class="boxes-tc"></div><div class="boxes-ml"></div><div class="boxes-mr"></div><div class="boxes-mc"></div><div class="boxes-bl"></div><div class="boxes-br"></div><div class="boxes-bc"></div><div class="boxes-contents"><div class="role">Defender</div>	</div></div></td>
             <td class="troopHeadline" colspan="<?php if($dataarray[116]){ echo'11'; }else{ echo'10'; } ?>">
             <?php
             if($targettribe=='4'){
             echo '<a href="spieler.php?uid='.$database->getUserField($dataarray[30],"id",0).'">';
-            echo "<span class=\"none2\">Természet</span>";
+            echo "<span class=\"none2\">Nature</span>";
             $coor = $database->getCoor($dataarray[31]);
-            echo '</a> Falu <a href="karte.php?d='.$dataarray[31].'&amp;c='.$generator->getMapCheck($dataarray[31]).'">
+            echo '</a> from village <a href="karte.php?d='.$dataarray[31].'&amp;c='.$generator->getMapCheck($dataarray[31]).'">
             '.stripslashes($dataarray[32]).' ('.$coor[x].'|'.$coor[y].')</a>';
             } else {
             echo "Egység szorzó";

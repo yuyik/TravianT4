@@ -122,14 +122,19 @@ if($message->unread) {
         } else
         	if(isset($w)) {
         		$enforce = $database->getEnforceArray($w, 0);
+				if($enforce['from'] != 0) {
         		if($enforce['vref'] == $village->wid) {
         			$to = $database->getVillage($enforce['from']);
         			$ckey = $w;
         			include ("Templates/a2b/sendback.tpl");
-        		} else {
+					} else {
         			include ("Templates/a2b/units_" . $session->tribe . ".tpl");
         			include ("Templates/a2b/search.tpl");
-        		}
+					}
+        			} else {
+						$database->deleteReinf($w);
+						header("Location: build.php?id=39");
+					}
         	} else
         		if(isset($r)) {
         			$enforce = $database->getEnforceArray($r, 0);
