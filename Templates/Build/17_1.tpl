@@ -101,7 +101,7 @@ if($session->plus) {
 <table id="range" cellpadding="1" cellspacing="1">
 	<thead>
 		<tr>
-			<th>Offeredt</th>
+			<th>Offered</th>
 			<th><img src="img/x.gif" class="ratio" alt="Ratio"></th>
 			<th>Searched</th>
 			<th>Players</th>
@@ -134,10 +134,10 @@ if($market->onsale[$i]['wamt'] > $market->maxcarry) {
         }
             
 switch($market->onsale[$i]['gtype']) {
-    case 1: echo "<img src=\"img/x.gif\" class=\"r1\" alt=\"Fa\" title=\"Fa\" /> "; break;
-    case 2: echo "<img src=\"img/x.gif\" class=\"r2\" alt=\"Agyag\" title=\"Agyag\" /> "; break;
-    case 3: echo "<img src=\"img/x.gif\" class=\"r3\" alt=\"Vasérc\" title=\"Vasérc\" /> "; break;
-    case 4: echo "<img src=\"img/x.gif\" class=\"r4\" alt=\"Búza\" title=\"Búza\" /> "; break;
+    case 1: echo "<img src=\"img/x.gif\" class=\"r1\" alt=\"Wood\" title=\"Wood\" /> "; break;
+    case 2: echo "<img src=\"img/x.gif\" class=\"r2\" alt=\"Clay\" title=\"Clay\" /> "; break;
+    case 3: echo "<img src=\"img/x.gif\" class=\"r3\" alt=\"Iron\" title=\"Iron\" /> "; break;
+    case 4: echo "<img src=\"img/x.gif\" class=\"r4\" alt=\"Wheat\" title=\"Wheat\" /> "; break;
  	}
     echo $market->onsale[$i]['gamt'];
     
@@ -146,10 +146,10 @@ switch($market->onsale[$i]['gtype']) {
       </div>
       </td><td class=\"val\">";
     switch($market->onsale[$i]['wtype']) {
-    case 1: echo "<img src=\"img/x.gif\" class=\"r1\" alt=\"Fa\" title=\"Wood\" /> "; break;
-    case 2: echo "<img src=\"img/x.gif\" class=\"r2\" alt=\"Agyag\" title=\"Clay\" /> "; break;
-    case 3: echo "<img src=\"img/x.gif\" class=\"r3\" alt=\"Vasérc\" title=\"Iron\" /> "; break;
-    case 4: echo "<img src=\"img/x.gif\" class=\"r4\" alt=\"Búza\" title=\"Wheat\" /> "; break;
+    case 1: echo "<img src=\"img/x.gif\" class=\"r1\" alt=\"Wood\" title=\"Wood\" /> "; break;
+    case 2: echo "<img src=\"img/x.gif\" class=\"r2\" alt=\"Clay\" title=\"Clay\" /> "; break;
+    case 3: echo "<img src=\"img/x.gif\" class=\"r3\" alt=\"Iron\" title=\"Iron\" /> "; break;
+    case 4: echo "<img src=\"img/x.gif\" class=\"r4\" alt=\"Wheat\" title=\"Wheat\" /> "; break;
     }
     echo $market->onsale[$i]['wamt'];
     echo "</td><td class=\"pla\">";
@@ -168,7 +168,7 @@ switch($market->onsale[$i]['gtype']) {
     <button type=\"button\" class=\"build\" onclick=\"window.location.href = 'build.php?id=$id&t=1&a=".$session->mchecker."&g=".$market->onsale[$i]['id']."'; return false;\">
 <div class=\"button-container\"><div class=\"button-position\"><div class=\"btl\"><div class=\"btr\"><div class=\"btc\"></div></div></div>
 <div class=\"bml\"><div class=\"bmr\"><div class=\"bmc\"></div></div></div><div class=\"bbl\"><div class=\"bbr\"><div class=\"bbc\"></div></div></div>
-</div><div class=\"button-contents\">Accpet Offer</div></div></button></td>";
+</div><div class=\"button-contents\">Accept Offer</div></div></button></td>";
     }
     echo"</tr>";
     }
@@ -183,20 +183,20 @@ echo "<tr><td class=\"none\" colspan=\"6\"><center>No Offers Currently</center><
 <span class="none">
 <?php
 if(!isset($_GET['u']) && count($market->onsale) < 40) {
-    echo "<span class=\"none\"><b>&laquo;</b></span> Oldalak <span class=\"none\"><b>&raquo;</b></span>";
+    echo "<span class=\"none\"><b>&laquo;</b></span> Pages <span class=\"none\"><b>&raquo;</b></span>";
     }
     else if (!isset($_GET['u']) && count($market->onsale) > 40) {
-    echo "<span class=\"none\"><b>&laquo;</b></span> Oldalak <a href=\"build.php?id=$id&t=1&u=".($_GET['u']+40)."\">&raquo;</a>";
+    echo "<span class=\"none\"><b>&laquo;</b></span> Pages <a href=\"build.php?id=$id&t=1&u=".($_GET['u']+40)."\">&raquo;</a>";
     }
     else if(isset($_GET['u']) && count($market->onsale) > $_GET['u']) {
     	if(count($market->onsale) > ($_GET['u']+40) && $_GET['u']-40 < count($market->onsale) && $_GET['u'] != 0) {
-         echo "<a href=\"build.php?id=$id&t=1&u=".($_GET['u']+40)."\">&laquo;</a> Oldalak <a href=\"build.php?id=$id&t=1&u=".($_GET['u']+40)."\">&raquo;</a>";
+         echo "<a href=\"build.php?id=$id&t=1&u=".($_GET['u']+40)."\">&laquo;</a> Pages <a href=\"build.php?id=$id&t=1&u=".($_GET['u']+40)."\">&raquo;</a>";
          }
          else if(count($market->onsale) > $_GET['u']+40) {
          	echo "<span class=\"none\"><b>&laquo;</b></span> Pages <a href=\"build.php?id=$id&t=1&u=".($_GET['u']+40)."\">&raquo;</a>";
          }
         else {
-        echo "<a href=\"build.php?id=$id&t=1&u=".($_GET['u']-40)."\">&laquo;</a> Oldalak <span class=\"none\"><b>&raquo;</b></span>";
+        echo "<a href=\"build.php?id=$id&t=1&u=".($_GET['u']-40)."\">&laquo;</a> Pages <span class=\"none\"><b>&raquo;</b></span>";
         }
     }
 ?>

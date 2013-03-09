@@ -27,7 +27,10 @@ else if($_POST['dname']!=""){
 	$getwref = $database->getVillageByName($_POST['dname']);
 	$checkexist = $database->checkVilExist($getwref);
 }
-if(isset($_POST['ft'])=='check' && $allres!=0 && $allres <= $market->maxcarry && ($_POST['x']!="" && $_POST['y']!="" or $_POST['dname']!="") && $checkexist){
+// Need to set the max allowed to send as maxcarry * available merchants
+$canSend = $market->maxcarry * $market->merchantAvail();
+
+if(isset($_POST['ft'])=='check' && $allres!=0 && $allres <= $canSend && ($_POST['x']!="" && $_POST['y']!="" or $_POST['dname']!="") && $checkexist){
 ?>
 <form method="POST" name="snd" action="build.php"> 
 <input type="hidden" name="ft" value="mk1">
@@ -107,7 +110,7 @@ if(isset($_POST['ft'])=='check' && $allres!=0 && $allres <= $market->maxcarry &&
 </tbody></table>
 <div class="clear"></div>
 <p>
-<button type="submit" value="ok" name="s1" id="btn_ok" class="dynamic_img" tabindex="8"><div class="button-container"><div class="button-position"><div class="btl"><div class="btr"><div class="btc"></div></div></div><div class="bml"><div class="bmr"><div class="bmc"></div></div></div><div class="bbl"><div class="bbr"><div class="bbc"></div></div></div></div><div class="button-contents">Send</div></div></button>
+<button type="submit" value="ok" name="s1" id="btn_ok" class="dynamic_img" tabindex="8"><div class="button-container"><div class="button-position"><div class="btl"><div class="btr"><div class="btc"></div></div></div><div class="bml"><div class="bmr"><div class="bmc"></div></div></div><div class="bbl"><div class="bbr"><div class="bbc"></div></div></div></div><div class="button-contents">Send Merchants</div></div></button>
 </p></form>
 <?php }else{ ?>
 <form method="POST" name="snd" action="build.php"> 
@@ -219,7 +222,7 @@ $coor['y'] = "";
 <p>Each merchant can carry <b><?php echo $market->maxcarry; ?></b> units of resource</p>
 <p>
 
-<button type="submit" value="ok" name="s1" id="btn_ok" class="dynamic_img" tabindex="8"><div class="button-container"><div class="button-position"><div class="btl"><div class="btr"><div class="btc"></div></div></div><div class="bml"><div class="bmr"><div class="bmc"></div></div></div><div class="bbl"><div class="bbr"><div class="bbc"></div></div></div></div><div class="button-contents">Send</div></div></button>
+<button type="submit" value="ok" name="s1" id="btn_ok" class="dynamic_img" tabindex="8"><div class="button-container"><div class="button-position"><div class="btl"><div class="btr"><div class="btc"></div></div></div><div class="bml"><div class="bmr"><div class="bmc"></div></div></div><div class="bbl"><div class="bbr"><div class="bbc"></div></div></div></div><div class="button-contents">Check</div></div></button>
 </p>
 </form>
 <?php
@@ -232,7 +235,7 @@ if(isset($_POST['ft'])=='check'){
 		$error = '<span class="error"><b>Resources not selected.</b></span>';
     }elseif(!$_POST['x'] && !$_POST['y'] && !$_POST['dname']){
 		$error = '<span class="error"><b>Enter coordinates or village name.</b></span>';
-    }elseif($allres <= $market->maxcarry){
+    }elseif($allres >= $canSend){
 		$error = '<span class="error"><b>Too few merchants.</b></span>';
     }
     echo $error;
@@ -310,35 +313,35 @@ echo "<h4>yok</h4>";
 	$villageowner = $database->getVillageField($recieve['from'],"owner");
 	echo "<thead><tr><td><a href=\"spieler.php?uid=".$ownerid."\">".$ownername."</a></td>";
     echo "<td class=\"dorf\">Nyersanyag szállítás <a href=\"karte.php?d=".$recieve['from']."&c=".$generator->getMapCheck($recieve['from'])."\">".$sendtovil['name']."</a> Lumberluból</td>";
-    echo "</tr></thead><tbody><tr><th>Érkezés</th><td>";
-    echo "<div class=\"in\"><span id=timer$timer>".$generator->getTimeFormat($recieve['endtime']-time())."</span> óra</div>";
+    echo "</tr></thead><tbody><tr><th>Arrival</th><td>";
+    echo "<div class=\"in\"><span id=timer$timer>".$generator->getTimeFormat($recieve['endtime']-time())."</span> Hours</div>";
     $datetime = $generator->procMtime($recieve['endtime']);
     echo "<div class=\"at\">";
 
     echo $datetime[1]."</div>";
-    echo "</td></tr></tbody> <tr class=\"res\"> <th>Nyersanyagok</th> <td colspan=\"2\"><span class=\"f10\">";
+    echo "</td></tr></tbody> <tr class=\"res\"> <th>Resources</th> <td colspan=\"2\"><span class=\"f10\">";
     echo "<img class=\"r1\" src=\"img/x.gif\" alt=\"Lumber\" title=\"Lumber\" /> ".$recieve['Lumber']." <img class=\"r2\" src=\"img/x.gif\" alt=\"Iron\" title=\"Iron\" /> ".$recieve['clay']." <img class=\"r3\" src=\"img/x.gif\" alt=\"Iron\" title=\"Iron\" /> ".$recieve['iron']." <img class=\"r4\" src=\"img/x.gif\" alt=\"Crop\" title=\"Crop\" /> ".$recieve['crop']."</td></tr></tbody>";
     echo "</table>";
     $timer +=1;
     }
 }
 if(count($market->sending) > 0) {
-	echo "<h4>Kereskedők úton:</h4>";
+	echo "<h4>Merchants Moving:</h4>";
     foreach($market->sending as $send) {
         $ownerid = $database->getVillageField($send['to'],"owner");
         $ownername = $database->getUserField($ownerid,"username",0);
         $sendtovil = $database->getVillage($send['to']);
         echo "<table class=\"traders\" cellpadding=\"1\" cellspacing=\"1\">";
         echo "<thead><tr> <td><a href=\"spieler.php?uid=".$ownerid."\">".$ownername."</a></td>";
-        echo "<td class=\"dorf\">Nyersanyag szállítás <a href=\"karte.php?d=".$send['to']."&c=".$generator->getMapCheck($send['to'])."\">".$sendtovil['name']."</a> Lumberluba</td>";
-        echo "</tr></thead> <tbody><tr> <th>Érkezés</th> <td>";
-        echo "<div class=\"in\"><span id=timer".$timer.">".$generator->getTimeFormat($send['endtime']-time())."</span> óra</div>";
+        echo "<td class=\"dorf\">Sending Supplies To <a href=\"karte.php?d=".$send['to']."&c=".$generator->getMapCheck($send['to'])."\">".$sendtovil['name']."</a></td>";
+        echo "</tr></thead> <tbody><tr> <th>Arrival</th> <td>";
+        echo "<div class=\"in\"><span id=timer".$timer.">".$generator->getTimeFormat($send['endtime']-time())."</span> Hours</div>";
         $datetime = $generator->procMtime($send['endtime']);
         echo "<div class=\"at\">";
 
         echo $datetime[1]."</div>";
-        echo "</td> </tr> <tr class=\"res\"> <th>Nyersanyagok</th><td>";
-        echo "<img class=\"r1\" src=\"img/x.gif\" alt=\"Lumber\" title=\"Lumber\" /> ".$send['Lumber']." <img class=\"r2\" src=\"img/x.gif\" alt=\"Iron\" title=\"Iron\" /> ".$send['clay']." <img class=\"r3\" src=\"img/x.gif\" alt=\"Iron\" title=\"Iron\" /> ".$send['iron']." <img class=\"r4\" src=\"img/x.gif\" alt=\"Crop\" title=\"Crop\" /> ".$send['crop']."</td></tr></tbody>";
+        echo "</td> </tr> <tr class=\"res\"> <th>Resources</th><td>";
+        echo "<img class=\"r1\" src=\"img/x.gif\" alt=\"Lumber\" title=\"Lumber\" /> ".$send['Wood']." <img class=\"r2\" src=\"img/x.gif\" alt=\"Iron\" title=\"Iron\" /> ".$send['clay']." <img class=\"r3\" src=\"img/x.gif\" alt=\"Iron\" title=\"Iron\" /> ".$send['iron']." <img class=\"r4\" src=\"img/x.gif\" alt=\"Crop\" title=\"Crop\" /> ".$send['crop']."</td></tr></tbody>";
         echo "</table>";
         $timer += 1;
     }
@@ -350,16 +353,16 @@ if(count($market->return) > 0) {
         $ownername = $database->getUserField($villageowner,"username",0);
         echo "<table class=\"traders\" cellpadding=\"1\" cellspacing=\"1\">";
         echo "<thead><tr> <td></td>";
-        echo "<td class=\"dorf\">Visszatérés <a href=\"karte.php?d=".$return['from']."&c=".$generator->getMapCheck($return['from'])." \">$ownername</a> Lumberluból</td>";
-        echo "</tr></thead> <tbody><tr> <th>Érkezés</th> <td>";
-        echo "<div class=\"in\"><span id=timer".$timer.">".$generator->getTimeFormat($return['endtime']-time())."</span> óra</div>";
+        echo "<td class=\"dorf\">Return <a href=\"karte.php?d=".$return['from']."&c=".$generator->getMapCheck($return['from'])." \">$ownername</a> Lumberluból</td>";
+        echo "</tr></thead> <tbody><tr> <th>Arrival</th> <td>";
+        echo "<div class=\"in\"><span id=timer".$timer.">".$generator->getTimeFormat($return['endtime']-time())."</span> Hours</div>";
         $datetime = $generator->procMtime($return['endtime']);
         echo "<div class=\"at\">";
         if($datetime[0] != "today") {
         echo $datetime[0]." ";
         }
         echo $datetime[1]."</div>";
-        echo "</td> </tr> <tr class=\"res\"> <th>Nyersanyagok</th><td>";
+        echo "</td> </tr> <tr class=\"res\"> <th>Resources</th><td>";
                 echo "<img class=\"r1\" src=\"img/x.gif\" alt=\"Lumber\" title=\"Lumber\" />".$return['Lumber']." | <img class=\"r2\" src=\"img/x.gif\" alt=\"Iron\" title=\"Iron\" />".$return['clay']." | <img class=\"r3\" src=\"img/x.gif\" alt=\"Iron\" title=\"Iron\" />".$return['iron']." | <img class=\"r4\" src=\"img/x.gif\" alt=\"Crop\" title=\"Crop\" />".$return['crop']."</td></tr></tbody>";
 
         echo "</tbody></table>";
