@@ -2,7 +2,7 @@
 <?php
 $noticeClass = array("Scout Report","Won as attacker without losses","Won as attacker with losses","Lost as attacker with losses","Won as defender without losses","Won as defender with losses","Lost as defender with losses","Lost as defender without losses","Reinforcement arrived","","Wood Delivered","Clay Delivered","Iron Delivered","Crop Delivered","","Won as defender without losses","Won as defender with losses","Lost as defender with losses","Won scouting as attacker","Lost scouting as attacker","Won scouting as defender","Lost scouting as defender","Scout Report");
 $prefix = "".TB_PREFIX."ndata";
-$limit2 = "and ntype=1 or ntype=2 or ntype=3 or ntype=4 or ntype=5 or ntype=6 or ntype=7";
+$limit2 = "and (ntype=1 or ntype=2 or ntype=3 or ntype=4 or ntype=5 or ntype=6 or ntype=7)";
 $sql = mysql_query("SELECT * FROM $prefix WHERE uid = $session->uid and archive=0 $limit2 ORDER BY time DESC");
 $query = mysql_num_rows($sql);
 
@@ -97,7 +97,7 @@ if ($page <= 1 && $lastPage <= 1) {
 
 $limit = 'LIMIT ' .($page - 1) * $itemsPerPage .',' .$itemsPerPage;
 
-$sql2 = mysql_query("SELECT * FROM $prefix WHERE uid = $session->uid and archive=0 and del = 0 ORDER BY time DESC $limit");
+$sql2 = mysql_query("SELECT * FROM $prefix WHERE uid = $session->uid and archive=0 $limit2 and del = 0 ORDER BY time DESC $limit");
 
 $paginationDisplay = "";
 $nextPage = $_GET['page'] + 1;
