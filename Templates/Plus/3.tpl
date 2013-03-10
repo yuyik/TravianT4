@@ -54,7 +54,7 @@ mysql_query("UPDATE ".TB_PREFIX."research set timestamp = '1' where vref = '".$v
 
 
 
-$done1 = "ساخت <b>".$buildnum."</b> bold <b>".$resnum."</b> تحقیق به پایان رسید.";
+$done1 = '<b>' . $buildnum . '</b> x Construction and <b>' . $resnum . '</b> x Research completed<br><br>';
     mysql_query("UPDATE ".TB_PREFIX."users set gold = ".($session->gold-2)." where `username`='".$session->username."'") or die(mysql_error());
     mysql_query("INSERT INTO ".TB_PREFIX."gold_fin_log VALUES ('".(mysql_num_rows($goldlog)+1)."', '".$village->wid."', 'Finish construction and research with gold')") or die(mysql_error());
 
@@ -68,9 +68,9 @@ $done1 = "ساخت <b>".$buildnum."</b> bold <b>".$resnum."</b> تحقیق به 
 
 }
  ?>
-
-<h4 class="spacer">Plus Managment</h4>
-
+<!-- TODO - Show Construction and research in progress here? -->
+<!-- <h4 class="spacer">ساخت</h4> --> 
+<br><br>
 <?php echo $done1; ?>
 <table class="plusFunctions" cellpadding="1" cellspacing="1">
 	<thead>
@@ -423,7 +423,7 @@ if($session->gold >= 100){
 		echo "<button type=\"button\" value=\"فعال سازی\" onclick=\"window.location.href = 'plus.php?id=15'; return false;\"><div class=\"button-container\"><div class=\"button-position\"><div class=\"btl\"><div class=\"btr\"><div class=\"btc\"></div></div></div><div class=\"bml\"><div class=\"bmr\"><div class=\"bmc\"></div></div></div><div class=\"bbl\"><div class=\"bbr\"><div class=\"bbc\"></div></div></div></div><div class=\"button-contents\">Activate</div></div></button>";
 
 	} else {
-		echo "<button type=\"button\" value=\"فعال شده\" class=\" disabled\" onclick=\"(new Event(event)).stop(); return false;\" onfocus=\"$$('button', 'input[type!=hidden]', 'select')[0].focus(); (new Event(event)).stop(); return false;\"><div class=\"button-container\"><div class=\"button-position\"><div class=\"btl\"><div class=\"btr\"><div class=\"btc\"></div></div></div><div class=\"bml\"><div class=\"bmr\"><div class=\"bmc\"></div></div></div><div class=\"bbl\"><div class=\"bbr\"><div class=\"bbc\"></div></div></div></div><div class=\"button-contents\">Activate</div></div></button>";
+		echo "<button type=\"button\" value=\"فعال شده\" class=\" disabled\" onclick=\"(new Event(event)).stop(); return false;\" onfocus=\"$$('button', 'input[type!=hidden]', 'select')[0].focus(); (new Event(event)).stop(); return false;\"><div class=\"button-container\"><div class=\"button-position\"><div class=\"btl\"><div class=\"btr\"><div class=\"btc\"></div></div></div><div class=\"bml\"><div class=\"bmr\"><div class=\"bmc\"></div></div></div><div class=\"bbl\"><div class=\"bbr\"><div class=\"bbc\"></div></div></div></div><div class=\"button-contents\">Activated</div></div></button>";
 	}
 }else{
 	echo "<button type=\"button\" value=\"فعال سازی\" class=\" disabled\" onclick=\"(new Event(event)).stop(); return false;\" onfocus=\"$$('button', 'input[type!=hidden]', 'select')[0].focus(); (new Event(event)).stop(); return false;\"><div class=\"button-container\"><div class=\"button-position\"><div class=\"btl\"><div class=\"btr\"><div class=\"btc\"></div></div></div><div class=\"bml\"><div class=\"bmr\"><div class=\"bmc\"></div></div></div><div class=\"bbl\"><div class=\"bbr\"><div class=\"bbc\"></div></div></div></div><div class=\"button-contents\">Activate</div></div></button>";

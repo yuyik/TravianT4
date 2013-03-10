@@ -63,7 +63,7 @@ echo "<div class=\"clear\"></div>
 					echo "<div class=\"contractLink\"><span class=\"none\">Improve the blacksmith</span></div>";
 				}
 				else if (count($ABups) > 0) {
-					echo "<div class=\"contractLink\"><span class=\"none\">Upgrading in progress</span></div>";
+					echo "<div class=\"contractLink\"><span class=\"none\">Research in progress</span></div>";
 				}
 				else {
 
