@@ -68,7 +68,7 @@ $done1 = '<b>' . $buildnum . '</b> x Construction and <b>' . $resnum . '</b> x R
 
 }
  ?>
-
+<!-- TODO - Show Construction and research in progress here? -->
 <!-- <h4 class="spacer">ساخت</h4> --> 
 <br><br>
 <?php echo $done1; ?>
