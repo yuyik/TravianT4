@@ -11,7 +11,7 @@ if ($units[$y]['sort_type']==3){
 	} else if ($units[$y]['attack_type']==4){
 		$actionType = "Raid on ";
 	} else if ($units[$y]['attack_type']==2){
-		$actionType = "Reinforment from ";
+		$actionType = "Reinforcement from ";
 	}
 
 	if($units[$y]['attack_type'] != 1){

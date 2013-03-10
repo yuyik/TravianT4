@@ -822,9 +822,9 @@ class Automation {
             $from = $database->getMInfo($data['from']);
 			$toAlly = $database->getUserField($to['owner'],'alliance',0);
 			$fromAlly = $database->getUserField($from['owner'],'alliance',0);
-            $database->addNotice($to['owner'],$to['wref'],$toAlly,$sort_type,''.addslashes($from['name']).' send resources to '.addslashes($to['name']).'',''.$from['wref'].','.$to['wref'].','.$data['wood'].','.$data['clay'].','.$data['iron'].','.$data['crop'].'',$data['endtime']); 
-            if($from['owner'] != $to['owner']) {
-                $database->addNotice($from['owner'],$to['wref'],$fromAlly,$sort_type,''.addslashes($from['name']).' send resources to '.addslashes($to['name']).'',''.$from['wref'].','.$to['wref'].','.$data['wood'].','.$data['clay'].','.$data['iron'].','.$data['crop'].'',$data['endtime']);
+			$database->addNotice($to['owner'],$to['wref'],$toAlly,$sort_type,''.addslashes($from['name']).' sent resources to '.addslashes($to['name']).'',''.$from['wref'].','.$to['wref'].','.$data['wood'].','.$data['clay'].','.$data['iron'].','.$data['crop'].'',$data['endtime']);
+			if($from['owner'] != $to['owner']) {
+                $database->addNotice($from['owner'],$to['wref'],$fromAlly,$sort_type,''.addslashes($from['name']).' sent resources to '.addslashes($to['name']).'',''.$from['wref'].','.$to['wref'].','.$data['wood'].','.$data['clay'].','.$data['iron'].','.$data['crop'].'',$data['endtime']);
             }
             $database->modifyResource($data['to'],$data['wood'],$data['clay'],$data['iron'],$data['crop'],1);
             $tocoor = $database->getCoor($data['from']);
@@ -2423,7 +2423,7 @@ $info_cata=" از سطح <b>".$tblevel."</b> به سطح <b>".$totallvl."</b> آ
 			$targetally = $database->getUserField($from['owner'],'alliance',0);
 			$unitssend_att = ''.$data['t1'].','.$data['t2'].','.$data['t3'].','.$data['t4'].','.$data['t5'].','.$data['t6'].','.$data['t7'].','.$data['t8'].','.$data['t9'].','.$data['t10'].','.$data['t11'].'';
 			$data_fail = '0,0,4,'.$unitssend_att.','.$to['wref'].','.$to['owner'];
-			$database->addNotice($to['owner'],$to['wref'],$targetally,8,'nature reinforcement '.addslashes($to['name']).'',$data_fail,$AttackArrivalTime);
+			$database->addNotice($to['owner'],$to['wref'],$targetally,8,'nature reinforced '.addslashes($to['name']).'',$data_fail,$AttackArrivalTime);
 			$database->setMovementProc($data['moveid']);
 			}else{
             //set base things
@@ -2475,10 +2475,10 @@ $info_cata=" از سطح <b>".$tblevel."</b> به سطح <b>".$totallvl."</b> آ
             $unitssend_att = ''.$data['t1'].','.$data['t2'].','.$data['t3'].','.$data['t4'].','.$data['t5'].','.$data['t6'].','.$data['t7'].','.$data['t8'].','.$data['t9'].','.$data['t10'].','.$data['t11'].'';
             $data_fail = ''.$from['wref'].','.$from['owner'].','.$owntribe.','.$unitssend_att.','.$to['wref'].','.$to['owner'].'';
 			$fromAlly = $database->getUserField($from['owner'],'alliance',0);
-            $database->addNotice($from['owner'],$to['wref'],$fromAlly,8,''.addslashes($from['name']).' reinforcement '.addslashes($to['name']).'',$data_fail,$AttackArrivalTime);
+            $database->addNotice($from['owner'],$to['wref'],$fromAlly,8,''.addslashes($from['name']).' reinforced '.addslashes($to['name']).'',$data_fail,$AttackArrivalTime);
 			if($from['owner'] != $to['owner']) {
 				$toAlly = $database->getUserField($from['owner'],'alliance',0);
-				$database->addNotice($to['owner'],$to['wref'],$toAlly,8,''.addslashes($from['name']).' reinforcement '.addslashes($to['name']).'',$data_fail,$AttackArrivalTime);
+				$database->addNotice($to['owner'],$to['wref'],$toAlly,8,''.addslashes($from['name']).' reinforced '.addslashes($to['name']).'',$data_fail,$AttackArrivalTime);
 			}
             //update status
             $database->setMovementProc($data['moveid']); 

@@ -46,7 +46,7 @@ for($i=0;$i<$units_incomming;$i++){
 		$units_incomming -= 1;
 }
 if($units_incomming >= 1){
-echo "<h4 class=\"spacer\">Incomming troops (".$units_incomming.")</h4>";
+echo "<h4 class=\"spacer\">Incoming troops (".$units_incomming.")</h4>";
 include("16_incomming.tpl");
 	} 
 ?>

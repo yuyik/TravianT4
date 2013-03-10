@@ -4,16 +4,16 @@ $start=41;
 <table cellpadding="0" cellspacing="0">
 	<thead>
 		<tr>
-			<td class="role"><div class="boxes boxesColor green"><div class="boxes-tl"></div><div class="boxes-tr"></div><div class="boxes-tc"></div><div class="boxes-ml"></div><div class="boxes-mr"></div><div class="boxes-mc"></div><div class="boxes-bl"></div><div class="boxes-br"></div><div class="boxes-bc"></div><div class="boxes-contents"><div class="role">Védés</div>	</div></div></td>
+			<td class="role"><div class="boxes boxesColor green"><div class="boxes-tl"></div><div class="boxes-tr"></div><div class="boxes-tc"></div><div class="boxes-ml"></div><div class="boxes-mr"></div><div class="boxes-mc"></div><div class="boxes-bl"></div><div class="boxes-br"></div><div class="boxes-bc"></div><div class="boxes-contents"><div class="role">Defender</div>	</div></div></td>
             <td class="troopHeadline" colspan="<?php if($dataarray[139]){ echo'11'; }else{ echo'10'; } ?>">
             <?php
             if($targettribe=='5'){
             echo '<a href="spieler.php?uid='.$database->getUserField($dataarray[30],"id",0).'">';
             echo "Natar";
-            echo '</a> Város <a href="karte.php?d='.$dataarray[31].'&amp;c='.$generator->getMapCheck($dataarray[31]).'">
+            echo '</a> Village <a href="karte.php?d='.$dataarray[31].'&amp;c='.$generator->getMapCheck($dataarray[31]).'">
             '.stripslashes($dataarray[32]).'</a>';
             } else {
-            echo"Támogatás";
+            echo "REPORT_REINF";
             }
             ?>
             </td>

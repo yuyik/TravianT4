@@ -2,8 +2,8 @@
 <?php
 $noticeClass = array("Scout Report","Won as attacker without losses","Won as attacker with losses","Lost as attacker with losses","Won as defender without losses","Won as defender with losses","Lost as defender with losses","Lost as defender without losses","Reinforcement arrived","","Wood Delivered","Clay Delivered","Iron Delivered","Crop Delivered","","Won as defender without losses","Won as defender with losses","Lost as defender with losses","Won scouting as attacker","Lost scouting as attacker","Won scouting as defender","Lost scouting as defender","Scout Report");
 $prefix = "".TB_PREFIX."ndata";
-$limit2 = "and ntype=1 or ntype=2 or ntype=3 or ntype=4 or ntype=5 or ntype=6 or ntype=7";
-$sql = mysql_query("SELECT * FROM $prefix WHERE uid = $session->uid and archive=0 $limit2 ORDER BY time DESC");
+$limit2 = "and (ntype = 8)";
+$sql = mysql_query("SELECT * FROM $prefix WHERE uid = $session->uid and archive = 0 $limit2 and del = 0 ORDER BY time DESC");
 $query = mysql_num_rows($sql);
 
 if (isset($_GET['page'])) {
@@ -31,37 +31,37 @@ $add3 = $page + 3;
 
 if ($page <= 1 && $lastPage <= 1) {
     $centerPages .= '<span class="number currentPage">1</span>';
-	
+
 }elseif ($page == 1 && $lastPage == 2) {
     $centerPages .= '<span class="number currentPage">' . $page . '</span> ';
     $centerPages .= '<a class="number" href="' . $_SERVER['PHP_SELF'] . '?t=' . $_GET['t'] . '&page=2">2</a>';
-	
+
 }elseif ($page == 1 && $lastPage == 3) {
     $centerPages .= '<span class="number currentPage">' . $page . '</span> ';
     $centerPages .= '<a class="number" href="' . $_SERVER['PHP_SELF'] . '?t=' . $_GET['t'] . '&page=2">2</a> ';
     $centerPages .= '<a class="number" href="' . $_SERVER['PHP_SELF'] . '?t=' . $_GET['t'] . '&page=3">3</a>';
-	
+
 }elseif ($page == 1) {
     $centerPages .= '<span class="number currentPage">' . $page . '</span> ';
     $centerPages .= '<a class="number" href="' . $_SERVER['PHP_SELF'] . '?t=' . $_GET['t'] . '&page=' . $add1 . '">' . $add1 . '</a> ';
 	$centerPages .= '<a class="number" href="' . $_SERVER['PHP_SELF'] . '?t=' . $_GET['t'] . '&page=' . $add2 . '">' . $add2 . '</a> ... ';
 	$centerPages .= '<a class="number" href="' . $_SERVER['PHP_SELF'] . '?t=' . $_GET['t'] . '&page=' . $lastPage . '">' . $lastPage . '</a>';
-	
+
 } else if ($page == $lastPage && $lastPage == 2) {
 	$centerPages .= '<a class="number" href="' . $_SERVER['PHP_SELF'] . '?t=' . $_GET['t'] . '&page=1">1</a> ';
     $centerPages .= '<span class="number currentPage">' . $page . '</span>';
-	
+
 } else if ($page == $lastPage && $lastPage == 3) {
 	$centerPages .= '<a class="number" href="' . $_SERVER['PHP_SELF'] . '?t=' . $_GET['t'] . '&page=1">1</a> ';
     $centerPages .= '<a class="number" href="' . $_SERVER['PHP_SELF'] . '?t=' . $_GET['t'] . '&page=2">2</a> ';
     $centerPages .= '<span class="number currentPage">' . $page . '</span>';
-	
+
 } else if ($page == $lastPage) {
 	$centerPages .= '<a class="number" href="' . $_SERVER['PHP_SELF'] . '?t=' . $_GET['t'] . '&page=1">1</a> ... ';
     $centerPages .= '<a class="number" href="' . $_SERVER['PHP_SELF'] . '?t=' . $_GET['t'] . '&page=' . $sub2 . '">' . $sub2 . '</a> ';
 	$centerPages .= '<a class="number" href="' . $_SERVER['PHP_SELF'] . '?t=' . $_GET['t'] . '&page=' . $sub1 . '">' . $sub1 . '</a> ';
     $centerPages .= '<span class="number currentPage">' . $page . '</span>';
-	
+
 } else if ($page == ($lastPage - 1) && $lastPage == 3) {
     $centerPages .= '<a class="number" href="' . $_SERVER['PHP_SELF'] . '?t=' . $_GET['t'] . '&page=1">1</a> ';
     $centerPages .= '<span class="number currentPage">' . $page . '</span> ';
@@ -73,7 +73,7 @@ if ($page <= 1 && $lastPage <= 1) {
     $centerPages .= '<span class="number currentPage">' . $page . '</span> ';
     $centerPages .= '<a class="number" href="' . $_SERVER['PHP_SELF'] . '?t=' . $_GET['t'] . '&page=' . $add1 . '">' . $add1 . '</a> ... ';
 	$centerPages .= '<a class="number" href="' . $_SERVER['PHP_SELF'] . '?t=' . $_GET['t'] . '&page=' . $lastPage . '">' . $lastPage . '</a>';
-	
+
 }else if ($page == ($lastPage - 1)) {
     $centerPages .= '<a class="number" href="' . $_SERVER['PHP_SELF'] . '?t=' . $_GET['t'] . '&page=1">1</a> ... ';
     $centerPages .= '<a class="number" href="' . $_SERVER['PHP_SELF'] . '?t=' . $_GET['t'] . '&page=' . $sub1 . '">' . $sub1 . '</a> ';
@@ -97,8 +97,7 @@ if ($page <= 1 && $lastPage <= 1) {
 
 $limit = 'LIMIT ' .($page - 1) * $itemsPerPage .',' .$itemsPerPage;
 
-$sql2 = mysql_query("SELECT * FROM $prefix WHERE uid = $session->uid and archive=0 and del = 0 ORDER BY time DESC $limit");
-
+$sql2 = mysql_query("SELECT * FROM $prefix WHERE uid = $session->uid and archive=0 $limit2 and del = 0 ORDER BY time DESC $limit");
 $paginationDisplay = "";
 $nextPage = $_GET['page'] + 1;
 $previous = $_GET['page'] - 1;
@@ -139,7 +138,6 @@ $paginationDisplay .=  '<img alt="Következő" src="img/x.gif" class="next disab
 $paginationDisplay .=  '<img alt="Utolsó" src="img/x.gif" class="last disabled">';
 }
 
-
 $outputList = '';
 $name = 1;
 if($query == 0) {        
@@ -154,46 +152,18 @@ while($row = mysql_fetch_array($sql2)){
     $time = $row["time"];
     $viewed = $row["viewed"];
     $archive = $row["archive"];
-	$type = (isset($_GET['t']) && $_GET['t'] == 5)? $archive : $ntype;
     $dataarray = explode(",",$data);
-    
-    
-    $outputList .= "<tr><td class=\"sel\"><input class=\"check\" type=\"checkbox\" name=\"n".$name."\" value=\"".$id."\" /></td><td class=\"sub\">";
-    
-    if($type==9){
-    	$outputList .= "<img src=\"img/x.gif\" class=\"iReport iReport21\" alt=\"".$noticeClass[$ntype]."\" title=\"".$noticeClass[$ntype]."\" /> <div>";
-    }else{
-    	$outputList .= "<img src=\"img/x.gif\" class=\"iReport iReport$type\" alt=\"".$noticeClass[$type]."\" title=\"".$noticeClass[$type]."\" /> <div>";
-    }
 
-if($type==1 || $type==2 || $type==5 || $type==6 || $type==7){
-    if ($dataarray[24]+$dataarray[25]+$dataarray[26]+$dataarray[27] == 0) {
-    $style = "empty";
-	} elseif ($dataarray[24]+$dataarray[25]+$dataarray[26]+$dataarray[27] != $dataarray[28]) {
-    $style = "half";
-    } else {
-    $style = "full";
-    }
-    $carry = ($dataarray[24]+$dataarray[25]+$dataarray[26]+$dataarray[27])."/".$dataarray[28];
-    
-    $outputList .= "<div class=\"reportInfoIcon\"><img title=\"".$carry."\" src=\"img/x.gif\" class=\"reportInfo carry ".$style."\"></div>";
-    
-}elseif($type==9){
-$btype = $dataarray[1];
-$type = $dataarray[2];
-include "Templates/Auction/alt.tpl";
-$typeArray = array("","helmet","body","leftHand","rightHand","shoes","horse","bandage25","bandage33","cage","scroll","ointment","bucketOfWater","bookOfWisdom","lawTables","artWork");
-if($dataarray[1]){
-	$outputList .= "<div class=\"reportInfoIcon\"><img title=\"".$name." (".$dataarray[3]."x)\" src=\"img/x.gif\" class=\"reportInfo itemCategory itemCategory_".$typeArray[$dataarray[1]]."\"></div>";
-    }
-}
+    $outputList .= "<tr><td class=\"sel\"><input class=\"check\" type=\"checkbox\" name=\"n".$name."\" value=\"".$id."\" /></td><td class=\"sub\">";
+    $outputList .= "<img src=\"img/x.gif\" class=\"iReport iReport$ntype\" alt=\"".$noticeClass[$ntype]."\" title=\"".$noticeClass[$ntype]."\" /> <div>";
+
     $outputList .= "<a href=\"berichte.php?id=".$id."\">".$topic." </a> ";
     if($viewed == 0) { $outputList .= "(New)"; }
     $date = $generator->procMtime($time);
     $outputList .= "</div><div class=\"clear\"></div></td>
 			<td class=\"dat\">".$date[0]." ".date('H:i',$time)."</td></tr>";
 	$name++;
-}
+    }
  }
 
 
@@ -201,7 +171,7 @@ if($dataarray[1]){
 <form method="post" action="berichte.php" name="msg">
 <input type="hidden" name="t" id="t" value="<?php echo $_GET['t']; ?>">
 	<table cellpadding="1" cellspacing="1" id="overview" class="row_table_data">
-		<thead><tr><th colspan="2">Subject:</th><th class="sent">Sent</th></tr></thead>
+		<thead><tr><th colspan="2">Subject:</th><th class="sent">Sent:</th></tr></thead>
         <tbody>
    <?php 
 
