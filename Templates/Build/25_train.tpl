@@ -36,7 +36,7 @@ echo "<div class=\"action first\">
 						<div class=\"tit\">
 							<a href=\"#\" onclick=\"return Travian.Game.iPopup(".$i.",1);\"><img class=\"unit u".$i."\" src=\"img/x.gif\" alt=\"".$technology->getUnitName($i)."\"></a>
 							<a href=\"#\" onclick=\"return Travian.Game.iPopup(".$i.",1);\">".$technology->getUnitName($i)."</a>
-							<span class=\"furtherInfo\">(Jelenlegi: ".$village->unitarray['u'.$i].")</span>
+							<span class=\"furtherInfo\">(Current: ".$village->unitarray['u'.$i].")</span>
 						</div>
                         <div class=\"showCosts\">
                         <span class=\"resources r1\"><img class=\"r1\" src=\"img/x.gif\" alt=\"Fa\">".${'u'.$i}['wood']."</span>
