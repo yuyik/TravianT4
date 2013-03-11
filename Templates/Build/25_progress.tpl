@@ -23,9 +23,9 @@
 			}
 			echo "</td><td class=\"fin\">";
 			$time = $generator->procMTime($train['commence']+($train['eachtime']*$train['amt']));
-			echo " ".$time[1]." óra";
+			echo " ".$time[1]." Time";
 		} ?>
-		</tr><tr class="next"><td colspan="3">A következő egység <span id="timer2"><?php echo $NextFinished; ?></span> múlva lesz kész.</td></tr>
+		</tr><tr class="next"><td colspan="3">Next Unit <span id="timer2"><?php echo $NextFinished; ?></span></td></tr>
 		</tbody></table>
     <?php }
 ?>

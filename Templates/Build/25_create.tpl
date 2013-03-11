@@ -55,8 +55,8 @@ $i = 20;
         if($time[0] != "today") {
             echo $time[0];
             }
-            echo $time[1]."</span><span> óra</td>
-		</tr><tr class=\"next\"><td colspan=\"3\">A következő egység <span id=timer".$timer.">".$generator->getTimeFormat(($train['commence']+$train['eachtime'])-time())." múlva lesz kész</span></td></tr>";
+            echo $time[1]."</span><span> Time</td>
+		</tr><tr class=\"next\"><td colspan=\"3\">Next Unit <span id=timer".$timer.">".$generator->getTimeFormat(($train['commence']+$train['eachtime'])-time())."</span></td></tr>";
         }
         echo "</tbody></table>";
     }
