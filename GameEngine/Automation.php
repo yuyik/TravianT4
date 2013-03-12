@@ -1914,8 +1914,8 @@ class Automation {
 				}
                 if (($battlepart[4]/2)>$needed_cata)
                 {
-					$info_cat .= "<br><tbody class=\"goods\"><tr><th>اطلاعات</th><td colspan=\"11\">
-                    <img class=\"unit u".$tbgid."\" src=\"img/x.gif\" alt=\"منجنیق\" title=\"منجنیق\" /> ".$this->procResType($tbgid)." <b>تخریب شد</b>.</td></tr></tbody>";
+					$info_cat .= "<br><tbody class=\"goods\"><tr><th>Info</th><td colspan=\"11\">
+                    <img class=\"unit u".$tbgid."\" src=\"img/x.gif\" alt=\"catapult\" title=\"catapult\" /> ".$this->procResType($tbgid)." <b>Destroyed</b>.</td></tr></tbody>";
                     $database->setVillageLevel($data['to'],"f".$tbid."",'0');
                     if($tbid>=19) { $database->setVillageLevel($data['to'],"f".$tbid."t",'0'); }
                     $buildarray = $GLOBALS["bid".$tbgid];
@@ -2001,8 +2001,8 @@ $info_cata=" از سطح <b>".$tblevel."</b> به سطح <b>".$totallvl."</b> آ
                         $pop=$this->recountPop($data['to']);
                     }
                         
-                    $info_cat .= "<br><tbody class=\"goods\"><tr><th>اطلاعات</th><td colspan=\"11\">
-                    <img class=\"unit u".$tbgid."\" src=\"img/x.gif\" alt=\"منجنیق\" title=\"منجنیق\" /> ".$this->procResType($tbgid).$info_cata."</td></tr></tbody>";
+                    $info_cat .= "<br><tbody class=\"goods\"><tr><th>Information</th><td colspan=\"11\">
+                    <img class=\"unit u".$tbgid."\" src=\"img/x.gif\" alt=\"catapult\" title=\"catapult\" /> ".$this->procResType($tbgid).$info_cata."</td></tr></tbody>";
                     $database->setVillageLevel($data['to'],"f".$tbid."",$totallvl);
                 }
             }
@@ -2020,7 +2020,7 @@ $info_cata=" از سطح <b>".$tblevel."</b> به سطح <b>".$totallvl."</b> آ
                 for ($i=18; $i<39; $i++){
                     if ($database->getFieldLevel($data['to'],"".$i."t")==25 or $database->getFieldLevel($data['to'],"".$i."t")==26){
                         $nochiefing='1';
-                            $info_chief = "".$chief_pic.", قصر یا اقامتگاه هنوز سالم است.";
+                            $info_chief = "".$chief_pic.",Palace or Residence still exists.";
                     }
                 }
                 if(!isset($nochiefing)){
@@ -2030,12 +2030,12 @@ $info_cata=" از سطح <b>".$tblevel."</b> به سطح <b>".$totallvl."</b> آ
                     }
                     //loyalty is more than 0
                     if(($toF['loyalty']-$rand)>0){
-                        $info_chief = "".$chief_pic.", وفاداری دهکده از <b>".$toF['loyalty']."</b> به <b>".($toF['loyalty']-$rand)."</b> کاهش یافت.";
+                            $info_chief = "".$chief_pic.", Reduced Loyalty from <b>".$toF['loyalty']."</b> To <b>".($toF['loyalty']-$rand)."</b>";
                         $database->setVillageField($data['to'],loyalty,($toF['loyalty']-$rand));
                     } else {
                     //you took over the village
                         $artifact = $database->getOwnArtefactInfo($data['to']);
-                        $info_chief = "".$chief_pic.", ساکنین دهکده به امپراطوری شما <b>ملحق شدند</b>.";
+                        $info_chief = "".$chief_pic.", You conquered the village!";
                         if ($artifact['vref'] == $data['to']){
                          $database->claimArtefact($data['to'],$data['to'],$database->getVillageField($data['from'],"owner"));
                         }
@@ -2069,7 +2069,7 @@ $info_cata=" از سطح <b>".$tblevel."</b> به سطح <b>".$totallvl."</b> آ
                     }
                 }
             } else {
-                $info_chief = "".$chief_pic.", شما نمی توانید پایتخت را تصرف کنید.";
+                $info_chief = "".$chief_pic.", You cannot Conquer the Capital!";
             }
         }
         
