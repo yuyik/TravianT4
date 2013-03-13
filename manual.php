@@ -11,6 +11,7 @@
 ##                                                                             ##
 #################################################################################
 
+include("GameEngine/Database/connection.php");
 include("GameEngine/config.php");
 ?>
 
