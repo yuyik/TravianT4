@@ -304,7 +304,7 @@ document.snd.r1.focus();
 <?php
 $timer = 1;
 if(count($market->recieving) > 0) { 
-echo "<h4>yok</h4>";
+echo "<h4>Incoming Merchants</h4>";
     foreach($market->recieving as $recieve) {
        echo "<table class=\"traders\" cellpadding=\"1\" cellspacing=\"1\">";
     $ownerid = $database->getVillageField($recieve['from'],"owner");
@@ -312,7 +312,7 @@ echo "<h4>yok</h4>";
     $sendtovil = $database->getVillage($recieve['from']);
 	$villageowner = $database->getVillageField($recieve['from'],"owner");
 	echo "<thead><tr><td><a href=\"spieler.php?uid=".$ownerid."\">".$ownername."</a></td>";
-    echo "<td class=\"dorf\">Nyersanyag szállítás <a href=\"karte.php?d=".$recieve['from']."&c=".$generator->getMapCheck($recieve['from'])."\">".$sendtovil['name']."</a> Lumberluból</td>";
+    echo "<td class=\"dorf\">Resources from <a href=\"karte.php?d=".$recieve['from']."&c=".$generator->getMapCheck($recieve['from'])."\">".$sendtovil['name']."</a></td>";
     echo "</tr></thead><tbody><tr><th>Arrival</th><td>";
     echo "<div class=\"in\"><span id=timer$timer>".$generator->getTimeFormat($recieve['endtime']-time())."</span> Hours</div>";
     $datetime = $generator->procMtime($recieve['endtime']);
@@ -320,7 +320,10 @@ echo "<h4>yok</h4>";
 
     echo $datetime[1]."</div>";
     echo "</td></tr></tbody> <tr class=\"res\"> <th>Resources</th> <td colspan=\"2\"><span class=\"f10\">";
-    echo "<img class=\"r1\" src=\"img/x.gif\" alt=\"Lumber\" title=\"Lumber\" /> ".$recieve['Lumber']." <img class=\"r2\" src=\"img/x.gif\" alt=\"Iron\" title=\"Iron\" /> ".$recieve['clay']." <img class=\"r3\" src=\"img/x.gif\" alt=\"Iron\" title=\"Iron\" /> ".$recieve['iron']." <img class=\"r4\" src=\"img/x.gif\" alt=\"Crop\" title=\"Crop\" /> ".$recieve['crop']."</td></tr></tbody>";
+    echo "<img class=\"r1\" src=\"img/x.gif\" alt=\"Lumber\" title=\"Lumber\" /> ".$recieve['wood']
+    ." <img class=\"r2\" src=\"img/x.gif\" alt=\"Clay\" title=\"Clay\" /> ".$recieve['clay']
+    ." <img class=\"r3\" src=\"img/x.gif\" alt=\"Iron\" title=\"Iron\" /> ".$recieve['iron']
+    ." <img class=\"r4\" src=\"img/x.gif\" alt=\"Crop\" title=\"Crop\" /> ".$recieve['crop']."</td></tr></tbody>";
     echo "</table>";
     $timer +=1;
     }
