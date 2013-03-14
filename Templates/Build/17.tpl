@@ -357,9 +357,11 @@ if(count($market->return) > 0) {
     foreach($market->return as $return) {
         $villageowner = $database->getVillageField($return['from'],"owner");
         $ownername = $database->getUserField($villageowner,"username",0);
+        $villagename = $database->getVillageField($return['from'],"name");
         echo "<table class=\"traders\" cellpadding=\"1\" cellspacing=\"1\">";
         echo "<thead><tr> <td></td>";
-        echo "<td class=\"dorf\">Return from <a href=\"karte.php?d=".$return['from']."&c=".$generator->getMapCheck($return['from'])." \">$ownername</a></td>";
+        //echo "<td class=\"dorf\">Return from <a href=\"karte.php?d=".$return['from']."&c=".$generator->getMapCheck($return['from'])." \">$ownername</a></td>";
+        echo "<td class=\"dorf\">Return from <a href=\"karte.php?d=".$return['from']."&c=".$generator->getMapCheck($return['from'])." \">$villagename</a></td>";
         echo "</tr></thead> <tbody><tr> <th>Arrival</th> <td>";
         echo "<div class=\"in\"><span id=timer".$timer.">".$generator->getTimeFormat($return['endtime']-time())."</span> Hours</div>";
         $datetime = $generator->procMtime($return['endtime']);
