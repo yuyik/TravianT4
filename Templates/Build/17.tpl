@@ -202,12 +202,12 @@ $coor['y'] = "";
 }
 ?>			<div class="coordinatesInput">
 				<div class="xCoord">
-					<label for="xCoordInput">X:</label>
-                    <input class="text coordinates x " type="text" name="y" value="<?php echo $coor['y']; ?>" maxlength="4" tabindex="6">
+					<label for="xCoordInput">Y:</label>
+                    <input class="text coordinates y " type="text" name="y" value="<?php echo $coor['y']; ?>" maxlength="4" tabindex="6">
 				</div>
 				<div class="yCoord">
-					<label for="yCoordInput">Y:</label>
-                    <input class="text coordinates y " type="text" name="x" value="<?php echo $coor['x']; ?>" maxlength="4" tabindex="7">
+					<label for="yCoordInput">X:</label>
+                    <input class="text coordinates x " type="text" name="x" value="<?php echo $coor['x']; ?>" maxlength="4" tabindex="7">
 				</div>
 				<div class="clear"></div>
 			</div>
@@ -304,7 +304,7 @@ document.snd.r1.focus();
 <?php
 $timer = 1;
 if(count($market->recieving) > 0) { 
-echo "<h4>yok</h4>";
+echo "<h4>Incoming Merchants</h4>";
     foreach($market->recieving as $recieve) {
        echo "<table class=\"traders\" cellpadding=\"1\" cellspacing=\"1\">";
     $ownerid = $database->getVillageField($recieve['from'],"owner");
@@ -312,7 +312,7 @@ echo "<h4>yok</h4>";
     $sendtovil = $database->getVillage($recieve['from']);
 	$villageowner = $database->getVillageField($recieve['from'],"owner");
 	echo "<thead><tr><td><a href=\"spieler.php?uid=".$ownerid."\">".$ownername."</a></td>";
-    echo "<td class=\"dorf\">Nyersanyag szállítás <a href=\"karte.php?d=".$recieve['from']."&c=".$generator->getMapCheck($recieve['from'])."\">".$sendtovil['name']."</a> Lumberluból</td>";
+    echo "<td class=\"dorf\">Resources from <a href=\"karte.php?d=".$recieve['from']."&c=".$generator->getMapCheck($recieve['from'])."\">".$sendtovil['name']."</a></td>";
     echo "</tr></thead><tbody><tr><th>Arrival</th><td>";
     echo "<div class=\"in\"><span id=timer$timer>".$generator->getTimeFormat($recieve['endtime']-time())."</span> Hours</div>";
     $datetime = $generator->procMtime($recieve['endtime']);
@@ -320,7 +320,10 @@ echo "<h4>yok</h4>";
 
     echo $datetime[1]."</div>";
     echo "</td></tr></tbody> <tr class=\"res\"> <th>Resources</th> <td colspan=\"2\"><span class=\"f10\">";
-    echo "<img class=\"r1\" src=\"img/x.gif\" alt=\"Lumber\" title=\"Lumber\" /> ".$recieve['Lumber']." <img class=\"r2\" src=\"img/x.gif\" alt=\"Iron\" title=\"Iron\" /> ".$recieve['clay']." <img class=\"r3\" src=\"img/x.gif\" alt=\"Iron\" title=\"Iron\" /> ".$recieve['iron']." <img class=\"r4\" src=\"img/x.gif\" alt=\"Crop\" title=\"Crop\" /> ".$recieve['crop']."</td></tr></tbody>";
+    echo "<img class=\"r1\" src=\"img/x.gif\" alt=\"Lumber\" title=\"Lumber\" /> ".$recieve['wood']
+    ." <img class=\"r2\" src=\"img/x.gif\" alt=\"Clay\" title=\"Clay\" /> ".$recieve['clay']
+    ." <img class=\"r3\" src=\"img/x.gif\" alt=\"Iron\" title=\"Iron\" /> ".$recieve['iron']
+    ." <img class=\"r4\" src=\"img/x.gif\" alt=\"Crop\" title=\"Crop\" /> ".$recieve['crop']."</td></tr></tbody>";
     echo "</table>";
     $timer +=1;
     }
@@ -341,19 +344,24 @@ if(count($market->sending) > 0) {
 
         echo $datetime[1]."</div>";
         echo "</td> </tr> <tr class=\"res\"> <th>Resources</th><td>";
-        echo "<img class=\"r1\" src=\"img/x.gif\" alt=\"Lumber\" title=\"Lumber\" /> ".$send['Wood']." <img class=\"r2\" src=\"img/x.gif\" alt=\"Iron\" title=\"Iron\" /> ".$send['clay']." <img class=\"r3\" src=\"img/x.gif\" alt=\"Iron\" title=\"Iron\" /> ".$send['iron']." <img class=\"r4\" src=\"img/x.gif\" alt=\"Crop\" title=\"Crop\" /> ".$send['crop']."</td></tr></tbody>";
+        echo "<img class=\"r1\" src=\"img/x.gif\" alt=\"Lumber\" title=\"Lumber\" /> ".$send['wood']
+        ." <img class=\"r2\" src=\"img/x.gif\" alt=\"Clay\" title=\"Clay\" /> ".$send['clay']
+        ." <img class=\"r3\" src=\"img/x.gif\" alt=\"Iron\" title=\"Iron\" /> ".$send['iron'].
+        " <img class=\"r4\" src=\"img/x.gif\" alt=\"Crop\" title=\"Crop\" /> ".$send['crop']."</td></tr></tbody>";
         echo "</table>";
         $timer += 1;
     }
 }
 if(count($market->return) > 0) {
-	echo "<h4>Visszatérő kereskedők:</h4>";
+	echo "<h4>Merchants Moving:</h4>";
     foreach($market->return as $return) {
         $villageowner = $database->getVillageField($return['from'],"owner");
         $ownername = $database->getUserField($villageowner,"username",0);
+        $villagename = $database->getVillageField($return['from'],"name");
         echo "<table class=\"traders\" cellpadding=\"1\" cellspacing=\"1\">";
         echo "<thead><tr> <td></td>";
-        echo "<td class=\"dorf\">Return <a href=\"karte.php?d=".$return['from']."&c=".$generator->getMapCheck($return['from'])." \">$ownername</a> Lumberluból</td>";
+        //echo "<td class=\"dorf\">Return from <a href=\"karte.php?d=".$return['from']."&c=".$generator->getMapCheck($return['from'])." \">$ownername</a></td>";
+        echo "<td class=\"dorf\">Return from <a href=\"karte.php?d=".$return['from']."&c=".$generator->getMapCheck($return['from'])." \">$villagename</a></td>";
         echo "</tr></thead> <tbody><tr> <th>Arrival</th> <td>";
         echo "<div class=\"in\"><span id=timer".$timer.">".$generator->getTimeFormat($return['endtime']-time())."</span> Hours</div>";
         $datetime = $generator->procMtime($return['endtime']);
@@ -363,7 +371,7 @@ if(count($market->return) > 0) {
         }
         echo $datetime[1]."</div>";
         echo "</td> </tr> <tr class=\"res\"> <th>Resources</th><td>";
-                echo "<img class=\"r1\" src=\"img/x.gif\" alt=\"Lumber\" title=\"Lumber\" />".$return['Lumber']." | <img class=\"r2\" src=\"img/x.gif\" alt=\"Iron\" title=\"Iron\" />".$return['clay']." | <img class=\"r3\" src=\"img/x.gif\" alt=\"Iron\" title=\"Iron\" />".$return['iron']." | <img class=\"r4\" src=\"img/x.gif\" alt=\"Crop\" title=\"Crop\" />".$return['crop']."</td></tr></tbody>";
+                echo "<img class=\"r1\" src=\"img/x.gif\" alt=\"Lumber\" title=\"Lumber\" /> ".$return['wood']."<img class=\"r2\" src=\"img/x.gif\" alt=\"Clay\" title=\"Clay\" /> ".$return['clay']."<img class=\"r3\" src=\"img/x.gif\" alt=\"Iron\" title=\"Iron\" /> ".$return['iron']."<img class=\"r4\" src=\"img/x.gif\" alt=\"Crop\" title=\"Crop\" />".$return['crop']."</td></tr></tbody>";
 
         echo "</tbody></table>";
         $timer += 1;
