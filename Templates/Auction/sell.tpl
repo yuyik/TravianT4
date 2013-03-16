@@ -46,6 +46,7 @@ include "Templates/Auction/alt.tpl";
 	}
 }
 echo 'You currently have ' . $query . ' items for sale in the auction (Maximum allowed at the same time is 5)<br><br>';
+$maxReached = ($query == 5 ? true : false);
 ?>
 <table class="sellings" cellspacing="1" cellpadding="1">
 	<thead>
@@ -311,7 +312,12 @@ $id = $row["id"];$num = $row["num"];
 						
 							},
 		sellItem: function (id, amount)
-		{
+        {
+            var maxReached = "<?php echo $maxReached; ?>";
+            if (maxReached)
+            {
+                return;
+            }
             var html = '';
 			var $this = this;
 			if (this.alreadyOpen)
