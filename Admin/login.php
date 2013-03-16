@@ -10,9 +10,9 @@
         <?php
             if(isset($_GET['error'])){
             	if($_GET['error']==1){
-                	echo 'نام کاربري يا کلمه عبور نادرست است.';
+                	echo 'Username or password is incorrect.';
                 }elseif($_GET['error']==2){
-                	echo 'لطفا کد امنيتي را به دقت وارد نماييد.';
+                	echo 'Please enter the code carefully.';
                 }
             }
         ?></div>
