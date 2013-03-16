@@ -293,8 +293,8 @@ include "Templates/Auction/alt.tpl";
 	Travian.Game.HeroAuction = new (new Class(
 	{
 		alreadyOpen: false,
-		textSingle: 'واقعاً این جنس فروخته شود؟',
-		textMulti: 'فروش &lt;input class=\"text\" id=\"sellAmount\" style=\"width:30px\" type=\"text\" value=\"0\" /&gt; واحد؟'.unescapeHtml(),
+		textSingle: 'Really sell this item?',
+		textMulti: 'Sell &lt;input class=\"text\" id=\"sellAmount\" style=\"width:30px\" type=\"text\" value=\"0\" /&gt; Amount'.unescapeHtml(),
 		initialize: function() {
 			var $this = this;
 <?php
@@ -341,9 +341,9 @@ $id = $row["id"];$num = $row["num"];
 			{
 				relativeTo:			$('content'),
 				elementFoucs:		'sellAmount',
-				buttonTextOk:		'بله',
-				buttonTextCancel:	'خیر',
-				title:				'تایید فروش:',
+				buttonTextOk:		'OK',
+				buttonTextCancel:	'CANCEL',
+				title:				'Confirm Sale:',
 				onOpen: function(dialog, contentElement)
 				{
 					if ($('sellAmount'))
