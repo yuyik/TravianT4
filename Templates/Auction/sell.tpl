@@ -15,7 +15,7 @@
 $prefix = "".TB_PREFIX."auction";
 
 $sql = mysql_query("SELECT * FROM $prefix WHERE finish = 0 AND owner = $session->uid ORDER BY time ASC");
-$query = mysql_num_rows($sql); // دریافت تعداد کوئری ها از دیتابیس
+$query = mysql_num_rows($sql); // Get the number of items already in auction
 
 $typeArray = array("","helmet","body","leftHand","rightHand","shoes","horse","bandage25","bandage33","cage","scroll","ointment","bucketOfWater","bookOfWisdom","lawTables","artWork");
 
@@ -28,16 +28,16 @@ if($query == 0) {
 $id = $row["id"];$owner = $row["owner"];$btype = $row["btype"];$type = $row["type"];$num = $row["num"];$uid = $row["uid"];$bids = $row["bids"];$silver = $row["silver"];$time = $row["time"];
 include "Templates/Auction/alt.tpl";
     if($bids!=0){
-    $outputList .= "<tr><td class=\"delete\"><img class=\"del inactive\" src=\"img/x.gif\" title=\"لغو\"></td><td class=\"icon\"><img class=\"itemCategory itemCategory_".$typeArray[$btype]."\" src=\"img/x.gif\" title=\"".$title."\"></td>";
+    $outputList .= "<tr><td class=\"delete\"><img class=\"del inactive\" src=\"img/x.gif\" title=\"Cancel\"></td><td class=\"icon\"><img class=\"itemCategory itemCategory_".$typeArray[$btype]."\" src=\"img/x.gif\" title=\"".$title."\"></td>";
     }else{
-    $outputList .= "<tr><td class=\"delete\"><a href=\"?action=sell&abort=".$id."\"><img class=\"del\" src=\"img/x.gif\" title=\"لغو\"></a></td><td class=\"icon\"><img class=\"itemCategory itemCategory_".$typeArray[$btype]."\" src=\"img/x.gif\" title=\"".$title."\"></td>";
+    $outputList .= "<tr><td class=\"delete\"><a href=\"?action=sell&abort=".$id."\"><img class=\"del\" src=\"img/x.gif\" title=\"Cancel\"></a></td><td class=\"icon\"><img class=\"itemCategory itemCategory_".$typeArray[$btype]."\" src=\"img/x.gif\" title=\"".$title."\"></td>";
     }
 	
 	$outputList .= "<td class=\"name\">".$num." x ".$name."</td>";
 	$outputList .= "<td class=\"bids\">";
     if($bids==0){ $outputList .= "<span class=\"none\">".$bids."</span>"; }else{ $outputList .= $bids; }
     $outputList .= "</td>";
-	$outputList .= "<td class=\"silver\" title=\"".round($silver/$num, 2)." برای هر واحد\">".$silver."</td>";
+	$outputList .= "<td class=\"silver\" title=\"".round($silver/$num, 2)." For each unit\">".$silver."</td>";
 	$outputList .= "<td class=\"time\"><span id=\"timer".$timer."\">".$generator->getTimeFormat($time-time())."</span></td>";
 	$outputList .= "";
    	$outputList .= "</tr>";
@@ -45,6 +45,7 @@ include "Templates/Auction/alt.tpl";
     $timer++;
 	}
 }
+echo 'You currently have ' . $query . ' items for sale in the auction (Maximum allowed at the same time is 5)<br><br>';
 ?>
 <table class="sellings" cellspacing="1" cellpadding="1">
 	<thead>
@@ -309,18 +310,9 @@ $id = $row["id"];$num = $row["num"];
 <?php } ?>
 						
 							},
-		noMoreAuctions: function ()
-		{
-			('شما فقط می‌توانید 0 حراجی در آن واحد داشته باشید.').dialog(
-			{
-				relativeTo:			$('content'),
-				elementFoucs:		'sellAmount',
-				buttonTextOk:		'تایید'
-			});
-		},
 		sellItem: function (id, amount)
 		{
-			var html = '';
+            var html = '';
 			var $this = this;
 			if (this.alreadyOpen)
 			{
