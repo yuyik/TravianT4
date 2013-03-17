@@ -60,7 +60,14 @@ echo "<div class=\"clear\"></div>
 		            //echo "<div class=\"contractLink\"><span class=\"none\">few resources</span></div>";
 				}
 				else if ($building->getTypeLevel(12) <= $abdata['b'.$j]) {
-					echo "<div class=\"contractLink\"><span class=\"none\">Improve the blacksmith</span></div>";
+                    if ($abdata['b'.$j] == 20)
+                    {
+                        echo "<div class=\"contractLink\"><span class=\"none\">Fully Developed  </span></div>";
+                    }
+                    else
+                    {
+                        echo "<div class=\"contractLink\"><span class=\"none\">Improve the blacksmith</span></div>";
+                    }
 				}
 				else if (count($ABups) > 0) {
 					echo "<div class=\"contractLink\"><span class=\"none\">Research in progress</span></div>";
