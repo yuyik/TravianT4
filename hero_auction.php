@@ -120,32 +120,44 @@ if($_GET['action']=='sell' && $_POST['a']=='e45'){
 if(isset($_POST['a']) && $_POST['action']=='buy' || isset($_POST['a']) && $_POST['action']=='bids'){
 $bidError = '';
 $getBidData = $database->getBidData($_POST['a']);
-
+$total_silver = $_POST['silver'] + $session->silver;
 	if($_POST['maxBid'] <= $_POST['silver']){
-		$bidError .= "شما سکۀ نقرۀ تراوین کافی برای پیشنهاد ندارید. حداقل پیشنهاد ممکن ".($_POST['silver']+1)." سکۀ نقرۀ تراوین میباشد.";
-	}elseif($_POST['maxBid'] > $session->silver){
-		$bidError .= "شما سکۀ نقرۀ تراوین کافی برای پیشنهاد ندارید.";
+		$bidError .= "Too low bid. You need to offer at least ".($_POST['silver']+1)." silver.";
+	}elseif($_POST['maxBid'] > $session->silver || ($_POST['uid'] == $session->uid && $_POST['maxBid'] > $total_silver)){
+		$bidError .= "You haven't enough silver for this bid.";
 	}else{
 		if($database->checkBid($_POST['a'], $_POST['maxBid'])){
 			
 			if($getBidData['uid']==0){
 				$database->addBid($_POST['a'], $session->uid, $_POST['maxBid']);
 				$database->setSilver($session->uid,$_POST['maxBid'],0);
+				$database->setNewSilver($_POST['a'],$_POST['maxBid']);
 				
 			}elseif($getBidData['uid']==$session->uid){
-				$database->editBid($_POST['a'], $_POST['maxBid']);
-				$maxBid = ($_POST['maxBid'] - $getBidData['silver']);
+				$maxBid = $_POST['maxBid'] - $getBidData['newsilver'];
 				$database->setSilver($session->uid,$maxBid,0);
+				$database->setNewSilver($_POST['a'],$_POST['maxBid']);
 			}else{
-				$database->setSilver($getBidData['uid'],$getBidData['silver'],1);
-				$database->addBid($_POST['a'], $session->uid, $_POST['maxBid']);
+				$database->setSilver($getBidData['uid'],$getBidData['newsilver'],1);
 				$database->setSilver($session->uid,$_POST['maxBid'],0);
+				$database->addBid($_POST['a'], $session->uid, $_POST['maxBid']);
+				$database->setNewSilver($_POST['a'],$_POST['maxBid']);
 			}
 			if(isset($_POST['page'])){ $page = "&page=".$_POST['page']; }else{ $page = ""; }
 			if($_POST['action']=='bids'){ $ssss = 'bids'; } elseif($_POST['action']=='buy'){ $ssss = 'buy'; }
 			header("Location: ?action=".$ssss."".$page."&a=".$_POST['a']);	
 		}else{
-			$bidError .= "بازیکن دیگری بالاتر از شما پیشنهاد داده است.";
+			if($getBidData['uid']==$session->uid){
+				$maxBid = $getBidData['newsilver'] - $_POST['maxBid'];
+				$database->setSilver($session->uid,$maxBid,1);
+				$database->setNewSilver($_POST['a'],$_POST['maxBid']);
+			}else{
+				$database->editBid($_POST['a'], $_POST['maxBid']);
+				$bidError .= "Your bid is lower than the other player's one.";
+			}
+			if(isset($_POST['page'])){ $page = "&page=".$_POST['page']; }else{ $page = ""; }
+			if($_POST['action']=='bids'){ $ssss = 'bids'; } elseif($_POST['action']=='buy'){ $ssss = 'buy'; }
+			header("Location: ?action=".$ssss."".$page."&a=".$_POST['a']);	
 		}
 	}
 	

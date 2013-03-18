@@ -1,5 +1,6 @@
 ﻿<?php
 
+if(isset($_GET['aid']) && !is_numeric($_GET['aid'])) die('Hacking Attemp');
        include ("GameEngine/Village.php");
        include ("GameEngine/Chat.php");
 $start = $generator->pageLoadTimeStart();
@@ -83,7 +84,39 @@ if($message->unread) {
 					});
 				</script>
 <?php
+if(isset($_GET['fid'])){
+$fid = preg_replace("/[^0-9]/","",$_GET['fid']);
+$forum = mysql_query("SELECT * FROM " . TB_PREFIX . "forum_cat WHERE id = ".$fid."");
+$forum_type = mysql_fetch_array($forum);
+if($forum_type['forum_name'] != "" && $forum_type['forum_area'] == 0){
+if($forum_type['alliance'] != $session->alliance){
+	header("Location: ".$_SERVER['PHP_SELF']);
+}
+}
+}else if(isset($_GET['fid2'])){
+$fid = preg_replace("/[^0-9]/","",$_GET['fid2']);
+$forum = mysql_query("SELECT * FROM " . TB_PREFIX . "forum_cat WHERE id = ".$fid."");
+$forum_type = mysql_fetch_array($forum);
+if($forum_type['forum_name'] != "" && $forum_type['forum_area'] != 1){
+if($forum_type['forum_area'] == 0){
+if($forum_type['alliance'] != $session->alliance){
+	header("Location: ".$_SERVER['PHP_SELF']);
+}
+}else if($forum_type['forum_area'] == 2){
+if($forum_type['alliance'] != $session->alliance){
+}else if($forum_type['forum_area'] == 3){
 
+}
+
+}else{
+	header("Location: ".$_SERVER['PHP_SELF']);
+}
+}
+}
+if(isset($_GET['aid'])){
+$ally_exist = $database->getAlliance($_GET['aid']);
+}
+if($ally_exist['id']!=0 or $_GET['fid'] or $_GET['fid2'] or $session->alliance!=0){
        include ("Templates/menu.tpl");
 
        if(isset($_GET['s']) && $_GET['s'] == 2) {
@@ -239,3 +272,8 @@ include("Templates/quest.tpl");
 </div>
 </body>
 </html>
+<?php
+}else{
+header("Location: spieler.php?uid=".$session->uid);
+}
+?>

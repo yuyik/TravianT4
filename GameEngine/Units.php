@@ -388,7 +388,7 @@ class Units {
 			
 		  $database->modifyResource($village->wid,750,750,750,750,0);
 		  $database->modifyUnit($village->wid,$unit,3,0);
-		  $database->addMovement(5,$village->wid,$post['s'],0,0,$post['timestamp']);
+		  $database->addMovement(5,$village->wid,$post['s'],0,0,time()+$post['timestamp']);
 		  header("Location: build.php?id=39");
 
 		  if($form->returnErrors() > 0) {

@@ -65,7 +65,7 @@ echo "<div class=\"clear\"></div></div><span class=\"value\"></span>
 </form></div></div>
 <?php
 	} else {
-		echo '<div class="c">Új falu alapításához vagy elfoglalásához 20-as szintű palotára van szükség.</div>';
+		echo '<div class="c">The creation of a new village, or occupy a residence level 20 is required.</div>';
 	}
     include ("26_progress.tpl");
 ?>

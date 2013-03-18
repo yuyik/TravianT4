@@ -2118,15 +2118,15 @@ $info_cata=" از سطح <b>".$tblevel."</b> به سطح <b>".$totallvl."</b> آ
 								if ($o_conqured=='0' or $o_conqured!=$data['from']) { 
 									mysql_query("UPDATE ".TB_PREFIX."odata SET `conqured`='".$data['from']."', `owner`='".$a_uid."', `name`='آبادی تسخیر شده', `lastupdated`='".time()."' WHERE `wref`='".$data['to']."' "); 
 									mysql_query("UPDATE ".TB_PREFIX."wdata SET `occupied`='1' WHERE `id`='".$data['to']."' "); 
-									$info_chief = "".$hero_pic.", قهرمان شما این آبادی را تسخیر کرد."; 
+									$info_chief = "".$hero_pic.", Your hero has conquered this oasis."; 
 								} elseif($o_conqured==$data['from']) { 
-									$info_chief = "".$hero_pic.", قهرمان شما قبلا این آبادی را تسخیر کرده."; 
+									$info_chief = "".$hero_pic.", Your hero has already conquered this oasis."; 
 								} 
 							} else {                                     
-								$info_chief = "".$hero_pic.", برای تسخیر این آبادی به عمارت قهرمان سطح ".$needed_hero_mansion_level." نیاز است."; 
+								$info_chief = "".$hero_pic.", You need hero mansion level ".$needed_hero_mansion_level." to conquer this oasis."; 
 							}
 						} else { 
-							$info_chief = "".$hero_pic.", در حال حاضر این دهکده 3 آبادی تسخیر شده دارد."; 
+							$info_chief = "".$hero_pic.", Your hero has already conquered 3 oasis."; 
 						} 
 					}
 			}else{
@@ -2134,7 +2134,7 @@ $info_cata=" از سطح <b>".$tblevel."</b> به سطح <b>".$totallvl."</b> آ
 				if ($artifact['vref'] == $data['to']){ 
 					if($database->canClaimArtifact($artifact['vref'],$artifact['size'])) { 
 						$database->claimArtefact($data['to'],$data['to'],$database->getVillageField($data['from'],"owner")); 
-						$info_chief = "".$hero_pic.", کتیبه توسط قهرمان شما دزدیده شد.";   
+						$info_chief = "".$hero_pic.", Your hero is carrying home a artefact.";   
 					}else{ 
 						$info_chief = "";
 					} 
@@ -3454,7 +3454,8 @@ $info_cata=" از سطح <b>".$tblevel."</b> به سطح <b>".$totallvl."</b> آ
         $dataarray = $database->query_return($q);
             foreach($dataarray as $data) {
 					$ownerID = $data['owner'];$biderID = $data['uid'];
-					$silver = $data['silver'];$btype = $data['btype'];
+					$silver = $data['silver'];$newsilver = $data['newsilver'];
+					$btype = $data['btype'];
                     if($data['finish'] != 1){
 						if($btype==7 || $btype==8 || $btype==9 || $btype==10 || $btype==11 || $btype==14 || $btype==15){
 							if($database->checkHeroItem($biderID, $btype)){
@@ -3465,8 +3466,9 @@ $info_cata=" از سطح <b>".$tblevel."</b> به سطح <b>".$totallvl."</b> آ
 						}else{
 							$database->addHeroItem($biderID, $data['btype'], $data['type'], $data['num']);
 						}
+						$silver2 = $newsilver - $silver;
 						$database->setSilver($ownerID, $silver, 1);
-						//$database->setSilver($biderID, $silver, 0);
+						$database->setSilver($biderID, $silver2, 1);
                     }
 			$q = "UPDATE ".TB_PREFIX."auction set finish=1 where id = ".$data['id'];
 			$database->query($q);

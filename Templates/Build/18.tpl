@@ -25,7 +25,7 @@ echo "
 
 	</tr>
 	<tr>
-		<td colspan=\"2\"><a href=\"allianz.php\" class=\"arrow\">To Alliance</a></td>
+		<td colspan=\"2\"><a href=\"allianz.php\" class=\"arrow\">to the alliance</a></td>
 	</tr></tbody>
 	</table>";
     }

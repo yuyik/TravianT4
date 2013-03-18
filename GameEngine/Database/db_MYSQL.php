@@ -80,6 +80,8 @@
         			$q = "UPDATE " . TB_PREFIX . "users set $field = '$value' where id = '$ref'";
         		} elseif($mode==2) {
 					$q = "UPDATE " . TB_PREFIX . "users set $field = $field + '$value' where id = '$ref'";
+				} elseif($mode==3) {
+					$q = "UPDATE " . TB_PREFIX . "users set $field = $field - '$value' where id = '$ref'";
 				}
         		return mysql_query($q, $this->connection);
         	}
@@ -3048,6 +3050,11 @@ break;
         		return mysql_query($q, $this->connection);
         	}
 			
+			function setNewSilver($id, $newsilver) {
+				$q = "UPDATE " . TB_PREFIX . "auction set newsilver = $newsilver where id = $id";
+        		return mysql_query($q, $this->connection);
+        	}
+			
 			function getAuctionSilver($uid) {
         		$q = "SELECT * FROM " . TB_PREFIX . "auction where uid = $uid and finish = 0";
         		$result = mysql_query($q, $this->connection);
@@ -3087,11 +3094,11 @@ break;
 					
 					$itemData = $this->getItemData($itemid);
 					if($amount == $itemData['num']){
-						$q = "INSERT INTO " . TB_PREFIX . "auction (`owner`, `itemid`, `btype`, `type`, `num`, `uid`, `bids`, `silver`, `time`, `finish`) VALUES ('$owner', '$itemid', '$btype', '$type', '$amount', 0, 0, '$silver', '$time', 0)";
+						$q = "INSERT INTO " . TB_PREFIX . "auction (`owner`, `itemid`, `btype`, `type`, `num`, `uid`, `bids`, `silver`, `newsilver`, `time`, `finish`) VALUES ('$owner', '$itemid', '$btype', '$type', '$amount', 0, 0, '$silver', '$silver', '$time', 0)";
 						$this->editProcItem($itemid, 1);
 					}else{
 						$this->editHeroNum($itemid, $amount, 0);
-						$q = "INSERT INTO " . TB_PREFIX . "auction (`owner`, `itemid`, `btype`, `type`, `num`, `uid`, `bids`, `silver`, `time`, `finish`) VALUES ('$owner', '$itemid', '$btype', '$type', '$amount', 0, 0, '$silver', '$time', 0)";
+						$q = "INSERT INTO " . TB_PREFIX . "auction (`owner`, `itemid`, `btype`, `type`, `num`, `uid`, `bids`, `silver`, `newsilver`, `time`, `finish`) VALUES ('$owner', '$itemid', '$btype', '$type', '$amount', 0, 0, '$silver', '$silver', '$time', 0)";
 						$this->editProcItem($itemid, 0);
 					}
 				}else{
@@ -3103,8 +3110,8 @@ break;
         		return mysql_query($q, $this->connection);
         	}
 						
-			function addBid($id, $uid, $silver) {
-        		$q = "UPDATE " . TB_PREFIX . "auction set uid = $uid, silver = $silver, bids = bids + 1 where id = $id";
+			function addBid($id, $uid, $newsilver) {
+        		$q = "UPDATE " . TB_PREFIX . "auction set uid = $uid, silver = newsilver + 1, newsilver = $newsilver, bids = bids + 1 where id = $id";
         		return mysql_query($q, $this->connection);
         	}
 			
@@ -3206,12 +3213,12 @@ break;
         		return mysql_query($q, $this->connection);
         	}
 			
-			function checkBid($id, $silver){
+			function checkBid($id, $newsilver){
                 $q = "SELECT * FROM " . TB_PREFIX . "auction WHERE id = '$id'";
 				$result = mysql_query($q, $this->connection);
         		$dbarray = mysql_fetch_array($result);
 				
-				if($dbarray['silver']>=$silver) {
+				if($dbarray['newsilver']>=$newsilver) {
 						return false;
 					} else {
 						return true;

@@ -52,6 +52,7 @@ define("SIDEINFO_ADVENTURES","Adventure");
 define("SIDEINFO_AUCTIONS","Auction");
 define("SIDEINFO_PROFILE","Profile");
 define("SIDEINFO_ALLIANCE","Alliance");
+define("SIDEINFO_ALLY_FORUM","Alliance Forum");
 define("SIDEINFO_CHANGE_TITLE","Double-click to rename the village");
 define("SIDEINFO_CHANGEVIL_TITLE","Village name change");
 define("SIDEINFO_CHANGEVIL_LABEL","New village name");

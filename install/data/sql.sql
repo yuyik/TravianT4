@@ -397,6 +397,7 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%auction` (
   `uid` int(11) unsigned NOT NULL,
   `bids` int(11) NOT NULL,
   `silver` int(11) NOT NULL,
+  `newsilver` int(11) NOT NULL,
   `time` int(11) unsigned NOT NULL,
   `finish` int(11) unsigned NOT NULL,
   PRIMARY KEY (`id`)

@@ -4,7 +4,7 @@
 	<div class="boxes boxesColor gray"><div class="boxes-tl"></div><div class="boxes-tr"></div><div class="boxes-tc"></div><div class="boxes-ml"></div><div class="boxes-mr"></div><div class="boxes-mc"></div><div class="boxes-bl"></div><div class="boxes-br"></div><div class="boxes-bc"></div><div class="boxes-contents">
     <div class="wrapper">
 
-<div class="silver"><img title="سکۀ نقرۀ تراوین" class="silver" src="img/x.gif"> <?php $now = $database->getAuctionSilver($session->uid); echo ($session->silver - $now['silver']); ?> / <?php echo $session->silver; ?></div>
+<div class="silver"><img title="silver" class="silver" src="img/x.gif"> <?php $now = $database->getAuctionSilver($session->uid); echo ($session->silver - $now['silver']); ?> / <?php echo $session->silver; ?></div>
 
 <div class="filterContainer">
 <button title="Filter for Helmets" type="button" value="itemCategory itemCategory_helmet" <?php if(isset($_GET['filter']) && $_GET['filter'] == 1) { echo "class=\"iconFilter iconFilterActive\""; } else { echo "class=\"iconFilter\""; } ?> onclick="window.location.href = '?action=buy&amp;filter=1'; return false;"><img src="img/x.gif" class="itemCategory itemCategory_helmet" alt="itemCategory itemCategory_helmet"></button>
@@ -185,10 +185,10 @@ $typeArray = array("","helmet","body","leftHand","rightHand","shoes","horse","ba
 $outputList = '';
 $timer = 1;
 if($query == 0) {        
-    $outputList .= "<td colspan=\"6\" class=\"none\"><center>No Items Available.</center></td>";
+    $outputList .= "<td colspan=\"7\" class=\"none\"><center>No Items Available.</center></td>";
 }else{
 while($row = mysql_fetch_array($sql2)){ 
-$id = $row["id"];$owner = $row["owner"];$btype = $row["btype"];$type = $row["type"];$num = $row["num"];$uid = $row["uid"];$bids = $row["bids"];$silver = $row["silver"];$time = $row["time"];
+$id = $row["id"];$owner = $row["owner"];$btype = $row["btype"];$type = $row["type"];$num = $row["num"];$uid = $row["uid"];$bids = $row["bids"];$silver = $row["silver"];$newsilver = $row["newsilver"];$time = $row["time"];
 
 include "Templates/Auction/alt.tpl";
     
@@ -205,18 +205,18 @@ include "Templates/Auction/alt.tpl";
 	$outputList .= "<td class=\"bids".$sStyle."\">";
     if($bids==0){ $outputList .= "<span class=\"none\">".$bids."</span>"; }else{ $outputList .= $bids; }
     $outputList .= "</td>";
-	$outputList .= "<td class=\"silver".$sStyle."\" title=\"".round($silver/$num, 2)." برای هر واحد\">".$silver."</td>";
+	$outputList .= "<td class=\"silver".$sStyle."\" title=\"".round($silver/$num, 2)." per unit\">".$silver."</td>";
 	$outputList .= "<td class=\"time".$sStyle."\"><span id=\"timer".$timer."\">".$generator->getTimeFormat($time-time())."</span></td>";
 	$outputList .= "";
     
-    if($session->silver > $silver){
+    if($session->silver > $silver || $session->uid == $uid){
     	if(isset($_GET['page'])){
         	$pURL = "&page=".$_GET['page'];
         }
         if(isset($_GET['filter'])){
         	$fURL = "&filter=".$_GET['filter'];
         }
-    	if($session->uid == $uid){ $bidd = "تغییر"; }else{ $bidd = "پیشنهاد"; }
+    	if($session->uid == $uid){ $bidd = "change"; }else{ $bidd = "bid"; }
    
     	$outputList .= "<td class=\"bid".$sStyle."\"><a class=\"bidButton openedClosedSwitch switch".$switchStyle."\" href=\"?action=buy".$pURL."".$fURL."&a=".$id."\">".$bidd."</a></td>";
     }else{
@@ -233,12 +233,14 @@ include "Templates/Auction/alt.tpl";
     $outputList .= "<input type=\"hidden\" name=\"z\" value=\"1ce\">";
     $outputList .= "<input type=\"hidden\" name=\"silver\" value=\"".$silver."\">";
     $outputList .= "<input type=\"hidden\" name=\"a\" value=\"".$_GET['a']."\">";
-    $outputList .= "<div class=\"bidHeadline\">پیشنهاد برای ".$num." × ".$name."</div><div>";
-    $outputList .= "پیشنهاد فعلی: <img title=\"سکۀ نقرۀ تراوین\" class=\"silver\" src=\"img/x.gif\"> <span>".$silver."</span><br>The highest bidder: ";
+    $outputList .= "<div class=\"bidHeadline\">Bid for ".$num." × ".$name."</div><div>";
+    $outputList .= "Current bid: <img title=\"silver\" class=\"silver\" src=\"img/x.gif\"> <span>".$silver."</span><br>The highest bidder: ";
     if($uid!=0){ $outputList .= "".$database->getUserField($uid,username,0).""; }
-    if($session->uid == $uid){ $bidvalue = $silver; }else{ $bidvalue = ""; }
-    $outputList .= "<span></span><br>حداکثر پیشنهاد:<input class=\"maxBid text\" type=\"text\" name=\"maxBid\" value=\"".$bidvalue."\">";
-    $outputList .= "<span> (حداقل <img title=\"سکۀ نقرۀ تراوین\" class=\"silver\" src=\"img/x.gif\"> ".$silver.")</span>";
+    if($session->uid == $uid){ $bidvalue = $newsilver; }else{ $bidvalue = ""; }
+	$minimum = $silver;
+	if($session->uid != $uid){ $minimum++; }
+    $outputList .= "<span></span><br>New bid:<input class=\"maxBid text\" type=\"text\" name=\"maxBid\" value=\"".$bidvalue."\">";
+    $outputList .= "<span> (min <img title=\"silver\" class=\"silver\" src=\"img/x.gif\"> ".$minimum.")</span>";
     $outputList .= '<div class="submitBid"><button type="submit" value="پیشنهاد"><div class="button-container"><div class="button-position"><div class="btl"><div class="btr"><div class="btc"></div></div></div><div class="bml"><div class="bmr"><div class="bmc"></div></div></div><div class="bbl"><div class="bbr"><div class="bbc"></div></div></div></div><div class="button-contents">Bid</div></div></button></div></div></form></td></tr>';
 	}
     
@@ -252,7 +254,7 @@ include "Templates/Auction/alt.tpl";
 <table cellspacing="1" cellpadding="1">
 	<thead>
 		<tr>
-            <th class="name" colspan="3">Description</th>
+            <th class="name" colspan="2">Description</th>
             <th class="bids"><img title="Bids" alt="Bids" class="bids" src="img/x.gif"></th>
             <th class="silver"><img title="Silver" alt="Silver" class="silver" src="img/x.gif"></th>
             <th class="time"><img title="Time" alt="Time" class="clock" src="img/x.gif"></th>
