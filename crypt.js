@@ -1,3 +1,6 @@
+String.prototype.contains = function(string, separator){
+    return (separator) ? (separator + this + separator).indexOf(separator + string + separator) > -1 : String(this).indexOf(string) > -1;
+};
 var MooTools={
   version:"1.2.5",
 	build:"008d8f0f2fcc2044e54fdd3635341aaab274e757"
