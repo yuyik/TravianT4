@@ -1,4 +1,5 @@
 <?php
+ob_start(); //this is enough 
         if(!file_exists('GameEngine/config.php') && !file_exists('GameEngine/Database/connection.php')) {
         	header("Location: install/");
         }

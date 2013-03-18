@@ -22,14 +22,14 @@ $active = $admin->getUserActive();
 	$time = time() - (60*5);
 	$sql = mysql_query("SELECT * FROM ".TB_PREFIX."users where timestamp > $time and id > 3 ORDER BY username ASC $limit");
 	$query = mysql_num_rows($sql);
-	if (isset($_GET['page'])) { // دریافت شماره صفحه
-		$page = preg_replace('#[^0-9]#i', '', $_GET['page']); // فیلتر کردن همه چیز به جز اعداد
+	if (isset($_GET['page'])) { // Get Page Number
+		$page = preg_replace('#[^0-9]#i', '', $_GET['page']); // Just Numbers!
 	} else {
 		$page = 1;
 	}
 	
-	$itemsPerPage = 10; //تعداد آیتم های قابل نمایش در هر صفحه
-	$lastPage = ceil($query / $itemsPerPage); // دریافت مقدار آخرین صفحه
+	$itemsPerPage = 10; // Number of Items per page
+	$lastPage = ceil($query / $itemsPerPage); // Get the last page value
 	if ($page < 1) {
 		$page = 1;
 	} else if ($page > $lastPage) {
@@ -165,9 +165,9 @@ if($query>0){
 			$tribe = "گول ها";
 		}
 		if($row['access'] == 9){
-			$access = "[<b>مدیر</b>]";
+			$access = "[<b>Admin</b>]";
         } elseif($row['access'] == 8){
-			$access = "[<b>مولتی هانتر</b>]";
+			$access = "[<b>MultiHunter</b>]";
         } elseif($row['access'] == 0){
 			$access = "[<b>بازداشت</b>]";
         }else{ $access = ""; }
@@ -181,12 +181,12 @@ if($query>0){
 					<td>'.count($vil).'</td>
 					<td><img src="../img/admin/gold.gif" class="gold" alt="Gold" title="این بازیکن '.$row['gold'].' طلا دارد"/> '.$row['gold'].'</td>
 					<td><img src="../img/admin/silver.gif" class="gold" alt="Silver" title="این بازیکن '.$row['silver'].' نقره دارد"/> '.$row['silver'].'</td>
-					<td><a href="?p=Users&uid='.$uid.'"><img title="ویرایش بازیکن" border="0" src="../img/admin/edit.gif"></a></td>
+					<td><a href="?p=Users&uid='.$uid.'"><img title="Edit Player" border="0" src="../img/admin/edit.gif"></a></td>
 				</tr>  
 			';
 	}
 }else{
-	echo '<tr><td colspan="8" align="center">هیچ بازیکنی آنلاین نیست</td></tr>';
+	echo '<tr><td colspan="8" align="center">There is no Online Usersت</td></tr>';
 } 
 
 ?>    
