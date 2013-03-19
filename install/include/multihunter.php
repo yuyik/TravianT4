@@ -39,7 +39,7 @@ if($StartNatars){
         $desc = "[#natars]";
 		$uid = 2;
 
-        mysql_query("INSERT INTO " . TB_PREFIX . "users (id,username,password,access,email,timestamp,desc2,tribe,location,act,protect,quest,fquest) VALUES ('$uid', 'Natars', '" . md5($password) . "', 0, '$email', ".time().", '$desc', 5, '', '', 0, 25, 35)");
+        mysql_query("INSERT INTO " . TB_PREFIX . "users (id,username,password,access,email,timestamp,desc2,tribe,location,act,protect,quest,fquest) VALUES ('$uid', 'Natars', '" . md5($password) . "', 2, '$email', ".time().", '$desc', 5, '', '', 0, 25, 35)");
         
         $wid = $admin->getWref(0, 1);
         $status = $database->getVillageState($wid);
