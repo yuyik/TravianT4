@@ -1,25 +1,25 @@
 ﻿<?php
 
-    $MyGold = mysql_query("SELECT * FROM ".TB_PREFIX."users WHERE `username`='".$session->username."'") or die(mysql_error());
+    $MyGold = mysql_query("SELECT * FROM ".TB_PREFIX."users WHERE `id`='".$session->uid."'") or die(mysql_error());
     $golds = mysql_fetch_array($MyGold);
 
 if($golds['b1'] <= time()) {
-mysql_query("UPDATE ".TB_PREFIX."users set b1 = '0' where `username`='".$session->username."'") or die(mysql_error());
+mysql_query("UPDATE ".TB_PREFIX."users set b1 = '0' where `id`='".$session->uid."'") or die(mysql_error());
 }
 
 if($golds['b2'] <= time()) {
-mysql_query("UPDATE ".TB_PREFIX."users set b2 = '0' where `username`='".$session->username."'") or die(mysql_error());
+mysql_query("UPDATE ".TB_PREFIX."users set b2 = '0' where `id`='".$session->uid."'") or die(mysql_error());
 }
 if($golds['b3'] <= time()) {
-mysql_query("UPDATE ".TB_PREFIX."users set b3 = '0' where `username`='".$session->username."'") or die(mysql_error());
+mysql_query("UPDATE ".TB_PREFIX."users set b3 = '0' where `id`='".$session->uid."'") or die(mysql_error());
 }
 
 if($golds['b4'] <= time()) {
-mysql_query("UPDATE ".TB_PREFIX."users set b4 = '0' where `username`='".$session->username."'") or die(mysql_error());
+mysql_query("UPDATE ".TB_PREFIX."users set b4 = '0' where `id`='".$session->uid."'") or die(mysql_error());
 }
 
 include("Templates/Plus/pmenu.tpl");
-    $MyGold = mysql_query("SELECT * FROM ".TB_PREFIX."users WHERE `username`='".$session->username."'") or die(mysql_error());
+    $MyGold = mysql_query("SELECT * FROM ".TB_PREFIX."users WHERE `id`='".$session->uid."'") or die(mysql_error());
     $golds = mysql_fetch_array($MyGold);
 
         $today = date("mdHi");
@@ -33,7 +33,7 @@ if (mysql_num_rows($MyGold)) {
 }
 
 if($_GET['action']==FinishBuilding){
-	$golds = $database->getUserArray($session->username, 0);
+	$golds = $database->getUserArray($session->uid, 1);
 
     $MyVilId = mysql_query("SELECT * FROM ".TB_PREFIX."bdata WHERE `wid`='".$village->wid."'") or die(mysql_error());
     $uuVilid = mysql_fetch_array($MyVilId);
@@ -152,7 +152,7 @@ $date2=strtotime("NOW");
 	if ($datetimep == 0) {
 		print "";
 	}elseif ($datetimep <= $date2) {
-		mysql_query("UPDATE ".TB_PREFIX."users set plus = '0' where `username`='".$session->username."'") or die(mysql_error());
+		mysql_query("UPDATE ".TB_PREFIX."users set plus = '0' where `id`='".$session->uid."'") or die(mysql_error());
  	} else {
    
 $holdtotmin=(($datetimep-$date2)/60);
@@ -173,7 +173,7 @@ $holdmr=intval($holdtotmin-(($holdhr*60)+($holdtotday*1440)));
 			<td class="cost"><img src="img/x.gif" class="gold" alt="gold">10</td>
 			<td class="act">
 <?php
-    $MyGold = mysql_query("SELECT * FROM ".TB_PREFIX."users WHERE `username`='".$session->username."'") or die(mysql_error());
+    $MyGold = mysql_query("SELECT * FROM ".TB_PREFIX."users WHERE `id`='".$session->uid."'") or die(mysql_error());
     $golds = mysql_fetch_array($MyGold);
 
 if (mysql_num_rows($MyGold)) {
