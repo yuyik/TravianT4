@@ -47,21 +47,72 @@ if($_GET['action']==FinishBuilding){
 
 if($session->gold >= 2) {
 
-if (mysql_num_rows($MyVilId) || mysql_num_rows($MyVilId2)) {
-
-mysql_query("UPDATE ".TB_PREFIX."bdata set timestamp = '1' where wid = ".$village->wid." AND type != '25' OR type != '26'") or die(mysql_error());
-mysql_query("UPDATE ".TB_PREFIX."research set timestamp = '1' where vref = '".$village->wid."'") or die(mysql_error());
-
-
-
-$done1 = '<b>' . $buildnum . '</b> x Construction and <b>' . $resnum . '</b> x Research completed<br><br>';
-    mysql_query("UPDATE ".TB_PREFIX."users set gold = ".($session->gold-2)." where `username`='".$session->username."'") or die(mysql_error());
-    mysql_query("INSERT INTO ".TB_PREFIX."gold_fin_log VALUES ('".(mysql_num_rows($goldlog)+1)."', '".$village->wid."', 'Finish construction and research with gold')") or die(mysql_error());
-
-} else {
-    mysql_query("INSERT INTO ".TB_PREFIX."gold_fin_log VALUES ('".(mysql_num_rows($goldlog)+1)."', '".$village->wid."', 'Failed construction and research with gold')") or die(mysql_error());
-
-}
+		if($session->access!=BANNED){
+		$ww = 1;
+		foreach($building->buildArray as $jobs) {
+		if($jobs['wid']==$village->wid){
+		$wwvillage = $database->getResourceLevel($jobs['wid']);
+		if($wwvillage['f99t']!=40){
+			$level = $jobs['level'];
+			if($jobs['type'] != 25 AND $jobs['type'] != 26 AND $jobs['type'] != 40) {
+			$finish = 1;
+				$resource = $building->resourceRequired($jobs['field'],$jobs['type']);
+				if($jobs['master'] == 0){
+				$q = "UPDATE ".TB_PREFIX."fdata set f".$jobs['field']." = ".$jobs['level'].", f".$jobs['field']."t = ".$jobs['type']." where vref = ".$jobs['wid'];
+				}else{
+				$villwood = $database->getVillageField($jobs['wid'],'wood');
+				$villclay = $database->getVillageField($jobs['wid'],'clay');
+				$villiron = $database->getVillageField($jobs['wid'],'iron');
+				$villcrop = $database->getVillageField($jobs['wid'],'crop');
+				$type = $jobs['type'];
+				$buildarray = $GLOBALS["bid".$type];
+				$buildwood = $buildarray[$level]['wood'];
+				$buildclay = $buildarray[$level]['clay'];
+				$buildiron = $buildarray[$level]['iron'];
+				$buildcrop = $buildarray[$level]['crop'];
+				if($buildwood < $villwood && $buildclay < $villclay && $buildiron < $villiron && $buildcrop < $villcrop){
+				$enought_res = 1;
+				$q = "UPDATE ".TB_PREFIX."fdata set f".$jobs['field']." = ".$jobs['level'].", f".$jobs['field']."t = ".$jobs['type']." where vref = ".$jobs['wid'];
+				}
+				}
+				if($database->query($q) && ($enought_res == 1 or $jobs['master'] == 0)) {
+					$database->modifyPop($jobs['wid'],$resource['pop'],0);
+					$database->addCP($jobs['wid'],$resource['cp']);
+					$q = "DELETE FROM ".TB_PREFIX."bdata where id = ".$jobs['id'];
+					$database->query($q);
+					if($jobs['type'] == 18) {
+						$owner = $database->getVillageField($jobs['wid'],"owner");
+						$max = $bid18[$level]['attri'];
+						$q = "UPDATE ".TB_PREFIX."alidata set max = $max where leader = $owner";
+						$database->query($q);
+					}
+				}
+				if(($jobs['field'] >= 19 && ($session->tribe == 1 || ALLOW_ALL_TRIBE)) || (!ALLOW_ALL_TRIBE && $session->tribe != 1)) { $innertimestamp = $jobs['timestamp']; }
+			}
+		}
+		}
+		}
+		$wwvillage1 = $database->getResourceLevel($village->wid);
+		if($wwvillage1['f99t']!=40){
+		$ww = 0;
+		}
+		if($ww == 0){
+		$database->finishDemolition($village->wid);
+		$technology->finishTech();
+		$logging->goldFinLog($village->wid);
+		$database->modifyGold($session->uid,2,0);
+		$stillbuildingarray = $database->getJobs($village->wid);
+		if(count($stillbuildingarray) == 1) {
+			if($stillbuildingarray[0]['loopcon'] == 1) {
+				$q = "UPDATE ".TB_PREFIX."bdata SET loopcon=0,timestamp=".(time()+$stillbuildingarray[0]['timestamp']-$innertimestamp)." WHERE id=".$stillbuildingarray[0]['id'];
+				$database->query($q);
+			}
+		}
+		}
+		header("Location: plus.php?id=3");
+		}else{
+		header("Location: banned.php");
+		}
 } else {
         $done1 = "Not enough Gold";
 }
@@ -119,7 +170,7 @@ $holdmr=intval($holdtotmin-(($holdhr*60)+($holdtotday*1440)));
 			} else if(PLUS_TIME < 86400){
 			echo ''.(PLUS_TIME/3600).' Days';
 			} ?></td>
-			<td class="cost"><img src="img/x.gif" class="gold" alt="سکۀ طلای تراوین">10</td>
+			<td class="cost"><img src="img/x.gif" class="gold" alt="gold">10</td>
 			<td class="act">
 <?php
     $MyGold = mysql_query("SELECT * FROM ".TB_PREFIX."users WHERE `username`='".$session->username."'") or die(mysql_error());
@@ -182,7 +233,7 @@ echo "    <br>You have <b>".$holdtotday1. "</b> days left till   ".date('H:i',$g
 			} else if(PLUS_PRODUCTION < 86400){
 			echo ''.(PLUS_PRODUCTION/3600).' ساعت';
 			} ?></td>
-			<td class="cost"><img src="img/x.gif" class="gold" alt="سکۀ طلای تراوین">5</td>
+			<td class="cost"><img src="img/x.gif" class="gold" alt="gold">5</td>
 			<td class="act">
 <?php
 
@@ -231,7 +282,7 @@ echo "<br> You have <b>".$holdtotday2. "</b> days left till ".date('H:i',$golds[
 			} else if(PLUS_PRODUCTION < 86400){
 			echo ''.(PLUS_PRODUCTION/3600).' ساعت';
 			} ?></td>
-			<td class="cost"><img src="img/x.gif" class="gold" alt="سکۀ طلای تراوین">5</td>
+			<td class="cost"><img src="img/x.gif" class="gold" alt="gold">5</td>
 			<td class="act">
 <?php
 
@@ -280,7 +331,7 @@ echo " <br> You have <b>".$holdtotday3. "</b> Days left till ".date('H:i',$golds
 			} else if(PLUS_PRODUCTION < 86400){
 			echo ''.(PLUS_PRODUCTION/3600).' ساعت';
 			} ?></td>
-			<td class="cost"><img src="img/x.gif" class="gold" alt="سکۀ طلای تراوین">5</td>
+			<td class="cost"><img src="img/x.gif" class="gold" alt="gold">5</td>
 			<td class="act">
 <?php
 
@@ -325,7 +376,7 @@ echo "<br> You have <b>".$holdtotday4. "</b> days left till ".date('H:i',$golds[
 			} else if(PLUS_PRODUCTION < 86400){
 			echo ''.(PLUS_PRODUCTION/3600).' ساعت';
 			} ?></td>
-			<td class="cost"><img src="img/x.gif" class="gold" alt="سکۀ طلای تراوین">5</td>
+			<td class="cost"><img src="img/x.gif" class="gold" alt="gold">5</td>
 			<td class="act">
 <?php
 
@@ -358,7 +409,7 @@ if (mysql_num_rows($MyGold)) {
 		<tr>
 			<td class="desc">Complete all Building and Researches immediately.</td>
 			<td class="dur">Instant</td>
-			<td class="cost"><img src="img/x.gif" class="gold" alt="سکۀ طلای تراوین">2</td>
+			<td class="cost"><img src="img/x.gif" class="gold" alt="gold">2</td>
 			<td class="act">
 <?php
 if (mysql_num_rows($MyGold)) {
@@ -375,7 +426,7 @@ if (mysql_num_rows($MyGold)) {
 			<tr>
 			<td class="desc">NPC Merchant 1:1</td>
 			<td class="dur">instant</td>
-			<td class="cost"><img src="img/x.gif" class="gold" alt="سکۀ طلای تراوین">3</td>
+			<td class="cost"><img src="img/x.gif" class="gold" alt="gold">3</td>
 			<td class="act link">
             <?php
             if($building->getTypeLevel(17)){ ?>
@@ -415,7 +466,7 @@ if (mysql_num_rows($MyGold)) {
 					The whole Game
 					
 				</td>
-				<td class="cost"><img src="img/x.gif" class="gold" alt="سکۀ طلای تراوین">100</td>
+				<td class="cost"><img src="img/x.gif" class="gold" alt="gold">100</td>
 				<td class="act">
 <?php
 if($session->gold >= 100){
