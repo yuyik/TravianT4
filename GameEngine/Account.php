@@ -1,4 +1,5 @@
 <?php
+ob_start();
 include("Session.php");
 
 class Account {
