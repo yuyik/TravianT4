@@ -681,7 +681,14 @@ class Building {
 			}
 		}
 		}
-		header("Location: ".$session->referrer);
+		if(isset($_GET['id']))
+        {
+            header("Location: ".$session->referrer . "?id=" . $_GET['id']);
+        }
+        else
+        {
+            header("Location: ".$session->referrer);
+        }
 		}else{
 		header("Location: banned.php");
 		}
