@@ -82,7 +82,7 @@
 <thead>
 				<tr>
 					<th>Distance</th>
-					<th>Position</th>
+					<th>Coordinates</th>
 					<th>Type</th>
 					<th>Oasis</th>
 					<th>Occupied by</th>
@@ -102,10 +102,7 @@
 foreach($rows as $dist => $row) {
 echo "<tr>";
 echo "<td class=\"dist\">".getDistance($coor['x'], $coor['y'], $row['x'], $row['y'])."</td>";
-echo "<td class=\"coords\">";
-echo "<a href=\"karte.php?d=".$row['id']."&c=".$generator->getMapCheck($row['id'])."\">";
-echo "<span class=\"coordinates coordinatesAligned\"><span class=\"coordinateY\">".$row['y'].")</span><span class=\"coordinatePipe\">|</span>";
-echo "<span class=\"coordinateX\">(".$row['x']."</span></span></a></td>";
+echo "<td class=\"coords\"><a href=\"karte.php?x=".$row['y']."&y=".$row['x']."\">(".$row['x']."|".$row['y'].")</a></td>";
 echo "<td class=\"typ\">15 Cropper</td>";
 if($row['occupied'] == 0) {
 echo "<td class=\"oase\"><img src=\"img/x.gif\" class=\"r4\"> <b><font color=\"green\">Oasis</font></b></td>";
@@ -155,10 +152,7 @@ echo "</tr>";
 
 echo "<tr>";
 echo "<td class=\"dist\">".getDistance($coor['x'], $coor['y'], $row['x'], $row['y'])."</td>";
-echo "<td class=\"coords\">";
-echo "<a href=\"karte.php?d=".$row['id']."&c=".$generator->getMapCheck($row['id'])."\">";
-echo "<span class=\"coordinates coordinatesAligned\"><span class=\"coordinateY\">".$row['y'].")</span><span class=\"coordinatePipe\">|</span>";
-echo "<span class=\"coordinateX\">(".$row['x']."</span></span></a></td>";
+echo "<td class=\"coords\"><a href=\"karte.php?x=".$row['y']."&y=".$row['x']."\">(".$row['x']."|".$row['y'].")</a></td>";
 echo "<td class=\"typ\">9 Cropper</td>";
 if($row['occupied'] == 0) {
 echo "<td class=\"oase\"><img src=\"img/x.gif\" class=\"r4\"> <b><font color=\"green\">Oasis</font></b></td>";
@@ -213,10 +207,7 @@ echo "</tr>";
    
 echo "<tr>";
 echo "<td class=\"dist\">".getDistance($coor['x'], $coor['y'], $row['x'], $row['y'])."</td>";
-echo "<td class=\"coords\">";
-echo "<a href=\"karte.php?d=".$row['id']."&c=".$generator->getMapCheck($row['id'])."\">";
-echo "<span class=\"coordinates coordinatesAligned\"><span class=\"coordinateY\">".$row['y'].")</span><span class=\"coordinatePipe\">|</span>";
-echo "<span class=\"coordinateX\">(".$row['x']."</span></span></a></td>";
+echo "<td class=\"coords\"><a href=\"karte.php?x=".$row['y']."&y=".$row['x']."\">(".$row['x']."|".$row['y'].")</a></td>";
 echo "<td class=\"typ\">" . $field . "</td>";
 if($row['occupied'] == 0) {
 echo "<td class=\"oase\"><img src=\"img/x.gif\" class=\"r4\"> <b><font color=\"green\">Oasis</font></b></td>";

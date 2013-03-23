@@ -31,12 +31,10 @@ else {
 $south1 = ($y-1) < -WORLD_MAX? $y+WORLD_MAX+WORLD_MAX : $x-1;
 $south2 = ($y-2) < -WORLD_MAX? $y+WORLD_MAX+WORLD_MAX-1 : $x-2;
 $south3 = ($y-3) < -WORLD_MAX? $y+WORLD_MAX+WORLD_MAX-2 : $x-3;
-$south4 = ($y-4) < -WORLD_MAX? $y+WORLD_MAX+WORLD_MAX-3 : $x-4;
 
 $north1 = ($y+1) > WORLD_MAX? $y-WORLD_MAX-WORLD_MAX : $x+1;
 $north2 = ($y+2) > WORLD_MAX? $y-WORLD_MAX-WORLD_MAX-1 : $x+2;
 $north3 = ($y+3) > WORLD_MAX? $y-WORLD_MAX-WORLD_MAX-2 : $x+3;
-$north4 = ($y+4) > WORLD_MAX? $y-WORLD_MAX-WORLD_MAX-3 : $x+4;
 
 $west1 = ($x-1) < -WORLD_MAX? $x+WORLD_MAX+WORLD_MAX : $y-1;
 $west2 = ($x-2) < -WORLD_MAX? $x+WORLD_MAX+WORLD_MAX-1 : $y-2;
@@ -70,14 +68,14 @@ $coorindex = 0;
 
 <div class="map2 lowRes">
 	<div id="mapContainer" class="lowRes">
-  <?php if($session->plus) { ?>
+  <?php if($session->goldclub) { ?>
   
     <div id="toolbar" class="toolbar">
 	<div class="ml">
 		<div class="mr">
 			<div class="mc">
 				<div class="contents">
-                	<a href="cropfinder.php"><div class="iconButton linkCropfinder" title="15 búzás Village kereső"></div></a>
+                	<a href="cropfinder.php"><div class="iconButton linkCropfinder" title="15-9 Crop Finder"></div></a>
 				</div>
 			</div>
 		</div>
@@ -199,9 +197,13 @@ break;
     }elseif($tribe==5) {
     	$tribename = "Natar";
         }
-        
+    if($maparray[$index]['fieldtype'] > 0){
     $odata = $database->getOMInfo($maparray[$index]['id']);
     $uinfo = $database->getUserField($odata['owner'],'username',0);
+	}else{
+	$vdata = $database->getMInfo($maparray[$index]['id']);
+    $uinfo = $database->getUserField($vdata['owner'],'username',0);
+	}
     
     if($maparray[$index]['fieldtype'] > 0 && $maparray[$index]['occupied'] == 1) {
     $targettitle = "<font color='white'><b>Village ".$maparray[$index]['name']."</b></font><br>(".$maparray[$index]['y']."|".$maparray[$index]['x'].")<br>Player: ".$username."<br>Population: ".$maparray[$index]['pop']."<br>Alliance ".$allyname."<br>Tribe: ".$tribename."";
