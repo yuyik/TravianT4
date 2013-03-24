@@ -849,7 +849,7 @@ class Automation {
         $time = time();
         $q = "SELECT * FROM ".TB_PREFIX."movement, ".TB_PREFIX."attacks where ".TB_PREFIX."movement.ref = ".TB_PREFIX."attacks.id and ".TB_PREFIX."movement.proc = '0' and ".TB_PREFIX."movement.sort_type = '3' and ".TB_PREFIX."attacks.attack_type != '2' and endtime < $time ORDER BY endtime ASC";
         $dataarray = $database->query_return($q);
-        
+        $totalattackdead = 0;
         foreach($dataarray as $data) {
             //set base things
 			//$battle->resolveConflict($data);
@@ -1316,6 +1316,17 @@ class Automation {
 			$unitsdead_deff[3] = '?,?,?,?,?,?,?,?,?,?,?,';
 			$unitsdead_deff[4] = '?,?,?,?,?,?,?,?,?,?,?,';
 			$unitsdead_deff[5] = '?,?,?,?,?,?,?,?,?,?,?,';
+			
+			$deadhero = $dead['hero'];
+
+				$totaldead_alldef[1] = $dead['1']+$dead['2']+$dead['3']+$dead['4']+$dead['5']+$dead['6']+$dead['7']+$dead['8']+$dead['9']+$dead['10'];
+				$totaldead_alldef[2] = $dead['11']+$dead['12']+$dead['13']+$dead['14']+$dead['15']+$dead['16']+$dead['17']+$dead['18']+$dead['19']+$dead['20'];
+				$totaldead_alldef[3] = $dead['21']+$dead['22']+$dead['23']+$dead['24']+$dead['25']+$dead['26']+$dead['27']+$dead['28']+$dead['29']+$dead['30'];
+				$totaldead_alldef[4] = $dead['31']+$dead['32']+$dead['33']+$dead['34']+$dead['35']+$dead['36']+$dead['37']+$dead['38']+$dead['39']+$dead['40'];
+				$totaldead_alldef[5] = $dead['41']+$dead['42']+$dead['43']+$dead['44']+$dead['45']+$dead['46']+$dead['47']+$dead['48']+$dead['49']+$dead['50'];
+
+				$totaldead_alldef =  $totaldead_alldef[1]+$totaldead_alldef[2]+$totaldead_alldef[3]+$totaldead_alldef[4]+$totaldead_alldef[5]+$deadhero;
+				$totalattackdead += $totaldead_alldef;
 
             // Set units returning from attack 
             $database->modifyAttack($data['ref'],1,$dead1);
@@ -1337,6 +1348,7 @@ class Automation {
             
             //top 10 attack and defence update
             $totaldead_att = $dead1+$dead2+$dead3+$dead4+$dead5+$dead6+$dead7+$dead8+$dead9+$dead10+$dead11;
+			$totalattackdead += $totaldead_att;
 			
 			for($i=1;$i<=50;$i++) {
             	$totalsend_def += $Defender[''.$i.''];
@@ -2314,6 +2326,11 @@ $info_cata=" از سطح <b>".$tblevel."</b> به سطح <b>".$totallvl."</b> آ
                     $database->addNotice($from['owner'],$to['wref'],$fromAlly,3,''.addslashes($from['name']).' attacks '.addslashes($to['name']).'',$data_fail,$AttackArrivalTime); 
                     }
             }
+			
+			if($type == 3 or $type == 4){
+			$database->addGeneralAttack($totalattackdead);
+			}
+			
 			}else{
 			$database->setMovementProc($data['moveid']);
 			$datar = "0,0,0,0,0";

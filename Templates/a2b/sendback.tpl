@@ -92,6 +92,6 @@ if ($enforce['hero']>0){ $colspan = 11; }else{ $colspan = 10; }
 <input name="c" value="8" type="hidden">
 
 		<p class="button">
-			<button type="submit" value="ok" name="s1" id="btn_ok" onclick="if (this.disabled==false) {document.getElementsByTagName('form')[0].submit();} this.disabled=true;"><div class="button-container"><div class="button-position"><div class="btl"><div class="btr"><div class="btc"></div></div></div><div class="bml"><div class="bmr"><div class="bmc"></div></div></div><div class="bbl"><div class="bbr"><div class="bbc"></div></div></div></div><div class="button-contents">Megerősítés</div></div></button>
+			<button type="submit" value="ok" name="s1" id="btn_ok" onclick="if (this.disabled==false) {document.getElementsByTagName('form')[0].submit();} this.disabled=true;"><div class="button-container"><div class="button-position"><div class="btl"><div class="btr"><div class="btc"></div></div></div><div class="bml"><div class="bmr"><div class="bmc"></div></div></div><div class="bbl"><div class="bbr"><div class="bbc"></div></div></div></div><div class="button-contents">confirm</div></div></button>
             </p>
 </form>

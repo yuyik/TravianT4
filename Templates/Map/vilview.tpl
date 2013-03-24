@@ -1,6 +1,6 @@
 ﻿<div id="content" class="positionDetails">
 <?php
-$d = $database->getVilWref($_GET['y'],$_GET['x']);
+$d = $database->getVilWref($_GET['x'],$_GET['y']);
 if($database->getOasisV($d)){
     $basearray = $database->getOMInfo($d);
 }else{
@@ -20,9 +20,9 @@ if($database->getOasisV($d)){
             	echo $basearray['name'];
             }else{ echo "Abandoned valley"; } ?>
         </span>
-        <span class="coordinateY"><?php echo "(".$basearray['y'].""; ?></span>
+        <span class="coordinateX"><?php echo "(".$basearray['x'].""; ?></span>
         <span class="coordinatePipe">|</span>
-        <span class="coordinateX"><?php echo "".$basearray['x'].")"; ?></span>
+        <span class="coordinateY"><?php echo "".$basearray['y'].")"; ?></span>
         </span>
         <span class="clear"> </span>
         <?php if($basearray['occupied'] && $basearray['capital']) { echo "<span class=\"mainVillage\">(capital)</span>"; } ?>
@@ -31,7 +31,7 @@ if($database->getOasisV($d)){
 <div id="tileDetails" class="village <?php echo ($basearray['fieldtype'] == 0)? 'oasis-'.$basearray['oasistype'] : 'village-'.$basearray['fieldtype'] ?>">
 <div class="detailImage">
 <div id="options">
-<div class="option"><a href="karte.php?x=<?php echo $basearray['y']; ?>&y=<?php echo $basearray['x']; ?>" class="a arrow">Centre map</a></div>
+<div class="option"><a href="karte.php?x=<?php echo $basearray['x']; ?>&y=<?php echo $basearray['y']; ?>" class="a arrow">Centre map</a></div>
  <?php if(!$basearray['occupied']) { ?>
  <div class="option">
  <?php 
@@ -361,13 +361,9 @@ else if ($basearray['occupied'] && !$basearray['oasistype']){
 
 $noticeClass = array("Scout Report","Won as attacker without losses","Won as attacker with losses","Lost as attacker with losses","Won as defender without losses","Won as defender with losses","Lost as defender with losses","Lost as defender without losses","Reinforcement arrived","","Wood Delivered","Clay Delivered","Iron Delivered","Crop Delivered","","Won as defender without losses","Won as defender with losses","Lost as defender with losses","Won scouting as attacker","Lost scouting as attacker","Won scouting as defender","Lost scouting as defender","Scout Report");
 
-if($session->uid == $database->getVillage($d)){
-	$limit = "ntype=0 and ntype=4 and ntype=5 and ntype=6 and ntype=7";
-}else{
-	$limit = "ntype!=8 and ntype!=9 and ntype!=10 and ntype!=11 and ntype!=12 and ntype!=13 and ntype!=14";
-    }
+	$limit = "(ntype=0 or ntype=1 or ntype=2 or ntype=3 or ntype=4 or ntype=5 or ntype=6 or ntype=7)";
 
-$result = mysql_query("SELECT * FROM ".TB_PREFIX."ndata WHERE $limit AND uid = ".$session->uid." AND toWref = ".$d." ORDER BY time DESC Limit 5");
+$result = mysql_query("SELECT * FROM ".TB_PREFIX."ndata WHERE $limit AND ally = ".$session->alliance." AND (ally > 0  or uid = ".$session->uid.") AND toWref = ".$d." ORDER BY time DESC Limit 5");
 
 while($row = mysql_fetch_array($result)){
 	$dataarray = explode(",",$row['data']);

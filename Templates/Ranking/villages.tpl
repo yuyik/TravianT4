@@ -3,7 +3,14 @@
 	<thead><tr><td></td><td>Village</td><td>Owner</td><td>Population</td><td>Coordinate</td></tr></thead>
 <tbody>
 <?php
+if($_POST['rank'] > 0){
+$myrank = $_POST['rank'];
+}else if(trim($_POST['name']) != ""){
+$wid = $database->getVillageByName(stripslashes($_POST['name']));
+$myrank = $ranking->getVillageRank($wid);
+}else{
 $myrank = $ranking->getVillageRank($village->wid);
+}
 if(!isset($_GET['page'])){
     if($myrank > 20){
         $_GET['page'] = intval(($myrank/20)+1);
@@ -151,16 +158,16 @@ $paginationDisplay .=  '<img alt="Utolsó oldal" src="img/x.gif" class="last dis
     }
 	while($row = mysql_fetch_array($sql2)){ 
     	$coor = $database->getCoor($row['wref']);
-		if($row['wref'] == $village->wid) {
+		if($myrank == $rank) {
 			echo "<tr class=\"hl\"><td class=\"ra fc\" >".$rank.".</td>";
 		}else {
 			echo "<tr class=\"hover\"><td class=\"ra \" >".$rank.".</td>";
 		}
-        echo "<td class=\"vil \" ><a href=\"karte.php?x=".$coor['y']."&amp;y=".$coor['x']."\">".$row['name']."</a></td>";
+        echo "<td class=\"vil \" ><a href=\"position_details.php?x=".$coor['x']."&amp;y=".$coor['y']."\">".$row['name']."</a></td>";
 		echo "<td class=\"pla \" ><a href=\"spieler.php?uid=".$row['owner']."\">".$database->getUserField($row['owner'], 'username', 0)."</a></td>"; 
 		echo "<td class=\"hab \" >".$row['pop']."</td>";
         
-        echo "<td class=\"coords \"><a class=\"\" href=\"karte.php?x=".$coor['y']."&amp;y=".$coor['x']."\"><span class=\"coordinates coordinatesAligned\"><span class=\"coordinatesWrapper\"><span class=\"coordinateY\">(".$coor['x']."</span><span class=\"coordinatePipe\">|</span><span class=\"coordinateX\">".$coor['y'].")</span></span></span><span class=\"clear\"> </span></a></td></tr>";
+        echo "<td class=\"coords \"><a class=\"\" href=\"position_details.php?x=".$coor['x']."&amp;y=".$coor['y']."\"><span class=\"coordinates coordinatesAligned\"><span class=\"coordinatesWrapper\"><span class=\"coordinateY\">(".$coor['x']."</span><span class=\"coordinatePipe\">|</span><span class=\"coordinateX\">".$coor['y'].")</span></span></span><span class=\"clear\"> </span></a></td></tr>";
     
 		$rank++;
 	}
@@ -182,7 +189,7 @@ if(!isset($_GET['tid'])){ $_GET['tid']='1'; }
                         <span>Rank <input type="text" class="text ra" maxlength="5" name="rank" value="" /></span>
                     </td>
                     <td>
-                        <span>Name <input type="text" class="text name" maxlength="20" name="name" value="<?php if(!is_numeric($search)) {echo $search; } ?>" /></span>
+                        <span>Name <input type="text" class="text name" maxlength="20" name="name" value="" /></span>
                     </td>
                     <td>
                         <input type="hidden" name="ft" value="r<?php echo isset($_GET['tid'])? $_GET['tid'] : 1; ?>" />

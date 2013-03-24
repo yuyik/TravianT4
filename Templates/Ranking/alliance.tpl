@@ -28,7 +28,14 @@
 	</thead>
     <tbody>
 <?php
+if($_POST['rank'] > 0){
+$myrank = $_POST['rank'];
+}else if(trim($_POST['name']) != ""){
+$aid = $database->getAllianceID($_POST['name']);
+$myrank = $ranking->getAllianceRank($aid);
+}else{
 $myrank = $ranking->getAllianceRank($session->alliance);
+}
 if(!isset($_GET['page'])){
     if($myrank > 20){
         $_GET['page'] = intval(($myrank/20)+1);
@@ -175,7 +182,7 @@ $paginationDisplay .=  '<img alt="Utolsó oldal" src="img/x.gif" class="last dis
     	$rank = 1;
     }
 	while($row = mysql_fetch_array($sql2)){ 
-		if($row['allyid'] == $session->alliance) {
+		if($myrank == $rank) {
 			echo "<tr class=\"hl\"><td class=\"ra fc\" >".$rank.".</td>";
 		}else {
 			echo "<tr class=\"hover\"><td class=\"ra \" >".$rank.".</td>";
@@ -204,7 +211,7 @@ if(!isset($_GET['tid'])){ $_GET['tid']='1'; }
                         <span>Rank: <input type="text" class="text ra" maxlength="5" name="rank" value="" /></span>
                     </td>
                     <td>
-                        <span>Name: <input type="text" class="text name" maxlength="20" name="name" value="<?php if(!is_numeric($search)) {echo $search; } ?>" /></span>
+                        <span>Name: <input type="text" class="text name" maxlength="20" name="name" value="" /></span>
                     </td>
                     <td>
                         <input type="hidden" name="ft" value="r<?php echo isset($_GET['tid'])? $_GET['tid'] : 1; ?>" />

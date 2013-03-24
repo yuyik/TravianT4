@@ -35,7 +35,7 @@ class Account {
 	
 	private function Signup() {
 		global $database,$form,$mailer,$generator,$session;
-		if(!isset($_POST['name']) || $_POST['name'] == "") {
+		if(!isset($_POST['name']) || trim($_POST['name']) == "") {
 			$form->addError("name",USRNM_EMPTY);
 		} else {
 			if(strlen($_POST['name']) < USRNM_MIN_LENGTH) {

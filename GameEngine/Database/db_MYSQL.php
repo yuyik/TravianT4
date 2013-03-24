@@ -2424,6 +2424,10 @@
         		$q = "UPDATE " . TB_PREFIX . "users set oldrank = '$cp' where id = $user";
         		return mysql_query($q, $this->connection);
         	}
+			function setclimberrankpop($user, $cp) {
+				$q = "UPDATE " . TB_PREFIX . "users set clp = '$cp' where id = $user";
+				return mysql_query($q, $this->connection);
+			}
         	function removeclimberpop($user, $cp) {
         		$q = "UPDATE " . TB_PREFIX . "users set Rc = Rc - '$cp' where id = $user";
         		return mysql_query($q, $this->connection);
@@ -3592,6 +3596,40 @@ break;
 		}
 				return $vill;
 		}
+		
+	//general statistics
+
+	function addGeneralAttack($casualties) {
+		$time = time();
+		$q = "INSERT INTO " . TB_PREFIX . "general values (0,'$casualties','$time',1)";
+		return mysql_query($q, $this->connection) or die(mysql_error());
+	}
+
+	function getAttackByDate($time) {
+		$q = "SELECT * FROM " . TB_PREFIX . "general where shown = 1";
+		$result = $this->query_return($q);
+		$attack = 0;
+		foreach($result as $general){
+		if(date("j. M",$time) == date("j. M",$general['time'])){
+		$attack += 1;
+		}
+		}
+		return $attack;
+	}
+
+	function getAttackCasualties($time) {
+		$q = "SELECT * FROM " . TB_PREFIX . "general where shown = 1";
+		$result = $this->query_return($q);
+		$casualties = 0;
+		foreach($result as $general){
+		if(date("j. M",$time) == date("j. M",$general['time'])){
+		$casualties += $general['casualties'];
+		}
+		}
+		return $casualties;
+	}
+
+	//end general statistics
 
         }
         ;

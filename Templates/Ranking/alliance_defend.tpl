@@ -26,7 +26,14 @@
 		<tr><td></td><td>Alliance</td><td>Players</td><td>Ø</td><td>Points</td></tr>
 		</thead><tbody>
 <?php
+if($_POST['rank'] > 0){
+$myrank = $_POST['rank'];
+}else if(trim($_POST['name']) != ""){
+$aid = $database->getAllianceID($_POST['name']);
+$myrank = $ranking->getAllianceDefRank($aid);
+}else{
 $myrank = $ranking->getAllianceDefRank($session->alliance);
+}
 if(!isset($_GET['page'])){
     if($myrank > 20){
         $_GET['page'] = intval(($myrank/20)+1);
@@ -173,7 +180,7 @@ $paginationDisplay .=  '<img alt="Utolsó oldal" src="img/x.gif" class="last dis
     	$rank = 1;
     }
 	while($row = mysql_fetch_array($sql2)){ 
-		if($row['allyid'] == $session->alliance) {
+		if($myrank == $rank) {
 			echo "<tr class=\"hl\"><td class=\"ra fc\" >".$rank.".</td>";
 		}else {
 			echo "<tr class=\"hover\"><td class=\"ra \" >".$rank.".</td>";

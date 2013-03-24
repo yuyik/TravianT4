@@ -30,7 +30,14 @@
 	</thead>
 	<tbody>
 <?php
-$myrank = $ranking->getUserRank($session->username);
+if($_POST['rank'] > 0){
+$myrank = $_POST['rank'];
+}else if(trim($_POST['name']) != ""){
+$uid = $database->getUserField($_POST['name'], "id", 1);
+$myrank = $ranking->getUserRank($uid);
+}else{
+$myrank = $ranking->getUserRank($session->uid);
+}
 if(!isset($_GET['page'])){
     if($myrank > 20){
         $_GET['page'] = intval(($myrank/20)+1);
@@ -177,7 +184,7 @@ $paginationDisplay .=  '<img alt="Utolsó oldal" src="img/x.gif" class="last dis
     	$rank = 1;
     }
 	while($row = mysql_fetch_array($sql2)){ 
-		if($row['userid'] == $session->uid) {
+		if($myrank == $rank) {
 			echo "<tr class=\"hl\"><td class=\"ra fc\" >".$rank.".</td>";
 		}else {
 			echo "<tr class=\"hover\"><td class=\"ra \" >".$rank.".</td>";

@@ -111,7 +111,7 @@ if($message->unread) {
 				<div title="" <?php if(isset($_GET['tid']) && $_GET['tid'] == 0) { echo "class=\"container active\""; } else { echo "class=\"container normal\""; } ?>> 
 					<div class="background-start">&nbsp;</div> 
 					<div class="background-end">&nbsp;</div> 
-					<div class="content"><a href="statistiken.php?tid=0"><span class="tabItem">More</span></a></div> 
+					<div class="content"><a href="statistiken.php?tid=0"><span class="tabItem">General</span></a></div> 
 				</div> 
 				<?php if(WW == true){ include "Templates/Ranking/ww2.tpl"; }?>
 				<div class="clear"></div>

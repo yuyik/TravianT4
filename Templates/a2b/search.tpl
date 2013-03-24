@@ -31,11 +31,11 @@ $coor['y'] = "";
 			<div class="coordinatesInput">
 				<div class="xCoord">
 					<label for="xCoordInput">X:</label>
-					<input class="text" name="y" value="<?php echo $coor['y']; ?>" maxlength="4" type="text">
+					<input class="text" name="x" value="<?php echo $coor['x']; ?>" maxlength="4" type="text">
 				</div>
 				<div class="yCoord">
 					<label for="yCoordInput">Y:</label>
-					<input class="text" name="x" value="<?php echo $coor['x']; ?>" maxlength="4" type="text">
+					<input class="text" name="y" value="<?php echo $coor['y']; ?>" maxlength="4" type="text">
 				</div>
 				<div class="clear"></div>
 			</div>

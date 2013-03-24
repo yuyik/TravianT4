@@ -13,14 +13,14 @@ if(isset($_GET['d']) && isset($_GET['c'])) {
 	}
 }
 else if(isset($_GET['x']) && isset($_GET['y'])) {
-    $x = $_GET['y'];
-    $y = $_GET['x'];
-    $bigmid = $generator->getBaseID($y,$x);
+    $x = $_GET['x'];
+    $y = $_GET['y'];
+    $bigmid = $generator->getBaseID($x,$y);
 }
 else if(isset($_POST['xp']) && isset($_POST['yp'])){
-	$x = $_POST['yp'];
-    $y = $_POST['xp'];
-    $bigmid = $generator->getBaseID($y,$x);
+	$x = $_POST['xp'];
+    $y = $_POST['yp'];
+    $bigmid = $generator->getBaseID($x,$y);
 }
 else {
     $y = $village->coor['y'];
@@ -30,10 +30,9 @@ else {
 
 
 $north1 = ($y+1) > WORLD_MAX? $y-WORLD_MAX-WORLD_MAX : $x+1;
-$north2 = ($y+2) > WORLD_MAX? $y-WORLD_MAX-WORLD_MAX-1 : $x+2;
-$north3 = ($y+3) > WORLD_MAX? $y-WORLD_MAX-WORLD_MAX-2 : $x+3;
-$north4 = ($y+4) > WORLD_MAX? $y-WORLD_MAX-WORLD_MAX-3 : $x+4;
-$north5 = ($y+5) > WORLD_MAX? $y-WORLD_MAX-WORLD_MAX-4 : $x+5;
+$north2 = ($y+2) > WORLD_MAX? $y-WORLD_MAX-WORLD_MAX+1 : $x+2;
+$north3 = ($y+3) > WORLD_MAX? $y-WORLD_MAX-WORLD_MAX+2 : $x+3;
+$north4 = ($y+4) > WORLD_MAX? $y-WORLD_MAX-WORLD_MAX+3 : $x+4;
 
 $south1 = ($y-1) < -WORLD_MAX? $y+WORLD_MAX+WORLD_MAX : $x-1;
 $south2 = ($y-2) < -WORLD_MAX? $y+WORLD_MAX+WORLD_MAX-1 : $x-2;
@@ -54,16 +53,16 @@ $west10 = ($x-10) < -WORLD_MAX? $x+WORLD_MAX+WORLD_MAX-9 : $y-10;
 $west11 = ($x-11) < -WORLD_MAX? $x+WORLD_MAX+WORLD_MAX-10 : $y-11;
 
 $east1 = ($x+1) > WORLD_MAX? $x-WORLD_MAX-WORLD_MAX : $y+1;
-$east2 = ($x+2) > WORLD_MAX? $x-WORLD_MAX-WORLD_MAX-1 : $y+2;
-$east3 = ($x+3) > WORLD_MAX? $x-WORLD_MAX-WORLD_MAX-2 : $y+3;
-$east4 = ($x+4) > WORLD_MAX? $x-WORLD_MAX-WORLD_MAX-3 : $y+4;
-$east5 = ($x+5) > WORLD_MAX? $x-WORLD_MAX-WORLD_MAX-4 : $y+5;
-$east6 = ($x+6) > WORLD_MAX? $x-WORLD_MAX-WORLD_MAX-5 : $y+6;
-$east7 = ($x+7) > WORLD_MAX? $x-WORLD_MAX-WORLD_MAX-6 : $y+7;
-$east8 = ($x+8) > WORLD_MAX? $x-WORLD_MAX-WORLD_MAX-7 : $y+8;
-$east9 = ($x+9) > WORLD_MAX? $x-WORLD_MAX-WORLD_MAX-8 : $y+9;
-$east10 = ($x+10) > WORLD_MAX? $x-WORLD_MAX-WORLD_MAX-9 : $y+10;
-$east11 = ($x+11) > WORLD_MAX? $x-WORLD_MAX-WORLD_MAX-10 : $y+11;
+$east2 = ($x+2) > WORLD_MAX? $x-WORLD_MAX-WORLD_MAX+1 : $y+2;
+$east3 = ($x+3) > WORLD_MAX? $x-WORLD_MAX-WORLD_MAX+2 : $y+3;
+$east4 = ($x+4) > WORLD_MAX? $x-WORLD_MAX-WORLD_MAX+3 : $y+4;
+$east5 = ($x+5) > WORLD_MAX? $x-WORLD_MAX-WORLD_MAX+4 : $y+5;
+$east6 = ($x+6) > WORLD_MAX? $x-WORLD_MAX-WORLD_MAX+5 : $y+6;
+$east7 = ($x+7) > WORLD_MAX? $x-WORLD_MAX-WORLD_MAX+6 : $y+7;
+$east8 = ($x+8) > WORLD_MAX? $x-WORLD_MAX-WORLD_MAX+7 : $y+8;
+$east9 = ($x+9) > WORLD_MAX? $x-WORLD_MAX-WORLD_MAX+8 : $y+9;
+$east10 = ($x+10) > WORLD_MAX? $x-WORLD_MAX-WORLD_MAX+9 : $y+10;
+$east11 = ($x+11) > WORLD_MAX? $x-WORLD_MAX-WORLD_MAX+10 : $y+11;
 
 $xarray = array($west11,$west10,$west9,$west8,$west7,$west6,$west5,$west4,$west3,$west2,$west1,$y,$east1,$east2,$east3,$east4,$east5,$east6,$east7,$east8,$east9,$east10,$east11);
 
@@ -71,13 +70,13 @@ $yarray = array($north4,$north3,$north2,$north1,$x,$south1,$south2,$south3,$sout
 
 
 $maparray = array();
-$xcount = 0;
+$ycount = 0;
 for($i=0;$i<=21;$i++) {
-if($xcount != 22) {
-array_push($maparray,$database->getMInfo($generator->getBaseID($yarray[$xcount],$xarray[$i])));
+if($ycount != 10) {
+array_push($maparray,$database->getMInfo($generator->getBaseID($xarray[$i],$yarray[$ycount])));
 if($i==21) {
 $i = -1;
-$xcount +=1;
+$ycount +=1;
 }
 }
 }
@@ -203,16 +202,16 @@ break;
     $uinfo = $database->getUserField($odata['owner'],'username',0);
     
     if($maparray[$index]['fieldtype'] > 0 && $maparray[$index]['occupied'] == 1) {
-    $targettitle = "<font color='white'><b>Village ".$maparray[$index]['name']."</b></font><br>(".$maparray[$index]['y']."|".$maparray[$index]['x'].")<br>Player: ".$username."<br>Population: ".$maparray[$index]['pop']."<br>Alliance ".$allyname."<br>Tribe: ".$tribename."";
+    $targettitle = "<font color='white'><b>Village ".$maparray[$index]['name']."</b></font><br>(".$maparray[$index]['x']."|".$maparray[$index]['y'].")<br>Player: ".$username."<br>Population: ".$maparray[$index]['pop']."<br>Alliance ".$allyname."<br>Tribe: ".$tribename."";
     }
     if($maparray[$index]['oasistype'] == 0 && $maparray[$index]['occupied'] == 0) {
-    $targettitle = "<font color='white'><b>Abandoned valley ".$tt."</b></font><br>(".$maparray[$index]['y']."|".$maparray[$index]['x'].")";
+    $targettitle = "<font color='white'><b>Abandoned valley ".$tt."</b></font><br>(".$maparray[$index]['x']."|".$maparray[$index]['y'].")";
     }
     
     if($maparray[$index]['fieldtype'] == 0 && $maparray[$index]['oasistype'] > 0 && $maparray[$index]['occupied'] == 0) {
-    $targettitle = "<font color='white'><b>Unoccupied oasis</b></font><br /> (".$maparray[$index]['y']."|".$maparray[$index]['x'].")<br />".$tt."";
+    $targettitle = "<font color='white'><b>Unoccupied oasis</b></font><br /> (".$maparray[$index]['x']."|".$maparray[$index]['y'].")<br />".$tt."";
     }elseif($maparray[$index]['fieldtype'] == 0 && $maparray[$index]['oasistype'] > 0 && $maparray[$index]['occupied'] > 0) {
-    $targettitle = "<font color='white'><b>occupied oasis</b></font><br /> (".$maparray[$index]['y']."|".$maparray[$index]['x'].")<br />".$tt."<br>Player: ".$uinfo."<br>Alliance: ".$allyname."<br>Tribe: ".$tribename."";
+    $targettitle = "<font color='white'><b>occupied oasis</b></font><br /> (".$maparray[$index]['x']."|".$maparray[$index]['y'].")<br />".$tt."<br>Player: ".$uinfo."<br>Alliance: ".$allyname."<br>Tribe: ".$tribename."";
     }
     
     

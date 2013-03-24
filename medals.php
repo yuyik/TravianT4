@@ -86,7 +86,7 @@ if (mysql_num_rows(mysql_query("SELECT id FROM ".TB_PREFIX."users WHERE access =
     }    
 
 	//Overvallers v/d Week
-    $result = mysql_query("SELECT * FROM ".TB_PREFIX."users WHERE id > 3 ORDER BY RR DESC Limit 10");
+    $result = mysql_query("SELECT * FROM ".TB_PREFIX."users WHERE id > 3 AND RR >= 0 ORDER BY RR DESC Limit 10");
     $i=0; 	while($row = mysql_fetch_array($result)){
 	$i++;	$img="t4_".($i)."";
 	$quer="insert into ".TB_PREFIX."medal(userid, categorie, plaats, week, points, img) values('".$row['id']."', '4', '".($i)."', '".$week."', '".$row['RR']."', '".$img."')";
@@ -368,7 +368,7 @@ if (mysql_num_rows(mysql_query("SELECT id FROM ".TB_PREFIX."users WHERE access =
 
 	//je staat voor 3e / 5e / 10e keer in de top 10 overvallers 
 	//Pak de top10 overvallers
-    $result = mysql_query("SELECT * FROM ".TB_PREFIX."users WHERE id > 3 ORDER BY RR DESC Limit 10");
+    $result = mysql_query("SELECT * FROM ".TB_PREFIX."users WHERE id > 3 AND RR >= 0 ORDER BY RR DESC Limit 10");
     while($row = mysql_fetch_array($result)){ 
 	
 			$query1="SELECT count(*) FROM ".TB_PREFIX."medal WHERE userid='".$row['id']."' AND categorie = 4 AND plaats<=3";
@@ -396,7 +396,7 @@ if (mysql_num_rows(mysql_query("SELECT id FROM ".TB_PREFIX."users WHERE access =
 		}
 	} //je staat voor 3e / 5e / 10e keer in de top 10 overvallers 
     //Pak de top10 overvallers
-    $result = mysql_query("SELECT * FROM ".TB_PREFIX."users WHERE id > 3 ORDER BY RR DESC Limit 10");
+    $result = mysql_query("SELECT * FROM ".TB_PREFIX."users WHERE id > 3 AND RR >= 0 ORDER BY RR DESC Limit 10");
     while($row = mysql_fetch_array($result)){ 
     
             $query1="SELECT count(*) FROM ".TB_PREFIX."medal WHERE userid='".$row['id']."' AND categorie = 4 AND plaats<=10";
@@ -450,7 +450,7 @@ if (mysql_num_rows(mysql_query("SELECT id FROM ".TB_PREFIX."users WHERE access =
     }    
     
       //Overvallers v/d Week
-    $result = mysql_query("SELECT * FROM ".TB_PREFIX."alidata ORDER BY RR DESC Limit 10");
+    $result = mysql_query("SELECT * FROM ".TB_PREFIX."alidata AND RR >= 0 ORDER BY RR DESC Limit 10");
     $i=0;     while($row = mysql_fetch_array($result)){
     $i++;    $img="a4_".($i)."";
     $quer="insert into ".TB_PREFIX."allimedal(allyid, categorie, plaats, week, points, img) values('".$row['id']."', '4', '".($i)."', '".$allyweek."', '".$row['RR']."', '".$img."')";

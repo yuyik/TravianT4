@@ -73,7 +73,7 @@ $end = ($tribe*10);
 
                         <th>Location</th>
 
-                        <td><a href="karte.php?d=&amp;c="><?php echo $process[1]; ?> (<?php echo $coor['y']; ?>|<?php echo $coor['x']; ?>)</a></td>
+                        <td><a href="karte.php?d=&amp;c="><?php echo $process[1]; ?> (<?php echo $coor['x']; ?>|<?php echo $coor['y']; ?>)</a></td>
 
                     </tr>
 
@@ -111,7 +111,7 @@ $end = ($tribe*10);
 
                         <td><?php echo $village->vname; ?></td>
 
-                        <td colspan="<?php if($process['t11'] != ''){ echo"11"; }else{ echo"10"; } ?>"><?php echo $actionType." ".$process['1']; ?> (<?php echo $coor['y']; ?>|<?php echo $coor['x']; ?>)</td>
+                        <td colspan="<?php if($process['t11'] != ''){ echo"11"; }else{ echo"10"; } ?>"><?php echo $actionType." ".$process['1']; ?> (<?php echo $coor['x']; ?>|<?php echo $coor['y']; ?>)</td>
 
                     </tr>
 

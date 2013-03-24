@@ -3,11 +3,11 @@
     echo "Row ".$i;
     }
     $result = mysql_query("SELECT * FROM ".TB_PREFIX."users WHERE id > 3 ORDER BY ap DESC, id ASC LIMIT 10");
-    $result2 = mysql_query("SELECT * FROM ".TB_PREFIX."users WHERE username = '".$session->username."' ORDER BY ap DESC, id ASC LIMIT 1");
-    $attRank = $ranking->getTop10AttRank($session->username);
-    $defRank = $ranking->getTop10DefRank($session->username);
-    $clpRank = $ranking->getTop10ClpRank($session->username);
-    $rrRank = $ranking->getTop10RobbersRank($session->username);
+    $result2 = mysql_query("SELECT * FROM ".TB_PREFIX."users WHERE id  = '".$session->uid."' ORDER BY ap DESC, id ASC LIMIT 1");
+    $attRank = $ranking->getTop10AttRank($session->uid);
+    $defRank = $ranking->getTop10DefRank($session->uid);
+    $clpRank = $ranking->getTop10ClpRank($session->uid);
+    $rrRank = $ranking->getTop10RobbersRank($session->uid);
 ?>
 <div class="contentNavi tabNavi">
 				<div class="container normal">
@@ -44,7 +44,7 @@
 	<tbody>
 <?php
 	while($row = mysql_fetch_array($result)){
-		if($row['username']==$session->username) {
+		if($row['uid']==$session->uid) {
 			echo "<tr class=\"own hl hover\">";
         } else {
         	echo "<tr class=\"hover\">";
@@ -82,7 +82,7 @@
     echo "Row ".$i;
     }
     $result = mysql_query("SELECT * FROM ".TB_PREFIX."users WHERE id > 3 ORDER BY dp DESC, id ASC Limit 10");
-    $result2 = mysql_query("SELECT * FROM ".TB_PREFIX."users WHERE username = '".$session->username."' ORDER BY dp DESC, id ASC Limit 1");
+    $result2 = mysql_query("SELECT * FROM ".TB_PREFIX."users WHERE id  = '".$session->uid."' ORDER BY dp DESC, id ASC Limit 1");
 ?>
 <h4 class="round small spacer top top10_defs">Top 10 Defenders</h4>
 <table cellpadding="1" cellspacing="1" id="top10_defs" class="top10 row_table_data">
@@ -96,7 +96,7 @@
 	<tbody>
 <?php
 	while($row = mysql_fetch_array($result)){
-		if($row['username']==$session->username) {
+		if($row['uid']==$session->uid) {
 			echo "<tr class=\"own hl hover\">";
         } else {
         	echo "<tr class=\"hover\">";
@@ -137,7 +137,7 @@
     echo "Row ".$i;
     }
     $result = mysql_query("SELECT * FROM ".TB_PREFIX."users WHERE id>3 ORDER BY `clp` DESC, id ASC Limit 10");
-    $result2 = mysql_query("SELECT * FROM ".TB_PREFIX."users WHERE username = '".$session->username."' ORDER BY `clp` DESC, id ASC Limit 1");
+    $result2 = mysql_query("SELECT * FROM ".TB_PREFIX."users WHERE id  = '".$session->uid."' ORDER BY `clp` DESC, id ASC Limit 1");
 ?>
 <h4 class="round small  top top10_climbers">Top 10 Climbers</h4>
 <table cellpadding="1" cellspacing="1" id="top10_climbers" class="top10 row_table_data">
@@ -151,7 +151,7 @@
 	<tbody>
 <?php
 	while($row = mysql_fetch_array($result)){
-		if($row['username']==$session->username) {
+		if($row['uid']==$session->uid) {
 			echo "<tr class=\"own hl hover\">";
         } else {
         	echo "<tr class=\"hover\">";
@@ -188,8 +188,8 @@
     for($i=1;$i<=0;$i++) {
     echo "Row ".$i;
     }
-    $result = mysql_query("SELECT * FROM ".TB_PREFIX."users WHERE id>3 ORDER BY RR DESC, id ASC Limit 10");
-    $result2 = mysql_query("SELECT * FROM ".TB_PREFIX."users WHERE username = '".$session->username."' ORDER BY RR DESC, id ASC Limit 1");
+    $result = mysql_query("SELECT * FROM ".TB_PREFIX."users WHERE id>3 AND RR >= 0 ORDER BY RR DESC, id ASC Limit 10");
+    $result2 = mysql_query("SELECT * FROM ".TB_PREFIX."users WHERE id  = '".$session->uid."' AND RR >= 0 ORDER BY RR DESC, id ASC Limit 1");
 ?>
 <h4 class="round small spacer top top10_raiders">Top 10 Raiders</h4>
 <table cellpadding="1" cellspacing="1" id="top10_raiders" class="top10 row_table_data">
@@ -203,7 +203,7 @@
 	<tbody>
 <?php
 	while($row = mysql_fetch_array($result)){
-		if($row['username']==$session->username) {
+		if($row['uid']==$session->uid) {
 			echo "<tr class=\"own hl hover\">";
         } else {
         	echo "<tr class=\"hover\">";

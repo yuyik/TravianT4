@@ -15,11 +15,11 @@ $founder = $database->getVillage($village->wid);
 				<input type="hidden" name="c" value="5" />
 				<input type="hidden" name="h" value="<?php echo $_GET['id']; ?>" />
 				<input type="hidden" name="id" value="39" />
-				<input type="hidden" name="timestamp" value="<?php echo time()+$time ?>" />
+				<input type="hidden" name="timestamp" value="<?php echo $time ?>" />
 		<table class="troop_details" cellpadding="1" cellspacing="1">
 	<thead>
 		<tr>
-			<td class="role"><a href="karte.php?d=<?php echo $founder['0']; ?>&c=<?php echo $generator->getMapCheck($founder['0']); ?>"><?php echo $village->vname; ?></a></td><td colspan="11">Adventure (<?php echo $adventure['y']; ?>|<?php echo $adventure['x']; ?>)</td>
+			<td class="role"><a href="karte.php?d=<?php echo $founder['0']; ?>&c=<?php echo $generator->getMapCheck($founder['0']); ?>"><?php echo $village->vname; ?></a></td><td colspan="11">Adventure (<?php echo $adventure['x']; ?>|<?php echo $adventure['y']; ?>)</td>
 		</tr>
 	</thead>
 	<tbody class="units">
@@ -63,6 +63,6 @@ if($herodetail['dead']==0){
 }
 }else{ 
 ?>
-<button type="button" title="Build rally point" value="Kalandra fel" class="disabled"><div class="button-container"><div class="button-position"><div class="btl"><div class="btr"><div class="btc"></div></div></div><div class="bml"><div class="bmr"><div class="bmc"></div></div></div><div class="bbl"><div class="bbr"><div class="bbc"></div></div></div></div><div class="button-contents">Start Adventure</div></div></button>
+<button type="button" title="You need to build rally point." value="Kalandra fel" class="disabled"><div class="button-container"><div class="button-position"><div class="btl"><div class="btr"><div class="btc"></div></div></div><div class="bml"><div class="bmr"><div class="bmc"></div></div></div><div class="bbl"><div class="bbr"><div class="bbc"></div></div></div></div><div class="button-contents">Start Adventure</div></div></button>
 <?php } ?>
 </form>

@@ -8,12 +8,12 @@ $t1 = $eiddata['t1'];$t2 = $eiddata['t2'];$t3 = $eiddata['t3'];$t4 = $eiddata['t
 
 if(isset($_POST['action']) == 'editSlot' && $_POST['eid']) {
 
-$Wref = $database->getVilWref($_POST['y'], $_POST['x']);
+$Wref = $database->getVilWref($_POST['x'], $_POST['y']);
 $type = $database->getVillageType2($Wref);
 $oasistype = $type['oasistype'];
 $vdata = $database->getVillage($Wref);
 
-$troops = "".$_POST['t1']."+".$_POST['t2']."+".$_POST['t3']."+".$_POST['t4']."+".$_POST['t5']."+".$_POST['t6']."+".$_POST['t7']."+".$_POST['t8']."+".$_POST['t9']."+".$_POST['t10']."";
+$troops = "".$_POST['t1']+$_POST['t2']+$_POST['t3']+$_POST['t4']+$_POST['t5']+$_POST['t6']+$_POST['t7']+$_POST['t8']+$_POST['t9']+$_POST['t10']."";
 
     if(!$_POST['x'] && !$_POST['y']){
     	$errormsg .= "Enter coordinates.";
@@ -25,7 +25,7 @@ $troops = "".$_POST['t1']."+".$_POST['t2']."+".$_POST['t3']."+".$_POST['t4']."+"
      	$errormsg .= "No troops has been selected.";
     }else{
     
-		$Wref = $database->getVilWref($_POST['y'], $_POST['x']);
+		$Wref = $database->getVilWref($_POST['x'], $_POST['y']);
 		$coor = $database->getCoor($village->wid);
 			
             function getDistance($coorx1, $coory1, $coorx2, $coory2) {
@@ -39,7 +39,7 @@ $troops = "".$_POST['t1']."+".$_POST['t2']."+".$_POST['t3']."+".$_POST['t4']."+"
    				$dist = sqrt(pow($distanceX, 2) + pow($distanceY, 2));
    				return round($dist, 1);
    			}
-            $distance = getDistance($coor['x'], $coor['y'], $_POST['y'], $_POST['x']);
+            $distance = getDistance($coor['x'], $coor['y'], $_POST['x'], $_POST['y']);
             
 		$database->editSlotFarm($_GET['eid'], $_POST['lid'], $Wref, $_POST['x'], $_POST['y'], $distance, $_POST['t1'], $_POST['t2'], $_POST['t3'], $_POST['t4'], $_POST['t5'], $_POST['t6'], $_POST['t7'], $_POST['t8'], $_POST['t9'], $_POST['t10']);
         
@@ -191,8 +191,30 @@ $lvname = $database->getVillageField($row["wref"], 'name');
 			</div>
 								<div class="targetSelect">
 							<label class="lastTargets" for="last_targets">Last targets:</label>
-							<select id="target_id" name="target_id" onchange="selectCoordinates()">
-								<option value="">Select village</option>
+							<select name="target_id">
+<?php
+$select_raidlist = "SELECT * FROM ".TB_PREFIX."raidlist WHERE id = ".$_GET['eid']."";
+$raidlist = mysql_fetch_array(mysql_query($select_raidlist));
+$getwref = "SELECT * FROM ".TB_PREFIX."raidlist WHERE id = ".$raidlist['lid']."";
+$arraywref = $database->query_return($getwref);
+	echo '<option value="">Select village</option>';
+if(mysql_num_rows(mysql_query($getwref)) != 0){
+foreach($arraywref as $row){
+$towref = $row["towref"];
+$tocoor = $database->getCoor($towref);
+$tooasistype = $database->getVillageType2($towref);
+if($tooasistype == 0){
+$tovname = $database->getVillageField($towref, 'name');
+}else{
+$tovname = $database->getOasisField($towref, 'name');
+}
+if($vill[$towref] == 0){
+	echo '<option value="'.$towref.'">'.$tovname.'('.$tocoor['x'].'|'.$tocoor['y'].')</option>';
+}
+$vill[$towref] = 1;
+}
+}
+?>
 							</select>
 						</div>
 						<div class="clear"></div>

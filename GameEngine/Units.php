@@ -406,7 +406,7 @@ class Units {
 		$getHero = count($database->getHero($session->uid));
 		if($getHero) {
 			$database->modifyUnit($village->wid,'hero',1,0);
-			$database->addMovement(9,$village->wid,$post['h'],0,0,$post['timestamp']);
+			$database->addMovement(9,$village->wid,$post['h'],0,0,time()+$post['timestamp']);
 			header("Location: build.php?id=39");
 
 			if($form->returnErrors() > 0) {

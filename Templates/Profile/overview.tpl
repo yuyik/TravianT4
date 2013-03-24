@@ -72,16 +72,16 @@ foreach($varray as $vil) {
 				elseif ((date('m') - substr($displayarray['birthday'],5,2)) == 0){
 					if(date('d') < substr($displayarray['birthday'],8,2)){$age --;}
 				}
-            echo "<tr><th>Birthday</th><td>$age</td></tr>";
+            echo "<tr><th>Age</th><td>$age</td></tr>";
             }
 			//Gender
             if(isset($displayarray['gender']) && $displayarray['gender'] != 0) {
-            $gender = ($displayarray['gender']== 1)? "Férfi" : "Nő";
-            echo "<tr><th>Nem</th><td>".$gender."</td></tr>";
+            $gender = ($displayarray['gender']== 1)? "Male" : "Female";
+            echo "<tr><th>Gender</th><td>".$gender."</td></tr>";
             }
 			//Location
             if($displayarray['location'] != "") {
-            echo "<tr><th>Lakhely:</th><td>".$displayarray['location']."</td></tr>";
+            echo "<tr><th>Location:</th><td>".$displayarray['location']."</td></tr>";
             }
             ?>
     		<tr>
@@ -126,7 +126,7 @@ foreach($varray as $vil) {
         <?php 
     foreach($varray as $vil) {
     	$coor = $database->getCoor($vil['wref']);
-    	echo "<tr><td class=\"name\"><a href=\"karte.php?x=".$coor['y']."&amp;y=".$coor['x']."\">".$vil['name']."</a> ";
+    	echo "<tr><td class=\"name\"><a href=\"position_details.php?x=".$coor['x']."&amp;y=".$coor['y']."\">".$vil['name']."</a> ";
         if($vil['capital'] == 1) {
         echo "<span class=\"mainVillage\">(Capital)</span>";
         }
@@ -167,11 +167,11 @@ break;
 }
         echo "</td>";
         echo "<td class=\"inhabitants\">".$vil['pop']."</td><td class=\"coords\">";
-        echo "<a href=\"karte.php?x=".$coor['y']."&amp;y=".$coor['x']."\">
+        echo "<a href=\"position_details.php?x=".$coor['x']."&amp;y=".$coor['y']."\">
         <span class=\"coordinates coordinatesAligned\">
-        <span class=\"coordinateY\">(".$coor['y']."</span>
+        <span class=\"coordinateY\">(".$coor['x']."</span>
         <span class=\"coordinatePipe\">|</span>
-        <span class=\"coordinateX\">".$coor['x'].")</span>
+        <span class=\"coordinateX\">".$coor['y'].")</span>
         </span><span class=\"clear\">‎</span>
         </td></tr>";
     }

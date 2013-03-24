@@ -1,7 +1,7 @@
 <?php
         class Ranking {
 			
-			public function getUserRank($username) {
+			public function getUserRank($uid) {
         		$q = "SELECT " . TB_PREFIX . "users.id userid, " . TB_PREFIX . "users.username username, (
 
 				SELECT SUM( " . TB_PREFIX . "vdata.pop ) 
@@ -11,12 +11,12 @@
 				
 				FROM " . TB_PREFIX . "users
 				WHERE " . TB_PREFIX . "users.id != 0 and id != 2 and id != 3
-				ORDER BY totalpop DESC, userid ASC";
+				ORDER BY totalpop DESC, userid DESC";
 				$result = mysql_query($q);
 				$i = 1;
 				$myrank = 0;
 				while($row = mysql_fetch_array($result)) {
-					if($row['username'] == $username){
+					if($row['userid'] == $uid){
 						$myrank = $i;
 					}
 					$i++;
@@ -24,17 +24,17 @@
 				return $myrank;
         	}
 			
-			public function getUserAttRank($username) {
+			public function getUserAttRank($uid) {
 				$q = "SELECT " . TB_PREFIX . "users.id userid, " . TB_PREFIX . "users.username username, " . TB_PREFIX . "users.apall apall
 				FROM " . TB_PREFIX . "users
 				WHERE " . TB_PREFIX . "users.id > 3
-				ORDER BY apall DESC, userid ASC";
+				ORDER BY apall DESC, userid DESC";
 					
 				$result = mysql_query($q);
 				$i = 1;
 				$myrank = 0;
 				while($row = mysql_fetch_array($result)) {
-					if($row['username'] == $username){
+					if($row['userid'] == $uid){
 						$myrank = $i;
 					}
 					$i++;
@@ -42,17 +42,17 @@
 				return $myrank;
         	}
 			
-			public function getUserDefRank($username) {
+			public function getUserDefRank($uid) {
 				$q = "SELECT " . TB_PREFIX . "users.id userid, " . TB_PREFIX . "users.username username, " . TB_PREFIX . "users.dpall dpall
 				FROM " . TB_PREFIX . "users
 				WHERE " . TB_PREFIX . "users.id > 3
-				ORDER BY dpall DESC, userid ASC";
+				ORDER BY dpall DESC, userid DESC";
 					
 				$result = mysql_query($q);
 				$i = 1;
 				$myrank = 0;
 				while($row = mysql_fetch_array($result)) {
-					if($row['username'] == $username){
+					if($row['userid'] == $uid){
 						$myrank = $i;
 					}
 					$i++;
@@ -70,12 +70,12 @@
 				
 				FROM " . TB_PREFIX . "users
 				WHERE " . TB_PREFIX . "users.alliance > 0
-				ORDER BY totalpop DESC, userid ASC";
+				ORDER BY totalpop DESC, userid DESC";
 				$result = mysql_query($q);
 				$i = 1;
 				$myrank = 0;
 				while($row = mysql_fetch_array($result)) {
-					if($row['username'] == $username){
+					if($row['alliance'] == $id){
 						$myrank = $i;
 					}
 					$i++;
@@ -159,7 +159,7 @@
 					
 				FROM " . TB_PREFIX . "users
 				WHERE " . TB_PREFIX . "users.id !=4 AND id !=2 AND id !=3
-				ORDER BY totalpop DESC, totalraid DESC, userid ASC $limit";
+				ORDER BY totalpop DESC, totalraid DESC, userid DESC $limit";
 				return mysql_query($q);
 			}
 						
@@ -177,7 +177,7 @@
 				
 				FROM " . TB_PREFIX . "users
 				WHERE " . TB_PREFIX . "users.id > 4
-				ORDER BY apall DESC, userid ASC $limit";
+				ORDER BY apall DESC, userid DESC $limit";
 				return mysql_query($q);
 			}
 			
@@ -196,7 +196,7 @@
 					
 				FROM " . TB_PREFIX . "users
 				WHERE " . TB_PREFIX . "users.id > 4
-				ORDER BY dpall DESC, userid ASC $limit";
+				ORDER BY dpall DESC, userid DESC $limit";
 				return mysql_query($q);
 			}
 						
@@ -350,7 +350,7 @@
 			
 			
 			public function getVillageRank($wid) {
-        		$q = "SELECT * FROM ".TB_PREFIX."vdata WHERE wref != 0 AND owner != 2 ORDER BY pop DESC, name ASC, lastupdate DESC";
+        		$q = "SELECT * FROM ".TB_PREFIX."vdata WHERE wref != 0 AND owner != 2 ORDER BY pop DESC, owner DESC, lastupdate DESC";
 				$result = mysql_query($q);
 				$i = 1;
 				$myrank = 0;
@@ -364,7 +364,7 @@
         	}
 			
 			public function procVillagesRanking($limit="") {				
-				$q = "SELECT * FROM ".TB_PREFIX."vdata WHERE wref != 0 AND owner != 2 ORDER BY pop DESC, name ASC, lastupdate DESC $limit";
+				$q = "SELECT * FROM ".TB_PREFIX."vdata WHERE wref != 0 AND owner != 2 ORDER BY pop DESC, owner DESC, lastupdate DESC $limit";
 				return mysql_query($q);
 			}
 			
@@ -392,7 +392,7 @@
 				
 				FROM " . TB_PREFIX . "users
 				WHERE " . TB_PREFIX . "users.id > 4
-				ORDER BY experience DESC, totalpop ASC, userid ASC";
+				ORDER BY experience DESC, totalpop ASC, userid DESC";
 				$result = mysql_query($q);
 				$i = 1;
 				$myrank = 0;
@@ -425,7 +425,7 @@
 				
 				FROM " . TB_PREFIX . "users
 				WHERE " . TB_PREFIX . "users.id > 4
-				ORDER BY experience DESC, totalpop ASC, userid ASC $limit";
+				ORDER BY experience DESC, totalpop ASC, userid DESC $limit";
 				
 				return mysql_query($q);
 			}
@@ -433,7 +433,7 @@
 
 
 			
-			public function getTop10AttRank($username) {
+			public function getTop10AttRank($uid) {
 				$q = "SELECT " . TB_PREFIX . "users.id userid, " . TB_PREFIX . "users.username username, " . TB_PREFIX . "users.ap ap, (
 				SELECT SUM( " . TB_PREFIX . "vdata.pop ) 
 				FROM " . TB_PREFIX . "vdata
@@ -447,13 +447,13 @@
 				
 				FROM " . TB_PREFIX . "users
 				WHERE " . TB_PREFIX . "users.id > 4
-				ORDER BY ap DESC, userid ASC";
+				ORDER BY ap DESC, userid DESC";
 					
 				$result = mysql_query($q);
 				$i = 1;
 				$myrank = 0;
 				while($row = mysql_fetch_array($result)) {
-					if($row['username'] == $username){
+					if($row['userid'] == $uid){
 						$myrank = $i;
 					}
 					$i++;
@@ -462,7 +462,7 @@
         	}
 			
 			
-			public function getTop10DefRank($username) {
+			public function getTop10DefRank($uid) {
 				$q = "SELECT " . TB_PREFIX . "users.id userid, " . TB_PREFIX . "users.username username, " . TB_PREFIX . "users.dp dp, (
 				SELECT SUM( " . TB_PREFIX . "vdata.pop ) 
 				FROM " . TB_PREFIX . "vdata
@@ -476,13 +476,13 @@
 				
 				FROM " . TB_PREFIX . "users
 				WHERE " . TB_PREFIX . "users.id > 4
-				ORDER BY dp DESC, userid ASC";
+				ORDER BY dp DESC, userid DESC";
 					
 				$result = mysql_query($q);
 				$i = 1;
 				$myrank = 0;
 				while($row = mysql_fetch_array($result)) {
-					if($row['username'] == $username){
+					if($row['userid'] == $uid){
 						$myrank = $i;
 					}
 					$i++;
@@ -491,7 +491,7 @@
         	}
 			
 			
-			public function getTop10ClpRank($username) {
+			public function getTop10ClpRank($uid) {
 				$q = "SELECT " . TB_PREFIX . "users.id userid, " . TB_PREFIX . "users.username username, " . TB_PREFIX . "users.clp clp, (
 				SELECT SUM( " . TB_PREFIX . "vdata.pop ) 
 				FROM " . TB_PREFIX . "vdata
@@ -505,13 +505,13 @@
 				
 				FROM " . TB_PREFIX . "users
 				WHERE " . TB_PREFIX . "users.id > 4
-				ORDER BY clp DESC, userid ASC";
+				ORDER BY clp DESC, userid DESC";
 					
 				$result = mysql_query($q);
 				$i = 1;
 				$myrank = 0;
 				while($row = mysql_fetch_array($result)) {
-					if($row['username'] == $username){
+					if($row['userid'] == $uid){
 						$myrank = $i;
 					}
 					$i++;
@@ -519,7 +519,7 @@
 				return $myrank;
         	}
 			
-			public function getTop10RobbersRank($username) {
+			public function getTop10RobbersRank($uid) {
 				$q = "SELECT " . TB_PREFIX . "users.id userid, " . TB_PREFIX . "users.username username, " . TB_PREFIX . "users.RR RR, (
 				SELECT SUM( " . TB_PREFIX . "vdata.pop ) 
 				FROM " . TB_PREFIX . "vdata
@@ -532,14 +532,14 @@
 				)totalvillages
 				
 				FROM " . TB_PREFIX . "users
-				WHERE " . TB_PREFIX . "users.id > 4
-				ORDER BY RR DESC, userid ASC";
+				WHERE " . TB_PREFIX . "users.id > 4 AND RR >= 0
+				ORDER BY RR DESC, userid DESC";
 					
 				$result = mysql_query($q);
 				$i = 1;
 				$myrank = 0;
 				while($row = mysql_fetch_array($result)) {
-					if($row['username'] == $username){
+					if($row['userid'] == $uid){
 						$myrank = $i;
 					}
 					$i++;

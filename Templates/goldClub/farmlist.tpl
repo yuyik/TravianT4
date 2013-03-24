@@ -111,9 +111,9 @@ $vdata = $database->getVillage($towref);
                 <span class="coordinates coordinatesWithText">
                 <span class="coordText">Oasis</span>
                 <span class="coordinatesWrapper">
-                <span class="coordinateY"><?php echo $y; ?>)</span>
+				<span class="coordinateX">(<?php echo $x; ?></span>
                 <span class="coordinatePipe">|</span>
-                <span class="coordinateX">(<?php echo $x; ?></span>
+				<span class="coordinateY"><?php echo $y; ?>)</span>
                 </span></span>
                 <?php }else{ ?>
                 <span class="coordinates coordinatesWithText">
