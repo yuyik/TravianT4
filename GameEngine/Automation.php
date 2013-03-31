@@ -1618,7 +1618,7 @@ class Automation {
 				}
                 if ($battlepart[4]>$needed_cata)
                 {
-                        $info_cat = "".$tbgid.",".$this->procResType($tbgid)." <b>تخریب شد</b>.";
+                        $info_cat = "".$catp_pic.", ".$this->procResType($tbgid)." destroyed.";
 						
 				$database->setVillageLevel($data['to'],"f".$tbid."",'0');
                     if($tbid>=19) { $database->setVillageLevel($data['to'],"f".$tbid."t",'0'); }
@@ -1638,7 +1638,12 @@ class Automation {
                         if ($tmaxcrop<800) $tmaxcrop=800;
                         $q = "UPDATE ".TB_PREFIX."vdata SET `maxcrop`='".$tmaxcrop."' WHERE wref=".$data['to'];
                         $database->query($q);
-                    }                                    
+                    }
+					if($tbgid==18) {
+						$owner = $database->getVillageField($data['to'],"owner");
+						$q = "UPDATE ".TB_PREFIX."alidata set max = 0 where leader = $owner";
+						$database->query($q);
+					}
                     $pop=$this->recountPop($data['to']);
 					if($pop=='0')
                     { 
@@ -1676,14 +1681,14 @@ class Automation {
                 }
                 elseif ($battlepart[4]==0)
                 {    
-					$info_cat = "".$tbgid.",به ".$this->procResType($tbgid)." آسیبی نرسید.";
+					$info_cat = "".$catp_pic.",".$this->procResType($tbgid)." was not damaged.";
 					}
                 else
                 {   
 					$demolish=$battlepart[4]/$needed_cata;
                     $totallvl = round(sqrt(pow(($tblevel+0.5),2)-($battlepart[4]*8)));
                     if ($tblevel==$totallvl) 
-                        $info_cata=" آسیبی نرسید.";
+                        $info_cata=" was not damaged.";
                     else
                     {
 					
@@ -1691,7 +1696,7 @@ class Automation {
 					
                                
             
-                    $info_cata= " از سطح <b>".$tblevel."</b> به سطح <b>".$totallvl."</b> آسیب دید.";
+                    $info_cata=" damaged from level <b>".$tblevel."</b> to level <b>".$totallvl."</b>.";
                   $buildarray = $GLOBALS["bid".$tbgid];
                         if ($tbgid==10 || $tbgid==38) {
                             $tsql=mysql_query("select `maxstore`,`maxcrop` from ".TB_PREFIX."vdata where wref=".$data['to']."");
@@ -1709,6 +1714,12 @@ class Automation {
                             $q = "UPDATE ".TB_PREFIX."vdata SET `maxcrop`='".$tmaxcrop."' WHERE wref=".$data['to'];
                             $database->query($q);
                         }       
+						if($tbgid==18) {
+							$owner = $database->getVillageField($data['to'],"owner");
+							$maxally = $buildarray[$totallvl]['attri'];
+							$q = "UPDATE ".TB_PREFIX."alidata set max = $maxally where leader = $owner";
+							$database->query($q);
+						}
                         $pop=$this->recountPop($data['to']);
                     }
                     $info_cat = "".$tbgid.",".$this->procResType($tbgid).$info_cata;
@@ -1776,7 +1787,7 @@ class Automation {
 				}
                 if (($battlepart[4]/2)>$needed_cata)
                 {
-					$info_cat = "".$tbgid.", ".$this->procResType($tbgid)." <b>تخریب شد</b>.";
+					$info_cat = "".$catp_pic.", ".$this->procResType($tbgid)." destroyed.";
                     $database->setVillageLevel($data['to'],"f".$tbid."",'0');
                     if($tbid>=19) { $database->setVillageLevel($data['to'],"f".$tbid."t",'0'); }
                     $buildarray = $GLOBALS["bid".$tbgid];
@@ -1796,6 +1807,12 @@ class Automation {
                         $q = "UPDATE ".TB_PREFIX."vdata SET `maxcrop`='".$tmaxcrop."' WHERE wref=".$data['to'];
                         $database->query($q);
                     }                                    
+					if($tbgid==18) {
+						$owner = $database->getVillageField($data['to'],"owner");
+						$maxally = $buildarray[$totallvl]['attri'];
+						$q = "UPDATE ".TB_PREFIX."alidata set max = $maxally where leader = $owner";
+						$database->query($q);
+					}
                     $pop=$this->recountPop($data['to']);
                     if($pop=='0')
                     { 
@@ -1833,17 +1850,17 @@ class Automation {
                 }
                 elseif ($battlepart[4]==0)
                 {                        
-                    $info_cat = "".$tbgid.",به ".$this->procResType($tbgid)." آسیبی نرسید.";
+                    $info_cat = "".$catp_pic.",".$this->procResType($tbgid)." was not damaged.";
                 }
                 else
                 {                
                     $demolish=($battlepart[4]/2)/$needed_cata;
                     $totallvl = round(sqrt(pow(($tblevel+0.5),2)-(($battlepart[4]/2)*8)));
                     if ($tblevel==$totallvl) 
-                        $info_cata=" تخریب نشد.";
+                        $info_cata=" was not damaged.";
                     else
                     {
-                        $info_cata=" از سطح <b>".$tblevel."</b> به سطح <b>".$totallvl."</b> آسیب دید.";
+                        $info_cata=" damaged from level <b>".$tblevel."</b> to level <b>".$totallvl."</b>.";
                         $buildarray = $GLOBALS["bid".$tbgid];
                         if ($tbgid==10 || $tbgid==38) {
                             $tsql=mysql_query("select `maxstore`,`maxcrop` from ".TB_PREFIX."vdata where wref=".$data['to']."");
@@ -1860,7 +1877,13 @@ class Automation {
                             if ($tmaxcrop<800) $tmaxcrop=800;
                             $q = "UPDATE ".TB_PREFIX."vdata SET `maxcrop`='".$tmaxcrop."' WHERE wref=".$data['to'];
                             $database->query($q);
-                        }       
+                        }
+						if($tbgid==18) {
+							$owner = $database->getVillageField($data['to'],"owner");
+							$maxally = $buildarray[$totallvl]['attri'];
+							$q = "UPDATE ".TB_PREFIX."alidata set max = $maxally where leader = $owner";
+							$database->query($q);
+						}
                         $pop=$this->recountPop($data['to']);
                     }
                     $info_cat = "".$tbgid.",".$this->procResType($tbgid).$info_cata;
@@ -1948,6 +1971,12 @@ class Automation {
                         $q = "UPDATE ".TB_PREFIX."vdata SET `maxcrop`='".$tmaxcrop."' WHERE wref=".$data['to'];
                         $database->query($q);
                     }                                  
+					if($tbgid==18) {
+						$owner = $database->getVillageField($data['to'],"owner");
+						$maxally = $buildarray[$totallvl]['attri'];
+						$q = "UPDATE ".TB_PREFIX."alidata set max = $maxally where leader = $owner";
+						$database->query($q);
+					}
                     $pop=$this->recountPop($data['to']);
                     if($pop=='0')
                     { 
@@ -1990,9 +2019,9 @@ class Automation {
                     $demolish=($battlepart[4]/2)/$needed_cata;
                     $totallvl = round(sqrt(pow(($tblevel+0.5),2)-(($battlepart[4]/2)*8)));
                     if ($tblevel==$totallvl){
-                        $info_cata=" تخریب نشد.";
+                        $info_cata=" was not damaged.";
 					}else{
-$info_cata=" از سطح <b>".$tblevel."</b> به سطح <b>".$totallvl."</b> آسیب دید.";
+$info_cata=" damaged from level <b>".$tblevel."</b> to level <b>".$totallvl."</b>.";
                         $buildarray = $GLOBALS["bid".$tbgid];
                         if ($tbgid==10 || $tbgid==38) {
                             $tsql=mysql_query("select `maxstore`,`maxcrop` from ".TB_PREFIX."vdata where wref=".$data['to']."");
@@ -2010,6 +2039,12 @@ $info_cata=" از سطح <b>".$tblevel."</b> به سطح <b>".$totallvl."</b> آ
                             $q = "UPDATE ".TB_PREFIX."vdata SET `maxcrop`='".$tmaxcrop."' WHERE wref=".$data['to'];
                             $database->query($q);
                         }       
+						if($tbgid==18) {
+							$owner = $database->getVillageField($data['to'],"owner");
+							$maxally = $buildarray[$totallvl]['attri'];
+							$q = "UPDATE ".TB_PREFIX."alidata set max = $maxally where leader = $owner";
+							$database->query($q);
+						}
                         $pop=$this->recountPop($data['to']);
                     }
                         
@@ -3390,6 +3425,12 @@ $info_cata=" از سطح <b>".$tblevel."</b> به سطح <b>".$totallvl."</b> آ
                     $q = "UPDATE ".TB_PREFIX."vdata SET `maxcrop`=".STORAGE_BASE." WHERE `maxcrop`<=".STORAGE_BASE." AND wref=".$vil['vref'];
                     $database->query($q);
                 }
+				if($type==18) {
+					$owner = $database->getVillageField($vil['vref'],"owner");
+					$maxally = $buildarray[$level]['attri'];
+					$q = "UPDATE ".TB_PREFIX."alidata set max = $maxally where leader = $owner";
+					$database->query($q);
+				}
                 if ($level==1) { $clear=",f".$vil['buildnumber']."t=0"; } else { $clear=""; }
                 $q = "UPDATE ".TB_PREFIX."fdata SET f".$vil['buildnumber']."=".($level-1).$clear." WHERE vref=".$vil['vref'];
                 $database->query($q);

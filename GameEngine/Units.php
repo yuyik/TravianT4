@@ -276,6 +276,11 @@ class Units {
 		
   		$database->addMovement(3,$village->wid,$data['to_vid'],$reference,0,($time+time()));
    
+		$to_owner = $database->getVillageField($data['to_vid']);
+		if($post['del_protect'] == 1) {
+		$database->updateUserField($session->uid, "protect", (time()-1), 1);
+		}
+
 		if($form->returnErrors() > 0) {
 			$_SESSION['errorarray'] = $form->getErrors();
 			$_SESSION['valuearray'] = $_POST;

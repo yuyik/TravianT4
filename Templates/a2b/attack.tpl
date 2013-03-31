@@ -1,6 +1,6 @@
 ﻿<?php
 
-
+$del_protect = 0;
 
 // Temp
 
@@ -387,6 +387,11 @@ $defender = $database->getUserField($process['2'],'alliance',0);
     } else { 
 ?> 
 <button type="submit" value="ok" name="s1" id="btn_ok"><div class="button-container"><div class="button-position"><div class="btl"><div class="btr"><div class="btc"></div></div></div><div class="bml"><div class="bmr"><div class="bmc"></div></div></div><div class="bbl"><div class="bbr"><div class="bbc"></div></div></div></div><div class="button-contents">confirm</div></div></button>
-
-<?php } ?>
+<?php
+if($database->hasBeginnerProtection($village->wid)==1 && $process['2']!=2 && $process['2']!=3) { 
+		$del_protect = 1;
+?>
+		</br></br><span style="color: #DD0000"><b>Warning:</b> if you attack this player you will lose your beginner protection!</span>
+<?php }} ?>
+<input name="del_protect" value="<?php echo $del_protect; ?>" type="hidden"> 
 </form>
