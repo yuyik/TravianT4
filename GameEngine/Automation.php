@@ -1549,7 +1549,7 @@ class Automation {
         if($toF['pop']<=0)
         {
               
-                 $info_cat = ",".$catp_pic.", روستا قبلا <b>تخریب شده</b>.";
+                 $info_cat = ",".$catp_pic.", Village already destroyed.";
         }
         else
         {
@@ -1618,7 +1618,7 @@ class Automation {
 				}
                 if ($battlepart[4]>$needed_cata)
                 {
-                        $info_cat = "".$catp_pic.", ".$this->procResType($tbgid)." destroyed.";
+                        $info_cat = "".$tbgid.", ".$this->procResType($tbgid)." destroyed.";
 						
 				$database->setVillageLevel($data['to'],"f".$tbid."",'0');
                     if($tbid>=19) { $database->setVillageLevel($data['to'],"f".$tbid."t",'0'); }
@@ -1681,7 +1681,7 @@ class Automation {
                 }
                 elseif ($battlepart[4]==0)
                 {    
-					$info_cat = "".$catp_pic.",".$this->procResType($tbgid)." was not damaged.";
+					$info_cat = "".$tbgid.",".$this->procResType($tbgid)." was not damaged.";
 					}
                 else
                 {   
