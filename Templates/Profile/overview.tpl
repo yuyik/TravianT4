@@ -25,7 +25,7 @@ foreach($varray as $vil) {
 <table cellpadding="1" cellspacing="1" id="details" class="transparent">
 	<tr>
 		<th>Rank</th>
-		<td><?php echo $ranking->getUserRank($displayarray['username']); ?></td>
+		<td><?php echo $ranking->getUserRank($displayarray['id']); ?></td>
 	</tr>
 	<tr>
 		<th>Tribe</th>
