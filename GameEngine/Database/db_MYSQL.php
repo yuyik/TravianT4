@@ -1984,24 +1984,36 @@
         		return $this->mysql_fetch_all($result);
         	}
 
+<<<<<<< HEAD
         	function getARanking($limit="") {
         		$q = "SELECT id,name,tag,oldrank FROM " . TB_PREFIX . "alidata where id != '' $limit";
+=======
+        	function getARanking() {
+        		$q = "SELECT id,name,tag FROM " . TB_PREFIX . "alidata where id != ''";
+>>>>>>> e8574568a0b50e1149c03aed1e46eb20961548ff
         		$result = mysql_query($q, $this->connection);
         		return $this->mysql_fetch_all($result);
         	}
 			
 			function getARanking2() {
+<<<<<<< HEAD
         		$q = "SELECT * FROM " . TB_PREFIX . "alidata where id != ''";
+=======
+        		$q = "SELECT id,name,tag FROM " . TB_PREFIX . "alidata where id != ''";
+>>>>>>> e8574568a0b50e1149c03aed1e46eb20961548ff
         		$result = mysql_query($q, $this->connection);
         		return mysql_num_rows($result);
         	}
 			
+<<<<<<< HEAD
 			function getARanking3($limit="") {
         		$q = "SELECT * FROM " . TB_PREFIX . "alidata where id != '' $limit";
         		$result = mysql_query($q, $this->connection);
         		return mysql_fetch_array($result);
         	}
 			
+=======
+>>>>>>> e8574568a0b50e1149c03aed1e46eb20961548ff
         	function getHeroRanking() {
         		$q = "SELECT * FROM " . TB_PREFIX . "hero";
         		$result = mysql_query($q, $this->connection);

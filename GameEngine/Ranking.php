@@ -61,6 +61,7 @@
         	}
 			
 			public function getAllianceRank($id) {
+<<<<<<< HEAD
 				$this->procAllianceRanking();
 				while(1) {
 					if(count($this->rankarray) > 1) {
@@ -118,6 +119,76 @@
 						return 1;
 					}
 				}
+=======
+        		$q = "SELECT " . TB_PREFIX . "users.id userid, " . TB_PREFIX . "users.alliance alliance, (
+
+				SELECT SUM( " . TB_PREFIX . "vdata.pop ) 
+				FROM " . TB_PREFIX . "vdata
+				WHERE " . TB_PREFIX . "vdata.owner = userid
+				)totalpop
+				
+				FROM " . TB_PREFIX . "users
+				WHERE " . TB_PREFIX . "users.alliance > 0
+				ORDER BY totalpop DESC, userid DESC";
+				$result = mysql_query($q);
+				$i = 1;
+				$myrank = 0;
+				while($row = mysql_fetch_array($result)) {
+					if($row['alliance'] == $id){
+						$myrank = $i;
+					}
+					$i++;
+				}
+				return $myrank;
+        	}
+			
+			public function getAllianceAttRank($id) {
+				$q = "SELECT " . TB_PREFIX . "users.id userid, " . TB_PREFIX . "users.username username, " . TB_PREFIX . "users.alliance alliance, (
+				
+				SELECT SUM( " . TB_PREFIX . "alidata.Aap ) 
+				FROM " . TB_PREFIX . "alidata
+				WHERE " . TB_PREFIX . "alidata.id = alliance
+				)totalpoint
+				
+				FROM " . TB_PREFIX . "users
+				WHERE " . TB_PREFIX . "users.alliance > 0
+				ORDER BY totalpoint DESC, alliance ASC";
+					
+				$result = mysql_query($q);
+				$i = 1;
+				$myrank = 0;
+				while($row = mysql_fetch_array($result)) {
+					if($row['alliance'] == $id){
+						$myrank = $i;
+					}
+					$i++;
+				}
+				return $myrank;
+        	}
+			
+			public function getAllianceDefRank($id) {
+				$q = "SELECT " . TB_PREFIX . "users.id userid, " . TB_PREFIX . "users.username username, " . TB_PREFIX . "users.alliance alliance, (
+				
+				SELECT SUM( " . TB_PREFIX . "alidata.Adp ) 
+				FROM " . TB_PREFIX . "alidata
+				WHERE " . TB_PREFIX . "alidata.id = alliance
+				)totalpoint
+				
+				FROM " . TB_PREFIX . "users
+				WHERE " . TB_PREFIX . "users.alliance > 0
+				ORDER BY totalpoint DESC, alliance ASC";
+					
+				$result = mysql_query($q);
+				$i = 1;
+				$myrank = 0;
+				while($row = mysql_fetch_array($result)) {
+					if($row['alliance'] == $id){
+						$myrank = $i;
+					}
+					$i++;
+				}
+				return $myrank;
+>>>>>>> e8574568a0b50e1149c03aed1e46eb20961548ff
         	}
 			
 			
@@ -194,6 +265,7 @@
 			
 			
 			public function procAllianceRanking($limit="") {
+<<<<<<< HEAD
 				global $database, $multisort;
 				$array = $database->getARanking($limit);
 				$holder = array();
@@ -220,10 +292,29 @@
 					array_push($newholder, $key);
 				}
 				$this->rankarray = $newholder;
+=======
+				$q = "SELECT " . TB_PREFIX . "users.id userid, " . TB_PREFIX . "users.username username, " . TB_PREFIX . "users.alliance allyid, (
+				
+				SELECT SUM( " . TB_PREFIX . "vdata.pop ) 
+				FROM " . TB_PREFIX . "vdata
+				WHERE " . TB_PREFIX . "vdata.owner = userid
+				)totalpop, (
+						
+				SELECT COUNT( " . TB_PREFIX . "users.alliance ) 
+				FROM " . TB_PREFIX . "users
+				WHERE " . TB_PREFIX . "users.alliance = allyid
+				)totalusers
+					
+				FROM " . TB_PREFIX . "users
+				WHERE " . TB_PREFIX . "users.alliance > 0
+				ORDER BY totalpop DESC, allyid ASC $limit";
+				return mysql_query($q);
+>>>>>>> e8574568a0b50e1149c03aed1e46eb20961548ff
 			}
 			
 			
 			public function procAllianceAttRanking($limit="") {
+<<<<<<< HEAD
 				global $database, $multisort;
 				$array = $database->getARanking($limit);
 				$holder = array();
@@ -271,6 +362,52 @@
 					array_push($newholder, $key);
 				}
 				$this->rankarray = $newholder;
+=======
+				$q = "SELECT " . TB_PREFIX . "users.id userid, " . TB_PREFIX . "users.username username, " . TB_PREFIX . "users.alliance allyid, (
+				
+				SELECT SUM( " . TB_PREFIX . "vdata.pop ) 
+				FROM " . TB_PREFIX . "vdata
+				WHERE " . TB_PREFIX . "vdata.owner = userid
+				)totalpop, (
+				
+				SELECT SUM( " . TB_PREFIX . "alidata.Aap ) 
+				FROM " . TB_PREFIX . "alidata
+				WHERE " . TB_PREFIX . "alidata.id = allyid
+				)totalpoint, (
+						
+				SELECT COUNT( " . TB_PREFIX . "users.alliance ) 
+				FROM " . TB_PREFIX . "users
+				WHERE " . TB_PREFIX . "users.alliance = allyid
+				)totalusers
+					
+				FROM " . TB_PREFIX . "users
+				WHERE " . TB_PREFIX . "users.alliance > 0
+				ORDER BY totalpoint DESC, allyid ASC $limit";
+				return mysql_query($q);
+			}
+			
+			public function procAllianceDefRanking($limit="") {
+				$q = "SELECT " . TB_PREFIX . "users.id userid, " . TB_PREFIX . "users.username username, " . TB_PREFIX . "users.alliance allyid, (
+				SELECT SUM( " . TB_PREFIX . "vdata.pop ) 
+				FROM " . TB_PREFIX . "vdata
+				WHERE " . TB_PREFIX . "vdata.owner = userid
+				)totalpop, (
+				
+				SELECT SUM( " . TB_PREFIX . "alidata.Adp ) 
+				FROM " . TB_PREFIX . "alidata
+				WHERE " . TB_PREFIX . "alidata.id = allyid
+				)totalpoint, (
+						
+				SELECT COUNT( " . TB_PREFIX . "users.alliance ) 
+				FROM " . TB_PREFIX . "users
+				WHERE " . TB_PREFIX . "users.alliance = allyid
+				)totalusers
+					
+				FROM " . TB_PREFIX . "users
+				WHERE " . TB_PREFIX . "users.alliance > 0
+				ORDER BY totalpoint DESC, allyid ASC $limit";
+				return mysql_query($q);
+>>>>>>> e8574568a0b50e1149c03aed1e46eb20961548ff
 			}
 						
 			public function getATop10AttRank($id) {

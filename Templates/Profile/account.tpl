@@ -157,7 +157,11 @@ echo "<button type=\"button\" value=\"del\" class=\"icon\" onclick=\"window.loca
                     <img src=\"img/x.gif\" class=\"del\" alt=\"del\"></button>";
         }
 		$time=$generator->getTimeFormat(($timestamp-time()));
+<<<<<<< HEAD
         echo " The account will be deleted in <span id=\"timer1\">".$time."</span> .</td></tr>";
+=======
+        echo " A felhasználó <span id=\"timer1\">".$time."</span> törölve.</td></tr>";
+>>>>>>> e8574568a0b50e1149c03aed1e46eb20961548ff
 }
 else {
 ?>

@@ -303,7 +303,10 @@ class Building {
 					$time = $this->buildArray[0]['timestamp'] + $uprequire['time'];
 				}
 			}
+<<<<<<< HEAD
 			if($session->access!=BANNED){
+=======
+>>>>>>> e8574568a0b50e1149c03aed1e46eb20961548ff
 			$level = $database->getResourceLevel($village->wid);
 			if($database->addBuilding($village->wid,$id,$village->resarray['f'.$id.'t'],$loop,$time+($loop==1?ceil(60/SPEED):0),0,$level['f'.$id] + 1 + count($database->getBuildingByField($village->wid,$id)))) {
 				$database->modifyResource($village->wid,$uprequire['wood'],$uprequire['clay'],$uprequire['iron'],$uprequire['crop'],0);
@@ -315,9 +318,12 @@ class Building {
 					header("Location: dorf1.php");
 				}
 			}
+<<<<<<< HEAD
 			}else{
 			header("Location: banned.php");
 			}
+=======
+>>>>>>> e8574568a0b50e1149c03aed1e46eb20961548ff
 			}
 		}
 	
@@ -348,15 +354,21 @@ class Building {
 					$time = $this->buildArray[0]['timestamp'] + round($dataarray[$village->resarray['f'.$id]-1]['time'] / 4);
 				}
 			}
+<<<<<<< HEAD
 			if($session->access!=BANNED){
+=======
+>>>>>>> e8574568a0b50e1149c03aed1e46eb20961548ff
 			$level = $database->getResourceLevel($village->wid);
 			if($database->addBuilding($village->wid,$id,$village->resarray['f'.$id.'t'],$loop,$time,0,0,$level['f'.$id] + 1 + count($database->getBuildingByField($village->wid,$id)))) {
 				$logging->addBuildLog($village->wid,$this->procResType($village->resarray['f'.$id.'t']),($village->resarray['f'.$id]-1),2);
 				header("Location: dorf2.php");
 			}
+<<<<<<< HEAD
 			}else{
 			header("Location: banned.php");
 			}
+=======
+>>>>>>> e8574568a0b50e1149c03aed1e46eb20961548ff
 		}	
 	}
 	
@@ -383,16 +395,22 @@ class Building {
 				}
 			}
 			if($this->meetRequirement($tid)) {
+<<<<<<< HEAD
 			if($session->access!=BANNED){
+=======
+>>>>>>> e8574568a0b50e1149c03aed1e46eb20961548ff
 			$level = $database->getResourceLevel($village->wid);
 				if($database->addBuilding($village->wid,$id,$tid,$loop,$time,0,$level['f'.$id] + 1 + count($database->getBuildingByField($village->wid,$id)))) {
 					$logging->addBuildLog($village->wid,$this->procResType($tid),($village->resarray['f'.$id]+1),1);
 					$database->modifyResource($village->wid,$uprequire['wood'],$uprequire['clay'],$uprequire['iron'],$uprequire['crop'],0);
 					header("Location: dorf2.php");
 				}
+<<<<<<< HEAD
 			}else{
 			header("Location: banned.php");
 			}
+=======
+>>>>>>> e8574568a0b50e1149c03aed1e46eb20961548ff
 			}
 		}
 	}

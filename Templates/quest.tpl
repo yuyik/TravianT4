@@ -37,11 +37,19 @@ echo "<div class=\"content\">";
 		$uurover=$generator->getTimeFormat($displayarray['protect']-time());
         echo "You have <b><span
 		id=\"timer1\">".$uurover."</span></b> hours of protection.</div></div>";
+<<<<<<< HEAD
 }
 if($timestamp) {
 echo "<div id=\"sideInfoCountdown\"><div class=\"head\"></div>";
 echo "<div class=\"content\">";
 		$time=$generator->getTimeFormat(($timestamp-time()));
        echo " The account will be deleted in <span id=\"timer1\">".$time."</span> .</div></div>";
+=======
+} elseif($timestamp) {
+echo "<div id=\"sideInfoCountdown\"><div class=\"head\"></div>";
+echo "<div class=\"content\">";
+		$time=$generator->getTimeFormat(($timestamp-time()));
+        echo "Delete in <span id=\"timer1\">".$time."</span> .</div></div>";
+>>>>>>> e8574568a0b50e1149c03aed1e46eb20961548ff
 }
 ?>

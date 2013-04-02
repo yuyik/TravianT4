@@ -117,6 +117,10 @@ if(isset($_GET['aid'])){
 $ally_exist = $database->getAlliance($_GET['aid']);
 }
 if($ally_exist['id']!=0 or $_GET['fid'] or $_GET['fid2'] or $session->alliance!=0){
+<<<<<<< HEAD
+=======
+       include ("Templates/menu.tpl");
+>>>>>>> e8574568a0b50e1149c03aed1e46eb20961548ff
 
        if(isset($_GET['s']) && $_GET['s'] == 2) {
        	echo '<div id="content" class="forum">';
