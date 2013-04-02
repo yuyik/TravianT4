@@ -189,11 +189,7 @@
     for($i=1;$i<=0;$i++) {
     echo "Row ".$i;
     }
-<<<<<<< HEAD
     $result = mysql_query("SELECT * FROM ".TB_PREFIX."alidata WHERE RR >= 0 ORDER BY RR DESC, id ASC Limit 10");
-=======
-    $result = mysql_query("SELECT * FROM ".TB_PREFIX."alidata AND RR >= 0 ORDER BY RR DESC, id ASC Limit 10");
->>>>>>> e8574568a0b50e1149c03aed1e46eb20961548ff
     $result2 = mysql_query("SELECT * FROM ".TB_PREFIX."alidata WHERE id = '".$session->alliance."' AND RR >= 0 ORDER BY RR DESC, id ASC Limit 1");
 ?>
 <h4 class="round small spacer top10_raiders">Top Raiders</h4>

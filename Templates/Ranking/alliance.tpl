@@ -43,12 +43,7 @@ if(!isset($_GET['page'])){
         $_GET['page'] = 1;
     }
 }
-<<<<<<< HEAD
 $query = $database->getARanking2();
-=======
-$sql = $ranking->procAllianceRanking();
-$query = mysql_num_rows($sql);
->>>>>>> e8574568a0b50e1149c03aed1e46eb20961548ff
 
 if (isset($_GET['page'])) {
     $page = preg_replace('#[^0-9]#i', '', $_GET['page']);
@@ -179,18 +174,13 @@ $paginationDisplay .=  '<img alt="Utolsó oldal" src="img/x.gif" class="last dis
 }
 
 	$limit = 'LIMIT ' .($page - 1) * $itemsPerPage .',' .$itemsPerPage; 
-<<<<<<< HEAD
 	$sql2 = mysql_query("SELECT * FROM ".TB_PREFIX."alidata WHERE id != '' $limit");
-=======
-	$sql2 = $ranking->procAllianceRanking($limit);
->>>>>>> e8574568a0b50e1149c03aed1e46eb20961548ff
     if(isset($_GET['page']) && $_GET['page'] > 1){
 		$rank = ($_GET['page']-1)*20+1;
     }else{
     	$rank = 1;
     }
 	while($row = mysql_fetch_array($sql2)){ 
-<<<<<<< HEAD
 		$memberlist = $database->getAllMember($row['id']);
 		$totalusers = 0;
 		$totalpoints = 0;
@@ -198,26 +188,16 @@ $paginationDisplay .=  '<img alt="Utolsó oldal" src="img/x.gif" class="last dis
 			$totalpoints += $database->getVSumField($member['id'],"pop");
 			$totalusers++;
 		}
-=======
->>>>>>> e8574568a0b50e1149c03aed1e46eb20961548ff
 		if($myrank == $rank) {
 			echo "<tr class=\"hl\"><td class=\"ra fc\" >".$rank.".</td>";
 		}else {
 			echo "<tr class=\"hover\"><td class=\"ra \" >".$rank.".</td>";
 		}
-<<<<<<< HEAD
 		echo "<td class=\"al \" ><a href=\"allianz.php?aid=".$row['id']."\">".$database->getAllianceName($row['id'])."</a></td>";
        
 		echo "<td class=\"pla \" >".$totalusers."</td>";
         echo "<td class=\"av \">".round($totalpoints/$totalusers)."</td>";
     	echo "<td class=\"po lc\">".$totalpoints."</td></tr>";
-=======
-		echo "<td class=\"al \" ><a href=\"allianz.php?aid=".$row['allyid']."\">".$database->getAllianceName($row['allyid'])."</a></td>";
-       
-		echo "<td class=\"pla \" >".$row['totalusers']."</td>";
-        echo "<td class=\"av \">".round($row['totalpop']/$row['totalusers'])."</td>";
-    	echo "<td class=\"po lc\">".$row['totalpop']."</td></tr>";
->>>>>>> e8574568a0b50e1149c03aed1e46eb20961548ff
 		$rank++;
 	}
 

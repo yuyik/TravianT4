@@ -3881,13 +3881,7 @@ $info_cata=" damaged from level <b>".$tblevel."</b> to level <b>".$totallvl."</b
 					foreach($memberlist as $member) {
 						$oldrank += $database->getVSumField($member['id'],"pop");
 					}
-<<<<<<< HEAD
 					if($ally['oldrank'] != $oldrank){
-=======
-					if($ally['oldrank'] == 0){
-					$database->updateoldrankAlly($ally['id'], $oldrank);
-					}
->>>>>>> e8574568a0b50e1149c03aed1e46eb20961548ff
 						if($ally['oldrank'] < $oldrank) {
 							$totalpoints = $oldrank - $ally['oldrank'];
 							$database->addclimberrankpopAlly($ally['id'], $totalpoints);
@@ -3900,10 +3894,7 @@ $info_cata=" damaged from level <b>".$tblevel."</b> to level <b>".$totallvl."</b
 							}
 					}
 					}
-<<<<<<< HEAD
 					}
-=======
->>>>>>> e8574568a0b50e1149c03aed1e46eb20961548ff
 		if(file_exists("GameEngine/Prevention/climbers.txt")) {
 			unlink("GameEngine/Prevention/climbers.txt");
 		}
