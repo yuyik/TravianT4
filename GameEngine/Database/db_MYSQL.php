@@ -1985,7 +1985,7 @@
         	}
 
         	function getARanking($limit="") {
-        		$q = "SELECT id,name,tag,oldrank FROM " . TB_PREFIX . "alidata where id != '' $limit";
+        		$q = "SELECT id,name,tag,oldrank,Aap,Adp FROM " . TB_PREFIX . "alidata where id != '' $limit";
         		$result = mysql_query($q, $this->connection);
         		return $this->mysql_fetch_all($result);
         	}
