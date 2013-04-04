@@ -35,6 +35,7 @@ if(isset($_POST['ft'])=='check' && $allres!=0 && $allres <= $canSend && ($_POST[
 <form method="POST" name="snd" action="build.php"> 
 <input type="hidden" name="ft" value="mk1">
 <input type="hidden" name="id" value="<?php echo $id; ?>">
+<input type="hidden" name="send3" value="<?php echo $_POST['send3']; ?>">
 <input type="hidden" name="x" value="<?php echo $_POST['x']; ?>">
 <input type="hidden" name="y" value="<?php echo $_POST['y']; ?>">
 <input type="hidden" name="dname" value="<?php echo $_POST['dname']; ?>">
@@ -217,7 +218,17 @@ $coor['y'] = "";
 				</tbody>
 			</table>
 								</div>
-				</div>	</div>
+				</div>
+<?php if($session->goldclub == 1){?>
+<p><select name="send3"><option value="1" selected="selected">1x</option><option value="2">2x</option><option value="3">3x</option></select>go</p>
+<?php
+}else{
+?>
+<input type="hidden" name="send3" value="1">
+<?php
+}
+?>
+				</div>
 <div class="clear"></div>
 <p>Each merchant can carry <b><?php echo $market->maxcarry; ?></b> units of resource</p>
 <p>

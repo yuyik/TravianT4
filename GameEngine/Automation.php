@@ -831,15 +831,58 @@ class Automation {
             $fromcoor = $database->getCoor($data['to']);
             $targettribe = $database->getUserField($database->getVillageField($data['from'],"owner"),"tribe",0);
             $endtime = $this->procDistanceTime($tocoor,$fromcoor,$targettribe,0) + $data['endtime'];
-            $database->addMovement(2,$data['to'],$data['from'],$data['merchant'],'0,0,0,0,0',$endtime);
+            $database->addMovement(2,$data['to'],$data['from'],$data['merchant'],'0,0,0,0,0',$endtime,$data['send'],$data['wood'],$data['clay'],$data['iron'],$data['crop']);
             $database->setMovementProc($data['moveid']);
         }
-        $q = "UPDATE ".TB_PREFIX."movement set proc = 1 where endtime < $time and sort_type = 2";
-        $database->query($q);
+        $q1 = "SELECT * FROM ".TB_PREFIX."movement where proc = 0 and sort_type = 2 and endtime < $time";
+		$dataarray1 = $database->query_return($q1);
+		foreach($dataarray1 as $data1) {
+			$database->setMovementProc($data1['moveid']);
+			if($data1['send'] > 1){
+			$targettribe1 = $database->getUserField($database->getVillageField($data1['to'],"owner"),"tribe",0);
+			$send = $data1['send']-1;
+			$this->sendResource2($data1['wood'],$data1['clay'],$data1['iron'],$data1['crop'],$data1['to'],$data1['from'],$targettribe1,$send);
+			}
+		}
 		if(file_exists("GameEngine/Prevention/market.txt")) {
             unlink("GameEngine/Prevention/market.txt");
         }
     }
+	
+	private function sendResource2($wtrans,$ctrans,$itrans,$crtrans,$from,$to,$tribe,$send) {
+		global $bid17,$bid28,$database,$generator,$logging;
+		$availableWood = $database->getWoodAvailable($from);
+		$availableClay = $database->getClayAvailable($from);
+		$availableIron = $database->getIronAvailable($from);
+		$availableCrop = $database->getCropAvailable($from);
+		if($availableWood >= $wtrans AND $availableClay >= $ctrans AND $availableIron >= $itrans AND $availableCrop >= $crtrans){
+		$merchant2 = ($this->getTypeLevel(17,$from) > 0)? $this->getTypeLevel(17,$from) : 0;
+		$used2 = $database->totalMerchantUsed($from);
+		$merchantAvail2 = $merchant2 - $used2;
+		$maxcarry2 = ($tribe == 1)? 500 : (($tribe == 2)? 1000 : 750);
+		$maxcarry2 *= TRADER_CAPACITY;
+		if($this->getTypeLevel(28,$from) != 0) {
+			$maxcarry2 *= $bid28[$this->getTypeLevel(28,$from)]['attri'] / 100;
+		}
+		$resource = array($wtrans,$ctrans,$itrans,$crtrans);
+		$reqMerc = ceil((array_sum($resource)-0.1)/$maxcarry2);
+		if($merchantAvail2 != 0 && $reqMerc <= $merchantAvail2) {
+					$coor = $database->getCoor($to);
+					$coor2 = $database->getCoor($from);
+				if($database->getVillageState($to)) {
+					$timetaken = $generator->procDistanceTime($coor,$coor2,$tribe,0);
+					$res = $resource[0]+$resource[1]+$resource[2]+$resource[3];
+					if($res!=0){
+					$resdata = "".$resource[0].",".$resource[1].",".$resource[2].",".$resource[3]."";
+					$reference = $database->sendResource($resource[0],$resource[1],$resource[2],$resource[3],$reqMerc,0);
+					$database->modifyResource($from,$resource[0],$resource[1],$resource[2],$resource[3],0);
+					$database->addMovement(0,$from,$to,$reference,$resdata,time()+$timetaken,$send);
+					}
+				}
+		}
+		header("Location: build.php?gid=17");
+	} else {}
+	}
     
     private function sendunitsComplete() {
 	if(file_exists("GameEngine/Prevention/sendunits.txt")) {
