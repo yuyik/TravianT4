@@ -3,7 +3,7 @@
     <div id="build" class="gid40">
     <div class="build_desc">
         <a href="#" onClick="return Travian.Game.iPopup(40,4);" class="build_logo">
-        <img class="building big white g40" src="img/x.gif" alt="A világcsoda" title="A világcsoda"></a>
+        <img class="building big white g40" src="img/x.gif" alt="Wonder of the World" title="Wonder of the World"></a>
         The World Wonder (otherwise known as a Wonder of the World) is as wonderful as it sounds. "This building" is built in order to win the server. Each level of the World Wonder costs hundreds of thousands (even millions) of resources to build.</div>
 
 <?php include "upgrade.tpl"; ?>
