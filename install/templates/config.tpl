@@ -20,6 +20,14 @@ echo "<div class=\"headline\"><span class=\"f10 c5\">Error creating constant.php
 			<td>Troop Speed</td>
 			<td><input type="text" dir="ltr" class="text" name="incspeed" id="incspeed" value="2"></td>
 		</tr>
+		<tr class="hover">
+			<td>Evasion Speed</td>
+			<td><input type="text" dir="ltr" class="text" name="evaspeed" id="evaspeed" value="2"></td>
+		</tr>
+		<tr class="hover">
+			<td>Add Adventure Speed</td>
+			<td><input type="text" dir="ltr" class="text" name="advspeed" id="advspeed" value="2"></td>
+		</tr>
     	<tr class="hover">
 			<td>World Size:</td>
 			<td><select name="wmax" dir="ltr" class="text">

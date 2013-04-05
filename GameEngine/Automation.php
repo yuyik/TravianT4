@@ -3582,7 +3582,8 @@ $info_cata=" damaged from level <b>".$tblevel."</b> to level <b>".$totallvl."</b
 	private function addAdventures() {
 		global $database;
         $time = time();
-        $q = "SELECT * FROM ".TB_PREFIX."hero where $time - lastadv > 3600";
+		$adv_time = 86400 / ADVENTURE_SPEED;
+        $q = "SELECT * FROM ".TB_PREFIX."hero where $time - lastadv > $adv_time";
         $dataarray = $database->query_return($q);
             foreach($dataarray as $data) {
 			$database->addAdventure($database->getVFH($data['uid']), $data['uid']);

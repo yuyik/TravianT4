@@ -27,6 +27,8 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%config` (
   `speed` int(4) NOT NULL,
   `gp_locate` varchar(45) NOT NULL,
   `increase` int(4) NOT NULL,
+  `evasion` int(4) NOT NULL,
+  `adventure` int(4) NOT NULL,
   `demolish_lvl` int(2) NOT NULL,
   `taskmaster` int(1) NOT NULL,
   `protecttime` int(6) NOT NULL,

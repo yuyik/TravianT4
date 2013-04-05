@@ -64,6 +64,14 @@ define("GP_LOCATE", $result['gp_locate']);
 // Values: 1 (normal), 3 (3x speed) etc...
 define("INCREASE_SPEED",$result['increase']);
 
+// ***** Evasion Speed
+// Values: 1 (normal), 3 (3x speed) etc...
+define("EVASION_SPEED",$result['evasion']);
+
+// ***** Add Adventure Speed
+// Values: 1 (normal), 3 (3x speed) etc...
+define("ADVENTURE_SPEED",$result['adventure']);
+
 // ***** Village Expand
 // 1 = slow village expanding - more Cultural Points needed for every new village
 // 0 = fast village expanding - less Cultural Points needed for every new village
