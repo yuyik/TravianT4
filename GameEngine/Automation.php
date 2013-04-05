@@ -542,7 +542,7 @@ class Automation {
         @fclose($ourFileHandle);
         $time = time();
         $array = array();
-        $q = "SELECT * FROM ".TB_PREFIX."bdata where timestamp < $time";
+        $q = "SELECT * FROM ".TB_PREFIX."bdata where timestamp < $time and master = 0";
         $array = $database->query_return($q);
         foreach($array as $indi) {
             $q = "UPDATE ".TB_PREFIX."fdata set f".$indi['field']." = ".$indi['level'].", f".$indi['field']."t = ".$indi['type']." where vref = ".$indi['wid'];

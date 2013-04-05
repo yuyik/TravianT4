@@ -1,4 +1,5 @@
 ﻿<?php
+$bid = $village->resarray['f'.$id.'t'];
 $bindicate = $building->canBuild($id,$village->resarray['f'.$id.'t']);
 if($bindicate == 1) {
 	echo "<p><span class=\"none\"><b><!--".$building->procResType($village->resarray['f'.$id.'t'])."--> Fully upgraded</b></span></p>";
@@ -11,10 +12,12 @@ if($bindicate == 1) {
         if ($loopsame>0 && $building->isLoop($id)) {
             $doublebuild = 1;
         }
-	$uprequire = $building->resourceRequired($id,$village->resarray['f'.$id.'t'],($loopsame > 0 ? 2:1)+$doublebuild);
+	$master = count($database->getMasterJobsByField($village->wid,$id));
+	$uprequire = $building->resourceRequired($id,$village->resarray['f'.$id.'t'],($loopsame > 0 ? 2:1)+$doublebuild+$master);
+	$mastertime = $uprequire['time'];
 ?>
 <div id="contract" class="contractWrapper">
-<div class="contractText">It Costs to Upgrade to Level <?php echo $village->resarray['f'.$id]+($loopsame > 0 ? 2:1)+$doublebuild; ?> </div>
+<div class="contractText">It Costs to Upgrade to Level <?php echo $village->resarray['f'.$id]+($loopsame > 0 ? 2:1)+$doublebuild+$master; ?> </div>
 <div class="contractCosts">
 <div class="showCosts">
 <span class="resources r1"><img class="r1" src="img/x.gif" title="Wood"><?php echo $uprequire['wood']; ?></span>
@@ -47,24 +50,90 @@ echo "&nbsp;&nbsp;<button ".$disable." type=\"button\" value=\"npc\" class=\"ico
 </div></div>
 <?php
     if($bindicate == 2) {
-   		echo "<span class=\"none\">Our Builders are busy.</span></div>";
+   		echo "<span class=\"none\">Our Builders are busy.</span>";
+	if($session->goldclub == 1){
+?>	</br>
+<?php
+	if($id <= 18) {
+	if($session->gold >= 1 && $village->master == 0){
+	    echo "<a class=\"build\" href=\"dorf1.php?master=$bid&id=$id&time=$mastertime\">Constructing with master builder </a>";
+		echo '(costs: <img src="'.GP_LOCATE.'img/a/gold.gif" alt="Gold" title="Gold"/>1)';
+	}else{
+		echo "<span class=\"none\">Constructing with master builder</span>";
+		echo '<font color="#B3B3B3">(costs: <img src="'.GP_LOCATE.'img/a/gold_g.gif" alt="Gold" title="Gold"/>1)</font>';
+	}
+	}else{
+	if($session->gold >= 1 && $village->master == 0){
+	    echo "<a class=\"build\" href=\"dorf2.php?master=$bid&id=$id&time=$mastertime\">Constructing with master builder </a>";
+		echo '(costs: <img src="'.GP_LOCATE.'img/a/gold.gif" alt="Gold" title="Gold"/>1)';
+	}else{
+		echo "<span class=\"none\">Constructing with master builder</span>";
+		echo '<font color="#B3B3B3">(costs: <img src="'.GP_LOCATE.'img/a/gold_g.gif" alt="Gold" title="Gold"/>1)</font>';
+	}
+	}
+	}
+	echo "</div>";
     }
     else if($bindicate == 3) {
-    	echo "<span class=\"none\">Our Builders are busy.</span></div>";
+    	echo "<span class=\"none\">Our Builders are busy (waiting loop).</span>";
+	if($session->goldclub == 1){
+?>	</br>
+<?php
+	if($id <= 18) {
+	if($session->gold >= 1 && $village->master == 0){
+	    echo "<a class=\"build\" href=\"dorf1.php?master=$bid&id=$id&time=$mastertime\">Constructing with master builder </a>";
+		echo '(costs: <img src="'.GP_LOCATE.'img/a/gold.gif" alt="Gold" title="Gold"/>1)';
+	}else{
+		echo "<span class=\"none\">Constructing with master builder</span>";
+		echo '<font color="#B3B3B3">(costs: <img src="'.GP_LOCATE.'img/a/gold_g.gif" alt="Gold" title="Gold"/>1)</font>';
+	}
+	}else{
+	if($session->gold >= 1 && $village->master == 0){
+	    echo "<a class=\"build\" href=\"dorf2.php?master=$bid&id=$id&time=$mastertime\">Constructing with master builder </a>";
+		echo '(costs: <img src="'.GP_LOCATE.'img/a/gold.gif" alt="Gold" title="Gold"/>1)';
+	}else{
+		echo "<span class=\"none\">Constructing with master builder</span>";
+		echo '<font color="#B3B3B3">(costs: <img src="'.GP_LOCATE.'img/a/gold_g.gif" alt="Gold" title="Gold"/>1)</font>';
+	}
+	}
+	}
+	echo "</div>";
     }
     else if($bindicate == 4) {
-    	echo "<span class=\"none\">Food Shortage: Build a Wheat field</span></div>";
+    	echo "<span class=\"none\">Food Shortage: Expand Cropland.</span></div>";
     }
    
     else if($bindicate == 5) {
-    	echo "<span class=\"none\">Upgrade Warehouse</span></div>";
+    	echo "<span class=\"none\">Upgrade Warehouse.</span></div>";
     }
     else if($bindicate == 6) {
-    	echo "<span class=\"none\">Upgrade Granary</span></div>";
+    	echo "<span class=\"none\">Upgrade Granary.</span></div>";
     }
     else if($bindicate == 7) {
     	$neededtime = $building->calculateAvaliable($id,$village->resarray['f'.$id.'t'],($loopsame > 0 ? 2:1));
-    	echo "<span class=\"none\">Enough resources: ".$neededtime[0]." at ".$neededtime[1]."</span></div>";
+    	echo "<span class=\"none\">Enough resources: ".$neededtime[0]." at ".$neededtime[1]."</span>";
+	if($session->goldclub == 1){
+?>	</br>
+<?php
+	if($id <= 18) {
+	if($session->gold >= 1 && $village->master == 0){
+	    echo "<a class=\"build\" href=\"dorf1.php?master=$bid&id=$id&time=$mastertime\">Constructing with master builder </a>";
+		echo '(costs: <img src="'.GP_LOCATE.'img/a/gold.gif" alt="Gold" title="Gold"/>1)';
+	}else{
+		echo "<span class=\"none\">Constructing with master builder</span>";
+		echo '<font color="#B3B3B3">(costs: <img src="'.GP_LOCATE.'img/a/gold_g.gif" alt="Gold" title="Gold"/>1)</font>';
+	}
+	}else{
+	if($session->gold >= 1 && $village->master == 0){
+	    echo "<a class=\"build\" href=\"dorf2.php?master=$bid&id=$id&time=$mastertime\">Constructing with master builder </a>";
+		echo '(costs: <img src="'.GP_LOCATE.'img/a/gold.gif" alt="Gold" title="Gold"/>1)';
+	}else{
+		echo "<span class=\"none\">Constructing with master builder</span>";
+		echo '<font color="#B3B3B3">(costs: <img src="'.GP_LOCATE.'img/a/gold_g.gif" alt="Gold" title="Gold"/>1)</font>';
+	}
+	}
+	}
+	echo "</div>";
     }
     else if($bindicate == 8) {
     	if($id <= 18) {

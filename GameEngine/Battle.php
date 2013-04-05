@@ -469,7 +469,7 @@ class Battle {
             $hero_id=$atkhero['uid'];
             $hero_health=$atkhero['health'];
             $damage_health=round(100*$result[1]);
-            if ($hero_health<=$damage_health){
+            if ($hero_health<=$damage_health or $damage_health>90){
                 //hero die
                 $result['casualties_attacker']['11'] = 1; 
 				$database->modifyHero2('dead', 1, $hero_id, 0);
@@ -485,7 +485,7 @@ class Battle {
             $hero_id=$defenderhero['uid'];
             $hero_health=$defenderhero['health'];
             $damage_health=round(100*$result[2]);
-            if ($hero_health<=$damage_health){
+            if ($hero_health<=$damage_health or $damage_health>90){
                 //hero die
 				$result['deadherodef'] = 1;
 				$database->modifyHero2('dead', 1, $hero_id, 0);
@@ -507,7 +507,7 @@ class Battle {
 					$hero_id = $defhero[$fromvillage]['uid'];
 					$hero_health = $defhero[$fromvillage]['health'];
 					$damage_health = round(100*$result[2]);
-					if ($hero_health<=$damage_health){
+					if ($hero_health<=$damage_health or $damage_health>90){
 						//hero die
 						$result['deadheroref'][$defenders['id']] = 1;
 						$database->modifyHero2('dead', 1, $hero_id, 0);

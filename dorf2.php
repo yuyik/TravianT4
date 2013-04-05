@@ -11,6 +11,15 @@ if(isset($_GET['newdid'])) {
 else {
 	$building->procBuild($_GET);
 }
+if(isset($_GET['master']) && isset($_GET['id']) && isset($_GET['time']) && $session->gold >= 1 && $session->goldclub) {
+if($session->access!=BANNED){
+$level = $database->getResourceLevel($village->wid);
+$database->addBuilding($village->wid, $_GET['id'], $_GET['master'], 1, $_GET['time'], 1, $level['f'.$_GET['id']] + 1 + count($database->getBuildingByField($village->wid,$_GET['id'])));
+header("Location: ".$_SERVER['PHP_SELF']);
+}else{
+header("Location: banned.php");
+}
+}
 include "Templates/html.tpl";
 ?>
 <body class="v35 webkit chrome village2">

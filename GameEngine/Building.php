@@ -18,7 +18,11 @@ class Building {
 			$this->maxConcurrent += PLUS_MAX;
 		}
 		$this->LoadBuilding();
-		
+		foreach($this->buildArray as $build) {
+		if($build['master']==1){
+		$this->maxConcurrent += 1;
+		}
+		}
 	}
 	
 	public function procBuild($get) { 
@@ -256,7 +260,9 @@ class Building {
 			if($jobs['id'] == $d) {
 				$uprequire = $this->resourceRequired($jobs['field'],$jobs['type']);
 				if($database->removeBuilding($d)) {
+					if($jobs['master'] == 0){
 					$database->modifyResource($village->wid,$uprequire['wood'],$uprequire['clay'],$uprequire['iron'],$uprequire['crop'],1);
+					}
 					if($jobs['field'] >= 19) {
 						header("Location: dorf2.php");
 					}

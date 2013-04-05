@@ -130,7 +130,12 @@ echo "<div class=\"headline\"><span class=\"f10 c5\">Error creating constant.php
 		<option value="4">Easter</option>				
 		</select></td>
 		</tr>
-
+    	<tr class="hover">
+			<td>Limit Troops (enable it if you have bugs with so many troops after attack):</td>
+			<td><select name="limit_troops" dir="ltr" class="text">
+      <option value="false" selected="selected">No</option>
+      <option value="true">Yes</option></select></td>
+		</tr>
 </table>
 <h4 class="round small spacer top top10_defs">Database Connection Settings</h4>
 <table cellpadding="1" cellspacing="1" id="top10_defs" class="top10 row_table_data">

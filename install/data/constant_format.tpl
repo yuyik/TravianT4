@@ -204,6 +204,9 @@ define("REG_OPEN", %REG_OPEN%);
 // 4 = Easter
 define("PEACE",%PEACE%);
 
+// ***** Limit troops
+define("LIMIT_TROOPS",%LIMIT_TROOPS%);
+
 ////////////////////////////////////
 //   ****  ADMIN SETTINGS  ****   //
 ////////////////////////////////////

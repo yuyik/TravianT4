@@ -46,6 +46,7 @@ date_default_timezone_set('Asia/Tehran');
 				$text = preg_replace("'%SSTARTTIME%'", $_POST['start_time'], $text);
 				$text = preg_replace("'%REG_OPEN%'", $_POST['reg_open'], $text);
 				$text = preg_replace("'%PEACE%'", $_POST['peace'], $text);
+				$text = preg_replace("'%LIMIT_TROOPS%'", $_POST['limit_troops'], $text);
 				$text = preg_replace("'%STORAGE_MULTIPLIER%'", $_POST['storage_multiplier'], $text);
         		fwrite($fh, $text);
 				fclose($fh);

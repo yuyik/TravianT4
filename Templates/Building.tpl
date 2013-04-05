@@ -50,7 +50,7 @@
       	}else{
         	echo "<tr><td class=\"ico\"><a href=\"?d=".$jobs['id']."&a=0&c=$session->checker\">";
             echo "<img src=\"img/x.gif\" class=\"del\" title=\"cancel\" alt=\"cancel\" /></a></td><td>";
-			echo $building->procResType($jobs['type'])."<span class=\"none\"> Level ".$jobs['level']."</span>";
+			echo "<span class=\"none\">".$building->procResType($jobs['type'])."</span> <span class=\"lvl\"> Level ".$jobs['level']."</span>";
 		}
 		}
         ?>
