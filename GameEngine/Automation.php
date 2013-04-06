@@ -167,6 +167,7 @@ class Automation {
             $this->sendunitsComplete();
         }
 		$this->updateStore();
+		$this->TradeRoute();
     }
 	
 	private function getfieldDistance($coorx1, $coory1, $coorx2, $coory2) {
@@ -802,6 +803,19 @@ class Automation {
         $cp = $dataarray[($level+1)]['cp'];
         return array($pop,$cp);
     }
+	
+	private function TradeRoute() {
+		global $database;
+			$time = time();
+			$q = "SELECT * FROM ".TB_PREFIX."route where timestamp < $time";
+			$dataarray = $database->query_return($q);
+			foreach($dataarray as $data) {
+			$database->modifyResource($data['from'],$data['wood'],$data['clay'],$data['iron'],$data['crop'],0);
+			$targettribe = $database->getUserField($database->getVillageField($data['from'],"owner"),"tribe",0);
+			$this->sendResource2($data['wood'],$data['clay'],$data['iron'],$data['crop'],$data['from'],$data['wid'],$targettribe,$data['deliveries']);
+			$database->editTradeRoute($data['id'],"timestamp",86400,1);
+			}
+	}
     
     private function marketComplete() {
 	if(file_exists("GameEngine/Prevention/market.txt")) {
