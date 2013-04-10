@@ -12,9 +12,9 @@ The cranny is used to hide some of your resources when the village is attacked. 
 		<td><b>
         <?php
 		if($session->tribe == 3) {
-		echo $bid23[$village->resarray['f'.$id]]['attri']*2;
+		echo $bid23[$village->resarray['f'.$id]]['attri']*2*CRANNY_CAPACITY;
         } else {
-        echo $bid23[$village->resarray['f'.$id]]['attri'];
+        echo $bid23[$village->resarray['f'.$id]]['attri']*CRANNY_CAPACITY;
         }
         ?>        
         </b> Units</td>
@@ -27,9 +27,9 @@ The cranny is used to hide some of your resources when the village is attacked. 
 		<td><b>
         <?php
 		if($session->tribe == 3) {
-		echo $bid23[$village->resarray['f'.$id]+1]['attri']*2;
+		echo $bid23[$village->resarray['f'.$id]+1]['attri']*2*CRANNY_CAPACITY;
         } else {
-        echo $bid23[$village->resarray['f'.$id]+1]['attri'];
+        echo $bid23[$village->resarray['f'.$id]+1]['attri']*CRANNY_CAPACITY;
         }
         ?>
         

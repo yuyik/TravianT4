@@ -72,6 +72,13 @@ define("EVASION_SPEED",$result['evasion']);
 // Values: 1 (normal), 3 (3x speed) etc...
 define("ADVENTURE_SPEED",$result['adventure']);
 
+// ***** Trader capacity
+// Values: 1 (normal), 3 (3x speed) etc...
+define("TRADER_CAPACITY","%TRADERCAP%");
+
+// ***** Cranny capacity
+define("CRANNY_CAPACITY","%CRANNYCAP%");
+
 // ***** Village Expand
 // 1 = slow village expanding - more Cultural Points needed for every new village
 // 0 = fast village expanding - less Cultural Points needed for every new village
