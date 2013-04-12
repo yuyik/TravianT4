@@ -10,6 +10,8 @@ foreach($topics as $top) {
 }
 foreach($posts as $pos) {
 	$poss = stripslashes($pos['post']);
+	$poss = preg_replace('/\[message\]/', '', $poss);
+	$poss = preg_replace('/\[\/message\]/', '', $poss);
 }
 ?>
 <form method="post" name="post" action="allianz.php?s=2&pid=<?php echo $_GET['pid']; ?>&tid=<?php echo $_GET['idt']; ?>">
