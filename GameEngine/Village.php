@@ -74,6 +74,7 @@ class Village {
 		$this->maxcrop = $this->infoarray['maxcrop'];
 		$this->allcrop = $this->getCropProd();
 		$this->loyalty = $this->infoarray['loyalty'];
+		$this->master = count($database->getMasterJobs($this->wid));
 		//de gs in town, zetten op max pakhuisinhoud
 		if($this->awood>$this->maxstore){ $this->awood=$this->maxstore; $database->updateResource($this->wid,'wood',$this->maxstore); }
 		if($this->aclay>$this->maxstore){ $this->aclay=$this->maxstore; $database->updateResource($this->wid,'clay',$this->maxstore); }
