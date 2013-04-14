@@ -75,11 +75,7 @@
 						$type = array(0, 18, 19, 20, 21);
 					}
 					if($get['t'] == 5) {
-						if(!$session->plus){
-							header("Location: berichte.php");
-						} else {
-							$type = 9;
-						}
+						$type = 9;
 					}
 					if (!is_array($type)) { $type = array($type); }
 					$this->noticearray = $this->filter_by_value($database->getNotice($session->uid), "ntype", $type);

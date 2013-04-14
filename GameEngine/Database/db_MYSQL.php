@@ -1980,6 +1980,12 @@
         		$q = "UPDATE " . TB_PREFIX . "attacks set $unit = $unit - $amt where id = $aid";
         		return mysql_query($q, $this->connection);
         	}
+			
+			function modifyAttack2($aid, $unit, $amt) {
+        		$unit = 't' . $unit;
+        		$q = "UPDATE " . TB_PREFIX . "attacks set $unit = $unit + $amt where id = $aid";
+        		return mysql_query($q, $this->connection);
+        	}
 
         	function getRanking() {
         		$q = "SELECT id,username,alliance,ap,apall,dp,dpall,access FROM " . TB_PREFIX . "users WHERE tribe<=3 AND access<" . (INCLUDE_ADMIN ? "10" : "8");

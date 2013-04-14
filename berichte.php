@@ -101,7 +101,7 @@ if($message->unread) {
 				<div title="" class="container <?php if (isset($_GET['t']) && $_GET['t'] == 3) { echo "active"; }else{ echo "normal"; } ?>">
 					<div class="background-start">&nbsp;</div>
 					<div class="background-end">&nbsp;</div>
-					<div class="content"><a href="berichte.php?t=3"><span class="tabItem">Scout</span></a></div>
+					<div class="content"><a href="berichte.php?t=3"><span class="tabItem">Miscellaneous</span></a></div>
 				</div>
 				<div title="" class="container <?php if (isset($_GET['t']) && $_GET['t'] == 2) { echo "active"; }else{ echo "normal"; } ?>">
 					<div class="background-start">&nbsp;</div>

@@ -2721,7 +2721,10 @@ $info_cata=" damaged from level <b>".$tblevel."</b> to level <b>".$totallvl."</b
 				if($helmetID != 0){
 				$helmet = $database->getItemData($helmetID);
 				}
-				
+				$notroops = rand(0,3);
+				if($notroops > 0){
+				$nosilver = rand(0,3);
+				if($nosilver > 0){
 				$btype = rand(0,15);
 				
 				if($btype==1){
@@ -2875,6 +2878,96 @@ $info_cata=" damaged from level <b>".$tblevel."</b> to level <b>".$totallvl."</b
 					$speeds[] = $getHero['speed'];
 					$endtime = $this->procDistanceTime($from,$to,min($speeds),1) + $AttackArrivalTime;
 					$database->addMovement(4,$data['to'],$data['from'],$ref,'0,0,0,0,0',$endtime);
+				}
+				}else{
+				if($getAdv['dif']==0){
+					$exp = rand(0,40);
+					$sgh = 1000;
+				}else{
+					$exp = rand(10,80);
+					$sgh = 2000;
+				}
+				if($tribe==1){
+					$tp = 100;
+				}else{
+					$tp = 80;
+				}
+				$health = round((3.007 / ((100+$tp*$getHero['power'])+$hero['itempower'])) * $sgh);
+				
+				if($helmet['proc'] == 1 && $helmet['type'] <= 3) $exp += $exp * (10 + $helmet['type'] * 5) / 100;
+				$database->modifyHero2('experience', $exp, $ownerID, 1);
+				$database->setMovementProc($data['moveid']);
+				$database->editTableField('adventure', 'end', 1, 'wref', $data['to']);
+				
+				if(($getHero['health']-$health)<=0){
+					$database->modifyHero2('dead', 1, $ownerID, 0);
+					$database->modifyHero2('health', $health, $ownerID, 2);
+					$database->addNotice($ownerID,$data['to'],$ally,9,''.addslashes($from['name']).' explores ('.addslashes($coor['x']).'|'.addslashes($coor['y']).')',''.$from['wref'].',dead,your hero did not survive the adventure.,,'.$health.','.$exp.'',$data['endtime']);
+				}else{
+					$amt = rand(300,1000);
+					$database->addNotice($ownerID,$data['to'],$ally,9,''.addslashes($from['name']).' explores ('.addslashes($coor['x']).'|'.addslashes($coor['y']).')',''.$from['wref'].',17,0,'.$amt.','.$health.','.$exp.'',$data['endtime']);
+
+					$database->modifyHero2('health', $health, $ownerID, 2);
+					$database->updateUserField($ownerID, 'silver', $amt, 2);
+					$ref = $database->addAttack($from['wref'],0,0,0,0,0,0,0,0,0,0,1,3,0,0,0);
+					$AttackArrivalTime = $data['endtime']; 
+					$speeds = array();
+					$speeds[] = $getHero['speed'];
+					$endtime = $this->procDistanceTime($from,$to,min($speeds),1) + $AttackArrivalTime;
+					$database->addMovement(4,$data['to'],$data['from'],$ref,'0,0,0,0,0',$endtime);
+				}
+				}
+				}else{
+				if($getAdv['dif']==0){
+					$exp = rand(0,40);
+					$sgh = 1000;
+				}else{
+					$exp = rand(10,80);
+					$sgh = 2000;
+				}
+				if($tribe==1){
+					$tp = 100;
+				}else{
+					$tp = 80;
+				}
+				$health = round((3.007 / ((100+$tp*$getHero['power'])+$hero['itempower'])) * $sgh);
+				
+				if($helmet['proc'] == 1 && $helmet['type'] <= 3) $exp += $exp * (10 + $helmet['type'] * 5) / 100;
+				$database->modifyHero2('experience', $exp, $ownerID, 1);
+				$database->setMovementProc($data['moveid']);
+				$database->editTableField('adventure', 'end', 1, 'wref', $data['to']);
+				
+				if(($getHero['health']-$health)<=0){
+					$database->modifyHero2('dead', 1, $ownerID, 0);
+					$database->modifyHero2('health', $health, $ownerID, 2);
+					$database->addNotice($ownerID,$data['to'],$ally,9,''.addslashes($from['name']).' explores ('.addslashes($coor['x']).'|'.addslashes($coor['y']).')',''.$from['wref'].',dead,your hero did not survive the adventure.,,'.$health.','.$exp.'',$data['endtime']);
+				}else{
+					$unit = rand(1,6);
+					if(($tribe != 3 && $unit < 4) or ($tribe == 3 && $unit < 3)){
+					$amt = rand(20,40);
+					}else if(($tribe != 3 && $unit == 4) or ($tribe == 3 && $unit == 3)){
+					$amt = rand(10,20);
+					}else{
+					$amt = rand(5,10);
+					}
+					$database->addNotice($ownerID,$data['to'],$ally,9,''.addslashes($from['name']).' explores ('.addslashes($coor['x']).'|'.addslashes($coor['y']).')',''.$from['wref'].',16,'.$unit.','.$amt.','.$health.','.$exp.'',$data['endtime']);
+
+					$database->modifyHero2('health', $health, $ownerID, 2);
+					$ref = $database->addAttack($from['wref'],0,0,0,0,0,0,0,0,0,0,1,3,0,0,0);
+					$AttackArrivalTime = $data['endtime']; 
+					$speeds = array();
+					$speeds[] = $getHero['speed'];
+					$endtime = $this->procDistanceTime($from,$to,min($speeds),1) + $AttackArrivalTime;
+					$database->addMovement(4,$data['to'],$data['from'],$ref,'0,0,0,0,0',$endtime);
+
+					$ref = $database->addAttack($from['wref'],0,0,0,0,0,0,0,0,0,0,0,3,0,0,0);
+					$database->modifyAttack2($ref, $unit, $amt);
+					$speeds1 = array();
+					$unitarray = $GLOBALS["u".(($tribe-1)*10+$unit)];
+					$speeds1[] = $unitarray['speed'];
+					$endtime = $this->procDistanceTime($from,$to,min($speeds1),1) + $AttackArrivalTime;
+					$database->addMovement(4,$data['to'],$data['from'],$ref,'0,0,0,0,0',$endtime);
+				}
 				}
 			}
 			$q2 = "SELECT * FROM ".TB_PREFIX."adventure where time <= $time";

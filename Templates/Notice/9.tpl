@@ -70,19 +70,21 @@ for($i=$start;$i<=$end;$i++) {
 }
 ?>
 						<td class="unit last">
-				<img title="Hős" class="unit uhero" src="img/x.gif">
+				<img title="Hero" class="unit uhero" src="img/x.gif">
 			</td>
 		</tr>
 	</tbody>
 	<tbody class="units last">
 		<tr>
 			<th>Troops</th>
+	<?php
+	for($i=1;$i<=6;$i++){
+	if($dataarray[2] == $i){
+	?>
+	<td><?php echo $dataarray[3]; ?></td>
+	<?php }else{ ?>
 	<td class="unit none">0</td>
-	<td class="unit none">0</td>
-	<td class="unit none">0</td>
-	<td class="unit none">0</td>
-	<td class="unit none">0</td>
-	<td class="unit none">0</td>
+	<?php }} ?>
 	<td class="unit none">0</td>
 	<td class="unit none">0</td>
 	<td class="unit none">0</td>
@@ -102,7 +104,7 @@ for($i=$start;$i<=$end;$i++) {
 				<img src="img/x.gif" class="injury" title="Injury:">
 				-<?php echo round($dataarray[4]); ?>%
             <?php }else{
-            		echo '<img src="img/x.gif" class="adventureDifficulty0" title="A Hős halott">'.$dataarray[2];
+            		echo '<img src="img/x.gif" class="adventureDifficulty0" title="Your hero is dead">'.$dataarray[2];
                   }
             ?>
             	
@@ -120,9 +122,20 @@ for($i=$start;$i<=$end;$i++) {
             	$typeArray = array("","helmet","body","leftHand","rightHand","shoes","horse","bandage25","bandage33","cage","scroll","ointment","bucketOfWater","bookOfWisdom","lawTables","artWork");
                 $btype = $dataarray[1];
                 $type = $dataarray[2];
+				if($btype < 16){
+				include "Templates/Auction/alt.tpl";
+				$typeArray = array("","helmet","body","leftHand","rightHand","shoes","horse","bandage25","bandage33","cage","scroll","ointment","bucketOfWater","bookOfWisdom","lawTables","artWork");
             	include "Templates/Auction/alt.tpl";
 				echo '<img src="img/x.gif" class="reportInfo itemCategory itemCategory_'.$typeArray[$btype].'" title="'.$title.'">';
 				echo ' '.$name.' ('.$dataarray[3].'x)';
+				}else if($btype == 16){
+				echo '<img src="img/x.gif" class="unit u'.$type.'" title="'.$technology->getUnitName($type).'">';
+				echo ' '.$technology->getUnitName($type).' ('.$dataarray[3].'x)';
+							$outputList .= "<div class=\"reportInfoIcon\"><img title=\"".$technology->getUnitName($type)." (".$dataarray[3]."x)\" src=\"img/x.gif\" class=\"unit u".$type."\"\"></div>";
+				}else{
+				echo '<img src="img/x.gif" class="silver" title="silver">';
+				echo ' Silver ('.$dataarray[3].'x)';
+				}
             }else{
             	echo $dataarray[2];
             }
