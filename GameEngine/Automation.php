@@ -1703,23 +1703,23 @@ class Automation {
             if ($type=='3'){
                 if ($rams!='0'){
                     if (isset($empty)){
-                        $info_ram = "".$ram_pic.", دیوار قبلا <b>تخریب شده</b>.";
+                        $info_ram = "".$ram_pic.", There is no wall to destroy.";
                     } else
 
                       if ($battlepart[8]>$battlepart[7]){
-                            $info_ram = "".$ram_pic.", دیوار <b>تخریب شد</b>.";
+                            $info_ram = "".$ram_pic.", Wall destroyed.";
                             $database->setVillageLevel($data['to'],"f".$wallid."",'0');
                             $database->setVillageLevel($data['to'],"f".$wallid."t",'0');
                             $pop=$this->recountPop($data['to']);
 
                     }elseif ($battlepart[8]==0){
                     
-                        $info_ram = "".$ram_pic.",به دیوار آسیبی نرسید.";
+                        $info_ram = "".$ram_pic.", Wall was not damaged.";
                     }else{
             
                         $demolish=$battlepart[8]/$battlepart[7];
                         $totallvl = round(sqrt(pow(($walllevel+0.5),2)-($battlepart[8]*8)));
-                    $info_ram = "".$ram_pic.",دیوار از سطح <b>".$walllevel."</b> به سطح <b>".$totallvl."</b> آسیب دید.";
+                    $info_ram = "".$ram_pic.",Wall damaged from level <b>".$walllevel."</b> to level <b>".$totallvl."</b>.";
                             $database->setVillageLevel($data['to'],"f".$wallid."",$totallvl);
 
                     }                  
@@ -2461,7 +2461,7 @@ $info_cata=" damaged from level <b>".$tblevel."</b> to level <b>".$totallvl."</b
 		}
 
             // When all troops die, sends no info.
-            $data_fail = ''.$from['owner'].','.$from['wref'].','.$owntribe.','.$unitssend_att.','.$unitsdead_att.','.$steal[0].','.$steal[1].','.$steal[2].','.$steal[3].','.$battlepart['bounty'].','.$to['owner'].','.$to['wref'].','.addslashes($to['name']).','.$targettribe.',,,'.$rom.','.$unitssend_def[1].','.$unitsdead_deff[1].','.$ger.','.$unitssend_def[2].','.$unitsdead_deff[2].','.$gal.','.$unitssend_def[3].','.$unitsdead_deff[3].','.$nat.','.$unitssend_def[4].','.$unitsdead_deff[4].','.$natar.','.$unitssend_def[5].','.$unitsdead_deff[5].',,,'.$unitstraped_att;
+            $data_fail = ''.$from['owner'].','.$from['wref'].','.$owntribe.','.$unitssend_att.','.$unitsdead_att.','.$steal[0].','.$steal[1].','.$steal[2].','.$steal[3].','.$battlepart['bounty'].','.$to['owner'].','.$to['wref'].','.addslashes($to['name']).','.$targettribe.',,,'.$rom.','.$unitssend_deff[1].','.$unitsdead_deff[1].','.$ger.','.$unitssend_deff[2].','.$unitsdead_deff[2].','.$gal.','.$unitssend_deff[3].','.$unitsdead_deff[3].','.$nat.','.$unitssend_deff[4].','.$unitsdead_deff[4].','.$natar.','.$unitssend_deff[5].','.$unitsdead_deff[5].',,,'.$unitstraped_att;
             
             //Undetected and detected in here.
             if($scout){
