@@ -1,8 +1,22 @@
-﻿<h4 class="round">Biggest Villages</h4>
+<h4 class="round">Biggest Villages</h4>
 <table cellpadding="1" cellspacing="1" id="villages" class="row_table_data">
-	<thead><tr><td></td><td>Village</td><td>Owner</td><td>Population</td><td>Coordinate</td></tr></thead>
+	<thead><tr><td></td><td>Village</td><td>Owner</td><td>Population</td><td>Distance</td><td>Coordinate</td></tr></thead>
 <tbody>
 <?php
+ function getDistance($coorx1, $coory1, $coorx2, $coory2) {
+   				$max = 2 * WORLD_MAX + 1;
+   				$x1 = intval($coorx1);
+   				$y1 = intval($coory1);
+   				$x2 = intval($coorx2);
+   				$y2 = intval($coory2);
+   				$distanceX = min(abs($x2 - $x1), abs($max - abs($x2 - $x1)));
+   				$distanceY = min(abs($y2 - $y1), abs($max - abs($y2 - $y1)));
+   				$dist = sqrt(pow($distanceX, 2) + pow($distanceY, 2));
+   				return round($dist, 1);
+   			}
+   			
+ $mycoor = $database->getCoor($_SESSION['wid']);
+
 if($_POST['rank'] > 0){
 $myrank = $_POST['rank'];
 }else if(trim($_POST['name']) != ""){
@@ -166,8 +180,14 @@ $paginationDisplay .=  '<img alt="Utolsó oldal" src="img/x.gif" class="last dis
         echo "<td class=\"vil \" ><a href=\"position_details.php?x=".$coor['x']."&amp;y=".$coor['y']."\">".$row['name']."</a></td>";
 		echo "<td class=\"pla \" ><a href=\"spieler.php?uid=".$row['owner']."\">".$database->getUserField($row['owner'], 'username', 0)."</a></td>"; 
 		echo "<td class=\"hab \" >".$row['pop']."</td>";
+	
+		$distance = getDistance($coor['x'], $coor['y'], $mycoor['x'], $mycoor['y']);
+		echo "<td class=\"hab \" >".$distance."</td>";
         
         echo "<td class=\"coords \"><a class=\"\" href=\"position_details.php?x=".$coor['x']."&amp;y=".$coor['y']."\"><span class=\"coordinates coordinatesAligned\"><span class=\"coordinatesWrapper\"><span class=\"coordinateY\">(".$coor['x']."</span><span class=\"coordinatePipe\">|</span><span class=\"coordinateX\">".$coor['y'].")</span></span></span><span class=\"clear\"> </span></a></td></tr>";
+    
+		
+		
     
 		$rank++;
 	}
