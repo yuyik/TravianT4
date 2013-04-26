@@ -5,7 +5,7 @@
 	</a>
 	The architects of the village live in the main building. The higher the level, the faster other buildings will be built or upgraded.</div>
 		<?php
-        $_GET['bid'] = 10;
+        $_GET['bid'] = 15;
         include("availupgrade.tpl");
         ?>
 <div class="clear"></div><hr>
