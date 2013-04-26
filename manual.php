@@ -27,14 +27,20 @@ include("GameEngine/config.php");
 	<script src="mt-more.js?0faaa" type="text/javascript"></script>
 	<script src="unx.js?0faaa" type="text/javascript"></script>
 	<script src="new.js?0faaa" type="text/javascript"></script>
-<!--    TODO - We need a lang pack for en, only one there is ir -->
-<!--   	<link href="<?php echo GP_LOCATE; ?>lang/en/compact.css?f4b7c" rel="stylesheet" type="text/css" />-->
-<!--   	<link href="<?php echo GP_LOCATE; ?>lang/en/lang.css?f4b7c" rel="stylesheet" type="text/css" />-->
-<!--	<link href="<?php echo GP_LOCATE; ?>travian.css?f4b7c" rel="stylesheet" type="text/css" />-->
-<!--    	<link href="<?php echo GP_LOCATE; ?>lang/en/lang.css" rel="stylesheet" type="text/css" />	-->
-       </head>
-<!--    <body class="manual">-->
-    <body style="background-color:white;">
+ 	<link href="gpack/travian_Travian_4.0_41/lang/ir/compact.css?asd423" rel="stylesheet" type="text/css" />
+	<!--    TODO - We need a lang pack for en, only one there is ir -->
+ 	<!-- <link href="<?php echo GP_LOCATE; ?>lang/en/compact.css?f4b7c" rel="stylesheet" type="text/css" /> 
+	<link href="<?php echo GP_LOCATE; ?>lang/en/lang.css?f4b7c" rel="stylesheet" type="text/css" />
+	<link href="<?php echo GP_LOCATE; ?>travian.css?f4b7c" rel="stylesheet" type="text/css" />
+	<link href="<?php echo GP_LOCATE; ?>lang/en/lang.css" rel="stylesheet" type="text/css" />	-->
+	<style>
+		p{width: 450px;word-wrap:break-word;padding-left:10px;}
+		table{width:48%;padding:15px;word-wrap:break-word;}
+		div{width: 450px;word-wrap:break-word;padding-left:10px;}
+	</style>
+</head>
+
+<body style="background-color:white;">
 <?php
 
 if (!ctype_digit($_GET['s'])) {
