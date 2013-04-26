@@ -14,7 +14,7 @@ $start=31;
             echo '</a> from village <a href="karte.php?d='.$dataarray[31].'&amp;c='.$generator->getMapCheck($dataarray[31]).'">
             '.stripslashes($dataarray[32]).' ('.$coor[x].'|'.$coor[y].')</a>';
             } else {
-            echo "REPORT_REINF";
+            echo REPORT_REINF;
             }
             ?>
             </td>
