@@ -13,4 +13,16 @@
         <link href="img/travian_basics.css" rel="stylesheet" type="text/css" />
         <script src="unx.js" type="text/javascript"></script>
         <script src="crypt.js?<?php echo time(); ?>" type="text/javascript"></script>
+	<script type="text/javascript">
+	Travian.Translation.add(
+	{
+	'allgemein.anleitung': 'Manual',
+	'allgemein.cancel': 'cancel',
+	'allgemein.ok': 'OK',
+	'cropfinder.keine_ergebnisse': 'No search results found.'
+	});
+	Travian.applicationId = 'T4.0 Game';
+	Travian.Game.version = '4.0';
+	Travian.Game.worldId = 'us11';
+	</script> 
 </head>
