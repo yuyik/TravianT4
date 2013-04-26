@@ -1,5 +1,19 @@
-﻿<?php
+<?php
 include("GameEngine/Village.php");
+
+function getDistance($coorx1, $coory1, $coorx2, $coory2) {
+   				$max = 2 * WORLD_MAX + 1;
+   				$x1 = intval($coorx1);
+   				$y1 = intval($coory1);
+   				$x2 = intval($coorx2);
+   				$y2 = intval($coory2);
+   				$distanceX = min(abs($x2 - $x1), abs($max - abs($x2 - $x1)));
+   				$distanceY = min(abs($y2 - $y1), abs($max - abs($y2 - $y1)));
+   				$dist = sqrt(pow($distanceX, 2) + pow($distanceY, 2));
+   				return round($dist, 1);
+   			}
+   			
+ $mycoor = $database->getCoor($_SESSION['wid']);
 
 $start = $generator->pageLoadTimeStart();
 include "Templates/html.tpl";
@@ -107,10 +121,10 @@ if($message->unread) {
 <table cellspacing="1" cellpadding="1">
 	<thead>
 		<tr>
-			<th class="location" colspan="2">Location</th>
+			<th class="location" colspan="3">Location & Distance</th>
 			<th class="moveTime">Time</th>
 			<th class="difficulty">Difficulty</th>
-			<th class="timeLeft">Lime Left</th>
+			<th class="timeLeft">Time Left</th>
 			<th class="goTo">Link</th>
 		</tr>
 	</thead>
@@ -176,11 +190,14 @@ break;
         <span class="coordinateX">'.$coor['x'].')</span>
         </span><span class="clear"></span>
         </a></td>';
+	$distance = getDistance($coor['x'], $coor['y'], $mycoor['x'], $mycoor['y']);
+	$outputList .= "<td class=\"moveTime\"> ".$distance." </td>";
+
     $outputList .= "<td class=\"moveTime\"> ".$generator->getTimeFormat($time)." </td>";
 	if(!$row['dif']){
-		$outputList .= "<td class='difficulty'><img src='img/x.gif' class='adventureDifficulty2' title='Normális' /></td>";
+		$outputList .= "<td class='difficulty'><img src='img/x.gif' class='adventureDifficulty2' title='Normal' /></td>";
 	}else{
-		$outputList .= "<td class='difficulty'><img src='img/x.gif' class='adventureDifficulty0' title='Veszélyes' /></td>";	
+		$outputList .= "<td class='difficulty'><img src='img/x.gif' class='adventureDifficulty0' title='Dangerous' /></td>";	
 	}
 	$outputList .= "<td class=\"timeLeft\"><span id=\"timer".$timer."\">".$generator->getTimeFormat($row['time']-time())."</span></td>";
 	$outputList .= "<td class=\"goTo\"><a class=\"gotoAdventure arrow\" href=\"a2b.php?id=".$row['wref']."&h=1\">To the Adventure</a></td></tr>";	
@@ -192,16 +209,11 @@ echo $outputList;
 	
     </tbody>
 </table>
-
-
-
-
-		  <div class="clear">&nbsp;</div></div>							<div class="clear"></div>
-						</div>
-
-                        <div class="contentFooter">&nbsp;</div>
-
-					</div>                    
+<div class="clear">&nbsp;</div></div>
+<div class="clear"></div>
+</div>
+<div class="contentFooter">&nbsp;</div>
+</div>                    
 <?php
 include("Templates/sideinfo.tpl");
 include("Templates/footer.tpl");
