@@ -1,4 +1,19 @@
-﻿<?php
+<?php
+
+function getDistance($coorx1, $coory1, $coorx2, $coory2) {
+   				$max = 2 * WORLD_MAX + 1;
+   				$x1 = intval($coorx1);
+   				$y1 = intval($coory1);
+   				$x2 = intval($coorx2);
+   				$y2 = intval($coory2);
+   				$distanceX = min(abs($x2 - $x1), abs($max - abs($x2 - $x1)));
+   				$distanceY = min(abs($y2 - $y1), abs($max - abs($y2 - $y1)));
+   				$dist = sqrt(pow($distanceX, 2) + pow($distanceY, 2));
+   				return round($dist, 1);
+   			}
+   			
+$mycoor = $database->getCoor($_SESSION['wid']);
+
 $displayarray = $database->getUserArray($_GET['uid'],1);
 $varmedal = $database->getProfileMedal($_GET['uid']);
 
@@ -109,8 +124,6 @@ foreach($varray as $vil) {
 <div class="description description2"><?php echo nl2br($profiel[0]); ?></div>
 
 <div class="clear"></div>
-
-
 <h4 class="round">Villages</h4>
 
 <table cellpadding="1" cellspacing="1" id="villages">
@@ -120,6 +133,7 @@ foreach($varray as $vil) {
             <th>Oasis</th>
 			<th>Population</th>
 			<th>Location</th>
+			<th>Distance</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -173,7 +187,11 @@ break;
         <span class=\"coordinatePipe\">|</span>
         <span class=\"coordinateX\">".$coor['y'].")</span>
         </span><span class=\"clear\">‎</span>
-        </td></tr>";
+        </td>";
+        
+        
+        $distance = getDistance($coor['x'], $coor['y'], $mycoor['x'], $mycoor['y']);
+        echo "<td class=\"coords\">".$distance."</td></tr>";
     }
     ?>
 </tbody>
