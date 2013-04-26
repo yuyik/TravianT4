@@ -13,7 +13,7 @@ $start=41;
             echo '</a> Village <a href="karte.php?d='.$dataarray[31].'&amp;c='.$generator->getMapCheck($dataarray[31]).'">
             '.stripslashes($dataarray[32]).'</a>';
             } else {
-            echo "REPORT_REINF";
+            echo REPORT_REINF;
             }
             ?>
             </td>
