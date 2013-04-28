@@ -3,49 +3,50 @@ $normalA = $database->getOwnArtefactInfoByType($village->wid,6);
 $largeA = $database->getOwnUniqueArtefactInfo($session->uid,6,2);
 
 
-$mainbuilding = $building->getTypeLevel(15);
-$cranny = $building->getTypeLevel(23);
-$granary = $building->getTypeLevel(11);
-$warehouse = $building->getTypeLevel(10);
-$embassy = $building->getTypeLevel(18);
-$wall = $village->resarray['f40'];
-$rallypoint = $building->getTypeLevel(16);
-$hero = $building->getTypeLevel(37);
-$market = $building->getTypeLevel(17);
-$barrack = $building->getTypeLevel(19);
-$cropland = $building->getTypeLevel(4);
-$grainmill = $building->getTypeLevel(8);
-$residence = $building->getTypeLevel(25);
-$academy = $building->getTypeLevel(22);
 $woodcutter = $building->getTypeLevel(1);
-$palace = $building->getTypeLevel(26);
 $claypit = $building->getTypeLevel(2);
 $ironmine = $building->getTypeLevel(3);
-$blacksmith = $building->getTypeLevel(12);
-$stable = $building->getTypeLevel(20);
-$trapper = $building->getTypeLevel(36);
-$treasury = $building->getTypeLevel(27);
+$cropland = $building->getTypeLevel(4);
 $sawmill = $building->getTypeLevel(5);
 $brickyard = $building->getTypeLevel(6);
 $ironfoundry = $building->getTypeLevel(7);
-$workshop = $building->getTypeLevel(21);
-$stonemasonslodge = $building->getTypeLevel(34);
-$townhall = $building->getTypeLevel(24);
-$tournamentsquare = $building->getTypeLevel(14);
+$grainmill = $building->getTypeLevel(8);
 $bakery = $building->getTypeLevel(9);
+$warehouse = $building->getTypeLevel(10);
+$granary = $building->getTypeLevel(11);
+$blacksmith = $building->getTypeLevel(12);
+$tournamentsquare = $building->getTypeLevel(14);
+$mainbuilding = $building->getTypeLevel(15);
+$rallypoint = $building->getTypeLevel(16);
+$market = $building->getTypeLevel(17);
+$embassy = $building->getTypeLevel(18);
+$barrack = $building->getTypeLevel(19);
+$stable = $building->getTypeLevel(20);
+$workshop = $building->getTypeLevel(21);
+$academy = $building->getTypeLevel(22);
+$cranny = $building->getTypeLevel(23);
+$townhall = $building->getTypeLevel(24);
+$residence = $building->getTypeLevel(25);
+$palace = $building->getTypeLevel(26);
+$treasury = $building->getTypeLevel(27);
 $tradeoffice = $building->getTypeLevel(28);
 $greatbarracks = $building->getTypeLevel(29);
 $greatstable = $building->getTypeLevel(30);
+
+$stonemasonslodge = $building->getTypeLevel(34);
 $brewery = $building->getTypeLevel(35);
-$horsedrinkingtrough = $building->getTypeLevel(41);
+$trapper = $building->getTypeLevel(36);
+$hero = $building->getTypeLevel(37);
 $herosmansion = $building->getTypeLevel(37);
 $greatwarehouse = $building->getTypeLevel(38);
 $greatgranary = $building->getTypeLevel(39);  
+$wall = $village->resarray['f40'];
+$horsedrinkingtrough = $building->getTypeLevel(41);
 $greatworkshop = $building->getTypeLevel(42);
 
 foreach ($database->getJobs($_SESSION['wid']) as $bdata) {
     $UnderConstruction = strtolower(str_replace(array(" ","'"),"",$building->procResType($bdata['type'])));
-    $$UnderConstruction = ($$UnderConstruction == 0 ? -1 : $$UnderConstruction);
+    $UnderConstruction = ($UnderConstruction == 0 ? -1 : $UnderConstruction);
 }
 ?>
 <h1 class="titleInHeader">Construction of new building</h1>
